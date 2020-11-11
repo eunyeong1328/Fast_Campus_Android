@@ -1,30 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"	isELIgnored="false"
+	%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath }"  />
+<%
+  request.setCharacterEncoding("UTF-8");
+%>  
+
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	
+
+
 	<body>
 
 		<div id="wrapper">
-
-		
-
-			<!-- PAGE TITLE -->
-			<section class="bg-light p-0">
-				<div class="container py-5">
-
-					<h1 class="h3">
-						비밀번호 찾기
-					</h1>
-
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb fs--14">
-							<li class="breadcrumb-item"><a href="#!">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Account</li>
-						</ol>
-					</nav>
-
-				</div>
-			</section>
 			<!-- /PAGE TITLE -->
 
 

@@ -53,4 +53,13 @@ public class MemberController {
 		mav.setViewName("/member/loginForm");
 		return mav;
 	}
+
+	//그냥 해봄
+//	@RequestMapping(value="/signupForm.do")
+//	public ModelAndView singup(@RequestParam Map<String, String> loginMap,
+//			HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("/member/signupForm");
+//		return mav;
+//	}
 }

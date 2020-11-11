@@ -59,6 +59,12 @@
 				class="com.project.shop.common.interceptor.ViewNameInterceptor" />				
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	<!-- 뭐징 -->
+	<context:component-scan base-package="com.project.shop" use-default-filters="false">
+	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+
+</context:component-scan>
 
 
 </beans:beans>
