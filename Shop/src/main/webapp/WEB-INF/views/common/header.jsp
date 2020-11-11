@@ -212,7 +212,52 @@
 							</li>
 
               <!-- my account -->
-              <li class="list-inline-item mx-1 dropdown d-none d-sm-block">
+              <c:choose>
+              <c:when test="${isLogOn==true and not empty memberInfo }">
+              
+
+              							 							<!-- my account -->
+							<li class="list-inline-item mx-1 dropdown">
+
+								<a href="#" aria-label="My Account" id="dropdownAccountOptions" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="d-inline-block text-center text-dark">
+									<i class="fi fi-users fs--20"></i>
+									<span class="d-block font-weight-light fs--14">내 계정</span>
+								</a>
+
+
+								<!-- dropdown -->
+								<div aria-labelledby="dropdownAccountOptions" class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15">
+									<div class="dropdown-header">
+										쩝쩝이
+									</div>
+
+									<div class="dropdown-divider"></div>
+
+									<a href="account-orders.html" title="My Orders" class="dropdown-item text-truncate font-weight-light">
+										내 주문 <small>(2)</small>
+									</a>
+
+									<a href="account-favourites.html" title="My Favourites" class="dropdown-item text-truncate font-weight-light">
+										찜 리스트 <small>(3)</small>
+									</a>
+
+									<a href="account-settings.html" title="Account Settings" class="dropdown-item text-truncate font-weight-light">
+										마이페이지
+									</a>
+
+									<div class="dropdown-divider mb-0"></div>
+
+									<a href="#!" title="Log Out" class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore">
+										<i class="fi fi-power float-start"></i>
+										로그아웃
+									</a>
+
+								</div>
+
+							</li>
+              </c:when>
+              <c:otherwise>
+                            <li class="list-inline-item mx-1 dropdown d-none d-sm-block">
 
 								<a href="${contextPath}/member/loginForm.do" aria-label="Login" class="d-inline-block text-center text-dark">
 									<i class="fi fi-power fs--20"></i>
@@ -220,19 +265,12 @@
 								</a>
 
 							</li>
+              </c:otherwise>
+              </c:choose>
+			
 
 
-							<li class="list-inline-item mx-1 dropdown d-none d-sm-block">
-
-								<a href="${contextPath}/member/signupForm.do" aria-label="signup" class="d-inline-block text-center text-dark">
-									<i class="fi fi-users fs--20"></i>
-									<span class="d-block font-weight-light fs--14">회원가입</span>
-								</a>
-
-							</li>
-
-
-							<!-- cart -->
+							<!-- 장바구니 -->
 							<li class="list-inline-item mx-1 dropdown">
 								
 								<a href="#" aria-label="My Cart" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="d-inline-block text-center text-dark">
@@ -243,7 +281,7 @@
 
 								<!-- dropdown -->
 								<div aria-labelledby="dropdownAccount" id="dropdownAccount" class="dropdown-menu dropdown-menu-clean dropdown-menu-invert dropdown-click-ignore mt--18 w--300 p-0"> 
-									<div class="p-3">Cart Products</div> 
+									<div class="p-3">장바구니</div> 
 
 									<!--
 									<div class="pt-5 pb-5 text-center bg-light">
@@ -297,7 +335,7 @@
 
 									<!-- subtotal -->
 									<div class="fs--14 text-align-start border-top px-3 py-2">
-										Subtotal: <span class="float-end">$196.00</span>
+										합계: <span class="float-end">$196.00</span>
 									</div>
 
 
@@ -305,7 +343,7 @@
 									<div class="clearfix border-top p-3">
 										
 										<a href="#!" class="btn btn-primary btn-sm btn-block">
-											<span>Go to Cart</span>
+											<span>장바구니로 가기</span>
 											<i class="fi fi-arrow-end fs--12"></i>
 										</a>
 
@@ -314,6 +352,16 @@
 
 								</div>
 
+
+							</li>
+							
+							              <!-- 고객센터 -->
+							<li class="list-inline-item mx-1 dropdown d-none d-sm-block">
+
+								<a href="#" aria-label="signup" class="d-inline-block text-center text-dark">
+									<i class="fi fi-support-headphones fs--20"></i>
+									<span class="d-block font-weight-light fs--14">고객센터</span>
+								</a>
 
 							</li>
 

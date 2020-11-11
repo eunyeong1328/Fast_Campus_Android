@@ -94,7 +94,7 @@
                   </div> -->
                   
                   <div class="col-12 col-md-6 mt-4">
-                    <a href="signup.html" class="btn btn-block">
+                    <a href="${contextPath}/member/signupForm.do" class="btn btn-block">
                       회원가입
                     </a>
                   </div>
