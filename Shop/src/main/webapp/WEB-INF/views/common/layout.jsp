@@ -27,8 +27,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
 
 		<!-- favicon -->
-		<link rel="shortcut icon" href="favicon.ico">
-		<link rel="apple-touch-icon" href="${contextPath}/resources/demo.files/logo/icon_512x512.png">
+		<link rel="shortcut icon" href="${contextPath}/resources/images/fvc.svg">
+		<link rel="apple-touch-icon" href="${contextPath}/resources/images/fvc.svg">
 
 		<link rel="manifest" href="${contextPath}/resources/assets/images/manifest/manifest.json">
 		<meta name="theme-color" content="#377dff">

@@ -214,7 +214,7 @@
               <!-- my account -->
               <li class="list-inline-item mx-1 dropdown d-none d-sm-block">
 
-								<a href="${contextPath}/member/login.do" aria-label="Login" class="d-inline-block text-center text-dark">
+								<a href="${contextPath}/member/loginForm.do" aria-label="Login" class="d-inline-block text-center text-dark">
 									<i class="fi fi-power fs--20"></i>
 									<span class="d-block font-weight-light fs--14">로그인</span>
 								</a>
@@ -224,7 +224,7 @@
 
 							<li class="list-inline-item mx-1 dropdown d-none d-sm-block">
 
-								<a href="${contextPath}/member/signup.do" aria-label="signup" class="d-inline-block text-center text-dark">
+								<a href="${contextPath}/member/signupForm.do" aria-label="signup" class="d-inline-block text-center text-dark">
 									<i class="fi fi-users fs--20"></i>
 									<span class="d-block font-weight-light fs--14">회원가입</span>
 								</a>

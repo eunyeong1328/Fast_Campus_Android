@@ -4,28 +4,24 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.shop.member.MemberService;
-import com.project.shop.member.MemberVO;
+import com.project.shop.common.base.BaseController;
 
 @Controller("memberController")
 @RequestMapping(value="/member")
-public class MemberController {
+public class MemberController extends BaseController{
 //	@Autowired
 //	private MemberService memberService;
 //	@Autowired
 //	private MemberVO memberVO;
 	
-//	@RequestMapping(value="/login.do" ,method = RequestMethod.POST)
-	@RequestMapping(value="/login.do")
+	@RequestMapping(value="/login.do" ,method = RequestMethod.POST)
 	public ModelAndView login(@RequestParam Map<String, String> loginMap,
 			                  HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -50,19 +46,17 @@ public class MemberController {
 //			mav.addObject("message", message);
 //			mav.setViewName("/member/loginForm");
 //		}
-		mav.setViewName("/member/loginForm");
-		System.out.println("mav: " + mav);
 		return mav;
 	}
 
 	//그냥 해봄
-	@RequestMapping(value="/signup.do")
-	public ModelAndView signup(@RequestParam Map<String, String> loginMap,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/member/signupForm");
-		System.out.println("mav: " + mav);
-
-		return mav;
-	}
+//	@RequestMapping(value="/signup.do")
+//	public ModelAndView signup(@RequestParam Map<String, String> loginMap,
+//			HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("/member/signupForm");
+//		System.out.println("mav: " + mav);
+//
+//		return mav;
+//	}
 }
