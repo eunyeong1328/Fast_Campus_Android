@@ -220,50 +220,11 @@
 								</a>
 
 							</li>
-							<!-- <li class="list-inline-item mx-1 dropdown">
-
-								<a href="signin.html" aria-label="My Account" id="dropdownAccountOptions" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="d-inline-block text-center text-dark">
-                  <i class="fi fi-power fs--20"></i>
-									<span class="d-block font-weight-light fs--14">login</span>
-								</a> -->
 
 
-								<!-- dropdown -->
-								<!-- <div aria-labelledby="dropdownAccountOptions" class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15">
-									<div class="dropdown-header">
-										John Doe
-									</div>
-
-									<div class="dropdown-divider"></div>
-
-									<a href="account-orders.html" title="My Orders" class="dropdown-item text-truncate font-weight-light">
-										My Orders <small>(2)</small>
-									</a>
-
-									<a href="account-favourites.html" title="My Favourites" class="dropdown-item text-truncate font-weight-light">
-										My Favourites <small>(3)</small>
-									</a>
-
-									<a href="account-settings.html" title="Account Settings" class="dropdown-item text-truncate font-weight-light">
-										Account Settings
-									</a>
-
-									<div class="dropdown-divider mb-0"></div>
-
-									<a href="#!" title="Log Out" class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore">
-										<i class="fi fi-power float-start"></i>
-										Log Out
-									</a>
-
-								</div>
-
-							</li> -->
-
-
-							<!-- favourites button : visible : desktop only -->
 							<li class="list-inline-item mx-1 dropdown d-none d-sm-block">
 
-								<a href=${contextPath}/member/signupForm.do" aria-label="signup" class="d-inline-block text-center text-dark">
+								<a href="${contextPath}/member/signup.do" aria-label="signup" class="d-inline-block text-center text-dark">
 									<i class="fi fi-users fs--20"></i>
 									<span class="d-block font-weight-light fs--14">회원가입</span>
 								</a>

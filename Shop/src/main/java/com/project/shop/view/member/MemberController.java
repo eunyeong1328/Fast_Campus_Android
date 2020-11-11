@@ -51,15 +51,18 @@ public class MemberController {
 //			mav.setViewName("/member/loginForm");
 //		}
 		mav.setViewName("/member/loginForm");
+		System.out.println("mav: " + mav);
 		return mav;
 	}
 
 	//그냥 해봄
-//	@RequestMapping(value="/signupForm.do")
-//	public ModelAndView singup(@RequestParam Map<String, String> loginMap,
-//			HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("/member/signupForm");
-//		return mav;
-//	}
+	@RequestMapping(value="/signup.do")
+	public ModelAndView signup(@RequestParam Map<String, String> loginMap,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/member/signupForm");
+		System.out.println("mav: " + mav);
+
+		return mav;
+	}
 }
