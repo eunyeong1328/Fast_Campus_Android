@@ -27,8 +27,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean> -->
 
-	<context:component-scan
-		base-package="com.project.shop" />
+	<context:component-scan base-package="com.project.shop" />
 
 	<!-- 타일즈 -->
 	<beans:bean id="tilesConfigurer"
@@ -47,6 +46,8 @@
 		<beans:property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles2.TilesView" />
 	</beans:bean>
+	
+	
 	<context:component-scan
 		base-package="com.project.shop" />
 		
@@ -60,5 +61,11 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="5248800" />	
+		<beans:property name="maxInMemorySize" value="100000" />	
+		<beans:property name="defaultEncoding" value="utf-8" />	
+	</beans:bean>
 
 </beans:beans>

@@ -1,0 +1,770 @@
+-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+
+-- member Table Create SQL
+CREATE TABLE member
+(
+    member_id        VARCHAR2(20)     NOT NULL, 
+    member_name      VARCHAR2(100)    NULL, 
+    email            VARCHAR2(200)    NULL, 
+    phone            VARCHAR2(20)     NULL, 
+    load_address     VARCHAR2(500)    NULL, 
+    rest_address     VARCHAR2(500)    NULL, 
+    zipNo            NUMBER           NULL, 
+    sex              VARCHAR2(10)     NULL, 
+    birthday         VARCHAR2(20)     NULL, 
+    pre_score        NUMBER           NULL, 
+    this_score       NUMBER           NULL, 
+    point            NUMBER           NULL, 
+    member_status    VARCHAR2(20)     NULL, 
+    CONSTRAINT MEMBER_PK PRIMARY KEY (member_id)
+)
+/
+
+COMMENT ON TABLE member IS '회원'
+/
+
+COMMENT ON COLUMN member.member_id IS '회원 아이디'
+/
+
+COMMENT ON COLUMN member.member_name IS '회원 이름'
+/
+
+COMMENT ON COLUMN member.email IS '이메일'
+/
+
+COMMENT ON COLUMN member.phone IS '전화번호'
+/
+
+COMMENT ON COLUMN member.load_address IS '도로명 주소'
+/
+
+COMMENT ON COLUMN member.rest_address IS '나머지 주소'
+/
+
+COMMENT ON COLUMN member.zipNo IS '우편번호'
+/
+
+COMMENT ON COLUMN member.sex IS '성별'
+/
+
+COMMENT ON COLUMN member.birthday IS '생일'
+/
+
+COMMENT ON COLUMN member.pre_score IS '전월 실적'
+/
+
+COMMENT ON COLUMN member.this_score IS '현재 실적'
+/
+
+COMMENT ON COLUMN member.point IS '포인트'
+/
+
+COMMENT ON COLUMN member.member_status IS '회원 상태'
+/
+
+
+-- member Table Create SQL
+CREATE TABLE product_category
+(
+    product_category_num     NUMBER           NULL, 
+    product_category_name    VARCHAR2(100)    NULL, 
+    CONSTRAINT PRODUCT_CATEGORY_PK PRIMARY KEY (product_category_num)
+)
+/
+
+COMMENT ON TABLE product_category IS '상품 카테고리'
+/
+
+COMMENT ON COLUMN product_category.product_category_num IS '상품 카테고리 번호'
+/
+
+COMMENT ON COLUMN product_category.product_category_name IS '상품 카테고리 이름'
+/
+
+
+-- member Table Create SQL
+CREATE TABLE product
+(
+    product_id              VARCHAR2(20)      NULL, 
+    product_name            varchar2(100)     NULL, 
+    product_detail          varchar2(4000)    NULL, 
+    sales_unit              NUMBER            NULL, 
+    product_size            NUMBER            NULL, 
+    packing_type            VARCHAR2(20)      NULL, 
+    product_image           varchar2(1000)    NULL, 
+    supplier                VARCHAR2(100)     NULL, 
+    product_category_num    NUMBER            NULL, 
+    CONSTRAINT PRODUCT_PK PRIMARY KEY (product_id)
+)
+/
+
+COMMENT ON TABLE product IS '상품'
+/
+
+COMMENT ON COLUMN product.product_id IS '상품 아이디'
+/
+
+COMMENT ON COLUMN product.product_name IS '상품 이름'
+/
+
+COMMENT ON COLUMN product.product_detail IS '상품 설명'
+/
+
+COMMENT ON COLUMN product.sales_unit IS '판매 단위'
+/
+
+COMMENT ON COLUMN product.product_size IS '상품 용량'
+/
+
+COMMENT ON COLUMN product.packing_type IS '포장 타입'
+/
+
+COMMENT ON COLUMN product.product_image IS '상품 이미지'
+/
+
+COMMENT ON COLUMN product.supplier IS '거래처'
+/
+
+COMMENT ON COLUMN product.product_category_num IS '상품 카테고리 번호'
+/
+
+ALTER TABLE product
+    ADD CONSTRAINT FK_product_product_category_nu FOREIGN KEY (product_category_num)
+        REFERENCES product_category (product_category_num)
+/
+
+
+-- member Table Create SQL
+CREATE TABLE qna_category
+(
+    qna_category_num     NUMBER           NULL, 
+    qna_category_name    VARCHAR2(100)    NULL, 
+    CONSTRAINT QNA_CATEGORY_PK PRIMARY KEY (qna_category_num)
+)
+/
+
+COMMENT ON TABLE qna_category IS '질문 카테고리'
+/
+
+COMMENT ON COLUMN qna_category.qna_category_num IS '질문 카테고리 번호'
+/
+
+COMMENT ON COLUMN qna_category.qna_category_name IS '질문 카테고리 이름'
+/
+
+
+-- member Table Create SQL
+CREATE TABLE orders
+(
+    order_num           NUMBER           NULL, 
+    member_id           VARCHAR2(20)     NULL, 
+    order_date          DATE             DEFAULT sysdate NULL, 
+    total_price         NUMBER           NULL, 
+    order_status        VARCHAR2(20)     NULL, 
+    card_name           VARCHAR2(100)    NULL, 
+    card_num            NUMBER           NULL, 
+    timeStamp           DATE             NULL, 
+    destination         VARCHAR2(500)    NULL, 
+    delivery_request    VARCHAR2(500)    NULL, 
+    CONSTRAINT ORDERS_PK PRIMARY KEY (order_num)
+)
+/
+
+COMMENT ON TABLE orders IS '주문정보'
+/
+
+COMMENT ON COLUMN orders.order_num IS '주문 번호'
+/
+
+COMMENT ON COLUMN orders.member_id IS '회원 아이디'
+/
+
+COMMENT ON COLUMN orders.order_date IS '주문 날짜'
+/
+
+COMMENT ON COLUMN orders.total_price IS '총 가격'
+/
+
+COMMENT ON COLUMN orders.order_status IS '주문 상태'
+/
+
+COMMENT ON COLUMN orders.card_name IS '카드 이름'
+/
+
+COMMENT ON COLUMN orders.card_num IS '카드 번호'
+/
+
+COMMENT ON COLUMN orders.timeStamp IS '처리일자'
+/
+
+COMMENT ON COLUMN orders.destination IS '도착지'
+/
+
+COMMENT ON COLUMN orders.delivery_request IS '배송 요청'
+/
+
+ALTER TABLE orders
+    ADD CONSTRAINT orders_member_id_fk FOREIGN KEY (member_id)
+        REFERENCES member (member_id)
+/
+
+
+-- member Table Create SQL
+CREATE TABLE item
+(
+    item_num      NUMBER          NULL, 
+    price         NUMBER          NULL, 
+    stock         NUMBER          NULL, 
+    sales         NUMBER          NULL, 
+    discount      NUMBER          NULL, 
+    reg_date      DATE            DEFAULT sysdate NULL, 
+    unit_price    NUMBER          NULL, 
+    product_id    VARCHAR2(20)    NULL, 
+    CONSTRAINT ITEM_PK PRIMARY KEY (item_num)
+)
+/
+
+COMMENT ON TABLE item IS '제품'
+/
+
+COMMENT ON COLUMN item.item_num IS '제품 번호'
+/
+
+COMMENT ON COLUMN item.price IS '가격'
+/
+
+COMMENT ON COLUMN item.stock IS '재고'
+/
+
+COMMENT ON COLUMN item.sales IS '판매'
+/
+
+COMMENT ON COLUMN item.discount IS '할인률'
+/
+
+COMMENT ON COLUMN item.reg_date IS '제품 등록일자'
+/
+
+COMMENT ON COLUMN item.unit_price IS '단위 가격'
+/
+
+COMMENT ON COLUMN item.product_id IS '상품 아이디'
+/
+
+ALTER TABLE item
+    ADD CONSTRAINT item_product_id_fk FOREIGN KEY (product_id)
+        REFERENCES product (product_id)
+/
+
+
+-- member Table Create SQL
+CREATE TABLE member_grade
+(
+    grade         VARCHAR2(20)    NULL, 
+    low_score     NUMBER          NULL, 
+    high_score    NUMBER          NULL   
+)
+/
+
+COMMENT ON TABLE member_grade IS '회원등급'
+/
+
+COMMENT ON COLUMN member_grade.grade IS '등급'
+/
+
+COMMENT ON COLUMN member_grade.low_score IS '최소 실적'
+/
+
+COMMENT ON COLUMN member_grade.high_score IS '최대 실적'
+/
+
+
+-- member Table Create SQL
+CREATE TABLE member_login
+(
+    member_id    VARCHAR2(20)    NULL, 
+    password     VARCHAR2(50)    NOT NULL, 
+    CONSTRAINT MEMBER_LOGIN_PK PRIMARY KEY (member_id)
+)
+/
+
+COMMENT ON TABLE member_login IS '로그인'
+/
+
+COMMENT ON COLUMN member_login.member_id IS '회원 아이디'
+/
+
+COMMENT ON COLUMN member_login.password IS '비밀번호'
+/
+
+ALTER TABLE member_login
+    ADD CONSTRAINT member_login_member_id_fk FOREIGN KEY (member_id)
+        REFERENCES member (member_id)
+/
+
+
+-- member Table Create SQL
+CREATE TABLE product_option
+(
+    option_name        VARCHAR2(100)    NULL, 
+    option_price       NUMBER           NULL, 
+    option_quantity    NUMBER           NULL, 
+    product_id         VARCHAR2(20)     NULL   
+)
+/
+
+COMMENT ON TABLE product_option IS '상품 옵션'
+/
+
+COMMENT ON COLUMN product_option.option_name IS '옵션 이름'
+/
+
+COMMENT ON COLUMN product_option.option_price IS '옵션 가격'
+/
+
+COMMENT ON COLUMN product_option.option_quantity IS '옵션 수량'
+/
+
+COMMENT ON COLUMN product_option.product_id IS '상품 아이디'
+/
+
+ALTER TABLE product_option
+    ADD CONSTRAINT product_option_product_id_fk FOREIGN KEY (product_id)
+        REFERENCES product (product_id)
+/
+
+
+-- member Table Create SQL
+CREATE TABLE mylist
+(
+    member_id     VARCHAR2(20)    NULL, 
+    product_id    VARCHAR2(20)    NULL   
+)
+/
+
+COMMENT ON TABLE mylist IS '찜 리스트'
+/
+
+COMMENT ON COLUMN mylist.member_id IS '회원 아이디'
+/
+
+COMMENT ON COLUMN mylist.product_id IS '상품 아이디'
+/
+
+ALTER TABLE mylist
+    ADD CONSTRAINT mylist_product_id_fk FOREIGN KEY (product_id)
+        REFERENCES product (product_id)
+/
+
+ALTER TABLE mylist
+    ADD CONSTRAINT FK_mylist_member_id_member_mem FOREIGN KEY (member_id)
+        REFERENCES member (member_id)
+/
+
+
+-- member Table Create SQL
+CREATE TABLE member_detail
+(
+    member_id        VARCHAR2(20)    NULL, 
+    language         VARCHAR2(20)    NULL, 
+    banner_option    NUMBER          NULL, 
+    CONSTRAINT MEMBER_DETAIL_PK PRIMARY KEY (member_id)
+)
+/
+
+COMMENT ON TABLE member_detail IS '지울까?'
+/
+
+COMMENT ON COLUMN member_detail.member_id IS '회원 아이디'
+/
+
+COMMENT ON COLUMN member_detail.language IS '언어'
+/
+
+COMMENT ON COLUMN member_detail.banner_option IS '배너 옵션'
+/
+
+ALTER TABLE member_detail
+    ADD CONSTRAINT member_detail_member_id_fk FOREIGN KEY (member_id)
+        REFERENCES member (member_id)
+/
+
+
+-- member Table Create SQL
+CREATE TABLE orders_detail
+(
+    order_num         NUMBER    NULL, 
+    item_num          NUMBER    NULL, 
+    order_quantity    NUMBER    NULL, 
+    CONSTRAINT ORDERS_DETAIL_PK PRIMARY KEY (order_num)
+)
+/
+
+COMMENT ON TABLE orders_detail IS '주문상세정보'
+/
+
+COMMENT ON COLUMN orders_detail.order_num IS '주문 번호'
+/
+
+COMMENT ON COLUMN orders_detail.item_num IS '제품 번호'
+/
+
+COMMENT ON COLUMN orders_detail.order_quantity IS '주문 수량'
+/
+
+ALTER TABLE orders_detail
+    ADD CONSTRAINT order_detail_order_num_fk FOREIGN KEY (order_num)
+        REFERENCES orders (order_num)
+/
+
+ALTER TABLE orders_detail
+    ADD CONSTRAINT order_detail_item_num_fk FOREIGN KEY (item_num)
+        REFERENCES item (item_num)
+/
+
+
+-- member Table Create SQL
+CREATE TABLE faq
+(
+    FAQ_num             NUMBER            NULL, 
+    qna_category_num    NUMBER            NULL, 
+    title               VARCHAR2(200)     NULL, 
+    contents            VARCHAR2(4000)    NULL, 
+    CONSTRAINT FAQ_PK PRIMARY KEY (FAQ_num)
+)
+/
+
+COMMENT ON TABLE faq IS '자주하는 질문'
+/
+
+COMMENT ON COLUMN faq.FAQ_num IS 'FAQ 번호'
+/
+
+COMMENT ON COLUMN faq.qna_category_num IS '질문 카테고리 번호'
+/
+
+COMMENT ON COLUMN faq.title IS '제목'
+/
+
+COMMENT ON COLUMN faq.contents IS '내용'
+/
+
+ALTER TABLE faq
+    ADD CONSTRAINT FK_faq_qna_category_num_qna_ca FOREIGN KEY (qna_category_num)
+        REFERENCES qna_category (qna_category_num)
+/
+
+
+-- member Table Create SQL
+CREATE TABLE member_qna
+(
+    member_qna_num      NUMBER            NULL, 
+    title               VARCHAR2(200)     NULL, 
+    contents            VARCHAR2(4000)    NULL, 
+    image               VARCHAR2(100)     NULL, 
+    qna_category_num    NUMBER            NULL, 
+    order_num           NUMBER            NULL, 
+    member_id           VARCHAR2(20)      NULL, 
+    email               VARCHAR2(200)     NULL, 
+    phone               VARCHAR2(20)      NULL, 
+    CONSTRAINT MEMBER_QNA_PK PRIMARY KEY (member_qna_num)
+)
+/
+
+COMMENT ON TABLE member_qna IS '이메일, 전화번호 FK로 할건지??'
+/
+
+COMMENT ON COLUMN member_qna.member_qna_num IS '회원 질문 번호'
+/
+
+COMMENT ON COLUMN member_qna.title IS '제목'
+/
+
+COMMENT ON COLUMN member_qna.contents IS '내용'
+/
+
+COMMENT ON COLUMN member_qna.image IS '이미지'
+/
+
+COMMENT ON COLUMN member_qna.qna_category_num IS '질문 카테고리 번호'
+/
+
+COMMENT ON COLUMN member_qna.order_num IS '주문 번호'
+/
+
+COMMENT ON COLUMN member_qna.member_id IS '회원 아이디'
+/
+
+COMMENT ON COLUMN member_qna.email IS '이메일'
+/
+
+COMMENT ON COLUMN member_qna.phone IS '전화번호'
+/
+
+ALTER TABLE member_qna
+    ADD CONSTRAINT member_qna_orders_num_fk FOREIGN KEY (order_num)
+        REFERENCES orders (order_num)
+/
+
+ALTER TABLE member_qna
+    ADD CONSTRAINT member_qna_member_id_fk FOREIGN KEY (member_id)
+        REFERENCES member (member_id)
+/
+
+ALTER TABLE member_qna
+    ADD CONSTRAINT FK_member_qna_qna_category_num FOREIGN KEY (qna_category_num)
+        REFERENCES qna_category (qna_category_num)
+/
+
+
+-- member Table Create SQL
+CREATE TABLE notice
+(
+    notice_num    NUMBER            NULL, 
+    title         VARCHAR2(200)     NULL, 
+    contents      VARCHAR2(4000)    NULL, 
+    reg_date      DATE              DEFAULT sysdate NULL, 
+    views         NUMBER            NULL, 
+    image         VARCHAR2(100)     NULL, 
+    CONSTRAINT NOTICE_PK PRIMARY KEY (notice_num)
+)
+/
+
+COMMENT ON TABLE notice IS '공지사항'
+/
+
+COMMENT ON COLUMN notice.notice_num IS '공지 번호'
+/
+
+COMMENT ON COLUMN notice.title IS '제목'
+/
+
+COMMENT ON COLUMN notice.contents IS '내용'
+/
+
+COMMENT ON COLUMN notice.reg_date IS '등록 날짜'
+/
+
+COMMENT ON COLUMN notice.views IS '조회수'
+/
+
+COMMENT ON COLUMN notice.image IS '이미지'
+/
+
+
+-- member Table Create SQL
+CREATE TABLE review
+(
+    review_num    NUMBER            NULL, 
+    product_id    VARCHAR2(20)      NULL, 
+    member_id     VARCHAR2(20)      NULL, 
+    title         VARCHAR2(200)     NULL, 
+    contents      VARCHAR2(4000)    NULL, 
+    image         VARCHAR2(100)     NULL, 
+    views         NUMBER            NULL, 
+    rated         NUMBER            NULL, 
+    reg_date      DATE              DEFAULT sysdate NULL, 
+    CONSTRAINT REVIEW_PK PRIMARY KEY (review_num)
+)
+/
+
+COMMENT ON TABLE review IS '상품 후기'
+/
+
+COMMENT ON COLUMN review.review_num IS '후기 번호'
+/
+
+COMMENT ON COLUMN review.product_id IS '상품 아이디'
+/
+
+COMMENT ON COLUMN review.member_id IS '회원 아이디'
+/
+
+COMMENT ON COLUMN review.title IS '제목'
+/
+
+COMMENT ON COLUMN review.contents IS '내용'
+/
+
+COMMENT ON COLUMN review.image IS '이미지'
+/
+
+COMMENT ON COLUMN review.views IS '조회수'
+/
+
+COMMENT ON COLUMN review.rated IS '별점'
+/
+
+COMMENT ON COLUMN review.reg_date IS '등록 날짜'
+/
+
+ALTER TABLE review
+    ADD CONSTRAINT FK_review_product_id_product_p FOREIGN KEY (product_id)
+        REFERENCES product (product_id)
+/
+
+ALTER TABLE review
+    ADD CONSTRAINT FK_review_member_id_member_mem FOREIGN KEY (member_id)
+        REFERENCES member (member_id)
+/
+
+
+-- member Table Create SQL
+CREATE TABLE cart
+(
+    member_id     VARCHAR2(20)    NULL, 
+    product_id    VARCHAR2(20)    NULL, 
+    quantity      NUMBER          NULL, 
+    CONSTRAINT CART_PK PRIMARY KEY (product_id)
+)
+/
+
+COMMENT ON TABLE cart IS '장바구니'
+/
+
+COMMENT ON COLUMN cart.member_id IS '회원 아이디'
+/
+
+COMMENT ON COLUMN cart.product_id IS '상품 아이디'
+/
+
+COMMENT ON COLUMN cart.quantity IS '수량'
+/
+
+ALTER TABLE cart
+    ADD CONSTRAINT FK_cart_product_id_product_pro FOREIGN KEY (product_id)
+        REFERENCES product (product_id)
+/
+
+ALTER TABLE cart
+    ADD CONSTRAINT FK_cart_member_id_member_membe FOREIGN KEY (member_id)
+        REFERENCES member (member_id)
+/
+
+
+-- member Table Create SQL
+CREATE TABLE product_qna
+(
+    product_qna_num     NUMBER            NULL, 
+    product_id          VARCHAR2(20)      NULL, 
+    member_id           VARCHAR2(20)      NULL, 
+    title               VARCHAR2(200)     NULL, 
+    contents            VARCHAR2(4000)    NULL, 
+    image               VARCHAR2(100)     NULL, 
+    qna_category_num    NUMBER            NULL, 
+    reg_date            DATE              DEFAULT sysdate NULL, 
+    views               NUMBER            NULL, 
+    parent_num          NUMBER            DEFAULT 0 NULL, 
+    CONSTRAINT PRODUCT_QNA_PK PRIMARY KEY (product_qna_num)
+)
+/
+
+COMMENT ON TABLE product_qna IS '상품문의'
+/
+
+COMMENT ON COLUMN product_qna.product_qna_num IS '상품 질문 번호'
+/
+
+COMMENT ON COLUMN product_qna.product_id IS '상품 아이디'
+/
+
+COMMENT ON COLUMN product_qna.member_id IS '회원 아이디'
+/
+
+COMMENT ON COLUMN product_qna.title IS '제목'
+/
+
+COMMENT ON COLUMN product_qna.contents IS '내용'
+/
+
+COMMENT ON COLUMN product_qna.image IS '이미지'
+/
+
+COMMENT ON COLUMN product_qna.qna_category_num IS '질문 카테고리 번호'
+/
+
+COMMENT ON COLUMN product_qna.reg_date IS '등록 날짜'
+/
+
+COMMENT ON COLUMN product_qna.views IS '조회수'
+/
+
+COMMENT ON COLUMN product_qna.parent_num IS '부모글 번호'
+/
+
+ALTER TABLE product_qna
+    ADD CONSTRAINT FK_product_qna_product_id_prod FOREIGN KEY (product_id)
+        REFERENCES product (product_id)
+/
+
+ALTER TABLE product_qna
+    ADD CONSTRAINT FK_product_qna_member_id_membe FOREIGN KEY (member_id)
+        REFERENCES member (member_id)
+/
+
+ALTER TABLE product_qna
+    ADD CONSTRAINT FK_product_qna_qna_category_nu FOREIGN KEY (qna_category_num)
+        REFERENCES qna_category (qna_category_num)
+/
+
+
+-- member Table Create SQL
+CREATE TABLE orders_history
+(
+    order_num           NUMBER           NULL, 
+    member_id           VARCHAR2(20)     NULL, 
+    order_date          DATE             DEFAULT sysdate NULL, 
+    total_price         NUMBER           NULL, 
+    order_status        VARCHAR2(20)     NULL, 
+    card_name           VARCHAR2(100)    NULL, 
+    card_num            NUMBER           NULL, 
+    timeStamp           DATE             NULL, 
+    destination         VARCHAR2(500)    NULL, 
+    delivery_request    VARCHAR2(500)    NULL   
+)
+/
+
+COMMENT ON TABLE orders_history IS '주문 히스토리'
+/
+
+COMMENT ON COLUMN orders_history.order_num IS '주문 번호'
+/
+
+COMMENT ON COLUMN orders_history.member_id IS '회원 아이디'
+/
+
+COMMENT ON COLUMN orders_history.order_date IS '주문 날짜'
+/
+
+COMMENT ON COLUMN orders_history.total_price IS '총 가격'
+/
+
+COMMENT ON COLUMN orders_history.order_status IS '주문 상태'
+/
+
+COMMENT ON COLUMN orders_history.card_name IS '카드 이름'
+/
+
+COMMENT ON COLUMN orders_history.card_num IS '카드 번호'
+/
+
+COMMENT ON COLUMN orders_history.timeStamp IS '처리일자'
+/
+
+COMMENT ON COLUMN orders_history.destination IS '도착지'
+/
+
+COMMENT ON COLUMN orders_history.delivery_request IS '배송 요청'
+/
+
+
+commit;
+
+INSERT INTO product values (
+	'bbang', '빵', '치즈 바게트 입니당',  1, 
+	200, '상온/종이포장', '치즈 바게트 메인.jpg', '더벨로', 0301
+);
+INSERT INTO product_category values (
+    0301, '빵' 
+);
+commit;

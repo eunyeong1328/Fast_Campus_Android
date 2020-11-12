@@ -25,11 +25,19 @@ public class MemberController {
 //	@Autowired
 //	private MemberVO memberVO;
 	
+	@RequestMapping(value="/signupForm.do")
+	public ModelAndView signupForm() {
+		System.out.println(" ㅎ ㅏ ㅇ ㅣ");
+		ModelAndView mav = new ModelAndView("signupForm.html");
+		return mav;
+	}
+	
 //	@RequestMapping(value="/login.do" ,method = RequestMethod.POST)
 	@RequestMapping(value="/login.do")
 	public ModelAndView login(@RequestParam Map<String, String> loginMap,
 			                  HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		System.out.println("로그인 하이 ");
 //		 memberVO=memberService.login(loginMap);
 //		if(memberVO!= null && memberVO.getMember_id()!=null){
 //			HttpSession session=request.getSession();
@@ -47,7 +55,7 @@ public class MemberController {
 //			
 //			
 //		}else{
-//			String message="아이디나  비밀번호가 틀립니다. 다시 로그인해주세요";
+//			String message="�븘�씠�뵒�굹  鍮꾨�踰덊샇媛� ��由쎈땲�떎. �떎�떆 濡쒓렇�씤�빐二쇱꽭�슂";
 //			mav.addObject("message", message);
 //			mav.setViewName("/member/loginForm");
 //		}
@@ -68,13 +76,13 @@ public class MemberController {
 		/*try {
 		    memberService.addMember(_memberVO);
 		    message  = "<script>";
-		    message +=" alert('회원 가입을 마쳤습니다.로그인창으로 이동합니다.');";
+		    message +=" alert('�쉶�썝 媛��엯�쓣 留덉낀�뒿�땲�떎.濡쒓렇�씤李쎌쑝濡� �씠�룞�빀�땲�떎.');";
 		    message += " location.href='"+request.getContextPath()+"/member/loginForm.do';";
 		    message += " </script>";
 		    
 		}catch(Exception e) {
 			message  = "<script>";
-		    message +=" alert('작업 중 오류가 발생했습니다. 다시 시도해 주세요');";
+		    message +=" alert('�옉�뾽 以� �삤瑜섍� 諛쒖깮�뻽�뒿�땲�떎. �떎�떆 �떆�룄�빐 二쇱꽭�슂');";
 		    message += " location.href='"+request.getContextPath()+"/member/memberForm.do';";
 		    message += " </script>";
 			e.printStackTrace();
@@ -83,4 +91,5 @@ public class MemberController {
 		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}
+	
 }
