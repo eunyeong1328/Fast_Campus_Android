@@ -44,7 +44,7 @@
 					<div
 						class="col-12 col-sm-8 col-md-8 col-lg-6 offset-sm-2 offset-md-2 offset-lg-3">
 						<!-- optional class: .form-control-pill -->
-						<form novalidate action="${contextPath }/member/login.do"
+						<form novalidate action="${contextPath}/member/login.do"
 							method="POST" class="bs-validate p-5 rounded shadow-xs">
 							<!--
 								<p class="text-danger">

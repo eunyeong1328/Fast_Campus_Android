@@ -45,9 +45,8 @@ public class MemberController extends BaseController{
 			if(action!=null && action.equals("/order/orderEachGoods.do")){//비로그인 상태에서 주문하기를 클릭하면
 				mav.setViewName("forward:"+action);
 			}else{
-				mav.setViewName("redirect:/main/main.do");	
-			}	
-			
+				mav.setViewName("redirect:/main/main.do");//로그인 성공하면 main화면으로
+			}				
 		}else{
 			String message="아이디나  비밀번호가 틀립니다. 다시 로그인해주세요";
 			mav.addObject("message", message);
