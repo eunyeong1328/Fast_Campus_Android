@@ -26,8 +26,7 @@ public class MainController extends BaseController {
 			String viewName=(String)request.getAttribute("viewName");
 			mav.setViewName(viewName);
 			System.out.println("mav: "+mav);			
-			
-			
+		
 			return mav;
 	}
 	
