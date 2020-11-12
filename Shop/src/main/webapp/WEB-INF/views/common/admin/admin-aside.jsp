@@ -32,7 +32,7 @@
 						<div class="clearfix d-flex justify-content-between">
 
 							<!-- Logo : height: 60px max -->
-							<a class="w-100 align-self-center navbar-brand p-3" href="${contextPath}/admin/main.do">
+							<a class="w-100 align-self-center navbar-brand p-3" href="${contextPath}/main/main.do">
 								<img src="${contextPath}/resources/assets/images/logo/logo_light.svg" width="110" height="60" alt="...">
 							</a>
 
@@ -67,7 +67,7 @@
 							<ul class="nav flex-column">
 
 								<li class="nav-item active">
-									<a class="nav-link js-ajax" href="${contextPath}/admin/main.do">
+									<a class="nav-link" href="${contextPath}/admin/main.do">
 										<i class="fi fi-menu-dots"></i>
 										요약
 									</a>
