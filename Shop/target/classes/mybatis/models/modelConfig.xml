@@ -12,6 +12,10 @@
     <typeAlias type="com.bookshop01.mypage.vo.MyPageVO" alias="mypageVO" /> 
   </typeAliases> -->
   
+  <typeAliases>
+  	<typeAlias type="com.project.shop.member.MemberVO" alias = "memberVO"/>
+  </typeAliases>
+  
 </configuration>
 
 
