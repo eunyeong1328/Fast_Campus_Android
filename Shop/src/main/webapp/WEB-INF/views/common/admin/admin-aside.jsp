@@ -74,7 +74,7 @@
 								</li>
 
 								<li class="nav-item">
-									<a class="nav-link" href="${contextPath}/admin/memberList.do">
+									<a class="nav-link" href="${contextPath}/admin/member/memberList.do">
 										<i class="fi fi-users"></i>
 										회원관리
 									</a>
@@ -112,8 +112,6 @@
 
 										</ul>
 									</li>
-
-
 
 
 

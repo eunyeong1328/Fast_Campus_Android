@@ -8,5 +8,6 @@ import com.project.shop.common.base.BaseController;
 @Controller("adminController")
 @RequestMapping(value="/admin")
 public class AdminController extends BaseController{
+	
 
 }

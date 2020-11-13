@@ -19,7 +19,7 @@
       </definition>  
       
       <!-- 관리자 회원목록 레이아웃 -->
-	  <definition name="/admin/memberList" extends="adminLayout">
+	  <definition name="/admin/member/memberList" extends="adminLayout">
          <put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberList.jsp" />
       </definition>  
 </tiles-definitions>

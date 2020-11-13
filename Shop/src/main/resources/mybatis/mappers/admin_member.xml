@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="mapper.admin.member">
+	<resultMap id="memberResult" type="memberVO"> <!-- 회원 정보를 저장할 resultMap을 정의한다. -->
+		<result property="member_id" column="member_id" />  <!-- db의 있는 이름 : 값 -->
+		<result property="password" column="password" />
+		<result property="member_name" column="member_name" />
+		<result property="email" column="email" />
+		<result property="phone" column="phone" />
+		<result property="load_address" column="load_address" />
+		<result property="rest_address" column="rest_address" />
+		<result property="zipNo" column="zipNo" />
+		<result property="member_date" column="member_date" />
+		<result property="birthday" column="birthday" />
+		<result property="pre_score" column="pre_score" />
+		<result property="this_score" column="this_score" />
+		<result property="point" column="point" />
+		<result property="member_status" column="member_status" />
+	</resultMap>	
+	
+	<!-- 1이랑 30 나중에 바꿔줘야함 -->
+	<select id="listMember" resultMap="memberResult" parameterType="java.util.HashMap">
+	<![CDATA[
+		SELECT X.RNUM, X.MEMBER_ID
+	FROM (
+	SELECT ROWNUM AS RNUM, A.MEMBER_ID
+	FROM(
+	    SELECT MEMBER_ID
+	    FROM MEMBER
+	    ORDER BY MEMBER_DATE) A
+	WHERE ROWNUM <= 30 )X
+	WHERE X.RNUM >=1;	
+	]]>
+	</select>
+	</mapper>
