@@ -13,7 +13,8 @@
 <html>
 	 <head>
 	 <meta charset="UTF-8">
-	 <script src="http://code.jquery.com/jquery-latest.js"></script>		
+	 <script src="http://code.jquery.com/jquery-latest.js"></script>
+
 
 			<!-- 
 				SWIPER 

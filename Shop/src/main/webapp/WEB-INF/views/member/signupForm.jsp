@@ -39,7 +39,6 @@
 
 
 
-
 			<!-- FORM -->
 			<section>
 				<div class="container">
@@ -63,10 +62,12 @@
 								-->
 
 
-								<div class="form-label-group mb-3">
-									<input required placeholder="member_id" id="member_id" name="member_id" type="text" class="form-control">
+								<div class="form-label-group mb-3"> 
+									<input required placeholder="member_id" id="member_id" name="member_id" type="text" label="아이디" class="form-control col-md-9" style="margin-bottom: 0;display: inline-block">
 									<label for="member_id">아이디</label>
-                </div>
+									<a class="btn btn-primary" href="javascript:chkId()"">중복확인</a>								
+									</div>
+									
                 
                 <div class="input-group-over">
 									<div class="form-label-group mb-3">
@@ -85,10 +86,11 @@
 									<label for="member_name">이름</label>
 								</div>
 
-								<div class="form-label-group mb-3">
-									<input required placeholder="Email" id="email" name="email" type="email" class="form-control">
-									<label for="email">이메일</label>
-								</div>
+								<div class="form-label-group mb-3"> 
+									<input required placeholder="Email" id="email" name="email" type="text" label="아이디" class="form-control col-md-9" style="margin-bottom: 0;display: inline-block">
+									<label for="member_id">이메일</label>
+									<a class="btn btn-primary" href="javascript:chkId()">중복확인</a>								
+									</div>
 
 								<div class="form-label-group mb-3">
 									<input required placeholder="Phone" id="phone" name="phone" type="tel" class="form-control">
@@ -317,7 +319,7 @@
 
 		</div><!-- /#wrapper -->
 
-		<script src="assets/js/core.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/core.min.js"></script>
 		
 	</body>
 </html>

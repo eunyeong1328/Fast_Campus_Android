@@ -6,7 +6,7 @@
 
 <mapper namespace="mappers.member">
 
-	<resultMap id="memberResult" type="MemberVO"> <!-- 회원 정보를 저장할 resultMap을 정의한다. -->
+	<resultMap id="memberResult" type="memberVO"> <!-- 회원 정보를 저장할 resultMap을 정의한다. -->
 		<result property="member_id" column="member_id" />  <!-- db의 있는 이름 : 값 -->
 		<result property="password" column="password" />
 		<result property="member_name" column="member_name" />
@@ -23,7 +23,7 @@
 		<result property="member_status" column="member_status" />
 	</resultMap>	
 	
-	<select id="login" parameterType="java.util.Map" resultType="memberVO">
+	<select id="login" parameterType="memberVO" resultType="memberVO">
 		<![CDATA[
 			select * from member
 			where member_id = #{member_id}
@@ -38,4 +38,5 @@
 			values(#{member_id},#{password},#{member_name},#{email},#{load_address});
 		]]>
 	</insert>
+	
 </mapper>

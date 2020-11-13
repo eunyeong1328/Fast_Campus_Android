@@ -4,49 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <%
-<<<<<<< HEAD
-  request.setCharacterEncoding("UTF-8");
-%>  
-		
-
-			<!-- PAGE TITLE -->
-			<section class="bg-light p-0">
-				<div class="container py-5">
-
-					<h1 class="h3">
-						로그인
-					</h1>
-
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb fs--14">
-							<li class="breadcrumb-item"><a href="#!">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Account</li>
-						</ol>
-					</nav>
-
-				</div>
-			</section>
-			<!-- /PAGE TITLE -->
-
-
-
-
-			<!-- FORM -->
-			<section>
-				<div class="container">
-
-
-					<div class="row">
-
-						<div class="col-12 col-sm-8 col-md-8 col-lg-6 offset-sm-2 offset-md-2 offset-lg-3">
-
-
-							<!-- optional class: .form-control-pill -->
-							<form novalidate action="#" method="POST" class="bs-validate p-5 rounded shadow-xs">
-
-
-								<!--
-=======
 	request.setCharacterEncoding("UTF-8");
 %>
 
@@ -90,18 +47,17 @@
 						<form novalidate action="${contextPath}/member/login.do"
 							method="POST" class="bs-validate p-5 rounded shadow-xs">
 							<!--
->>>>>>> refs/remotes/origin/wendy
 								<p class="text-danger">
 									Ups! Please check again
 								</p>
 								-->
 							<div class="form-label-group mb-3">
-								<input required placeholder="id" id="account_id" name="account_id" type="text" class="form-control">
+								<input required placeholder="id" id="account_id" name="member_id" type="text" class="form-control">
 								 <label for="account_email">아이디</label>
 							</div>
 							<div class="input-group-over">
 								<div class="form-label-group mb-3">
-									<input required placeholder="Password" id="account_password" name="account_password" type="password" class="form-control">
+									<input required placeholder="Password" id="account_password" name="password" type="password" class="form-control">
 									<label for="account_password">비밀번호</label>
 								</div> 
 								<a href="signin-password.jsp" class="btn fs--12"> 비밀번호 찾기 </a>

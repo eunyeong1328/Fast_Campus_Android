@@ -15,12 +15,14 @@ public class MemberDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public MemberVO login(Map<String, String> loginMap) throws DataAccessException{
-		MemberVO member = (MemberVO)sqlSession.selectOne("mappers.member.login",loginMap);
+	public MemberVO login(MemberVO user) throws DataAccessException{
+		System.out.println("М∙≤Л²╢");
+		MemberVO member = (MemberVO)sqlSession.selectOne("mappers.member.login",user);
+		System.out.println("SQL RESULT : " +member);
 		return member;
 	}
 	
-	public int insertMember(MemberVO vo) {//х╦©Ь╟║ют
+	public int insertMember(MemberVO vo) {//х╦О©╫О©╫О©╫О©╫О©╫О©╫
 		return sqlSession.insert("mappers.member.insertMember",vo);
 	}
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	<!-- 관리자 기본 레이아웃 설정 -->
+	<definition name="adminLayout"	
+		template="/WEB-INF/views/common/admin/admin-layout.jsp">
+		<put-attribute name="title" value="쩝쩝박사 :: 관리자페이지" />
+		<put-attribute name="aside"
+			value="/WEB-INF/views/common/admin/admin-aside.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/admin/admin-footer.jsp" />
+	</definition>
+
+	<!-- 관리자 메인(대시보드) 레이아웃 -->
+	  <definition name="/admin/main" extends="adminLayout">
+         <put-attribute name="body" value="/WEB-INF/views/admin/admin-main.jsp" />
+      </definition>  
+      
+      <!-- 관리자 회원목록 레이아웃 -->
+	  <definition name="/admin/memberList" extends="adminLayout">
+         <put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberList.jsp" />
+      </definition>  
+</tiles-definitions>

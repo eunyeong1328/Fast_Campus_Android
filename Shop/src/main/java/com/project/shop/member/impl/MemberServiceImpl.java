@@ -1,7 +1,6 @@
 package com.project.shop.member.impl;
 
-import java.util.Map;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,18 +10,19 @@ import com.project.shop.member.MemberVO;
 
 @Service("memberService")
 @Transactional(propagation=Propagation.REQUIRED) 
-//DAO¿¡¼­ Ã³¸®ÇÑ Äõ¸®¹®ÀÌ Á¤»óÀûÀ¸·Î ¿Ï·á°¡ µÇ°í,Ã³¸® µµÁß ¿¡·¯°¡ ³µÀ» ¶§ DAO¿¡¼­ Ã³¸®ÇÑ Äõ¸®¸¦ ÀÚµ¿À¸·Î rollbackÇÏ±â À§ÇØ
+//DAOï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·á°¡ ï¿½Ç°ï¿½,Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ DAOï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ rollbackï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½
 public class MemberServiceImpl implements MemberService{
-
+	
+	@Autowired
 	private MemberDAO memberDAO;
 	
 	@Override
-	public MemberVO login(Map<String, String> loginMap) throws Exception {//·Î±×ÀÎ
-		return memberDAO.login(loginMap);
+	public MemberVO login(MemberVO user) throws Exception {//ï¿½Î±ï¿½ï¿½ï¿½
+		return memberDAO.login(user);
 	}
 	
 	@Override
-	public int insertMember(MemberVO vo) { //È¸¿ø°¡ÀÔ
+	public int insertMember(MemberVO vo) { //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		return memberDAO.insertMember(vo);
 	}
 
