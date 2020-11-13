@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 eclipse.preferences.version=1
 encoding//src/main/java/com/project/shop/view/member/MemberController.java=UTF-8
+=======
+eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/member/signupForm.jsp=UTF-8
+>>>>>>> refs/remotes/origin/wendy

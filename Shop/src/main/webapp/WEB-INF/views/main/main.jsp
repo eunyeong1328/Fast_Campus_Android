@@ -755,8 +755,8 @@
 					<div class="row">
 
 						<div class="col-10 mx-auto col-lg-8 py-5 pb-0-xs text-center-md text-center-xs">
-							<h3 class="m-0">냠냠박사의 <span class="text-danger">맛있는 할인정보 </span>받아보기</h3>
-							<p class="m-0">매주 달라지는 냠냠박사의 할인정보 놓치지 마지고 이메일로 받아보세요!</p>
+							<h3 class="m-0">쩝쩝박사의 <span class="text-danger">맛있는 할인정보 </span>받아보기</h3>
+							<p class="m-0">매주 달라지는 쩝쩝박사의 할인정보 놓치지 마지고 이메일로 받아보세요!</p>
 						</div>
 
 						<div class="col-10 mx-auto col-lg-4 py-4">
@@ -793,7 +793,7 @@
 						</h2>
 
 						<p class="lead max-w-600 mx-auto">
-							매일 정오, 냠냠박사의 새로운 상품을 만나보세요!
+							매일 정오, 쩝쩝박사의 새로운 상품을 만나보세요!
 						</p>
 					</div>
 
@@ -1125,7 +1125,7 @@
 						<div class="col">
 
 							<h5 class="text-danger my-3">
-								냠냠박사 구독하기
+								쩝쩝박사 구독하기
 							</h5>
 
 							<form novalidate class="bs-validate" method="post" action="#">

@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.shop.common.base.BaseController;
+
 /**
  * Handles requests for the application home page.
  */
 @Controller("mainController")
 @EnableAspectJAutoProxy
-public class MainController {
+public class MainController extends BaseController {
 	
 		@RequestMapping(value= "/main/main.do" ,method={RequestMethod.POST,RequestMethod.GET})
 		public ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -24,8 +26,7 @@ public class MainController {
 			String viewName=(String)request.getAttribute("viewName");
 			mav.setViewName(viewName);
 			System.out.println("mav: "+mav);			
-			
-			
+		
 			return mav;
 	}
 	
