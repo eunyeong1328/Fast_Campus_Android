@@ -213,50 +213,7 @@
 
               <!-- my account -->
               <c:choose>
-              <c:when test="${isLogOn==true and not empty memberInfo }">
-              
-
-              				<!-- my account -->
-							<li class="list-inline-item mx-1 dropdown">
-
-								<a href="#" aria-label="My Account" id="dropdownAccountOptions" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="d-inline-block text-center text-dark">
-									<i class="fi fi-users fs--20"></i>
-									<span class="d-block font-weight-light fs--14">내 계정</span>
-								</a>
-
-
-								<!-- dropdown -->
-								<div aria-labelledby="dropdownAccountOptions" class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15">
-									<div class="dropdown-header">
-										${memberInfo.member_name }님
-									</div>
-
-									<div class="dropdown-divider"></div>
-
-									<a href="account-orders.html" title="My Orders" class="dropdown-item text-truncate font-weight-light">
-										내 주문 <small>(2)</small>
-									</a>
-
-									<a href="account-favourites.html" title="My Favourites" class="dropdown-item text-truncate font-weight-light">
-										찜 리스트 <small>(3)</small>
-									</a>
-
-									<a href="account-settings.html" title="Account Settings" class="dropdown-item text-truncate font-weight-light">
-										마이페이지
-									</a>
-
-									<div class="dropdown-divider mb-0"></div>
-
-									<a href="#!" title="Log Out" class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore">
-										<i class="fi fi-power float-start"></i>
-										로그아웃
-									</a>
-
-								</div>
-
-							</li>
-              </c:when>
-              <c:when test="${isLogOn==true and id eq 'admin' }">
+              <c:when test="${(isLogOn==true) and (memberInfo.member_id eq'admin') }">
              			 <!-- my account -->
 							<li class="list-inline-item mx-1 dropdown">
 
@@ -291,6 +248,50 @@
 							</li>
               
               </c:when>
+              <c:when test="${isLogOn==true and not empty memberInfo }">
+              
+
+              				<!-- my account -->
+							<li class="list-inline-item mx-1 dropdown">
+
+								<a href="#" aria-label="My Account" id="dropdownAccountOptions" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="d-inline-block text-center text-dark">
+									<i class="fi fi-users fs--20"></i>
+									<span class="d-block font-weight-light fs--14">내 계정</span>
+								</a>
+
+
+								<!-- dropdown -->
+								<div aria-labelledby="dropdownAccountOptions" class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15">
+									<div class="dropdown-header">
+										${memberInfo.member_id }님
+									</div>
+
+									<div class="dropdown-divider"></div>
+
+									<a href="account-orders.html" title="My Orders" class="dropdown-item text-truncate font-weight-light">
+										내 주문 <small>(2)</small>
+									</a>
+
+									<a href="account-favourites.html" title="My Favourites" class="dropdown-item text-truncate font-weight-light">
+										찜 리스트 <small>(3)</small>
+									</a>
+
+									<a href="account-settings.html" title="Account Settings" class="dropdown-item text-truncate font-weight-light">
+										마이페이지
+									</a>
+
+									<div class="dropdown-divider mb-0"></div>
+
+									<a href="#!" title="Log Out" class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore">
+										<i class="fi fi-power float-start"></i>
+										로그아웃
+									</a>
+
+								</div>
+
+							</li>
+              </c:when>
+              
               <c:otherwise>
                             <li class="list-inline-item mx-1 dropdown d-none d-sm-block">
 
