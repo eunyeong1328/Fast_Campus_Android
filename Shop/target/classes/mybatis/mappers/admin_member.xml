@@ -25,15 +25,15 @@
 	<!-- 1이랑 30 나중에 바꿔줘야함 -->
 	<select id="listMember" resultMap="memberResult" parameterType="java.util.HashMap">
 	<![CDATA[
-		SELECT X.RNUM, X.MEMBER_ID
+		SELECT X.RNUM, X.*
 	FROM (
-	SELECT ROWNUM AS RNUM, A.MEMBER_ID
+	SELECT ROWNUM AS RNUM, A.*
 	FROM(
-	    SELECT MEMBER_ID
+	    SELECT *
 	    FROM MEMBER
 	    ORDER BY MEMBER_DATE) A
 	WHERE ROWNUM <= 30 )X
-	WHERE X.RNUM >=1;	
+	WHERE X.RNUM >=1
 	]]>
 	</select>
 	</mapper>

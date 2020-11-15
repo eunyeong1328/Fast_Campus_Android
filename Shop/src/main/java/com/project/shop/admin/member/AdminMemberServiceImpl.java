@@ -15,12 +15,10 @@ import com.project.shop.member.MemberVO;
 @Service("adminMemberService")
 @Transactional(propagation=Propagation.REQUIRED)
 public class AdminMemberServiceImpl implements AdminMemberService {
-	
 	@Autowired
 	private AdminMemberDAO adminMemberDAO;
 
-	@Override
-	public ArrayList<MemberVO> listMember(Map<String, Object> condMap) throws Exception {
+	public ArrayList<MemberVO> listMember(HashMap condMap) throws Exception{
 		return adminMemberDAO.listMember(condMap);
 	}
 

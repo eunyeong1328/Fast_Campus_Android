@@ -111,168 +111,156 @@
 												</tr>
 											</thead>
 
-											<tbody id="item_list">
+										<tbody id="item_list">
+											<c:choose>
+												<c:when test="${empty member_list}">
+													<tr>
+														<td colspan=5 class="fixed"><strong>조회된 회원이
+																없습니다.</strong></td>
+													</tr>
+												</c:when>
+												<c:otherwise>
+													<c:forEach var="item" items="${member_list}" varStatus="item_num">
+													<!-- item -->
+														<tr id="message_id_2" class="text-muted">
 
-												<!-- item -->
-												<tr id="message_id_2" class="text-muted">
-
-													<!-- 체크박스 -->
-													<td>
-														<label class="form-checkbox form-checkbox-secondary float-start">
-															<input type="checkbox" name="item_id[]" value="2">
-															<i></i>
-														</label>
-													</td>
+															<!-- 체크박스 -->
+															<td><label
+																class="form-checkbox form-checkbox-secondary float-start">
+																	<input type="checkbox" name="item_id[]" value="2">
+																	<i></i>
+															</label></td>
 
 
-												
-													<td >1</td>	
-													<td >doctorjjoup</td>
-													<td >쩝쩝이</td>
-													<td >drjj@test.com</td>
-													<td >
-														<small class="badge badge-danger font-medium text-uppercase">우수회원</small>
-													</td>
 
-													<!-- 상태 -->
-													<td>일반</td>
+															<td>1</td>
+															<td>${item.member_id}</td>
+															<td>${item.member_name}</td>
+															<td>${item.email}</td>
+															<td><small
+																class="badge badge-danger font-medium text-uppercase">우수회원</small>
+															</td>
 
-													<td >2020-11-12</td>
+															<!-- 상태 -->
+															<td>일반</td>
 
-													<td class="text-align-end">
+															<td>${item.member_date}</td>
 
-														<div class="dropdown">
+															<td class="text-align-end">
 
-															<a href="#" class="btn btn-sm btn-light rounded-circle" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
-																<span class="group-icon">
-																	<i class="fi fi-dots-vertical-full"></i>
-																	<i class="fi fi-close"></i>
-																</span>
-															</a>
-															</td>					
+																<div class="dropdown">
 
-															<div class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-220">
+																	<a href="#" class="btn btn-sm btn-light rounded-circle"
+																		data-toggle="dropdown" aria-expanded="false"
+																		aria-haspopup="true"> <span class="group-icon">
+																			<i class="fi fi-dots-vertical-full"></i> <i
+																			class="fi fi-close"></i>
+																	</span>
+																	</a>
+															</td>
 
-																<a class="dropdown-item text-truncate" href="#!">
-																	<i class="fi fi-check"></i>
-																	Set Active
-																</a>
+															<div
+																class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-220">
 
-																<a class="dropdown-item text-truncate" href="#!">
-																	<i class="fi fi-close"></i>
-																	Set Inactive
-																</a>
-
-																<a	 href="#!" 
-																	class="dropdown-item text-truncate js-ajax-confirm" 
-																	data-href="page-list.html" 
-																	data-ajax-confirm-body="Delete this page?" 
-
-																	data-ajax-confirm-mode="ajax" 
-																	data-ajax-confirm-method="GET" 
-
-																	data-ajax-confirm-btn-yes-class="btn-sm btn-danger" 
-																	data-ajax-confirm-btn-yes-text="Delete" 
-																	data-ajax-confirm-btn-yes-icon="fi fi-check" 
-
-																	data-ajax-confirm-btn-no-class="btn-sm btn-light" 
-																	data-ajax-confirm-btn-no-text="Cancel" 
+																<a class="dropdown-item text-truncate" href="#!"> <i
+																	class="fi fi-check"></i> Set Active
+																</a> <a class="dropdown-item text-truncate" href="#!"> <i
+																	class="fi fi-close"></i> Set Inactive
+																</a> <a href="#!"
+																	class="dropdown-item text-truncate js-ajax-confirm"
+																	data-href="page-list.html"
+																	data-ajax-confirm-body="Delete this page?"
+																	data-ajax-confirm-mode="ajax"
+																	data-ajax-confirm-method="GET"
+																	data-ajax-confirm-btn-yes-class="btn-sm btn-danger"
+																	data-ajax-confirm-btn-yes-text="Delete"
+																	data-ajax-confirm-btn-yes-icon="fi fi-check"
+																	data-ajax-confirm-btn-no-class="btn-sm btn-light"
+																	data-ajax-confirm-btn-no-text="Cancel"
 																	data-ajax-confirm-btn-no-icon="fi fi-close"
-
-																	data-ajax-confirm-success-target="#message_id_2" 
-																	data-ajax-confirm-success-target-action="remove">
-																	<i class="fi fi-thrash text-danger"></i>
-																	Delete
+																	data-ajax-confirm-success-target="#message_id_2"
+																	data-ajax-confirm-success-target-action="remove"> <i
+																	class="fi fi-thrash text-danger"></i> Delete
 																</a>
 
 															</div>
 
-												</tr>
-												<!-- /item -->
-												<!-- item -->
-												<tr id="message_id_2" class="text-muted">
+														</tr>
+														<!-- /item -->
+														</c:forEach>
+														</c:otherwise>
+														</c:choose>
 
-													<!-- 체크박스 -->
-													<td>
-														<label class="form-checkbox form-checkbox-secondary float-start">
-															<input type="checkbox" name="item_id[]" value="2">
-															<i></i>
-														</label>
-													</td>
+														
+														<!-- item -->
+														<tr id="message_id_2" class="text-muted">
+
+															<!-- 체크박스 -->
+															<td><label
+																class="form-checkbox form-checkbox-secondary float-start">
+																	<input type="checkbox" name="item_id[]" value="2">
+																	<i></i>
+															</label></td>
 
 
-												
-													<td >2</td>	
-													<td >doctornyam</td>
-													<td >냠냠이</td>
-													<td >drnn@test.com</td>
-													<td >
-														<small class="badge badge-indigo font-medium text-uppercase">일반회원</small>
-													</td>
 
-													<!-- 상태 -->
-													<td>
-														휴면
-													</td>
+															<td>2</td>
+															<td>doctornyam</td>
+															<td>냠냠이</td>
+															<td>drnn@test.com</td>
+															<td><small
+																class="badge badge-indigo font-medium text-uppercase">일반회원</small>
+															</td>
 
-													<td >2020-11-11</td>
+															<!-- 상태 -->
+															<td>휴면</td>
 
-													<td class="text-align-end">
+															<td>2020-11-11</td>
 
-														<div class="dropdown">
+															<td class="text-align-end">
 
-															<a href="#" class="btn btn-sm btn-light rounded-circle" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
-																<span class="group-icon">
-																	<i class="fi fi-dots-vertical-full"></i>
-																	<i class="fi fi-close"></i>
-																</span>
-															</a>
-															</td>					
+																<div class="dropdown">
 
-															<div class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-220">
+																	<a href="#" class="btn btn-sm btn-light rounded-circle"
+																		data-toggle="dropdown" aria-expanded="false"
+																		aria-haspopup="true"> <span class="group-icon">
+																			<i class="fi fi-dots-vertical-full"></i> <i
+																			class="fi fi-close"></i>
+																	</span>
+																	</a>
+															</td>
 
-																<a class="dropdown-item text-truncate" href="#!">
-																	<i class="fi fi-check"></i>
-																	Set Active
-																</a>
+															<div
+																class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-220">
 
-																<a class="dropdown-item text-truncate" href="#!">
-																	<i class="fi fi-close"></i>
-																	Set Inactive
-																</a>
-
-																<a	 href="#!" 
-																	class="dropdown-item text-truncate js-ajax-confirm" 
-																	data-href="page-list.html" 
-																	data-ajax-confirm-body="Delete this page?" 
-
-																	data-ajax-confirm-mode="ajax" 
-																	data-ajax-confirm-method="GET" 
-
-																	data-ajax-confirm-btn-yes-class="btn-sm btn-danger" 
-																	data-ajax-confirm-btn-yes-text="Delete" 
-																	data-ajax-confirm-btn-yes-icon="fi fi-check" 
-
-																	data-ajax-confirm-btn-no-class="btn-sm btn-light" 
-																	data-ajax-confirm-btn-no-text="Cancel" 
+																<a class="dropdown-item text-truncate" href="#!"> <i
+																	class="fi fi-check"></i> Set Active
+																</a> <a class="dropdown-item text-truncate" href="#!"> <i
+																	class="fi fi-close"></i> Set Inactive
+																</a> <a href="#!"
+																	class="dropdown-item text-truncate js-ajax-confirm"
+																	data-href="page-list.html"
+																	data-ajax-confirm-body="Delete this page?"
+																	data-ajax-confirm-mode="ajax"
+																	data-ajax-confirm-method="GET"
+																	data-ajax-confirm-btn-yes-class="btn-sm btn-danger"
+																	data-ajax-confirm-btn-yes-text="Delete"
+																	data-ajax-confirm-btn-yes-icon="fi fi-check"
+																	data-ajax-confirm-btn-no-class="btn-sm btn-light"
+																	data-ajax-confirm-btn-no-text="Cancel"
 																	data-ajax-confirm-btn-no-icon="fi fi-close"
-
-																	data-ajax-confirm-success-target="#message_id_2" 
-																	data-ajax-confirm-success-target-action="remove">
-																	<i class="fi fi-thrash text-danger"></i>
-																	Delete
+																	data-ajax-confirm-success-target="#message_id_2"
+																	data-ajax-confirm-success-target-action="remove"> <i
+																	class="fi fi-thrash text-danger"></i> Delete
 																</a>
 
 															</div>
 
-												</tr>
-												<!-- /item -->
-												
+														</tr>
+														<!-- /item -->
+										</tbody>
 
-
-											</tbody>
-
-											<tfoot>
+										<tfoot>
 												<tr class="text-muted fs--13">
 													<th class="w--30 hidden-lg-down">
 														<label class="form-checkbox form-checkbox-primary float-start">

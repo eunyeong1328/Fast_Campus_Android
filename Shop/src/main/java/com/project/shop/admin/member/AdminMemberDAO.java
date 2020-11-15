@@ -17,7 +17,7 @@ public class AdminMemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public ArrayList<MemberVO> listMember(Map<String, Object> condMap) throws DataAccessException{
+	public ArrayList<MemberVO> listMember(HashMap condMap) throws DataAccessException{
 		ArrayList<MemberVO>  memberList=(ArrayList)sqlSession.selectList("mapper.admin.member.listMember",condMap);
 		return memberList;
 	}
