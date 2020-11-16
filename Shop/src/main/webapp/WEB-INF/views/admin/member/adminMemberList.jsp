@@ -45,17 +45,61 @@
 							<!-- portlet : header -->
 							<div class="portlet-header border-bottom">
 
-								<div class="float-end">
+								<div class="float row">
+							<!-- 아이디, 이름으로 검색 -->
 
-									<a href="#!" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
-										회원 수정
-									</a>
-
-								</div>
-
+							<div class="col-3">
+									<div class="input-group">
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-default dropdown-toggle"
+												data-toggle="dropdown" aria-expanded="false" >
+												ID <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="#">ID</a></li>
+												<li><a href="#">이름</a></li>
+											</ul>
+										</div>
+										<!-- /btn-group -->
+										<input type="text" class="form-control" aria-label="...">
+										
+									</div>
+									<!-- /input-group -->
+							</div>
+							
+							<!-- 등급 -->
+											<div class="form-label-group col-2">
+											<select id="select_options" class="form-control bs-select">
+												<option value="1">일반회원</option>
+												<option value="2">우수회원</option>
+											</select>
+											<label for="select_options">회원등급</label>
+										</div>
+									
+							<!-- 날짜로 검색 -->
+							<div class="float-end col-3">
+								<input autocomplete="off" type="text" name="my_daterange"
+									class="form-control rangepicker" data-placement="left"
+									data-ranges="false" data-date-start="01/16/2019"
+									data-date-end="01/28/2019" data-date-format="MM/DD/YYYY"
+									data-quick-locale='{
+														"lang_apply"	: "검색",
+														"lang_cancel"	: "취소",
+														"lang_crange"	: "Custom Range",
+														"lang_months" 	: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+														"lang_weekdays" : ["일", "월", "화", "수", "목", "금", "토"]
+													}'>
 
 							</div>
-							<!-- /portlet : header -->
+
+							<!-- 날짜로 검색 끝 -->
+
+
+						</div>
+
+
+					</div>
+					<!-- /portlet : header -->
 
 
 							<!-- portlet : body -->
@@ -134,7 +178,9 @@
 
 
 															<td>${item_num.count}</td>
-															<td>${item.member_id}</td>
+															<td><a href="${contextPath}/admin/member/memberDetail.do?member_id=${item.member_id}" class="font-weight-medium text-muted mx-2 m-0-xs">
+															${item.member_id}</a>
+															</td>
 															<td>${item.member_name}</td>
 															<td>${item.email}</td>
 															<td><small

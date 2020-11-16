@@ -23,15 +23,18 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 	}
 
 	@Override
-	public MemberVO memberDetail(String member_id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberVO memberDetail(String member_id) throws Exception{
+		 return adminMemberDAO.memberDetail(member_id);
 	}
-
+	
 	@Override
-	public void modifyMemberInfo(HashMap memberMap) throws Exception {
-		// TODO Auto-generated method stub
-
+	public void  modifyMemberInfo(HashMap memberMap) throws Exception{
+		 String member_id=(String)memberMap.get("member_id");
+		 adminMemberDAO.modifyMemberInfo(memberMap);
+	}
+	
+	public void  deleteMember(String member_id) throws Exception{		 
+		 adminMemberDAO.deleteMember(member_id);
 	}
 
 }

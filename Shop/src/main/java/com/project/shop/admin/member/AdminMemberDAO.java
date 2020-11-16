@@ -22,7 +22,18 @@ public class AdminMemberDAO {
 		return memberList;
 	}
 	
-
+	public MemberVO memberDetail(String member_id) throws DataAccessException{
+		MemberVO memberBean=(MemberVO)sqlSession.selectOne("mapper.admin.member.memberDetail",member_id);
+		return memberBean;
+	}
+	
+	public void modifyMemberInfo(HashMap memberMap) throws DataAccessException{
+		sqlSession.update("mapper.admin.member.modifyMemberInfo",memberMap);
+	}
+	
+	public void deleteMember(String member_id) throws DataAccessException{
+		sqlSession.selectOne("mapper.admin.member.deleteMember",member_id);
+	}
 	
 
 }

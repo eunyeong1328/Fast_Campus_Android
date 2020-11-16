@@ -22,7 +22,7 @@
 		<result property="member_status" column="member_status" />
 	</resultMap>	
 	
-	<!-- 1이랑 30 나중에 바꿔줘야함 -->
+	<!-- 회원목록: 1이랑 30 나중에 바꿔줘야함 -->
 	<select id="listMember" resultMap="memberResult" parameterType="java.util.HashMap">
 	<![CDATA[
 		SELECT X.RNUM, X.*
@@ -36,4 +36,19 @@
 	WHERE X.RNUM >=1
 	]]>
 	</select>
+	
+	<!-- 회원상세 -->
+	    <select id="memberDetail" resultMap="memberResult"   parameterType="String"  >
+	    <![CDATA[
+		    SELECT * FROM MEMBER
+            WHERE member_id=#{member_id}
+    	]]>
+	</select>
+	<!-- 회원수정 -->
+	
+	<!-- 회원삭제 -->
+		<delete id="deleteMember" parameterType="String">
+	  delete from member
+	  where member_id=#{member_id}
+	</delete>
 	</mapper>

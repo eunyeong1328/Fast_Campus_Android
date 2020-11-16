@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.shop.admin.member.AdminMemberService;
@@ -27,6 +28,7 @@ public class AdminMemberController extends BaseController {
 	public ModelAndView memberList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		System.out.println(viewName);
 		HttpSession session=request.getSession();
 		session=request.getSession();
 //		session.setAttribute("side_menu", "admin_mode"); //마이페이지 사이드 메뉴로 설정한다.
@@ -71,6 +73,28 @@ public class AdminMemberController extends BaseController {
 //		mav.addObject("pageNum", pageNum);
 		return mav;
 	
+	}
+	
+	@RequestMapping(value="/memberDetail.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView memberDetail(HttpServletRequest request, HttpServletResponse response)  throws Exception{
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		String member_id=request.getParameter("member_id");
+		MemberVO member_info=adminMemberService.memberDetail(member_id);
+		mav.addObject("member_info",member_info);
+		return mav;
+	}
+	
+	
+	@RequestMapping(value="/deleteMember.do")
+	public ModelAndView removeGoodsImage( @RequestParam("member_id") String member_id,
+			                      HttpServletRequest request, HttpServletResponse response)  throws Exception {
+		ModelAndView mav = new ModelAndView();
+		adminMemberService.deleteMember(member_id);
+		mav.setViewName("redirect:/admin/member/memberList.do");
+		return mav;
+		
+		
 	}
 	
 	
