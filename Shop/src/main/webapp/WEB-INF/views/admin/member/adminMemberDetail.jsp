@@ -187,8 +187,8 @@
 											data-ajax-confirm-size="modal-md" 
 											data-ajax-confirm-centered="false" 
 
-											data-ajax-confirm-callback-function=""
-											data-ajax-confirm-mode="ajax" 
+											data-ajax-confirm-callback-function='function(){window.location.href = "${contextPath}/admin/member/memberList.do";}'
+											data-ajax-confirm-mode="json" 
 											data-ajax-confirm-method="GET" 
 
 											data-ajax-confirm-title="Please Confirm" 
