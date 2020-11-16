@@ -133,7 +133,7 @@
 
 
 
-															<td>1</td>
+															<td>${item_num.count}</td>
 															<td>${item.member_id}</td>
 															<td>${item.member_name}</td>
 															<td>${item.email}</td>
