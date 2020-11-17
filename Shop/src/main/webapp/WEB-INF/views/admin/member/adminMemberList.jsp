@@ -44,40 +44,36 @@
 							
 							<!-- portlet : header -->
 							<div class="portlet-header border-bottom">
+							<form class="float-end row" method="get" action="#">
+							<!-- 옵션으로 검색 -->
+									<div class="row gutters-xs">
 
-								<div class="float row">
-							<!-- 아이디, 이름으로 검색 -->
+										<div class="col-6 col-lg-6">
 
-							<div class="col-3">
-									<div class="input-group">
-										<div class="input-group-btn">
-											<button type="button" class="btn btn-default dropdown-toggle"
-												data-toggle="dropdown" aria-expanded="false" >
-												ID <span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu" role="menu">
-												<li><a href="#">ID</a></li>
-												<li><a href="#">이름</a></li>
-											</ul>
+											<div class="form-label-group mb-4">
+												<select id="search" class="form-control bs-select" title="Bathrooms">
+													<option value="0" selected="">ID</option>
+													<option value="2">이름</option>
+													<option value="3">등급</option>
+												</select>
+												<label for="s_baths">검색옵션</label>
+											</div>
+
 										</div>
-										<!-- /btn-group -->
-										<input type="text" class="form-control" aria-label="...">
-										
+
+										<div class="col-12 col-lg-6">
+
+											<div class="form-label-group mb-4">
+												<input placeholder="Max. Price" id="s_max_price" type="text" value="" class="form-control">
+												<label for="s_max_price">입력</label>
+											</div>
+
+										</div>
+
 									</div>
-									<!-- /input-group -->
-							</div>
-							
-							<!-- 등급 -->
-											<div class="form-label-group col-2">
-											<select id="select_options" class="form-control bs-select">
-												<option value="1">일반회원</option>
-												<option value="2">우수회원</option>
-											</select>
-											<label for="select_options">회원등급</label>
-										</div>
-									
+							<!-- 옵션으로 검색 끝 -->
 							<!-- 날짜로 검색 -->
-							<div class="float-end col-3">
+							<div class="float-end col-6 col-lg-5">
 								<input autocomplete="off" type="text" name="my_daterange"
 									class="form-control rangepicker" data-placement="left"
 									data-ranges="false" data-date-start="01/16/2019"
@@ -91,11 +87,10 @@
 													}'>
 
 							</div>
-
 							<!-- 날짜로 검색 끝 -->
-
-
-						</div>
+							
+							
+							</form>
 
 
 					</div>
@@ -138,10 +133,10 @@
 											<thead>
 												<tr class="text-muted fs--13">
 													<th class="w--30 hidden-lg-down">
-														<label class="form-checkbox form-checkbox-primary float-start">
+<!-- 														<label class="form-checkbox form-checkbox-primary float-start">
 															<input class="checkall" data-checkall-container="#item_list" type="checkbox" name="checkbox">
 															<i></i>
-														</label>
+														</label> -->
 													</th>
 													<span class="px-2 p-0-xs"></span>
 													<th class="w--80 ">번호</th>
@@ -169,11 +164,13 @@
 														<tr id="message_id_2" class="text-muted">
 
 															<!-- 체크박스 -->
-															<td><label
+															<td>
+<!-- 															<label
 																class="form-checkbox form-checkbox-secondary float-start">
 																	<input type="checkbox" name="item_id[]" value="2">
 																	<i></i>
-															</label></td>
+															</label> -->
+															</td>
 
 
 
@@ -181,7 +178,9 @@
 															<td><a href="${contextPath}/admin/member/memberDetail.do?member_id=${item.member_id}" class="font-weight-medium text-muted mx-2 m-0-xs">
 															${item.member_id}</a>
 															</td>
-															<td>${item.member_name}</td>
+															<td><a href="${contextPath}/admin/member/memberDetail.do?member_id=${item.member_id}" class="font-weight-medium text-muted mx-2 m-0-xs">
+															${item.member_name}
+															</a></td>
 															<td>${item.email}</td>
 															<td><small
 																class="badge badge-danger font-medium text-uppercase">우수회원</small>
@@ -192,7 +191,7 @@
 
 															<td>${item.member_date}</td>
 
-															<td class="text-align-end">
+<!-- 															<td class="text-align-end">
 
 																<div class="dropdown">
 
@@ -231,7 +230,7 @@
 
 															</div>
 
-														</tr>
+														</tr> -->
 														<!-- /item -->
 														</c:forEach>
 														</c:otherwise>
@@ -242,9 +241,9 @@
 										<tfoot>
 												<tr class="text-muted fs--13">
 													<th class="w--30 hidden-lg-down">
-														<label class="form-checkbox form-checkbox-primary float-start">
+<!-- 														<label class="form-checkbox form-checkbox-primary float-start">
 															<input class="checkall" data-checkall-container="#item_list" type="checkbox" name="checkbox">
-															<i></i>
+															<i></i> -->
 														</label>
 													</th>
 													<span class="px-2 p-0-xs"></span>
@@ -271,7 +270,7 @@
 										<div class="hidden-lg-down col-12 col-xl-6">
 
 											<!-- SELECTED ITEMS -->
-											<div class="dropup">
+											<!-- <div class="dropup">
 
 												<a href="#" class="btn btn-sm btn-pill btn-light" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
 													<span class="group-icon">
@@ -339,7 +338,7 @@
 
 												</div>
 
-											</div>
+											</div> -->
 											<!-- /SELECTED ITEMS -->
 
 										</div>
