@@ -100,7 +100,7 @@
 								Logo : height: 70px max
 							-->
 							<a class="navbar-brand m-0" href="${contextPath }/main/main.do">
-								<img src="${contextPath}/resources/assets/images/logo/logo_dark.svg" width="110" height="70" alt="...">
+								<img src="${contextPath}/resources/images/drjjlogo.svg" width="140" height="100" alt="...">
 							</a>
 
 						</div>
