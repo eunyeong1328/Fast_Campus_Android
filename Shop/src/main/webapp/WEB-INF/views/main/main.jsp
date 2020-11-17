@@ -39,26 +39,8 @@
 
 					<div class="swiper-wrapper h-100">
 
+
 						<!-- slide 1 -->
-						<div class="h-100 swiper-slide d-middle overlay-dark overlay-opacity-5 bg-cover text-decoration-none text-white" style="background-image:url('${contextPath}/resources/images/bread1.jpg')">
-							<div class="position-absolute container z-index-10 text-white text-center" data-aos="fade-in" data-aos-delay="150" data-aos-offset="0">
-
-								<h1 class="display-3 h1-xs mb-4 font-weight-medium" data-swiper-parallax="-300">
-									<span class="text-danger">점심시간</span> 언제 돼...
-								</h1>
-
-								<div data-swiper-parallax="-100"><!-- parallax directly on button will cancel hover fade -->
-									<a href="#!" class="btn btn-lg btn-outline-light shadow-none transition-hover-top">
-										점심 먹기
-									</a>
-								</div>
-
-							</div>
-						</div>
-						<!-- /slide 1 -->
-
-
-						<!-- slide 2 -->
 						<a href="#!" class="h-100 swiper-slide d-middle overlay-dark overlay-opacity-5 bg-cover text-decoration-none text-white lazy" style="background-image:url('${contextPath}/resources/images/steak1.jpg')">
 							<div class="position-relative container z-index-10 text-white text-center" data-aos="fade-in" data-aos-delay="150" data-aos-offset="0">
 
@@ -74,6 +56,24 @@
 
 							</div>
 						</a>
+						<!-- /slide 1 -->
+						
+						<!-- slide 2 -->
+						<div class="h-100 swiper-slide d-middle overlay-dark overlay-opacity-5 bg-cover text-decoration-none text-white" style="background-image:url('${contextPath}/resources/images/bread1.jpg')">
+							<div class="position-absolute container z-index-10 text-white text-center" data-aos="fade-in" data-aos-delay="150" data-aos-offset="0">
+
+								<h1 class="display-3 h1-xs mb-4 font-weight-medium" data-swiper-parallax="-300">
+									<span class="text-danger">점심시간</span> 언제 돼...
+								</h1>
+
+								<div data-swiper-parallax="-100"><!-- parallax directly on button will cancel hover fade -->
+									<a href="#!" class="btn btn-lg btn-outline-light shadow-none transition-hover-top">
+										점심 먹기
+									</a>
+								</div>
+
+							</div>
+						</div>
 						<!-- /slide 2 -->
 
 					</div>
