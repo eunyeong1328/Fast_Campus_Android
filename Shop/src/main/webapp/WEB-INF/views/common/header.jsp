@@ -238,7 +238,7 @@
 
 									<div class="dropdown-divider mb-0"></div>
 
-									<a href="#!" title="Log Out" class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore">
+									<a href="${contextPath}/member/logout.do" title="Log Out" class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore">
 										<i class="fi fi-power float-start"></i>
 										로그아웃
 									</a>
@@ -282,7 +282,7 @@
 
 									<div class="dropdown-divider mb-0"></div>
 
-									<a href="#!" title="Log Out" class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore">
+									<a href="${contextPath}/member/logout.do" title="Log Out" class="prefix-icon-ignore dropdown-footer dropdown-custom-ignore">
 										<i class="fi fi-power float-start"></i>
 										로그아웃
 									</a>

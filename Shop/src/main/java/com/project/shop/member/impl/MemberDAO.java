@@ -1,5 +1,7 @@
 package com.project.shop.member.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,13 +18,16 @@ public class MemberDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	public MemberVO login(MemberVO user) throws DataAccessException{
-		System.out.println("하이");
 		MemberVO member = (MemberVO)sqlSession.selectOne("mappers.member.login",user);
-		System.out.println("SQL RESULT : " +member);
 		return member;
 	}
 	
-	public int insertMember(MemberVO vo) {//ȸ������
-		return sqlSession.insert("mappers.member.insertMember",vo);
+	public void insertNewMember(MemberVO memberVO) throws DataAccessException{
+		sqlSession.insert("mappers.member.insertNewMember", memberVO);
+	}
+	
+	public String selectOverlappedID(String id) throws DataAccessException {
+		String result =  sqlSession.selectOne("mappers.member.selectOverlappedID",id);
+		return result;
 	}
 }

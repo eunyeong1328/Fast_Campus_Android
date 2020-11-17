@@ -9,13 +9,16 @@
 
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-
-
+<head>
+<c:if test='${not empty message }'>
+<script>
+	alert("아이디나  비밀번호가 틀립니다. 다시 로그인해주세요");
+</script>
+</c:if>
+</head>
 <body>
 
 	<div id="wrapper">
-
-
 
 		<!-- PAGE TITLE -->
 		<section class="bg-light p-0">
@@ -25,7 +28,7 @@
 
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb fs--14">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item"><a href="${contextPath}/main/main.do">Home</a></li>
 						<li class="breadcrumb-item active" aria-current="page">Account</li>
 					</ol>
 				</nav>
@@ -52,14 +55,16 @@
 								</p>
 								-->
 							<div class="form-label-group mb-3">
-								<input required placeholder="id" id="account_id" name="member_id" type="text" class="form-control">
-								 <label for="account_email">아이디</label>
+								<input required placeholder="id" id="account_id"
+									name="member_id" type="text" class="form-control"> <label
+									for="account_email">아이디</label>
 							</div>
 							<div class="input-group-over">
 								<div class="form-label-group mb-3">
-									<input required placeholder="Password" id="account_password" name="password" type="password" class="form-control">
+									<input required placeholder="Password" id="account_password"
+										name="password" type="password" class="form-control">
 									<label for="account_password">비밀번호</label>
-								</div> 
+								</div>
 								<a href="signin-password.jsp" class="btn fs--12"> 비밀번호 찾기 </a>
 							</div>
 
@@ -68,8 +73,8 @@
 							<div class="row">
 
 								<div class="col-12 col-md-6 mt-4">
-									<button type="submit" class="btn btn-primary btn-block">
-										로그인</button>
+									<button type="submit" class="btn btn-primary btn-block"
+										onclick="login_confirm(this.form)">로그인</button>
 								</div>
 
 								<!-- <div class="col-12 col-md-6 mt-4">
@@ -101,7 +106,14 @@
 		</section>
 		<!-- /FORM -->
 
+<!-- function login_confirm(frm){
+	var id = frm.member_id.value;
+	var pw = frm.password.value;
 
+	if ((id == "" || id.length == 0) || (pw == "" || pw.length == 0)) {
+		alert("아이디와 비밀번호는 필수입니다.");
+	}
+} -->
 
 
 		<!-- CONNECT WITH -->

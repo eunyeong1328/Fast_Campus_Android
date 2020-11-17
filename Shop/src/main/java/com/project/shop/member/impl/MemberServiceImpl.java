@@ -10,20 +10,23 @@ import com.project.shop.member.MemberVO;
 
 @Service("memberService")
 @Transactional(propagation=Propagation.REQUIRED) 
-//DAO���� ó���� �������� ���������� �Ϸᰡ �ǰ�,ó�� ���� ������ ���� �� DAO���� ó���� ������ �ڵ����� rollback�ϱ� ����
 public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
 	private MemberDAO memberDAO;
 	
 	@Override
-	public MemberVO login(MemberVO user) throws Exception {//�α���
+	public MemberVO login(MemberVO user) throws Exception {
 		return memberDAO.login(user);
 	}
 	
 	@Override
-	public int insertMember(MemberVO vo) { //ȸ������
-		return memberDAO.insertMember(vo);
+	public void addMember(MemberVO memberVO) throws Exception{
+		memberDAO.insertNewMember(memberVO);
+	}
+	
+	public String overlapped(String id) throws Exception{
+		return memberDAO.selectOverlappedID(id);
 	}
 
 }

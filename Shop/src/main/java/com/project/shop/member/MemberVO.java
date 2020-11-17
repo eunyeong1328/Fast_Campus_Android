@@ -11,15 +11,17 @@ public class MemberVO {
 	private String member_name;
 	private String email;
 	private String phone;
-	private String load_address;
-	private String rest_address;
-	private int zipNo;
+	private String zipNo; 
+	private String load_address; 
+	private String jibun_address;
+	private String rest_address; 
 	private Date member_date;
 	private String birthday;
 	private int pre_score;
 	private int this_score;
 	private int point;
 	private String member_status;
+	
 	public String getMember_id() {
 		return member_id;
 	}
@@ -50,23 +52,29 @@ public class MemberVO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	public String getZipNo() {
+		return zipNo;
+	}
+	public void setZipNo(String zipNo) {
+		this.zipNo = zipNo;
+	}
 	public String getLoad_address() {
 		return load_address;
 	}
 	public void setLoad_address(String load_address) {
 		this.load_address = load_address;
 	}
+	public String getJibun_address() {
+		return jibun_address;
+	}
+	public void setJibun_address(String jibun_address) {
+		this.jibun_address = jibun_address;
+	}
 	public String getRest_address() {
 		return rest_address;
 	}
 	public void setRest_address(String rest_address) {
 		this.rest_address = rest_address;
-	}
-	public int getZipNo() {
-		return zipNo;
-	}
-	public void setZipNo(int zipNo) {
-		this.zipNo = zipNo;
 	}
 	public Date getMember_date() {
 		return member_date;
@@ -104,8 +112,16 @@ public class MemberVO {
 	public void setMember_status(String member_status) {
 		this.member_status = member_status;
 	}
+	@Override
+	public String toString() {
+		return "MemberVO [member_id=" + member_id + "/ password=" + password + ", member_name=" + member_name
+				+ ", email=" + email + ", phone=" + phone + ", zipNo=" + zipNo + ", load_address=" + load_address
+				+ ", jibun_address=" + jibun_address + ", rest_address=" + rest_address + ", member_date=" + member_date
+				+ ", birthday=" + birthday + ", pre_score=" + pre_score + ", this_score=" + this_score + ", point="
+				+ point + ", member_status=" + member_status + "]";
+	}
 	
 	
-	
+
 
 }

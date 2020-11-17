@@ -6,22 +6,23 @@
 
 <mapper namespace="mappers.member">
 
-	<resultMap id="memberResult" type="memberVO"> <!-- 회원 정보를 저장할 resultMap을 정의한다. -->
-		<result property="member_id" column="member_id" />  <!-- db의 있는 이름 : 값 -->
-		<result property="password" column="password" />
-		<result property="member_name" column="member_name" />
-		<result property="email" column="email" />
-		<result property="phone" column="phone" />
+	<!-- <resultMap id="memberResult" type="memberVO"> //회원 정보를 저장할 resultMap을 정의한다.
+		<result property="MEMBER_ID" column="MEMBER_ID" />  db의 있는 이름 : 값
+		<result property="PASSWORD" column="PASSWORD" />
+		<result property="MEMBER_NAME" column="MEMBER_NAME" />
+		<result property="EMAIL" column="EMAIL" />
+		<result property="PHONE" column="PHONE" />
+		<result property="ZIPNO" column="ZIPNO" />
 		<result property="load_address" column="load_address" />
+		<result property="jibun_address" column="jibun_address" />
 		<result property="rest_address" column="rest_address" />
-		<result property="zipNo" column="zipNo" />
 		<result property="member_date" column="member_date" />
 		<result property="birthday" column="birthday" />
 		<result property="pre_score" column="pre_score" />
 		<result property="this_score" column="this_score" />
 		<result property="point" column="point" />
 		<result property="member_status" column="member_status" />
-	</resultMap>	
+	</resultMap>	 -->
 	
 	<select id="login" parameterType="memberVO" resultType="memberVO">
 		<![CDATA[
@@ -32,11 +33,37 @@
 	</select>
 
 	<!-- cdata[ 사용이유 : 특수문자 사용하는데 제한을 푼다. -->
-	<insert id=" insertMember" parameterType="memberVO">
+	<insert id="insertNewMember" parameterType="memberVO">
 		<![CDATA[
-			insert into member (member_id,password,member_name,email,load_address)
-			values(#{member_id},#{password},#{member_name},#{email},#{load_address});
-		]]>
+			insert into member(member_id,
+								password,
+								 member_name,
+								 email,
+								 phone,
+								 zipNo,
+								load_address,
+								jibun_address,  
+								rest_address,
+ 								birthday) values(
+ 								#{member_id},
+ 								 #{password}, 
+ 								 #{member_name},
+ 								  #{email}, 
+ 								  #{phone}, 
+ 								  #{zipNo}, 
+								#{load_address},
+								  #{jibun_address}, 
+								  #{rest_address},
+								   #{birthday}
+								   )
+								   ]]>
+		
 	</insert>
+	
+	<select id="selectOverlappedID" parameterType="String" resultType="String">
+	   select decode(count(*),1, 'true', 0, 'false')
+	   from member
+	   where member_id = #{id}
+	</select>
 	
 </mapper>
