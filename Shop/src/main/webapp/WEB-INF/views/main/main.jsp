@@ -1155,7 +1155,7 @@
 
 						<!-- logo -->
 						<span class="h--70 d-inline-flex align-items-center">
-							<img src="${contextPath}/resources/assets/images/logo/logo_dark.svg" width="110" height="70" alt="...">
+							<img src="${contextPath}/resources/images/drjjlogo.svg" width="110" height="70" alt="...">
 						</span>
 
 						<p class="m-0 text-gray-500 fs--14">
