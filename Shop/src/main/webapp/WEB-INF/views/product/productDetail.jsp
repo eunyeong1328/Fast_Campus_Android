@@ -17,7 +17,7 @@
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb fs--14">
 								<li class="breadcrumb-item"><a href="${contextPath}/main/main.do">Home</a></li>
-								<li class="breadcrumb-item active" aria-current="page">${vo.product_category_name}ㄹㄹㄹ</li>
+								<li class="breadcrumb-item active" aria-current="page"> ${vo.product_category_name } </li>
 							</ol>
 						</nav>
 						<!--
@@ -47,6 +47,7 @@
 										SWIPER SLIDER : THUMBS
 
 									-->
+									<!--  -->
 									<div id="swiper_secondary" class="swiper-container swiper-thumbs mt-3"
 										data-swiper='{
 											"slidesPerView": 6,
@@ -70,13 +71,17 @@
 										<div class="swiper-wrapper text-center">
 
 											<!-- slider 1 -->
-											<!--
+											<!--  
 											<div class="swiper-slide py-2 rounded cursor-pointer">
 												<img height="80" class="bg-suprime rounded max-h-600" 
-													src="demo.files/images/unsplash/products/thumb_330/smartwatch_3.jpg" 
+													src="${contextPath}/product/thumbnails1.do?product_id=${vo.product_id }&product_image=${vo.product_image }" 
+													
 													alt="...">
 											</div>
 											-->
+											<div>
+											<img src="${contextPath}/product/thumbnails1.do?product_id=${vo.product_id }&product_image=${vo.product_image }">
+											</div>
 											<!-- slider 2 -->
 											<!-- 
 											<div class="swiper-slide py-2 rounded cursor-pointer">
@@ -159,7 +164,7 @@
 														alt="...">
 													-->
 													<img class="bg-suprime img-fluid rounded max-h-600" 
-														src ="${contextPath}/product/thumail.do?product_id=${vo.product_id}&product_category_num=${vo.product_category_num}ㅎㅎ" >
+														src ="${contextPath}/product/thumbnails.do?product_id=${vo.product_id}&product_category_num=${vo.product_category_num}ㅎㅎ" >
 												</div>
 											</div>
 											
@@ -261,7 +266,7 @@
 									<div class="clearfix mb-5">
 
 										<p class="text-muted m-0">
-											<del>${vo.price}</del> 
+											<del>${vo.price}원</del> 
 											<span class="text-success font-light fs--14">( ${vo.discount}%) 
 												<!--<span class="font-weight-medium">you save $31.00</span> -->
 											</span>
@@ -273,12 +278,12 @@
 												counter used because of configurator to do the math.
 												If configurator not used, just add the price instead ($149.99)
 											-->
-											$<span class="item-price" 
+											<span class="item-price" 
 														data-toggle="count" 
 														data-count-decimals="2"
 														data-count-from="144.99" 
 														data-count-to="144.99" 
-														data-count-duration="250">${vo.sale_price}</span>
+														data-count-duration="250">${vo.sale_price}원</span>
 										</p>
 
 									</div>
@@ -719,11 +724,11 @@
 
 
 
-
+			
 			<!-- DESCRIPTION -->
 			<section>
 				<div class="container">
-
+					<img src="${contextPath }/product/download.do?product_detail_image=${vo.product_detail_image}" >
 					<h2 class="font-weight-light mb-4 text-center-xs">
 						Description
 					</h2>

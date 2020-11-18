@@ -15,7 +15,8 @@ public class ProductVO {
 	private String packing_type;
 	private String product_image;
 	private String supplier; 
-
+	private String product_detail_image;
+	
 	//Product_category
 	private int product_category_num; 
 	private String product_category_name; 
@@ -40,10 +41,13 @@ public class ProductVO {
 	public ProductVO() {
 		
 	}
+	
+	
 	public ProductVO(String product_id, String product_name, String product_detail, int sales_unit, int product_size,
-			String packing_type, String product_image, String supplier, int product_category_num,
-			String product_category_name, String option_name, int option_price, int option_quantity, int item_num,
-			int price, int stock, int sales, int discount, Date reg_date, int unit_price) {
+			String packing_type, String product_image, String supplier, String product_detail_image,
+			int product_category_num, String product_category_name, String option_name, int option_price,
+			int option_quantity, int item_num, int price, int stock, int sales, int discount, Date reg_date,
+			int unit_price, int sale_price) {
 		this.product_id = product_id;
 		this.product_name = product_name;
 		this.product_detail = product_detail;
@@ -52,6 +56,7 @@ public class ProductVO {
 		this.packing_type = packing_type;
 		this.product_image = product_image;
 		this.supplier = supplier;
+		this.product_detail_image = product_detail_image;
 		this.product_category_num = product_category_num;
 		this.product_category_name = product_category_name;
 		this.option_name = option_name;
@@ -64,9 +69,19 @@ public class ProductVO {
 		this.discount = discount;
 		this.reg_date = reg_date;
 		this.unit_price = unit_price;
-		
+		this.sale_price = sale_price;
 	}
-	
+
+
+	public String getProduct_detail_image() {
+		return product_detail_image;
+	}
+	public void setProduct_detail_image(String product_detail_image) {
+		this.product_detail_image = product_detail_image;
+	}
+	public void setSale_price(int sale_price) {
+		this.sale_price = sale_price;
+	}
 	public int getSale_price() {
 		return sale_price;
 	}

@@ -15,6 +15,7 @@
 		<result property="packing_type" column="packing_type" />
 		<result property="product_image" column="product_image" />
 		<result property="supplier" column="supplier" />
+		<result property="product_detail_image" column="product-detail_image"/>
 		
 		<result property="product_category_num" column="product_category_num" />
 		<result property="product_category_name" column="product_category_name" />
@@ -74,9 +75,10 @@
 	
 	<select id="selectProductDetail" resultType="productVO"   parameterType="String"  >
 	    <![CDATA[
-		    select p.*, i.item_num, i.price, i.discount
- 			from product p, item i
+		    select p.*, i.item_num, i.price, i.discount , c.product_category_name
+ 			from product p, item i, product_category c
 	        where p.product_id = i.product_id 
+	         and p.product_category_num = c.product_category_num
         	and p.product_id= #{product_id}
     	]]>
 	</select>
