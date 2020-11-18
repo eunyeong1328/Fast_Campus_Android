@@ -644,7 +644,8 @@
 										<a href="${contextPath}/product/productDetail.do?product_id=${item.product_id}" class="d-block text-decoration-none">
 
 											<figure class="m-0 text-center">
-												<img class="img-fluid" src="${contextPath}/product/thumbnails.do?product_id=${item.product_id }&product_image=${item.product_image }" alt="상품이미지"> 
+												<%-- <img class="img-fluid" src="${contextPath}/product/thumbnails.do?product_id=${item.product_id }&product_image=${item.product_image }" alt="상품이미지">  --%>
+												<img class="img-fluid" src="${contextPath}/resources/images/item_image/${item.product_image}" alt="상품이미지"> 
 											</figure>
 
 											<span class="d-block text-center-xs text-gray-600 py-3">

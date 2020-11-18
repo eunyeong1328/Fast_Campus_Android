@@ -40,44 +40,10 @@
 		<meta name="theme-color" content="#377dff">
 <!--font-->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
+
 </head>
 
 
-	<!--
-
-		Layout Admin
-			.layout-admin 	(required)
-
-			.aside-sticky  					- sidebar : fixed and push header
-			.header-sticky  				- header : always visible on top (acting as old .header-focus)
-
-
-		****************************************************************************************************
-
-			NOTES
-
-				1. 	LOGO TO REPLACE
-						- logo_light.svg 	: sidebar
-						- logo_dark.svg 	: header navbar
-
-		****************************************************************************************************
-
-
-		++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++
-
-		SCROLL TO TOP BUTTON [optional styling]
-
-			data-s2t-disable="true"
-			data-s2t-position="start|end"
-			data-s2t-class="btn-secondary btn-sm" 	(default)
-			data-s2t-class="btn-secondary rounded-circle"
-			data-s2t-class="btn-warning rounded-circle"
-
-		++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++
-
-	-->
-
-	
 			<header>
 				<tiles:insertAttribute name="aside" /> 
 			</header>

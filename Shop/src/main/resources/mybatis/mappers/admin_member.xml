@@ -44,11 +44,30 @@
             WHERE member_id=#{member_id}
     	]]>
 	</select>
+	
 	<!-- 회원수정 -->
+	<update id="modifyMemberInfo" parameterType="java.util.HashMap">
+	   UPDATE MEMBER 
+			   <set>
+			   MEMBER_NAME=#{member_name},
+			   EMAIL=#{email},
+			   PHONE=#{phone},
+			   ZIPNO=#{zipNo},
+			   LOAD_ADDRESS=#{load_address},
+			   JIBUN_ADDRESS=#{jibun_address},
+			   REST_ADDRESS=#{rest_address},
+			   BIRTHDAY=#{birthday},
+			   POINT=#{point},
+			   MEMBER_DATE=#{member_date}			   
+			   </set>
+		WHERE 
+		MEMBER_ID=#{member_id}
+	</update>	
 	
 	<!-- 회원삭제 -->
 		<delete id="deleteMember" parameterType="String">
 	  delete from member
 	  where member_id=#{member_id}
-	</delete>
+	</delete>	
+	
 	</mapper>

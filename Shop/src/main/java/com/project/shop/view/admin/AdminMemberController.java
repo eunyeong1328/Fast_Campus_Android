@@ -24,14 +24,11 @@ public class AdminMemberController extends BaseController {
 	@Autowired
 	private AdminMemberService adminMemberService;
 	
-	@RequestMapping(value="memberList.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="memberList.do")
 	public ModelAndView memberList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		System.out.println(viewName);
-		HttpSession session=request.getSession();
-		session=request.getSession();
-//		session.setAttribute("side_menu", "admin_mode"); //마이페이지 사이드 메뉴로 설정한다.
 		
 //		String fixedSearchPeriod = dateMap.get("fixedSearchPeriod");
 //		String section = dateMap.get("section");
@@ -75,7 +72,7 @@ public class AdminMemberController extends BaseController {
 	
 	}
 	
-	@RequestMapping(value="/memberDetail.do" ,method={RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/memberDetail.do")
 	public ModelAndView memberDetail(HttpServletRequest request, HttpServletResponse response)  throws Exception{
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
@@ -95,6 +92,19 @@ public class AdminMemberController extends BaseController {
 		return mav;
 		
 		
+	}
+	
+	@RequestMapping(value="/modifyMemberInfo.do")
+	public ModelAndView modifyMemberInfo(
+			@RequestParam HashMap<String, String> memberMap,
+			HttpServletRequest request, HttpServletResponse response)  throws Exception{
+		ModelAndView mav = new ModelAndView();
+		System.out.println("memberID = " + memberMap.get("member_id"));
+		System.out.println("member_date = " + memberMap.get("member_date"));
+		adminMemberService.modifyMemberInfo(memberMap);
+		
+		mav.setViewName("redirect:/admin/member/memberList.do");
+		return mav;
 	}
 	
 	

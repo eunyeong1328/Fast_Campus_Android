@@ -130,7 +130,7 @@
 
 	function fn_join_member(){ //가입하기 누른 후 비밀번호 불일치 시에 
 		if(compare_result == true){
-			//회원 가입 요청0
+			//회원 가입 요청
 			alert("회원 가입을 진행합니다.");
 		}else{
 			alert("비밀번호가 일치하지 않습니다.");
@@ -241,14 +241,14 @@
 
 									<div class="form-label-group mb-3">
 										<input required placeholder="Address" id="zipNo"
-											name="zipNo" type="email" class="form-control"> <label
+											name="zipNo" type="number" class="form-control"> <label
 											for="zipNo">우편번호</label>
 										<a href="javascript:execDaumPostcode()">우편번호검색</a>
 									</div>
 
 									<div class="form-label-group mb-3">
 										<input required placeholder="Address" id="load_address"
-											name="load_address" type="email" class="form-control"> <label
+											name="load_address" type="text" class="form-control"> <label
 											for="load_address">도로명 주소</label>
 
 									</div>
@@ -256,14 +256,14 @@
 								</div>
 								<div class="form-label-group mb-3">
 									<input required placeholder="Address" id="jibun_address"
-										name="jibun_address" type="email" class="form-control"> <label
+										name="jibun_address" type="text" class="form-control"> <label
 										for="jibun_address">지번 주소</label>
 
 								</div>
 
 								<div class="form-label-group mb-3">
 									<input required placeholder="Address" id="rest_address"
-										name="rest_address" type="email" class="form-control"> <label
+										name="rest_address" type="text" class="form-control"> <label
 										for="rest_address">나머지 주소</label>
 
 								</div>
@@ -508,4 +508,7 @@
 	</div>
 	<!-- /#wrapper -->
 
-	<script src="${contextPath}/resources/assets/js/core.min.js"></script>
+	<script src="${contextPath}/resources/assets/js/core.js"></script>
+
+</body>
+</html>

@@ -29,7 +29,6 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 	
 	@Override
 	public void  modifyMemberInfo(HashMap memberMap) throws Exception{
-		 String member_id=(String)memberMap.get("member_id");
 		 adminMemberDAO.modifyMemberInfo(memberMap);
 	}
 	
