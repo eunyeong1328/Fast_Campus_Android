@@ -32,10 +32,10 @@
 								<a href="faq-tab.do?nowTab=tab-2">FAQ</a>
 							</li>
 							<li class="tab-link" data-tab="tab-3">
-								상품문의
+								<a href="productQ-tab.do?nowTab=tab-3">상품문의</a>
 							</li>
 							<li class="tab-link" data-tab="tab-4">
-								1:1문의
+								<a href="memberQ-tab.do?nowTab=tab-4">1:1 문의</a>
 							</li>
 						</ul>
 						

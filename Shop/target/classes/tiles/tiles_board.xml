@@ -14,23 +14,31 @@
 	
 	<!-- 고객센터 메인 페이지 레이아웃 설정 -->
 	<definition name="/board/notice-tab" extends="helpcenterLayout">
-		<put-attribute name="body"
-			value="/WEB-INF/views/helpcenter/notice-tab.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/helpcenter/notice-tab.jsp" />
 	</definition>
 	
 	<definition name="/board/faq-tab" extends="helpcenterLayout">
-		<put-attribute name="body"
-			value="/WEB-INF/views/helpcenter/faq-tab.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/helpcenter/faq-tab.jsp" />
+	</definition>
+	
+	<definition name="/board/productQ-tab" extends="helpcenterLayout">
+		<put-attribute name="body" value="/WEB-INF/views/helpcenter/productQ-tab.jsp" />
+	</definition>
+	
+	<definition name="/board/memberQ-tab" extends="helpcenterLayout">
+		<put-attribute name="body" value="/WEB-INF/views/helpcenter/memberQ-tab.jsp" />
+	</definition>
+	
+	<definition name="/board/memQ-insert" extends="helpcenterLayout">
+		<put-attribute name="body" value="/WEB-INF/views/helpcenter/memQ-insert.jsp" />
 	</definition>
 	
 	<definition name="/board/notice" extends="helpcenterLayout">
-		<put-attribute name="body"
-			value="/WEB-INF/views/helpcenter/notice.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/helpcenter/notice.jsp" />
 	</definition>
 	
 	<definition name="/board/faq" extends="helpcenterLayout">
-		<put-attribute name="body"
-			value="/WEB-INF/views/helpcenter/faq.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/helpcenter/faq.jsp" />
 	</definition>
 	
 </tiles-definitions>

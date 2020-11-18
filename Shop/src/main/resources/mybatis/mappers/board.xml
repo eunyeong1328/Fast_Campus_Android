@@ -43,6 +43,49 @@
 		WHERE f.qna_category_num = q.qna_category_num
 		AND f.faq_num = #{faq_num}
 	</select>
+	
+	<!-- 상품문의 전체 목록 불러오기 -->
+	<select id="getProQList" parameterType="map" resultType="boardVO">
+		SELECT * FROM
+		(SELECT ROWNUM R_NUM, A.*FROM
+		(SELECT Q.PRODUCT_QNA_NUM, P.PRODUCT_NAME, C.QNA_CATEGORY_NAME,
+			Q.MEMBER_ID, Q.TITLE, Q.CONTENTS, Q.IMAGE, Q.REG_DATE, Q.VIEWS 
+			FROM PRODUCT_QNA Q, PRODUCT P, QNA_CATEGORY C 
+			WHERE Q.PRODUCT_ID = P.PRODUCT_ID
+			AND C.QNA_CATEGORY_NUM = Q.QNA_CATEGORY_NUM
+			ORDER BY Q.PRODUCT_QNA_NUM DESC) A)
+		WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 상품문의 선택한 글 상세 불러오기 -->
+<!-- 	<select id="getProQ" parameterType="boardVO" resultType="boardVO"> -->
+<!-- 		SELECT * FROM PRODUCT_QNA WHERE PRODUCT_QNA_NUM = #{product_qna_num} -->
+<!-- 	</select> -->
+	
+	<!-- 1:1 문의 전체 목록 불러오기 -->
+	<select id="getMemQList" parameterType="map" resultType="boardVO">
+		SELECT * FROM 
+			(SELECT ROWNUM R_NUM, A.* FROM 
+			(SELECT member_qna_num, title, contents, image, qna_category_name, 
+			order_num, member_id, email, phone, reg_date 
+			FROM MEMBER_QNA Q, QNA_CATEGORY C 
+			WHERE Q.qna_category_num = C.qna_category_num 
+			ORDER BY Q.member_qna_num DESC) A)
+		WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- 1:1 문의 선택한 글 상세 불러오기 -->
+<!-- 	<select id="getMemQ" parameterType="boardVO" resultType="boardVO"> -->
+<!-- 		SELECT * FROM MEMBER_QNA WHERE MEMBER_QNA_NUM = #{member_qna_num} -->
+<!-- 	</select> -->
+
+	<!-- 1:1 문의 insert문 -->
+	<insert id="memqInsert" parameterType="boardVO">
+		INSERT INTO MEMBER_QNA VALUES 
+		((SELECT NVL(MAX(MEMBER_QNA_NUM),0) + 1 FROM MEMBER_QNA), 
+		#{title}, #{contents}, 
+		#{image}, 2, #{order_num}, (SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_ID = #{member_id}), #{email}, #{phone}, SYSDATE)
+	</insert>
 
 	<!-- 공지사항 게시글 갯수 조회 -->
 	<select id="getNoticeCount" resultType="int">
@@ -54,6 +97,18 @@
 	<select id="getFAQCount" resultType="int">
 		SELECT COUNT(*) 
 		FROM FAQ
+	</select>
+	
+	<!-- 상품문의 게시글 갯수 조회 -->
+	<select id="getProQCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM PRODUCT_QNA
+	</select>
+	
+	<!-- 회원 1:1 문의 (member_qna) 게시글 갯수 조회 -->
+	<select id="getMemQCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM MEMBER_QNA
 	</select>
 
 </mapper>

@@ -18,17 +18,29 @@ public class BoardDAO {
 	public List<BoardVO> getNoticeList(Map<String, Integer> map) {
 		return board.selectList("mapper.board.getNoticeList", map);
 	}
+	
+	public BoardVO getNotice(BoardVO vo) {
+		return board.selectOne("mapper.board.getNotice", vo);
+	}
 
 	public List<BoardVO> getFAQList(Map<String, Integer> map) {
 		return board.selectList("mapper.board.getFAQList", map);
 	}
 	
-	public BoardVO getNotice(BoardVO vo) {
-		return board.selectOne("mapper.board.getNotice", vo);
-	}
-	
 	public BoardVO getFAQ(BoardVO vo) {
 		return board.selectOne("mapper.board.getFAQ", vo);
+	}
+
+	public List<BoardVO> getProQList(Map<String, Integer> map) {
+		return board.selectList("mapper.board.getProQList", map);
+	}
+
+	public List<BoardVO> getMemQList(Map<String, Integer> map) {
+		return board.selectList("mapper.board.getMemQList", map);
+	}
+
+	public void memQInsert(BoardVO vo) {
+		board.insert("mapper.board.memqInsert", vo);
 	}
 	
 }

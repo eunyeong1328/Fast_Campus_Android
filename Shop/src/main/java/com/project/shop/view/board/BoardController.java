@@ -61,6 +61,54 @@ public class BoardController {
 		return mav;
 	}
 	
+//	상품문의 productQ-tab 페이지
+	@RequestMapping("/productQ-tab.do")
+	public ModelAndView getProQList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		getPaging(request, response);
+		mav.addObject("paging", paging);
+		
+		List<BoardVO> proQ = boardService.getProQList(map);
+		mav.addObject("ProQList", proQ);
+		
+		return mav;
+	}
+	
+//	회원 1:1 문의 memberQ-tab 페이지
+	@RequestMapping("/memberQ-tab.do")
+	public ModelAndView getMemQList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		getPaging(request, response);
+		mav.addObject("paging", paging);
+		
+		List<BoardVO> MemQ = boardService.getMemQList(map);
+		mav.addObject("MemQList", MemQ);
+		
+		return mav;
+	}
+	
+//	1:1 문의 글 작성
+	@RequestMapping("/memQ-insert.do")
+	public ModelAndView memQInsert(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		return mav;
+	}
+	
+	@RequestMapping("/addMemQ.do")
+	public void addMemQ(BoardVO vo) {
+		
+		boardService.memQInsert(vo);
+	}
+	
 	@RequestMapping("/notice.do")
 	public ModelAndView getNotice(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -101,6 +149,12 @@ public class BoardController {
 		} else if (nowTab.equals("tab-2")) {
 			paging.setNowTab(nowTab);
 			paging.setTotalRecord(pagingService.getFAQCount());
+		} else if (nowTab.equals("tab-3")) {
+			paging.setNowTab(nowTab);
+			paging.setTotalRecord(pagingService.getProQCount());
+		} else if (nowTab.equals("tab-4")) {
+			paging.setNowTab(nowTab);
+			paging.setTotalRecord(pagingService.getMemQCount());
 		}
 		
 //		전체 게시물의 수 구하기

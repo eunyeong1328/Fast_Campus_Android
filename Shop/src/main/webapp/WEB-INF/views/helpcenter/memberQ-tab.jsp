@@ -28,24 +28,24 @@
 							<li class="tab-link" data-tab="tab-1">
 								<a href="notice-tab.do?nowTab=tab-1">공지사항</a>
 							</li>
-							<li class="tab-link current" data-tab="tab-2">
+							<li class="tab-link" data-tab="tab-2">
 								<a href="faq-tab.do?nowTab=tab-2">FAQ</a>
 							</li>
 							<li class="tab-link" data-tab="tab-3">
 								<a href="productQ-tab.do?nowTab=tab-3">상품문의</a>
 							</li>
-							<li class="tab-link" data-tab="tab-4">
+							<li class="tab-link current" data-tab="tab-4">
 								<a href="memberQ-tab.do?nowTab=tab-4">1:1 문의</a>
 							</li>
 						</ul>
 			
-						<!-- tab-2 -->
-						<div id="tab-2" class="tab-content">
+						<!-- tab-4 -->
+						<div id="tab-4" class="tab-content">
 							
 							<h3 class="joy-table-title">
-								FAQ
-								<p>여러분이 쩝쩝박사에게 자주하는 질문!</p>
-							</h3>
+                                1:1 문의
+                                <p>모든 의문... 쩝쩝박사에게!</p>
+                            </h3>
 							
 							<table class="joy-table">
 								<thead>
@@ -53,27 +53,25 @@
 										<th>번호</th>
 										<th>카테고리</th>
 										<th>제목</th>
+										<th>작성자</th>
+										<th>작성일</th>
 									</tr>
 								</thead>
 
-								<c:if test="${empty FAQList}">
+								<c:if test="${empty MemQList}">
 									<tbody>
-										<tr><td colspan="3">데이터가 없습니다.</td></tr>
+										<tr><td colspan="5">데이터가 없습니다.</td></tr>
 									</tbody>
 								</c:if>
-								<c:if test="${not empty FAQList}">
-									<c:forEach var="faq" items="${FAQList}">
+								<c:if test="${not empty MemQList}">
+									<c:forEach var="memQ" items="${MemQList}">
 										<tbody>
 											<tr>
-												<td>${faq.faq_num}</td>
-												<td>
-													${faq.qna_category_name}
-												</td>
-												<td>
-													<a href="faq.do?faq_num=${faq.faq_num}&cPage=${paging.nowPage}">
-														${faq.title}
-													</a>
-												</td>
+												<td>${memQ.member_qna_num}</td>
+												<td>${memQ.qna_category_name}</td>
+												<td>${memQ.title}</td>
+												<td>${memQ.member_id}</td>
+												<td>${memQ.reg_date}</td>
 											</tr>
 										</tbody>
 									</c:forEach>
@@ -86,7 +84,7 @@
 								</c:if>
 								<c:if test="${paging.beginPage != 1}">
 									<li>
-										<a href="faq-tab.do?nowTab=${paging.nowTab }&cPage=${paging.beginPage - 1 }">Prev</a>
+										<a href="memberQ-tab.do?nowTab=${paging.nowTab }&cPage=${paging.beginPage - 1 }">Prev</a>
 									</li>
 								</c:if>
 									
@@ -95,7 +93,7 @@
 										<li class="active">${pageNo }</li>
 									</c:if>
 									<c:if test="${pageNo != paging.nowPage }">
-										<li><a href="faq-tab.do?nowTab=${paging.nowTab }&cPage=${pageNo }">${pageNo }</a></li>
+										<li><a href="memberQ-tab.do?nowTab=${paging.nowTab }&cPage=${pageNo }">${pageNo }</a></li>
 									</c:if>
 								</c:forEach>
 									
@@ -103,11 +101,13 @@
 									<li><p class="disabled">Next</p></li>
 								</c:if>
 								<c:if test="${paging.endPage < paging.totalPage }">
-									<li><a href="faq-tab.do?nowTab=${paging.nowTab }&cPage=${paging.endPage + 1 }">Next</a></li>
+									<li><a href="memberQ-tab.do?nowTab=${paging.nowTab }&cPage=${paging.endPage + 1 }">Next</a></li>
 								</c:if>
+								
+								<li><a class="insert" href="memQ-insert.do?nowTab=${paging.nowTab }">글쓰기</a></li>
 							</ul>
 						</div>
-						<!-- tab-2 end -->
+						<!-- tab-4 end -->
 
 					</div>
 					<!-- Nav tabs end-->

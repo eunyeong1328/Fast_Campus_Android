@@ -19,6 +19,11 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> getNoticeList(Map<String, Integer> map) {
 		return boardDAO.getNoticeList(map);
 	}
+	
+	@Override
+	public BoardVO getNotice(BoardVO vo) {
+		return boardDAO.getNotice(vo);
+	}
 
 	@Override
 	public List<BoardVO> getFAQList(Map<String, Integer> map) {
@@ -26,13 +31,23 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVO getNotice(BoardVO vo) {
-		return boardDAO.getNotice(vo);
+	public BoardVO getFAQ(BoardVO vo) {
+		return boardDAO.getFAQ(vo);
 	}
 
 	@Override
-	public BoardVO getFAQ(BoardVO vo) {
-		return boardDAO.getFAQ(vo);
+	public List<BoardVO> getProQList(Map<String, Integer> map) {
+		return boardDAO.getProQList(map);
+	}
+
+	@Override
+	public List<BoardVO> getMemQList(Map<String, Integer> map) {
+		return boardDAO.getMemQList(map);
+	}
+
+	@Override
+	public void memQInsert(BoardVO vo) {
+		boardDAO.memQInsert(vo);
 	}
 
 }
