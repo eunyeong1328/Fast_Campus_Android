@@ -24,8 +24,12 @@
       </definition>  
       
       <!-- 관리자 회원상세 레이아웃 -->
-      	  <definition name="/admin/member/memberDetail" extends="adminLayout">
+      <definition name="/admin/member/memberDetail" extends="adminLayout">
          <put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberDetail.jsp" />
       </definition>  
+      
+      <definition name="/admin/productAdd" extends="adminLayout">
+      	<put-attribute name="body" value="/WEB-INF/views/admin/goods/productAdd.jsp"/>
+      </definition>
       
 </tiles-definitions>
