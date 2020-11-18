@@ -184,7 +184,17 @@ body.layout-admin #footer a { color: #121212; }
     text-decoration: none;
 }
 
+/* insert form css */
+#container div.memq-title {
+}
 
+#container div.memq-title p {
+    display: inline-block;
+}
+
+#container div.memq-title div.category-select {
+    display: inline-block;
+}
 
 
 

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.shop.board.BoardService;
@@ -103,10 +104,10 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping("/addMemQ.do")
-	public void addMemQ(BoardVO vo) {
-		
+	@RequestMapping(value="/addMemQ.do", method = RequestMethod.POST)
+	public String addMemQ(BoardVO vo, HttpServletRequest request, HttpServletResponse response) {
 		boardService.memQInsert(vo);
+		return "redirect:memberQ-tab.do";
 	}
 	
 	@RequestMapping("/notice.do")

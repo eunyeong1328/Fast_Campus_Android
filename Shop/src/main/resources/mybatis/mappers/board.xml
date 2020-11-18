@@ -84,7 +84,9 @@
 		INSERT INTO MEMBER_QNA VALUES 
 		((SELECT NVL(MAX(MEMBER_QNA_NUM),0) + 1 FROM MEMBER_QNA), 
 		#{title}, #{contents}, 
-		#{image}, 2, #{order_num}, (SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_ID = #{member_id}), #{email}, #{phone}, SYSDATE)
+		#{image}, 2, #{order_num}, 
+		(SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_ID = #{member_id}), 
+		#{email}, #{phone}, SYSDATE)
 	</insert>
 
 	<!-- 공지사항 게시글 갯수 조회 -->
