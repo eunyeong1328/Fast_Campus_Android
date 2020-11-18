@@ -16,6 +16,7 @@ public class ProductDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	//아진
 	public List<ProductVO> selectProductList(int product_category_num, Map map) throws DataAccessException{
 		System.out.println(product_category_num);
 		System.out.println("sql실행전");
@@ -55,4 +56,20 @@ public class ProductDAO {
 		List<ProductVO> optionList= sqlSession.selectList("mappers.product.selectOption", product_id);
 		return optionList;
 	}
+	
+	//상연
+	public List<ProductVO> bestList() {
+		return sqlSession.selectList("mappers.product.bestList");
+	}
+	
+	public List<ProductVO> newList() {
+		return sqlSession.selectList("mappers.product.newList");
+	}
+	
+	public int insertProduct (ProductVO vo) {
+		sqlSession.insert("mappers.product.insertProduct",vo);
+		sqlSession.insert("mappers.product.insertProductOption",vo);
+		return sqlSession.insert("mappers.product.insertItem",vo);
+	}
+	
 }

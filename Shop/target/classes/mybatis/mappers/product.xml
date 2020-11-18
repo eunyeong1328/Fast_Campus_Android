@@ -34,6 +34,8 @@
 		
 	</resultMap>	
 	
+	
+	<!-- 아진 -->
 	<select id="selectGoodsList" parameterType="java.util.HashMap" resultMap="productResult"   >
         <![CDATA[
         	SELECT *
@@ -85,5 +87,43 @@
 			WHERE PRODUCT_ID=#{product_id}
 		]]>
 	</select>
+	
+	
+	<!-- 상연 -->
+	<select id="bestList" resultType="productVO">
+		select * from product p , item i where p.product_id=i.product_id order by i.sales desc
+	</select>
+	
+	<select id="newList" resultType="productVO">
+		select * from product p , item i where p.product_id=i.product_id order by i.reg_date desc
+	</select>
+	
+	<insert id=" insertProduct" parameterType="productVO">
+		<![CDATA[
+			insert into product (product_id,product_name,product_detail,sales_unit,product_size,packing_type,product_image,supplier,product_category_num)
+			values(#{product_id},#{product_name},#{product_detail},#{sales_unit},#{product_size},#{packing_type},#{product_image},#{supplier},${product_category_num})
+		]]>
+	</insert>
+	
+	<insert id=" insertProductCategory" parameterType="productVO">
+		<![CDATA[
+			insert into product_category (product_category_num,product_category_name)
+			values(#{product_category_num},#{product_category_name})
+		]]>
+	</insert>
+	
+	<insert id=" insertProductOption" parameterType="productVO">
+		<![CDATA[
+			insert into product_option (option_name,option_price,option_quantity,product_id)
+			values(#{option_name},#{option_price},#{option_quantity},#{product_id})
+		]]>
+	</insert>
+	
+	<insert id=" insertitem" parameterType="productVO">
+		<![CDATA[
+			insert into item (item_num,price,stock,sales,discount,reg_date,unit_price,product_id)
+			values(#{item_num},#{price},#{stock},#{sales},#{discount},#{reg_date},#{unit_price},#{product_id})
+		]]>
+	</insert>
 	
 </mapper>

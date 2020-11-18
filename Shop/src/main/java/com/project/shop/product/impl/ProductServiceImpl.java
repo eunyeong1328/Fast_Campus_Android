@@ -19,7 +19,7 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	private ProductDAO productDAO;
 	
-	
+	//아진
 	@Override
 	public List<ProductVO> listProduct(int productCategoryNum, Map map) throws Exception {
 		List<ProductVO> productList = productDAO.selectProductList(productCategoryNum, map);
@@ -48,6 +48,22 @@ public class ProductServiceImpl implements ProductService{
 	public List<ProductVO> productOption(String product_id) throws Exception {
 		List<ProductVO> optionList = productDAO.selectOption(product_id);
 		return optionList;
+	}
+	
+	//상연
+	@Override
+	public List<ProductVO> bestList() {
+		return productDAO.bestList();
+	}
+
+	@Override
+	public List<ProductVO> newList() {
+		return productDAO.bestList();
+	}
+
+	@Override
+	public int insertProduct(ProductVO vo) {
+		return productDAO.insertProduct(vo);
 	}
 
 }

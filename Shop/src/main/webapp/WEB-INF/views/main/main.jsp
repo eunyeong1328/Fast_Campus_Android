@@ -4,6 +4,9 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+
 <c:set var="contextPath"  value="${pageContext.request.contextPath }"  />
 <%
   request.setCharacterEncoding("UTF-8");
@@ -39,26 +42,7 @@
 
 					<div class="swiper-wrapper h-100">
 
-
 						<!-- slide 1 -->
-						<a href="#!" class="h-100 swiper-slide d-middle overlay-dark overlay-opacity-5 bg-cover text-decoration-none text-white lazy" style="background-image:url('${contextPath}/resources/images/steak1.jpg')">
-							<div class="position-relative container z-index-10 text-white text-center" data-aos="fade-in" data-aos-delay="150" data-aos-offset="0">
-
-								<h2 class="display-3 h1-xs mb-4 font-weight-medium" data-swiper-parallax="-300">
-									고기 <span class="text-danger">고기</span> 있소?
-								</h2>
-
-								<div data-swiper-parallax="-100"><!-- parallax directly on button will cancel hover fade -->
-									<span class="btn btn-lg btn-outline-light shadow-none transition-hover-top">
-										고기 먹기
-									</span>
-								</div>
-
-							</div>
-						</a>
-						<!-- /slide 1 -->
-						
-						<!-- slide 2 -->
 						<div class="h-100 swiper-slide d-middle overlay-dark overlay-opacity-5 bg-cover text-decoration-none text-white" style="background-image:url('${contextPath}/resources/images/bread1.jpg')">
 							<div class="position-absolute container z-index-10 text-white text-center" data-aos="fade-in" data-aos-delay="150" data-aos-offset="0">
 
@@ -74,6 +58,25 @@
 
 							</div>
 						</div>
+						<!-- /slide 1 -->
+
+
+						<!-- slide 2 -->
+						<a href="#!" class="h-100 swiper-slide d-middle overlay-dark overlay-opacity-5 bg-cover text-decoration-none text-white lazy" style="background-image:url('${contextPath}/resources/images/steak1.jpg')">
+							<div class="position-relative container z-index-10 text-white text-center" data-aos="fade-in" data-aos-delay="150" data-aos-offset="0">
+
+								<h2 class="display-3 h1-xs mb-4 font-weight-medium" data-swiper-parallax="-300">
+									고기 <span class="text-danger">고기</span> 있소?
+								</h2>
+
+								<div data-swiper-parallax="-100"><!-- parallax directly on button will cancel hover fade -->
+									<span class="btn btn-lg btn-outline-light shadow-none transition-hover-top">
+										고기 먹기
+									</span>
+								</div>
+
+							</div>
+						</a>
 						<!-- /slide 2 -->
 
 					</div>
@@ -347,7 +350,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/sneakers/thumb_330/gregorius-maximillian-CtTBJ2ew4sw-unsplash-min.jpg" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="..."> 
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -358,15 +361,15 @@
 											.text-truncate
 										-->
 										<span class="d-block fs--16 max-h-50 overflow-hidden">
-											Lorem ipsum dolor sit amet elit
+											<c:out value="${bestlist[0].product_name}" />
 										</span>
 
 										<!-- price -->
 										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
 
-											<del class="text-muted">$220<sup>00</sup></del> 
+											<del class="text-muted"><c:out value="${bestlist[0].price}" />원</del> 
 
-											$173<sup>00</sup>
+											<fmt:parseNumber value="${bestlist[0].price*((100-bestlist[0].discount)/100)}"/>원
 										</span>
 
 										<!-- rating -->
@@ -415,7 +418,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/sneakers/thumb_330/mutzii-fmDCrqPQKog-unsplash-min.jpg" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -426,15 +429,15 @@
 											.text-truncate
 										-->
 										<span class="d-block fs--16 max-h-50 overflow-hidden">
-											Lorem ipsum dolor sit amet elit
+											<c:out value="${bestlist[1].product_name}" />
 										</span>
 
 										<!-- price -->
 										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
 
-											<del class="text-muted">$220<sup>00</sup></del> 
+											<del class="text-muted"><c:out value="${bestlist[1].price}" />원</del>  
 
-											$173<sup>00</sup>
+											<fmt:parseNumber value="${bestlist[1].price*((100-bestlist[1].discount)/100)}"/>원
 										</span>
 
 										<!-- rating -->
@@ -496,7 +499,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/sneakers/thumb_330/nikita-kachanovsky-ad_0wMHtvlU-unsplash-min.jpg" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -507,15 +510,15 @@
 											.text-truncate
 										-->
 										<span class="d-block fs--16 max-h-50 overflow-hidden">
-											Lorem ipsum dolor sit amet elit
+											<c:out value="${bestlist[2].product_name}" />
 										</span>
 
 										<!-- price -->
 										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
 
-											<del class="text-muted">$220<sup>00</sup></del> 
+											<del class="text-muted"><c:out value="${bestlist[2].price}" />원</del> 
 
-											$173<sup>00</sup>
+											<fmt:parseNumber value="${bestlist[2].price*((100-bestlist[2].discount)/100)}"/>원
 										</span>
 
 										<!-- rating -->
@@ -564,7 +567,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/sneakers/thumb_330/irene-kredenets-dwKiHoqqxk8-unsplash-min.jpg" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="..."> 
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -575,15 +578,15 @@
 											.text-truncate
 										-->
 										<span class="d-block fs--16 max-h-50 overflow-hidden">
-											Lorem ipsum dolor sit amet elit
+											<c:out value="${bestlist[3].product_name}" />
 										</span>
 
 										<!-- price -->
 										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
 
-											<del class="text-muted">$220<sup>00</sup></del> 
+											<del class="text-muted"><c:out value="${bestlist[3].price}" />원</del>  
 
-											$173<sup>00</sup>
+											<fmt:parseNumber value="${bestlist[3].price*((100-bestlist[3].discount)/100)}"/>원
 										</span>
 
 										<!-- rating -->
@@ -632,7 +635,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/sneakers/thumb_330/masaaki-komori-1GiUkfbcXis-unsplash-min.jpg" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -643,15 +646,15 @@
 											.text-truncate
 										-->
 										<span class="d-block fs--16 max-h-50 overflow-hidden">
-											Lorem ipsum dolor sit amet elit
+											<c:out value="${bestlist[4].product_name}" />
 										</span>
 
 										<!-- price -->
 										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
 
-											<del class="text-muted">$220<sup>00</sup></del> 
+											<del class="text-muted"><c:out value="${bestlist[4].price}" />원</del>  
 
-											$173<sup>00</sup>
+											<fmt:parseNumber value="${bestlist[4].price*((100-bestlist[4].discount)/100)}"/>원
 										</span>
 
 										<!-- rating -->
@@ -700,7 +703,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/sneakers/thumb_330/sarah-dorweiler-gUPiTDBdRe4-unsplash-min.jpg" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="..."> 
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -711,15 +714,15 @@
 											.text-truncate
 										-->
 										<span class="d-block fs--16 max-h-50 overflow-hidden">
-											Lorem ipsum dolor sit amet elit
+											<c:out value="${bestlist[5].product_name}" />
 										</span>
 
 										<!-- price -->
 										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
 
-											<del class="text-muted">$220<sup>00</sup></del> 
+											<del class="text-muted"><c:out value="${bestlist[5].price}" />원</del>  
 
-											$173<sup>00</sup>
+											<fmt:parseNumber value="${bestlist[5].price*((100-bestlist[5].discount)/100)}"/>원
 										</span>
 
 										<!-- rating -->
@@ -736,6 +739,8 @@
 
 						</div>
 						<!-- /item -->
+
+						
 
 					</div>
 					<!-- /product list -->
@@ -783,105 +788,117 @@
 
 
 
-			<!-- BRANDS -->
+			<!-- 신상품 -->
 			<section>
 				<div class="container">
 
 
 					<div class="mb-7 text-center px-3">
-						<h2 class="h3 text-center-xs font-weight-normal text-danger">
-							오늘의 <b>신상품</b>
+						<h2 class="h3-xs text-center-xs font-weight-normal text-danger">
+							신상품 <b> 최대 30% 할인</b>
 						</h2>
-
+						
 						<p class="lead max-w-600 mx-auto">
-							매일 정오, 쩝쩝박사의 새로운 상품을 만나보세요!
+							~12월 7일(월) 11시 
 						</p>
 					</div>
 
-					<!-- BRANDS : GRID : LAZYLOAD -->
-					<div class="clearfix mb-3 mt-5 p-3 bg-white shadow-md rounded overflow-hidden">
-						<div class="bg-white overflow-hidden"><!-- negative classes - hide bordered edges -->
+
+
+					<!-- NEW PRODUCT LIST -->
+					<div class="row gutters-xs--xs">
+
+
+						<!-- 
 							
-							<div class="row row-grid mt--n1 mb--n1">
+							MAIN/FEATURED
+							please pay attention to how order-* is set!
+							See on mobile how looks like! Play to set as desired!
 
-								<div class="h--150 col-6 col-md-5th d-flex align-items-center text-center">
-									<a href="#!" class="w-100">
-										<img class="max-h-60 img-fluid mx-3 max-w-180 lazy" data-src="${contextPath}/resources/demo.files/svg/brands/adidas.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="...">
-									</a>
-								</div>
+							You can also insert this "featured" anywhere
+							between them as long .order-2 class is present!
 
-								<div class="h--150 col-6 col-md-5th d-flex align-items-center text-center">
-									<a href="#!" class="w-100">
-										<img class="max-h-60 img-fluid mx-3 max-w-180 lazy" data-src="${contextPath}/resources/demo.files/svg/brands/xing.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="...">
-									</a>
-								</div>
+						-->
+						
+						<!-- /SPECIAL PRODUCT -->
 
-								<div class="h--150 col-6 col-md-5th d-flex align-items-center text-center">
-									<a href="#!" class="w-100">
-										<img class="max-h-60 img-fluid mx-3 max-w-180 lazy" data-src="${contextPath}/resources/demo.files/svg/brands/chanel.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="...">
-									</a>
-								</div>
 
-								<div class="h--150 col-6 col-md-5th d-flex align-items-center text-center">
-									<a href="#!" class="w-100">
-										<img class="max-h-60 img-fluid mx-3 max-w-180 lazy" data-src="${contextPath}/resources/demo.files/svg/brands/jordan.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="...">
-									</a>
-								</div>
+						<!-- item -->
+						<c:forEach var="bestlist" items="${bestlist}" begin="0" end="3">
+							<div class="order-2 col-6 col-lg-3 mb-4 mb-2-xs">
 
-								<div class="h--150 col-6 col-md-5th d-flex align-items-center text-center">
-									<a href="#!" class="w-100">
-										<img class="max-h-60 img-fluid mx-3 max-w-180 lazy" data-src="${contextPath}/resources/demo.files/svg/brands/levis.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="...">
-									</a>
-								</div>
+							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
 
-								<div class="h--150 col-6 col-md-5th d-flex align-items-center text-center">
-									<a href="#!" class="w-100">
-										<img class="max-h-60 img-fluid mx-3 max-w-180 lazy" data-src="${contextPath}/resources/demo.files/svg/brands/lacoste.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="...">
-									</a>
-								</div>
+								<a href="shop-page-product-2.html" class="d-block text-decoration-none">
 
-								<div class="h--150 col-6 col-md-5th d-flex align-items-center text-center">
-									<a href="#!" class="w-100">
-										<img class="max-h-60 img-fluid mx-3 max-w-180 lazy" data-src="${contextPath}/resources/demo.files/svg/brands/hm.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="...">
-									</a>
-								</div>
+									<!-- 
+										
+										3 ways to set the image
 
-								<div class="h--150 col-6 col-md-5th d-flex align-items-center text-center">
-									<a href="#!" class="w-100">
-										<img class="max-h-60 img-fluid mx-3 max-w-180 lazy" data-src="${contextPath}/resources/demo.files/svg/brands/american-apparel.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="...">
-									</a>
-								</div>
+									-->
 
-								<div class="h--150 col-6 col-md-5th d-flex align-items-center text-center">
-									<a href="#!" class="w-100">
-										<img class="max-h-60 img-fluid mx-3 max-w-180 lazy" data-src="${contextPath}/resources/demo.files/svg/brands/nike-4.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="...">
-									</a>
-								</div>
+									<!-- 1. without .bg-suprime - use image as it is -->
+									<!--
+									<figure class="m-0 text-center rounded-top overflow-hidden">
+										<img class="img-fluid" src="image.jpg" alt="..."> 
+									</figure>
+									-->
 
-								<div class="h--150 col-6 col-md-5th d-flex align-items-center text-center">
-									<a href="#!" class="w-100">
-										<img class="max-h-60 img-fluid mx-3 max-w-180 lazy" data-src="${contextPath}/resources/demo.files/svg/brands/bike.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="...">
-									</a>
-								</div>
+
+									<!-- 2. squared, as background -->
+									<!--
+									<figure class="m-0 text-center rounded-top overflow-hidden bg-cover" style="background-image:url('image.jpg')">
+										<img class="w-100" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="..."> 
+									</figure>
+									-->
+
+									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
+									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="..."> 
+									</figure>
+
+									<span class="d-block text-center-xs text-gray-600 py-3">
+										
+										<!-- 
+											.max-height-50  = limited to 2 rows of text 
+											-or-
+											.text-truncate
+										-->
+										<span class="d-block fs--16 max-h-50 overflow-hidden">
+											<c:out value="${bestlist.product_name}" />
+										</span>
+
+										<!-- price -->
+										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
+
+											<del class="text-muted"><c:out value="${bestlist.price}" />원</del>  
+
+											<fmt:parseNumber value="${bestlist.price*((100-bestlist.discount)/100)}"/>원
+										</span>
+
+										<!-- rating -->
+										<span class="d-block">
+											<i class="rating-5 text-warning fs--14"></i>
+											<span class="fs--12 text-muted">(4.7)</span>
+										</span>
+
+									</span>
+
+								</a>
 
 							</div>
 
 						</div>
+					</c:forEach>
+						<!-- /item -->
+									
 					</div>
-					<!-- BRANDS : GRID : LAZYLOAD -->
-
-
-					<div class="text-center pt-5">
-
-						<!-- view all button -->
-						<a href="#!" class="btn btn-sm btn-secondary btn-soft btn-soft">더 많은 상품 보러가기</a>
-
-					</div>
+					<!-- /product list -->
 
 
 				</div>
 			</section>
-			<!-- /BRANDS -->
+			<!-- /NEW PRODUCT LIST -->
 
 
 
