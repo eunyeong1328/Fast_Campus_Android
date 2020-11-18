@@ -90,7 +90,7 @@
 
 
 				<form novalidate class="bs-validate d-block mb-7" method="post"
-					action="#" enctype="multipart/form-data">
+					action="${contextPath}/admin/member/modifyMemberInfo.do" enctype="multipart/form-data">
 
 					<div class="row gutters-sm mb-3">
 
@@ -224,7 +224,7 @@
 
 											<div class="form-label-group mt-3">
 												<input placeholder="Address" id="zipNo" name="zipNo"
-													type="text" value="" class="form-control col-md-9"
+													type="text" value="${member_info.zipNo }" class="form-control col-md-9"
 													style="margin-bottom: 0; display: inline-block"> <label
 													for="zipNo">우편번호</label> <a class="btn btn-primary"
 													href="javascript:execDaumPostcode()" style="margin-bottom:4px">검색</a>
@@ -238,7 +238,7 @@
 
 											<div class="form-label-group mt-3">
 												<input placeholder="Address" id="load_address"
-													name="load_address" type="text" value=""
+													name="load_address" type="text" value="${member_info.load_address }"
 													class="form-control"> <label for="load_address">도로명
 													주소</label>
 											</div>
@@ -248,7 +248,7 @@
 
 											<div class="form-label-group mt-3">
 												<input placeholder="address" id="jibun_address"
-													name="jibun_address" type="text" value=""
+													name="jibun_address" type="text" value="${member_info.jibun_address }"
 													class="form-control"> <label for="jibun_address">지번
 													주소</label>
 											</div>
@@ -258,7 +258,7 @@
 
 											<div class="form-label-group mt-3">
 												<input placeholder="address" id="rest_address"
-													name="rest_address" type="text" value=""
+													name="rest_address" type="text" value="${member_info.rest_address }"
 													class="form-control"> <label for="rest_address">나머지
 													주소</label>
 											</div>
@@ -284,11 +284,7 @@
 					</button>
 					<script type="text/javascript">
 					function fn_modify_member() {
-						const result = confirm("변경하시겠습니까?");
-						if(result){
-							alert("회원정보를 변경합니다.");							
-						}
-						
+						const result = confirm("변경하시겠습니까?");		
 					}
 					</script>
 					

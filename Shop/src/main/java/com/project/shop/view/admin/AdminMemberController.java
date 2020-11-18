@@ -97,6 +97,19 @@ public class AdminMemberController extends BaseController {
 		
 	}
 	
+	@RequestMapping(value="/modifyMemberInfo.do")
+	public ModelAndView modifyMemberInfo(
+			@RequestParam HashMap<String, String> memberMap,
+			HttpServletRequest request, HttpServletResponse response)  throws Exception{
+		ModelAndView mav = new ModelAndView();
+		System.out.println("memberID = " + memberMap.get("member_id"));
+		System.out.println("member_date = " + memberMap.get("member_date"));
+		adminMemberService.modifyMemberInfo(memberMap);
+		
+		mav.setViewName("redirect:/admin/member/memberList.do");
+		return mav;
+	}
+	
 	
 
 }

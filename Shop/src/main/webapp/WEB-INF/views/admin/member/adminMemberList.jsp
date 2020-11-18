@@ -237,27 +237,7 @@
 														</c:choose>														
 														
 										</tbody>
-
-										<tfoot>
-												<tr class="text-muted fs--13">
-													<th class="w--30 hidden-lg-down">
-<!-- 														<label class="form-checkbox form-checkbox-primary float-start">
-															<input class="checkall" data-checkall-container="#item_list" type="checkbox" name="checkbox">
-															<i></i> -->
-														</label>
-													</th>
-													<span class="px-2 p-0-xs"></span>
-													<th class="w--80 ">번호</th>
-													<th class="w--150 ">아이디</th>
-													<th class="w--150 ">이름</th>
-													<th class="w--250 ">이메일</th>
-													<th class="w--100 ">등급</th>
-													<th class="w--100 ">상태</th>
-													<th class="w--200 ">가입일</th>
-													<th class="w--60">&nbsp;</th>
-												</tr>
-											</tfoot>
-
+										
 										</table>
 
 									</div>
