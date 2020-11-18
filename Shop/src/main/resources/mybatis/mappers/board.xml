@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board">
+
+	<!-- 공지사항 전체 목록 불러오기 -->
+	<select id="getNoticeList" parameterType="map" resultType="boardVO">
+		SELECT *
+		FROM (SELECT ROWNUM R_NUM, N.*
+      		  FROM (SELECT *
+            		FROM NOTICE
+            		ORDER BY NOTICE_NUM DESC
+             	    ) N
+     		 )
+		WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+
+	<!-- 공지사항 선택한 글 상세 불러오기 -->
+	<select id="getNotice" parameterType="boardVO" resultType="boardVO">
+		SELECT *
+		FROM NOTICE
+		WHERE NOTICE_NUM = #{notice_num}
+	</select>
+
+	<!-- FAQ 전체 목록 불러오기 -->
+	<select id="getFAQList" parameterType="map" resultType="boardVO">
+		SELECT * 
+		FROM (SELECT ROWNUM R_NUM, A.*
+			  FROM (SELECT F.FAQ_NUM, Q.QNA_CATEGORY_NAME, F.TITLE, F.CONTENTS  
+			  		FROM FAQ F, QNA_CATEGORY Q 
+					WHERE f.qna_category_num = q.qna_category_num 
+					ORDER BY f.faq_num) A)
+		WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- FAQ 선택한 글 상세 불러오기 -->
+	<select id="getFAQ" parameterType="boardVO" resultType="boardVO">
+		SELECT F.FAQ_NUM , Q.QNA_CATEGORY_NAME , F.TITLE, F.CONTENTS
+		FROM FAQ F, QNA_CATEGORY Q
+		WHERE f.qna_category_num = q.qna_category_num
+		AND f.faq_num = #{faq_num}
+	</select>
+
+	<!-- 공지사항 게시글 갯수 조회 -->
+	<select id="getNoticeCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM NOTICE
+	</select>
+	
+	<!-- FAQ 게시글 갯수 조회 -->
+	<select id="getFAQCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM FAQ
+	</select>
+
+</mapper>
