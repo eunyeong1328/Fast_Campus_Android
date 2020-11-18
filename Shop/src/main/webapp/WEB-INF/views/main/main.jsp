@@ -43,6 +43,25 @@
 					<div class="swiper-wrapper h-100">
 
 						<!-- slide 1 -->
+							<a href="#!" class="h-100 swiper-slide d-middle overlay-dark overlay-opacity-5 bg-cover text-decoration-none text-white lazy" style="background-image:url('${contextPath}/resources/images/steak1.jpg')">
+							<div class="position-relative container z-index-10 text-white text-center" data-aos="fade-in" data-aos-delay="150" data-aos-offset="0">
+
+								<h2 class="display-3 h1-xs mb-4 font-weight-medium" data-swiper-parallax="-300">
+									고기 <span class="text-danger">고기</span> 있소?
+								</h2>
+
+								<div data-swiper-parallax="-100"><!-- parallax directly on button will cancel hover fade -->
+									<span class="btn btn-lg btn-outline-light shadow-none transition-hover-top">
+										고기 먹기
+									</span>
+								</div>
+
+							</div>
+						</a>
+						<!-- /slide 1 -->
+
+
+						<!-- slide 2 -->
 						<div class="h-100 swiper-slide d-middle overlay-dark overlay-opacity-5 bg-cover text-decoration-none text-white" style="background-image:url('${contextPath}/resources/images/bread1.jpg')">
 							<div class="position-absolute container z-index-10 text-white text-center" data-aos="fade-in" data-aos-delay="150" data-aos-offset="0">
 
@@ -58,25 +77,7 @@
 
 							</div>
 						</div>
-						<!-- /slide 1 -->
 
-
-						<!-- slide 2 -->
-						<a href="#!" class="h-100 swiper-slide d-middle overlay-dark overlay-opacity-5 bg-cover text-decoration-none text-white lazy" style="background-image:url('${contextPath}/resources/images/steak1.jpg')">
-							<div class="position-relative container z-index-10 text-white text-center" data-aos="fade-in" data-aos-delay="150" data-aos-offset="0">
-
-								<h2 class="display-3 h1-xs mb-4 font-weight-medium" data-swiper-parallax="-300">
-									고기 <span class="text-danger">고기</span> 있소?
-								</h2>
-
-								<div data-swiper-parallax="-100"><!-- parallax directly on button will cancel hover fade -->
-									<span class="btn btn-lg btn-outline-light shadow-none transition-hover-top">
-										고기 먹기
-									</span>
-								</div>
-
-							</div>
-						</a>
 						<!-- /slide 2 -->
 
 					</div>
@@ -350,7 +351,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[0].product_image}" alt="..."> 
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -418,7 +419,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="...">
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[1].product_image}" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -499,7 +500,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="...">
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[2].product_image}" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -567,7 +568,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[3].product_image}" alt="..."> 
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -635,7 +636,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="...">
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[4].product_image}" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -703,7 +704,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[5].product_image}" alt="..."> 
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -854,7 +855,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/demo.files/images/unsplash/products/bread/bread1.jpg" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist.product_image}" alt="..."> 
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -1256,12 +1257,12 @@
 			Note: #onload_modal_shop is also used inside the modal
 			for the button "stop showing" to set a cookie!
 		-->
-		<div id="onload_modal_shop" class="hide js-onload js-ajax-modal" 
+<%-- 		<div id="onload_modal_shop" class="hide js-onload js-ajax-modal" 
 		    data-href="${contextPath}/resources/_ajax/modal_shop.html" 
 		    data-ajax-modal-delay="3000" 
 		    data-ajax-modal-size="modal-lg" 
 		    data-ajax-modal-centered="true" 
-		    data-ajax-modal-backdrop=""></div>
+		    data-ajax-modal-backdrop=""></div> --%>
 
 
 		<script src="${contextPath}/resources/assets/js/core.js"></script>

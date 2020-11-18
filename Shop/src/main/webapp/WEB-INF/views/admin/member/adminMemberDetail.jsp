@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <%
-  request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
 %>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -64,7 +64,7 @@
 					}
 				}).open();
 	}
-	</script>
+</script>
 
 <body class="layout-admin aside-sticky header-sticky">
 
@@ -90,7 +90,8 @@
 
 
 				<form novalidate class="bs-validate d-block mb-7" method="post"
-					action="${contextPath}/admin/member/modifyMemberInfo.do" enctype="multipart/form-data">
+					action="${contextPath}/admin/member/modifyMemberInfo.do"
+					enctype="multipart/form-data">
 
 					<div class="row gutters-sm mb-3">
 
@@ -161,8 +162,8 @@
 
 											<div class="form-label-group mt-3">
 												<input id="member_date" name="member_date" type="date"
-													value="${member_info.member_date }" class="form-control">
-												<label for="member_date">가입일</label>
+													value="${member_info.member_date }" class="form-control"
+													readonly> <label for="member_date">가입일</label>
 											</div>
 
 										</div>
@@ -224,10 +225,12 @@
 
 											<div class="form-label-group mt-3">
 												<input placeholder="Address" id="zipNo" name="zipNo"
-													type="text" value="${member_info.zipNo }" class="form-control col-md-9"
+													type="text" value="${member_info.zipNo }"
+													class="form-control col-md-9"
 													style="margin-bottom: 0; display: inline-block"> <label
 													for="zipNo">우편번호</label> <a class="btn btn-primary"
-													href="javascript:execDaumPostcode()" style="margin-bottom:4px">검색</a>
+													href="javascript:execDaumPostcode()"
+													style="margin-bottom: 4px">검색</a>
 
 											</div>
 
@@ -238,9 +241,9 @@
 
 											<div class="form-label-group mt-3">
 												<input placeholder="Address" id="load_address"
-													name="load_address" type="text" value="${member_info.load_address }"
-													class="form-control"> <label for="load_address">도로명
-													주소</label>
+													name="load_address" type="text"
+													value="${member_info.load_address }" class="form-control">
+												<label for="load_address">도로명 주소</label>
 											</div>
 
 										</div>
@@ -248,9 +251,9 @@
 
 											<div class="form-label-group mt-3">
 												<input placeholder="address" id="jibun_address"
-													name="jibun_address" type="text" value="${member_info.jibun_address }"
-													class="form-control"> <label for="jibun_address">지번
-													주소</label>
+													name="jibun_address" type="text"
+													value="${member_info.jibun_address }" class="form-control">
+												<label for="jibun_address">지번 주소</label>
 											</div>
 
 										</div>
@@ -258,9 +261,9 @@
 
 											<div class="form-label-group mt-3">
 												<input placeholder="address" id="rest_address"
-													name="rest_address" type="text" value="${member_info.rest_address }"
-													class="form-control"> <label for="rest_address">나머지
-													주소</label>
+													name="rest_address" type="text"
+													value="${member_info.rest_address }" class="form-control">
+												<label for="rest_address">나머지 주소</label>
 											</div>
 
 										</div>
@@ -279,15 +282,16 @@
 					</div>
 
 
-					<button type="submit" class="btn btn-primary" onclick="fn_modify_member()">
+					<button type="submit" class="btn btn-primary"
+						onclick="fn_modify_member()">
 						<i class="fi fi-check"></i> 회원정보 변경
 					</button>
 					<script type="text/javascript">
-					function fn_modify_member() {
-						const result = confirm("변경하시겠습니까?");		
-					}
+						function fn_modify_member() {
+							const result = confirm("변경하시겠습니까?");
+						}
 					</script>
-					
+
 					<!-- 회원삭제 버튼 -->
 					<a
 						href="${contextPath}/admin/member/deleteMember.do?member_id=${member_info.member_id}"
