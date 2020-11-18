@@ -6,7 +6,97 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 
+			<!-- INFO BOX -->
+			<section class="bg-light py-0">
+				<div class="container py-3">
 
+					<div class="row">
+
+						<div class="col-6 col-lg-3 p--15 d-flex d-block-xs text-center-xs">
+
+							<div class="pl--10 pr--20 fs--50 line-height-1 pt--6">
+								<img width="60" height="60" src="${contextPath}/resources/demo.files/svg/ecommerce/money_bag.svg" alt="...">
+							</div>
+
+							<div class="my-2">
+								
+								<h2 class="font-weight-medium fs--20 mb-0">
+									최저가 보장
+								</h2>
+
+								<p class="m-0">
+									30-days money back
+								</p>
+
+							</div>
+
+						</div>
+
+						<div class="col-6 col-lg-3 p--15 d-flex d-block-xs text-center-xs border-dashed border-light bw--1 bt-0 br-0 bb-0 b--0-lg">
+
+							<div class="pl--10 pr--20 fs--50 line-height-1 pt--6">
+								<img width="60" height="60" src="${contextPath}/resources/demo.files/svg/ecommerce/free-delivery-truck.svg" alt="...">
+							</div>
+
+							<div class="my-2">
+								
+								<h2 class="font-weight-medium fs--20 mb-0">
+									무료배송
+								</h2>
+
+								<p class="m-0">
+									Shipping is on us
+								</p>
+
+							</div>
+
+						</div>
+
+						<div class="col-6 col-lg-3 p--15 d-flex d-block-xs text-center-xs border-dashed border-light bw--1 bl-0 br-0 bb-0 b--0-lg">
+
+							<div class="pl--10 pr--20 fs--50 line-height-1 pt--6">
+								<img width="60" height="60" src="${contextPath}/resources/demo.files/svg/ecommerce/24-hours-phone-service.svg" alt="...">
+							</div>
+
+							<div class="my-2">
+								
+								<h2 class="font-weight-medium fs--20 mb-0">
+									고객센터
+								</h2>
+
+								<p class="m-0">
+									24/24 available
+								</p>
+
+							</div>
+
+						</div>
+
+						<div class="col-6 col-lg-3 p--15 d-flex d-block-xs text-center-xs border-dashed border-light bw--1 bb-0 br-0 b--0-lg">
+
+							<div class="pl--10 pr--20 fs--50 line-height-1 pt--6">
+								<img width="60" height="60" src="${contextPath}/resources/demo.files/svg/ecommerce/handshake.svg" alt="...">
+							</div>
+
+							<div class="my-2">
+								
+								<h2 class="font-weight-medium fs--20 mb-0">
+									품질보장
+								</h2>
+
+								<p class="m-0">
+									Quality guaranteed
+								</p>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</section>
+			<!-- /INFO BOX -->
 
 		<!-- Footer -->
 		<footer id="footer" class="shadow-xs">

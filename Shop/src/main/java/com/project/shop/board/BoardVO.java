@@ -17,18 +17,27 @@ public class BoardVO {
 	private int qna_category_num;
 	private String qna_category_name;
 
-	// 상품문의
+// 상품문의
 	private int product_qna_num;
 	private String product_id;
 	private String member_id;
 	private int parent_num;
+	private String product_name;
 
 //	1:1 문의
 	private int member_qna_num;
 	private int order_num;
 	private String email;
 	private String phone;
-
+	
+	public String getProduct_name() {
+		return product_name;
+	}
+	
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+	
 	public int getNotice_num() {
 		return notice_num;
 	}

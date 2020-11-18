@@ -19,4 +19,14 @@ public class PagingServiceImpl implements PagingService {
 		return pagingDAO.getFAQCount();
 	}
 
+	@Override
+	public int getProQCount() {
+		return pagingDAO.getProQCount();
+	}
+
+	@Override
+	public int getMemQCount() {
+		return pagingDAO.getMemQCount();
+	}
+
 }
