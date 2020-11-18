@@ -15,6 +15,7 @@
   <typeAliases>
   	<typeAlias type="com.project.shop.member.MemberVO" alias = "memberVO"/>
   	<typeAlias type="com.project.shop.product.ProductVO" alias = "productVO"/>
+  	<typeAlias type="com.project.shop.product.board.ProductBoardQnaVO" alias="product_qnaVO"/>
   </typeAliases>
   
 </configuration>

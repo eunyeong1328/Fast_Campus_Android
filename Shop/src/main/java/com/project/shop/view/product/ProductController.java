@@ -17,12 +17,18 @@ import com.project.shop.common.base.BaseController;
 import com.project.shop.product.Paging;
 import com.project.shop.product.ProductService;
 import com.project.shop.product.ProductVO;
+import com.project.shop.product.board.ProductBoardQnaVO;
+import com.project.shop.product.board.ProductBoardService;
 
 @Controller
 @RequestMapping(value="/product")
 public class ProductController extends BaseController{
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private ProductBoardService productBoardService;
+	
 	@Autowired
 	private Paging p;
 	
@@ -110,25 +116,101 @@ public class ProductController extends BaseController{
 		mav.addObject("pvo", p);
 		return mav;
 	}
+	
+	
 	@RequestMapping(value="/productDetail.do")
 	public ModelAndView productList(@RequestParam(value="product_id") String product_id,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView (viewName);
 		
-		System.out.println("viewName :"+viewName);
-		System.out.println("product_id :"+product_id);
 		ProductVO productVO =productService.productDetail(product_id);
 		mav.addObject("vo", productVO);
-		System.out.println("컨트롤러에서 productVO.get카테고리네임:"+productVO.getProduct_category_name());
 		
 		List<ProductVO> optionList = productService.productOption(product_id);
 		mav.addObject("optionList", optionList);
 		
 		
+		//========================================================
+		//게시판
+		// ===========================페이징 처리 ====================
 		
+		int totalCount = productBoardService.getTotalCount(product_id);//문의글 전체 수
+		
+		
+		String cPage = request.getParameter("cPage");
+		if(cPage == null) {
+			cPage="1";
+		}
+		System.out.println("cPage: "+ cPage);
+		
+		int[] pagingInfo = pagingInfo(totalCount, cPage);
+		System.out.println(pagingInfo);
+		
+		Map map = new HashMap();
+		map.put("product_id", product_id);
+		map.put("begin", pagingInfo[0]);
+		map.put("end", pagingInfo[1]);
+		System.out.println("map데이터: "+map.get("begin"));
+		System.out.println("map데이터: "+map.get("end"));
+		
+		List<ProductBoardQnaVO> productBoardQnaList = productBoardService.getListQna(map);
+		
+		System.out.println("확인좀..." +productBoardQnaList);
+		mav.addObject("qnaList", productBoardQnaList);
 		
 		return mav;
 	}
-	
+	public int[] pagingInfo(int totalCount, String cPage) {
+		int[] pagingInfo = new int[2];
+		
+		// 1. 전체 게시물의 수를 구하기
+		p.setTotalRecord(totalCount); // 전체 product 수 설정
+		p.setTotalPage(); // 전체 페이지 갯수 구하기
+		System.out.println("전체 게시글 수 : " + p.getTotalRecord());
+		System.out.println("전체 페이지 수 : " + p.getTotalPage());
+
+		// 2. 현재 페이지 구하기
+		//String cPage = request.getParameter("cPage");
+		if (cPage != null) {
+			p.setNowPage(Integer.parseInt(cPage));
+		}
+
+		// 3. 현재 페이지에 표시할 게시글 시작번호(begin), 끝번호(end) 구하기
+		p.setEnd(p.getNowPage() * p.getNumPerPage());
+		p.setBegin(p.getEnd() - p.getNumPerPage() + 1);
+		System.out.println("---------");
+		System.out.println("현재페이지 : " + p.getNowPage());
+		System.out.println("시작글번호 : " + p.getBegin());
+		System.out.println("끝글번호 : " + p.getEnd());
+
+		// 4. 블록(block) 계산하기(블록의 시작, 끝페이지 구하기)
+		int nowPage = p.getNowPage();
+		int currentBlock = (nowPage - 1) / p.getPagePerBlock() + 1;
+		p.setEndPage(currentBlock * p.getPagePerBlock());
+		p.setBeginPage(p.getEndPage() - p.getPagePerBlock() + 1);
+
+		System.out.println("---- 블럭의 시작, 끝 페이지 ----");
+		System.out.println("현재페이지 : " + p.getNowPage());
+		System.out.println("시작페이지 : " + p.getBeginPage());
+		System.out.println("끝페이지 : " + p.getEndPage());
+
+		// 5. 끝페이지(endPage)가 전체 페이지 수(totalPage) 보다 크면
+		// 끝페이지 값을 전체페이지수로 변경처리
+		if (p.getEndPage() > p.getTotalPage()) {
+			p.setEndPage(p.getTotalPage());
+		}
+		System.out.println("---- 블럭의 시작, 끝 페이지(정정후) ----");
+		System.out.println(">> 시작페이지 : " + p.getBeginPage());
+		System.out.println(">> 끝페이지 : " + p.getEndPage());
+		
+		System.out.println("p.getBegin() : "+p.getBegin());
+		System.out.println("p.getEnd() : "+p.getEnd());
+		
+		pagingInfo[0]= p.getBegin();
+		System.out.println("pagingInfo[0]: "+pagingInfo[0]);
+		pagingInfo[1]= p.getEnd();
+		
+		return pagingInfo;
+	}
 }
