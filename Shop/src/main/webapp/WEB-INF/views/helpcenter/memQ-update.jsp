@@ -32,7 +32,7 @@
 								<a href="faq-tab.do?nowTab=tab-2">FAQ</a>
 							</li>
 							<li class="tab-link current" data-tab="tab-3">
-								<a href="memberQ-tab.do?nowTab=tab-4">1:1 문의</a>
+								<a href="memberQ-tab.do?nowTab=tab-3">1:1 문의</a>
 							</li>
 						</ul>
 			
@@ -47,8 +47,8 @@
 							<!-- insert form -->
                                 <div id="memq-insert">
 
-                                    <form action="memQ-insert.do" method="post" enctype="multipart/form-data">
-                                    	<input type="hidden" name="action" value="memQ-insert">
+                                    <form action="memQ-update.do" method="post" enctype="multipart/form-data">
+                                    	<input type="hidden" name="action" value="memQ-update">
                                         <div class="memq-title">
                                             <p>제목</p>
                                             <div class="category-select">
@@ -58,22 +58,22 @@
                                                     <option>배송문의</option>
                                                     <option>반품문의</option>
                                                 </select>
-                                                <input type="text" name="member_id">
-                                                <input type="text" name="title">
+                                                <input type="text" name="member_id" value="${memQ.member_id }" readonly>
+                                                <input type="text" name="title" value="${memQ.title }">
                                             </div>
                                         </div>
                                         <div class="memq-order-num">
                                             <p>주문번호</p>
-                                            <input type="number" name="order_num">
+                                            <input type="number" name="order_num" value="${memQ.order_num}">
                                             <input type="button" value="주문조회">
                                         </div>
                                         <div class="memq-email">
                                             <p>이메일</p>
-                                            <input type="text" name="email" placeholder="이메일을 입력하세요">
+                                            <input type="text" name="email" value="${memQ.email }">
                                         </div>
                                         <div class="memq-phone">
                                             <p>전화번호</p>
-                                            <input type="text" name="phone">
+                                            <input type="text" name="phone" value="${memQ.phone }">
                                         </div>
                                         <div class="memq-contents">
                                             <p>내용</p>
@@ -88,11 +88,11 @@
                                                 - 배송일 및 배송시간 지정은 불가능합니다.<br><br>
                                                 # 전화번호, 이메일, 주소, 계좌번호 등의 상세 개인정보가 문의 내용에 저장되지 않도록 주의해 주시기 바랍니다.<br>
                                             </p>
-                                            <textarea name="contents" rows="5" cols="80"></textarea>
+                                            <textarea name="contents" rows="5" cols="80">${memQ.contents }</textarea>
                                         </div>
                                         <div class="memq-image">
                                             <p>이미지</p>
-                                            <input type="text" name="image">
+                                            <input type="text" name="image" value="${memQ.image }">
                                         </div>
                                         <div class="memq-submit">
                                             <input type="submit" value="등록">

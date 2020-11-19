@@ -31,16 +31,13 @@
 							<li class="tab-link" data-tab="tab-2">
 								<a href="faq-tab.do?nowTab=tab-2">FAQ</a>
 							</li>
-							<li class="tab-link" data-tab="tab-3">
-								<a href="productQ-tab.do?nowTab=tab-3">상품문의</a>
-							</li>
-							<li class="tab-link current" data-tab="tab-4">
-								<a href="memberQ-tab.do?nowTab=tab-4">1:1 문의</a>
+							<li class="tab-link current" data-tab="tab-3">
+								<a href="memberQ-tab.do?nowTab=tab-3">1:1 문의</a>
 							</li>
 						</ul>
 			
-						<!-- tab-4 -->
-						<div id="tab-4" class="tab-content">
+						<!-- tab-3 -->
+						<div id="tab-3" class="tab-content">
 							
 							<h3 class="joy-table-title">
                                 1:1 문의
@@ -69,7 +66,11 @@
 											<tr>
 												<td>${memQ.member_qna_num}</td>
 												<td>${memQ.qna_category_name}</td>
-												<td>${memQ.title}</td>
+												<td>
+	                                        		<a href="memQ.do?member_qna_num=${memQ.member_qna_num}&cPage=${paging.nowPage}">
+		                                        		${memQ.title }
+	                                        		</a>
+	                                        	</td>
 												<td>${memQ.member_id}</td>
 												<td>${memQ.reg_date}</td>
 											</tr>
@@ -107,7 +108,7 @@
 								<li><a class="insert" href="memQ-insert.do?nowTab=${paging.nowTab }">글쓰기</a></li>
 							</ul>
 						</div>
-						<!-- tab-4 end -->
+						<!-- tab-3 end -->
 
 					</div>
 					<!-- Nav tabs end-->

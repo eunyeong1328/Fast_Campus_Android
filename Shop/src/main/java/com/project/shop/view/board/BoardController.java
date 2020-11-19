@@ -1,11 +1,14 @@
 package com.project.shop.view.board;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +36,7 @@ public class BoardController {
 //	고객센터 notice-tab 페이지
 	@RequestMapping("/notice-tab.do")
 	public ModelAndView getNoticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -61,23 +65,7 @@ public class BoardController {
 		
 		return mav;
 	}
-	
-//	상품문의 productQ-tab 페이지
-	@RequestMapping("/productQ-tab.do")
-	public ModelAndView getProQList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		String viewName = (String) request.getAttribute("viewName");
-		mav.setViewName(viewName);
-		
-		getPaging(request, response);
-		mav.addObject("paging", paging);
-		
-		List<BoardVO> proQ = boardService.getProQList(map);
-		mav.addObject("ProQList", proQ);
-		
-		return mav;
-	}
-	
+
 //	회원 1:1 문의 memberQ-tab 페이지
 	@RequestMapping("/memberQ-tab.do")
 	public ModelAndView getMemQList(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -95,21 +83,54 @@ public class BoardController {
 	}
 	
 //	1:1 문의 글 작성
-	@RequestMapping("/memQ-insert.do")
+	@RequestMapping(value="/memQ-insert.do", method={RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView memQInsert(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		ModelAndView mav = new ModelAndView();
+		
 		String viewName = (String) request.getAttribute("viewName");
-		mav.setViewName(viewName);
+		
+		if (viewName.equals("/board/memQ-insert")) {
+			mav.setViewName(viewName);
+		}
+		
+		String action = (String) request.getParameter("action");
+		System.out.println(action);
+		
+		if (action != null && action.equals("memQ-insert")) {
+			boardService.memQInsert(vo);
+			getPaging(request, response);
+			mav.setViewName("redirect:memberQ-tab.do?nowTab=tab-3");
+		} 
 		
 		return mav;
 	}
 	
-	@RequestMapping(value="/addMemQ.do", method = RequestMethod.POST)
-	public String addMemQ(BoardVO vo, HttpServletRequest request, HttpServletResponse response) {
-		boardService.memQInsert(vo);
-		return "redirect:memberQ-tab.do";
+//	1:1 문의 글 수정
+	@RequestMapping(value="/memQ-update.do", method={RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView memQUpdate(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String viewName = (String) request.getAttribute("viewName");
+		
+		if (viewName.equals("/board/memQ-update")) {
+			mav.setViewName(viewName);
+		}
+		
+		String action = (String) request.getParameter("action");
+		System.out.println(action);
+		
+		if (action != null && action.equals("memQ-update")) {
+			boardService.memQUpdate(vo);
+			getPaging(request, response);
+			mav.setViewName("redirect:memQ.do?nowTab=tab-3");
+		} 
+		
+		return mav;
 	}
 	
+//	글 상세 불러오기
 	@RequestMapping("/notice.do")
 	public ModelAndView getNotice(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -140,6 +161,22 @@ public class BoardController {
 		return mav;
 	}
 	
+	@RequestMapping("/memQ.do")
+	public ModelAndView getMemQ(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		
+		getPaging(request, response);
+		mav.addObject("paging", paging);
+		
+		BoardVO memQ = boardService.getMemQ(vo);
+		mav.addObject("memQ", memQ);
+		
+		return mav;
+	}
+	
+//	Paging
 	public void getPaging(HttpServletRequest request, HttpServletResponse response) {
 		
 		String nowTab = request.getParameter("nowTab");
@@ -151,9 +188,6 @@ public class BoardController {
 			paging.setNowTab(nowTab);
 			paging.setTotalRecord(pagingService.getFAQCount());
 		} else if (nowTab.equals("tab-3")) {
-			paging.setNowTab(nowTab);
-			paging.setTotalRecord(pagingService.getProQCount());
-		} else if (nowTab.equals("tab-4")) {
 			paging.setNowTab(nowTab);
 			paging.setTotalRecord(pagingService.getMemQCount());
 		}

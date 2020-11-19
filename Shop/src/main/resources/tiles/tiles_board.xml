@@ -21,16 +21,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/helpcenter/faq-tab.jsp" />
 	</definition>
 	
-	<definition name="/board/productQ-tab" extends="helpcenterLayout">
-		<put-attribute name="body" value="/WEB-INF/views/helpcenter/productQ-tab.jsp" />
-	</definition>
-	
 	<definition name="/board/memberQ-tab" extends="helpcenterLayout">
 		<put-attribute name="body" value="/WEB-INF/views/helpcenter/memberQ-tab.jsp" />
-	</definition>
-	
-	<definition name="/board/memQ-insert" extends="helpcenterLayout">
-		<put-attribute name="body" value="/WEB-INF/views/helpcenter/memQ-insert.jsp" />
 	</definition>
 	
 	<definition name="/board/notice" extends="helpcenterLayout">
@@ -41,6 +33,18 @@
 		<put-attribute name="body" value="/WEB-INF/views/helpcenter/faq.jsp" />
 	</definition>
 	
+	<definition name="/board/memQ" extends="helpcenterLayout">
+		<put-attribute name="body" value="/WEB-INF/views/helpcenter/memQ.jsp" />
+	</definition>
+	
+	<definition name="/board/memQ-insert" extends="helpcenterLayout">
+		<put-attribute name="body" value="/WEB-INF/views/helpcenter/memQ-insert.jsp" />
+	</definition>
+	
+	<definition name="/board/memQ-update" extends="helpcenterLayout">
+		<put-attribute name="body" value="/WEB-INF/views/helpcenter/memQ-update.jsp" />
+	</definition>
+
 </tiles-definitions>
 
 
