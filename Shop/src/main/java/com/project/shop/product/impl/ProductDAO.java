@@ -31,6 +31,7 @@ public class ProductDAO {
 	}
 	//product 갯수 조회
 	public int getTotalCount(int productCategoryNum) {
+		System.out.println("ㅎㅎ");
 		int totalCount = sqlSession.selectOne("mappers.product.totalCount", productCategoryNum);
 		return totalCount;
 		
