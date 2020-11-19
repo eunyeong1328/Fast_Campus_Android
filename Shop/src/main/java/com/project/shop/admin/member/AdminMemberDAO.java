@@ -22,6 +22,11 @@ public class AdminMemberDAO {
 		return memberList;
 	}
 	
+	public ArrayList<MemberVO> searchMember(HashMap condMap) throws DataAccessException{
+		ArrayList<MemberVO> memberList=(ArrayList)sqlSession.selectList("mapper.admin.member.searchMember",condMap);
+		return memberList;
+	}
+	
 	public MemberVO memberDetail(String member_id) throws DataAccessException{
 		MemberVO memberBean=(MemberVO)sqlSession.selectOne("mapper.admin.member.memberDetail",member_id);
 		return memberBean;

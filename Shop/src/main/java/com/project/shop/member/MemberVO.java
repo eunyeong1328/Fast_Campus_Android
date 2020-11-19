@@ -21,6 +21,7 @@ public class MemberVO {
 	private int this_score;
 	private int point;
 	private String member_status;
+	private String grade;
 	
 	public String getMember_id() {
 		return member_id;
@@ -112,14 +113,23 @@ public class MemberVO {
 	public void setMember_status(String member_status) {
 		this.member_status = member_status;
 	}
+	
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 	@Override
 	public String toString() {
-		return "MemberVO [member_id=" + member_id + "/ password=" + password + ", member_name=" + member_name
+		return "MemberVO [member_id=" + member_id + ", password=" + password + ", member_name=" + member_name
 				+ ", email=" + email + ", phone=" + phone + ", zipNo=" + zipNo + ", load_address=" + load_address
 				+ ", jibun_address=" + jibun_address + ", rest_address=" + rest_address + ", member_date=" + member_date
 				+ ", birthday=" + birthday + ", pre_score=" + pre_score + ", this_score=" + this_score + ", point="
-				+ point + ", member_status=" + member_status + "]";
+				+ point + ", member_status=" + member_status + ", grade=" + grade + "]";
 	}
+
+	
 	
 	
 
