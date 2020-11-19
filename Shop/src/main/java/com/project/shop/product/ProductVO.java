@@ -3,6 +3,7 @@ package com.project.shop.product;
 import java.sql.Date;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class ProductVO {

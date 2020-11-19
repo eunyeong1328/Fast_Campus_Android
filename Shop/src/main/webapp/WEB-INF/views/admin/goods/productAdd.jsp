@@ -85,7 +85,7 @@
 							
 							할인율 <input type="text" name="discount" required="required" placeholder="discount"><br><br>
 
-							판매량 <input type="text" name="sales" required="required" placeholder="sales"><br><br>
+							판매량 <input type="text" name="sales" disabled="disabled" value="0"><br><br>
 						</div>
 					</section>
 		
@@ -94,8 +94,8 @@
 							<div>
 								<select required  name="product_category_num" class="form-control bs-select" data-live-search="true" title="선택해주세요">
 
-									<option value="1" class="font-weight-medium">채소</option>
-									<option value="2" class="font-weight-medium">육류</option>
+									<option value="1" class="font-weight-medium">고기</option>
+									<option value="2" class="font-weight-medium">채소</option>
 									<option value="3" class="font-weight-medium">베이커리</option>
 									<!-- <option value="4" class="font-weight-medium">기타</option> -->
 
