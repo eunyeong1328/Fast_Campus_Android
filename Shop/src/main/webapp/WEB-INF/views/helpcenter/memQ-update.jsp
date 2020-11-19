@@ -49,6 +49,7 @@
 
                                     <form action="memQ-update.do" method="post" enctype="multipart/form-data">
                                     	<input type="hidden" name="action" value="memQ-update">
+                                    	<input type="hidden" name="member_qna_num" value="${memQ.member_qna_num }">
                                         <div class="memq-title">
                                             <p>제목</p>
                                             <div class="category-select">

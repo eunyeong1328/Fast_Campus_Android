@@ -1,14 +1,11 @@
 package com.project.shop.view.board;
 
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -95,11 +92,9 @@ public class BoardController {
 		}
 		
 		String action = (String) request.getParameter("action");
-		System.out.println(action);
 		
 		if (action != null && action.equals("memQ-insert")) {
 			boardService.memQInsert(vo);
-			getPaging(request, response);
 			mav.setViewName("redirect:memberQ-tab.do?nowTab=tab-3");
 		} 
 		
@@ -111,20 +106,20 @@ public class BoardController {
 	public ModelAndView memQUpdate(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
-		
 		String viewName = (String) request.getAttribute("viewName");
+		
+		BoardVO memQ = boardService.getMemQ(vo);
+		mav.addObject("memQ", memQ);
 		
 		if (viewName.equals("/board/memQ-update")) {
 			mav.setViewName(viewName);
 		}
 		
 		String action = (String) request.getParameter("action");
-		System.out.println(action);
 		
 		if (action != null && action.equals("memQ-update")) {
 			boardService.memQUpdate(vo);
-			getPaging(request, response);
-			mav.setViewName("redirect:memQ.do?nowTab=tab-3");
+			mav.setViewName("redirect:memQ.do?nowTab=tab-3&member_qna_num=" + memQ.getMember_qna_num());
 		} 
 		
 		return mav;
@@ -164,6 +159,7 @@ public class BoardController {
 	@RequestMapping("/memQ.do")
 	public ModelAndView getMemQ(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
 		
