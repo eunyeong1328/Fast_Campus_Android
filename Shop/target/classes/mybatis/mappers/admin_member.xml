@@ -58,11 +58,7 @@
 			<when test="search_type=='member_name'"> 
 	    	(MEMBER_DATE BETWEEN #{beginDate} and #{endDate}) 
 			and member_name like '%' || #{search_word} || '%'  
-			</when> 
-			<when test="search_type=='grade'"> 
-	    (MEMBER_DATE BETWEEN #{beginDate} and #{endDate}) 
-			and grade=#{search_word} 
-			</when> 
+			</when>  
 			</choose>
 			</where>
 				<![CDATA[

@@ -79,10 +79,8 @@
 												title="search_type">
 												<option value="member_id" selected="">ID</option>
 												<option value="member_name">이름</option>
-												<option value="grade">등급</option>
 											</select> <label for="search_type">검색옵션</label>
 										</div>
-
 									</div>
 
 									<div class="col-7 col-lg-7 ">
@@ -198,8 +196,18 @@
 																class="font-weight-medium text-muted mx-2 m-0-xs">
 																	${item.member_name} </a></td>
 															<td>${item.email}</td>
-															<td><small
-																class="badge badge-danger font-medium text-uppercase">우수회원</small>
+															<td>
+															<c:choose>
+															<c:when test="${item.member_id=='admin' }">
+															<small class="badge badge-pink font-medium text-uppercase"> 관리자</small>														
+															</c:when>
+															<c:when test="${item.pre_score >10000}">															
+															<small class="badge badge-danger font-medium text-uppercase">우수회원</small>
+															</c:when>
+															<c:otherwise>
+															<small class="badge badge-primary font-medium text-uppercase">일반회원</small>															
+															</c:otherwise>															
+															</c:choose>
 															</td>
 
 															<!-- 상태 -->
