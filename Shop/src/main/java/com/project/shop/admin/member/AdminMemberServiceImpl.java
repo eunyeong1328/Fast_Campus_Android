@@ -2,7 +2,6 @@ package com.project.shop.admin.member;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,18 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 	private AdminMemberDAO adminMemberDAO;
 
 	public ArrayList<MemberVO> listMember(HashMap condMap) throws Exception{
-		return adminMemberDAO.listMember(condMap);
+		ArrayList<MemberVO> memberList = null;
+		System.out.println(condMap.get("search_daterange"));
+		if(condMap.get("search_daterange")==null) {			
+			memberList = adminMemberDAO.listMember(condMap);
+		} else {
+			String daterange = (String)condMap.get("search_daterange");
+			String[] date = daterange.split(" - ");
+			condMap.put("beginDate", date[0]);
+			condMap.put("endDate", date[1]);
+			memberList= adminMemberDAO.searchMember(condMap);
+		}
+		return memberList;
 	}
 
 	@Override
