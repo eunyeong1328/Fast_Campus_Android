@@ -4,6 +4,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.shop.member.MemberVO;
+
 @Repository
 public class PagingDAO {
 
@@ -20,8 +22,8 @@ public class PagingDAO {
 		return board.selectOne("mapper.board.getFAQCount");
 	}
 
-	public int getMemQCount() {
-		return board.selectOne("mapper.board.getMemQCount");
+	public int getMemQCount(MemberVO memberVO) {
+		return board.selectOne("mapper.board.getMemQCount", memberVO);
 	}
 	
 }

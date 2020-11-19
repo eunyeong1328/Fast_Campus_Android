@@ -50,6 +50,7 @@ public class MemberController extends BaseController{
          session = request.getSession();
          session.setAttribute("isLogOn", true);
          session.setAttribute("memberInfo",memberVO);
+         System.out.println("##session: " + session.getAttribute("isLogOn") + ", " + session.getAttribute("memberInfo"));
          
          String action=(String)session.getAttribute("action");
          if(action!=null && action.equals("/order/orderEachGoods.do")){

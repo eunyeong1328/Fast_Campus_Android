@@ -11,10 +11,10 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <c:if test='${not empty message }'>
-<script>
-	alert("아이디나  비밀번호가 틀립니다. 다시 로그인해주세요");
-</script>
-</c:if>
+		<script>
+			alert('${message}')
+		</script>
+	</c:if>
 </head>
 <body>
 

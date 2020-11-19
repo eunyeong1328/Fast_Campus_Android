@@ -2,10 +2,10 @@ package com.project.shop.view.board;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +17,7 @@ import com.project.shop.board.BoardService;
 import com.project.shop.board.BoardVO;
 import com.project.shop.board.paging.Paging;
 import com.project.shop.board.paging.PagingService;
+import com.project.shop.member.MemberVO;
 
 @Controller("boardController")
 @RequestMapping("/board")
@@ -28,18 +29,20 @@ public class BoardController {
 	private PagingService pagingService;
 	
 	Paging paging = new Paging();
-	Map<String, Integer> map = new HashMap<String, Integer>();
+	HashMap<String, Object> map = new HashMap<String, Object>();
 
 //	고객센터 notice-tab 페이지
 	@RequestMapping("/notice-tab.do")
 	public ModelAndView getNoticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
 		
 		getPaging(request, response);
 		mav.addObject("paging", paging);
+		
+		String message = "공지사항입니다";
+		mav.addObject("message", message);
 		
 		List<BoardVO> notice = boardService.getNoticeList(map);
 		mav.addObject("NoticeList", notice);
@@ -70,11 +73,20 @@ public class BoardController {
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
 		
-		getPaging(request, response);
-		mav.addObject("paging", paging);
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		
-		List<BoardVO> MemQ = boardService.getMemQList(map);
-		mav.addObject("MemQList", MemQ);
+		if (memberVO != null && memberVO.getMember_id() != null) {
+			getPaging(request, response);
+			mav.addObject("paging", paging);
+			map.put("member_id", memberVO.getMember_id());
+			List<BoardVO> MemQ = boardService.getMemQList(map);
+			mav.addObject("MemQList", MemQ);
+		} else {
+			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
+			mav.addObject("message", message);
+			mav.setViewName("/member/loginForm");
+		}
 		
 		return mav;
 	}
@@ -174,7 +186,8 @@ public class BoardController {
 	
 //	Paging
 	public void getPaging(HttpServletRequest request, HttpServletResponse response) {
-		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		String nowTab = request.getParameter("nowTab");
 		
 		if (nowTab == null || nowTab == "tab-1") {
@@ -185,7 +198,7 @@ public class BoardController {
 			paging.setTotalRecord(pagingService.getFAQCount());
 		} else if (nowTab.equals("tab-3")) {
 			paging.setNowTab(nowTab);
-			paging.setTotalRecord(pagingService.getMemQCount());
+			paging.setTotalRecord(pagingService.getMemQCount(memberVO));
 		}
 		
 //		전체 게시물의 수 구하기
@@ -215,9 +228,7 @@ public class BoardController {
 			paging.setEndPage(paging.getTotalPage());
 		}
 		
-		map.put("begin", paging.getBegin());
-		map.put("end", paging.getEnd());
-
+		map.put("paging", paging);
 	}
 	
 }

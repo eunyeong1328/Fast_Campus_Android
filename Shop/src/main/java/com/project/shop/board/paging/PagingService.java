@@ -1,5 +1,7 @@
 package com.project.shop.board.paging;
 
+import com.project.shop.member.MemberVO;
+
 public interface PagingService {
 	
 //	공지사항 글 개수 구하기
@@ -9,6 +11,6 @@ public interface PagingService {
 	int getFAQCount();
 
 //	MemQ 글 개수 구하기
-	int getMemQCount();
+	int getMemQCount(MemberVO memverVO);
 	
 }

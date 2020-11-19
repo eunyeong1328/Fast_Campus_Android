@@ -1,17 +1,17 @@
 package com.project.shop.board;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public interface BoardService {
 
 //	Notice List
-	List<BoardVO> getNoticeList(Map<String, Integer> map);
+	List<BoardVO> getNoticeList(HashMap<String, Object> map);
 //	FAQ List	
-	List<BoardVO> getFAQList(Map<String, Integer> map);
+	List<BoardVO> getFAQList(HashMap<String, Object> map);
 //	1:1 List
-	List<BoardVO> getMemQList(Map<String, Integer> map);
-	
+	List<BoardVO> getMemQList(HashMap<String, Object> map);
+
 //	Notice detail
 	BoardVO getNotice(BoardVO vo);
 //	FAQ detail
