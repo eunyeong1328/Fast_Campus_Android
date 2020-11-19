@@ -20,9 +20,11 @@
 		<result property="this_score" column="this_score" />
 		<result property="point" column="point" />
 		<result property="member_status" column="member_status" />
+		<result property="grade" column="grade" />
+		
 	</resultMap>	
 	
-	<!-- 회원목록: 1이랑 30 나중에 바꿔줘야함 -->
+	<!-- 회원목록 -->
 	<select id="listMember" resultMap="memberResult" parameterType="java.util.HashMap">
 	<![CDATA[
 		SELECT X.RNUM, X.*
@@ -35,7 +37,41 @@
 	WHERE ROWNUM <= 30 )X
 	WHERE X.RNUM >=1
 	]]>
+	</select>		
+	
+	<!-- 회원검색 -->
+	<select id="searchMember" resultMap="memberResult" parameterType="java.util.HashMap">
+	<![CDATA[
+		SELECT X.RNUM, X.*
+	FROM (
+	SELECT ROWNUM AS RNUM, A.*
+	FROM(
+	    SELECT *
+	    FROM MEMBER
+	    ]]>
+	    	<where>
+	    	<choose>
+	    	<when test="search_type=='member_id'"> 
+	    (MEMBER_DATE BETWEEN #{beginDate} and #{endDate}) 
+			and member_id like '%' || #{search_word} || '%'  
+			</when> 
+			<when test="search_type=='member_name'"> 
+	    	(MEMBER_DATE BETWEEN #{beginDate} and #{endDate}) 
+			and member_name like '%' || #{search_word} || '%'  
+			</when>  
+			</choose>
+			</where>
+				<![CDATA[
+	    ORDER BY MEMBER_DATE) A 
+	WHERE ROWNUM <= 30 )X 
+	WHERE X.RNUM >=1 
+	]]>
+
+	
 	</select>
+	
+	<!-- 회원등급 가져오기 -->
+	
 	
 	<!-- 회원상세 -->
 	    <select id="memberDetail" resultMap="memberResult"   parameterType="String"  >

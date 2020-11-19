@@ -7,7 +7,14 @@
 <%
   request.setCharacterEncoding("UTF-8");
 %>
-
+<script type="text/javascript">
+	function fn_search(frm){
+	    frm.method="post";
+	    frm.action="${contextPath}/admin/member/memberList.do";
+	    frm.submit();
+		
+	}
+</script>
 <body class="layout-admin aside-sticky header-sticky">
 
 	<div id="wrapper" class="d-flex align-items-stretch flex-column">
@@ -41,50 +48,55 @@
 
 						<!-- portlet : header -->
 						<div class="portlet-header border-bottom">
-							<form class="float-end row" method="get" action="#">
-								<!-- 옵션으로 검색 -->
-								<div class="row gutters-xs">
+						
+							<form name="search" method="post" class="float-end row">
+							
+							<!-- 날짜로 검색 -->
+								<div class="float-end col-6 col-lg-5">
+								
+									<input autocomplete="off" type="text" name="search_daterange" 
+										class="form-control rangepicker" data-placement="left"
+										data-ranges="true" data-date-start="2020/10/01"
+										data-date-format="YYYY/MM/DD"
+										data-quick-locale='{
+														"lang_apply"	: "선택",
+														"lang_cancel"	: "취소",
+														"lang_months" 	: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+														"lang_weekdays" : ["일", "월", "화", "수", "목", "금", "토"]
+													}'>
+													
 
-									<div class="col-5 col-lg-5">
+								</div>
+								<!-- 날짜로 검색 끝 -->
+							
+								<!-- 옵션으로 검색 -->
+								<div class="row gutters-xs col-6">
+
+									<div class="col-4 col-lg-4">
 
 										<div class="form-label-group mb-4">
-											<select id="search" class="form-control bs-select"
-												title="Bathrooms">
-												<option value="0" selected="">ID</option>
-												<option value="2">이름</option>
-												<option value="3">등급</option>
-											</select> <label for="s_baths">검색옵션</label>
+											<select name="search_type" id="search_type" class="form-control bs-select"
+												title="search_type">
+												<option value="member_id" selected="">ID</option>
+												<option value="member_name">이름</option>
+											</select> <label for="search_type">검색옵션</label>
 										</div>
-
 									</div>
 
-									<div class="col-12 col-lg-6">
+									<div class="col-7 col-lg-7 ">
 
-										<div class="form-label-group mb-4">
-											<input placeholder="Max. Price" id="s_max_price" type="text"
-												value="" class="form-control"> <label
-												for="s_max_price">입력</label>
+										<div class="form-label-group mb-4 row">
+											<input placeholder="검색" name="search_word" type="text"
+												value="" class="form-control col-9"> <label
+												for="s_max_price">검색</label>
+											<input class="btn btn-secondary col-3 fs--13" type="button"  value="검색" name="btn_search" style="padding:11px" onClick="fn_search(form)"  />
 										</div>
 
 									</div>
 
 								</div>
 								<!-- 옵션으로 검색 끝 -->
-								<!-- 날짜로 검색 -->
-								<div class="float-end col-6 col-lg-5">
-									<input autocomplete="off" type="text" name="search_daterange"
-										class="form-control rangepicker" data-placement="left"
-										data-ranges="true" data-date-start="2000/01/01"
-										data-date-format="YYYY/MM/DD"
-										data-quick-locale='{
-														"lang_apply"	: "검색",
-														"lang_cancel"	: "취소",
-														"lang_months" 	: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-														"lang_weekdays" : ["일", "월", "화", "수", "목", "금", "토"]
-													}'>
 
-								</div>
-								<!-- 날짜로 검색 끝 -->
 
 
 							</form>
@@ -184,8 +196,18 @@
 																class="font-weight-medium text-muted mx-2 m-0-xs">
 																	${item.member_name} </a></td>
 															<td>${item.email}</td>
-															<td><small
-																class="badge badge-danger font-medium text-uppercase">우수회원</small>
+															<td>
+															<c:choose>
+															<c:when test="${item.member_id=='admin' }">
+															<small class="badge badge-pink font-medium text-uppercase"> 관리자</small>														
+															</c:when>
+															<c:when test="${item.pre_score >10000}">															
+															<small class="badge badge-danger font-medium text-uppercase">우수회원</small>
+															</c:when>
+															<c:otherwise>
+															<small class="badge badge-primary font-medium text-uppercase">일반회원</small>															
+															</c:otherwise>															
+															</c:choose>
 															</td>
 
 															<!-- 상태 -->
