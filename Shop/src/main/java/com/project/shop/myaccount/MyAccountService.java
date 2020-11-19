@@ -1,10 +1,8 @@
 package com.project.shop.myaccount;
 
-public class MyAccountService {
+import com.project.shop.member.MemberVO;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
+public interface MyAccountService{
+	public MemberVO accountSettingsInfo(String member_id) throws Exception;
 
 }
