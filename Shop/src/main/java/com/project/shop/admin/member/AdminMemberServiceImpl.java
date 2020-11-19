@@ -19,7 +19,6 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 
 	public ArrayList<MemberVO> listMember(HashMap condMap) throws Exception{
 		ArrayList<MemberVO> memberList = null;
-		System.out.println(condMap.get("search_daterange"));
 		if(condMap.get("search_daterange")==null) {			
 			memberList = adminMemberDAO.listMember(condMap);
 		} else {

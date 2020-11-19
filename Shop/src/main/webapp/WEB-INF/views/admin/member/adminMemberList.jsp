@@ -9,11 +9,6 @@
 %>
 <script type="text/javascript">
 	function fn_search(frm){
-		if(frm.search_word.value==""){
-			alert("검색 단어를 입력하세요");
-			frm.search_word.focus();
-			return
-		}
 	    frm.method="post";
 	    frm.action="${contextPath}/admin/member/memberList.do";
 	    frm.submit();
@@ -55,6 +50,25 @@
 						<div class="portlet-header border-bottom">
 						
 							<form name="search" method="post" class="float-end row">
+							
+							<!-- 날짜로 검색 -->
+								<div class="float-end col-6 col-lg-5">
+								
+									<input autocomplete="off" type="text" name="search_daterange" 
+										class="form-control rangepicker" data-placement="left"
+										data-ranges="true" data-date-start="2020/10/01"
+										data-date-format="YYYY/MM/DD"
+										data-quick-locale='{
+														"lang_apply"	: "선택",
+														"lang_cancel"	: "취소",
+														"lang_months" 	: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+														"lang_weekdays" : ["일", "월", "화", "수", "목", "금", "토"]
+													}'>
+													
+
+								</div>
+								<!-- 날짜로 검색 끝 -->
+							
 								<!-- 옵션으로 검색 -->
 								<div class="row gutters-xs col-6">
 
@@ -84,21 +98,7 @@
 
 								</div>
 								<!-- 옵션으로 검색 끝 -->
-								<!-- 날짜로 검색 -->
-								<div class="float-end col-6 col-lg-5">
-									<input autocomplete="off" type="text" name="search_daterange"
-										class="form-control rangepicker" data-placement="left"
-										data-ranges="true" data-date-start="2020/01/01"
-										data-date-format="YYYY/MM/DD"
-										data-quick-locale='{
-														"lang_apply"	: "검색",
-														"lang_cancel"	: "취소",
-														"lang_months" 	: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-														"lang_weekdays" : ["일", "월", "화", "수", "목", "금", "토"]
-													}'>
 
-								</div>
-								<!-- 날짜로 검색 끝 -->
 
 
 							</form>
