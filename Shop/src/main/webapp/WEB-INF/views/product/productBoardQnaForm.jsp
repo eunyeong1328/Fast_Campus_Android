@@ -91,7 +91,7 @@
 											
 											<br><br>
 											<a href="${contextPath }/product/productBoardQnaForm.do?product_id=${vo.product_id}">
-												<button type="submit"" class="btn btn-purple btn-soft mb-1">
+												<button type="submit" class="btn btn-purple btn-soft mb-1">
 													문의등록
 												</button>
 											</a>

@@ -297,17 +297,17 @@
 						</ul>
 					</nav>
 				</div>
-<<<<<<< HEAD
+
 				<!-- pagination -->
 			</div>
 
 		</div>
 </section>
 <!-- / -->
-=======
+
 			</section>
 			<!-- / -->
 	
->>>>>>> branch 'ajinMain' of https://github.com/bitcamp170/web-project.git
+
 
 <script src="${contextPath}/resources/assets/js/core.min.js"></script>
