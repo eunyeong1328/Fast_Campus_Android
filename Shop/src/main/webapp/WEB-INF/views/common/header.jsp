@@ -525,7 +525,7 @@
 										aria-expanded="false">
 										<span class="fi fi-bars-2 fs--18" style="font-weight: 500;"/>
 										
-										&nbsp 전체 카테고리
+										&nbsp; 전체 카테고리
 									</a>
 
 									<div aria-labelledby="mainNavHome" class="dropdown-menu dropdown-menu-clean dropdown-menu-hover">

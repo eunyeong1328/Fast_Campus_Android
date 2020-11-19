@@ -134,7 +134,7 @@
 														alt="...">
 													-->
 										<img class="bg-suprime img-fluid rounded max-h-600"
-											src="${contextPath}/product/thumbnails.do?product_id=${vo.product_id}&product_category_num=${vo.product_category_num}ㅎㅎ">
+											src="${contextPath}/product/thumbnails.do?product_id=${vo.product_id}&product_category_num=${vo.product_category_num}">
 									</div>
 								</div>
 
@@ -368,27 +368,179 @@
 </section>
 <!-- /SPECIFICATIONS -->
 
+<!-- 상품 문의	Accordion -->
+
+<section class="border-top">
+	<div class="container">
+		<div class="accordion shadow-xs" id="accordionBottomBorder"
+			data-aos="fade-in" data-aos-delay="250">
+			<h2 class="h4 text-primary mb-4 mt-5">상품 문의 게시판</h2>
+			<p class="lead mb-5">
+				상품에 대한 문의를 남기는 공간입니다.<br>배송관련, 주문(취소/교환/환불)관련 문의는 1:1문의에 남겨주세요
+			</p>
+
+			<!-- 게시판 테이블  -->
+			<!-- 게시판 헤드 -->
+ 
+			<div class="card border-bottom bl-0 br-0 bt-0">
+				<div class="card-header b-0 p-0 border bg-transparent"
+					id="cleanHeadingBorder1">
+					<h2 class="mb-0">
+						<button style="background-color: lightgray;"
+							class="fs--18 btn btn-link btn-block btn-lg text-align-start text-decoration-none text-dark"
+							type="button">
+							<span style="display: inline-block; width: 10%;">글번호</span> <span
+								style="display: inline-block; width: 55%;">글제목</span> <span
+								style="display: inline-block; width: 15%;">작성자</span> <span
+								style="display: inline-block; width: 15%;">작성일</span>
+						</button>
+					</h2>
+				</div>
+			</div>
+
+			<!-- 게시판 바디 -->
+			
+			<c:if test="${empty qnaList }">
+				<div class="card border-bottom bl-0 br-0 bt-0">
+				<div class="card-header b-0 p-0 border bg-transparent"
+					id="cleanHeadingBorder1">
+					<h2 class="mb-0">
+						<button 
+							class="fs--18 btn btn-link btn-block btn-lg text-align-start text-decoration-none text-dark"
+							type="button">
+							<span>등록된 게시글이 없습니다.</span> 
+						</button>
+					</h2>
+				</div>
+			</div>
+			</c:if>
+			
+			<c:if test="${not empty qnaList }">
+			<c:forEach var="qna" items="${qnaList}" varStatus="loop">
+				<div class="card border-bottom bl-0 br-0 bt-0">
+				<div class="card-header b-0 p-0 border bg-transparent"
+					id="cleanHeadingBorder2">
+					<h2 class="mb-0">
+						<button
+							class="fs--18 btn btn-link btn-block btn-lg text-align-start text-decoration-none text-dark collapsed"
+							type="button" data-toggle="collapse"
+							data-target="#borderCollapse2" aria-expanded="false"
+							aria-controls="borderCollapse2">
+							<span style="display: inline-block; width: 10%;">${qna.product_qna_num }</span> 
+							<span style="display: inline-block; width: 55%;">${qna.title } </span> 
+							<span style="display: inline-block; width: 15%;">${qna.member_id }</span>
+							<span style="display: inline-block; width: 15%;">${qna.reg_date }</span> 
+							<span class="group-icon float-end"> 
+							<i class="fi fi-arrow-start-slim"></i> 
+							<i class="fi fi-arrow-down-slim"></i>
+							</span>
+						</button>
+					</h2>
+				</div>
+
+				<div id="borderCollapse2" class="collapse"
+					aria-labelledby="cleanHeadingBorder2"
+					data-parent="#accordionBottomBorder">
+					<div class="card-body">
+						<p class="lead">${qna.contents }</p>
+					</div>
+				</div>
+			</div>
+			</c:forEach>
+			</c:if>
+		</div>
+		
+		<!-- 글쓰기 -->
+		<div>
+			<br><br>
+			<a href="${contextPath }/product/productBoardQnaForm.do?product_id=${vo.product_id}">
+				<button style="float: right;"type="button" class="btn btn-purple btn-soft mb-1">
+					상품문의
+				</button>
+			</a> 
+			<br><br>
+		</div>
+		<!-- 글쓰기 -->
+		
+		
+		
+		<!-- pagination -->
+							<div>
+							<nav aria-label="pagination" class="mt-5">
+								<ul class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
+								<%--[이전으로] 사용불가 또는 안보이게 : 첫번째 블록인경우 --%>
+								<c:if test="${pvo.beginPage == 1}">
+									<li class="page-item disabled">
+										<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+									</li>
+								</c:if>
+								<c:if test="${pvo.beginPage != 1}">	
+									<li class="page-item">
+										<a class="page-link" href="${contextPath}/product/productDetail.do?product_id=${vo.product_id }&cPage=${pvo.beginPage - 1 }">Previous</a>
+									</li>
+								</c:if>
+								
+								<%-- 페이지 표시(시작페이지~끝페이지) --%>
+								<c:forEach var="pageNo" begin="${pvo.beginPage }" end="${pvo.endPage }">
+								<c:if test="${pageNo == pvo.nowPage }">
+									<li class="page-item active">
+										<a class="page-link" href="#">${pageNo } <span class="sr-only">??</span></a>
+									</li>
+								</c:if>
+								<c:if test="${pageNo != pvo.nowPage }">
+									<li class="page-item" aria-current="page">
+										<a class="page-link" href="${contextPath}/product/productDetail.do?product_id=${vo.product_id }&cPage=${pageNo}">${pageNo }</a>
+									</li>
+								</c:if>
+								</c:forEach>
+								
+								<%--[다음으로] 사용여부 처리 --%>
+								<c:if test="${pvo.endPage >= pvo.totalPage }">	
+									<li class="page-item disabled">
+										<a class="page-link">다음으로 </a>
+									</li>
+								</c:if> 
+								
+								<c:if test="${pvo.endPage < pvo.totalPage }">
+								
+									<li class="page-item">
+										<a class="page-link" href="${contextPath}/product/productDetail.do?product_id=${vo.product_id }&cPage=${pvo.endPage +1}">Next</a>
+									</li>
+								</c:if>
+								</ul>
+							</nav>
+							</div>
+							<!-- pagination -->
+		
+	</div>
+</section>
+
 <!--  상품 문의 qna -->
+<!-- 
 <section class="border-top">
 	
 	<div class="d-flex flex-fill container">
-
+ -->
 		<!-- MIDDLE -->
+<!--  	
 		<div id="middle" class="flex-fill">
 
 			<div class="page-title bg-transparent b-0">
 				<!-- h1 고객센터 -->
+<!-- 
 				<h1 class="h4 mt-4 mb-0 px-3">상품문의... mm</h1>
 			</div>
 
 			<div class="clearfix">
 				<div role="tabpanel">
-
+ -->
 					<!-- Nav tabs -->
+<!-- 
 					<div class="container">
-
+ -->
 
 						<!-- tab-1 -->
+<!-- 
 						<div id="tab-1" class="tab-content current">
 
 							<h3 class="joy-table-title">
@@ -434,163 +586,24 @@
 							</table>
 							
 						</div>
+ -->		 
 						<!-- tab-1 end -->
-
+<!--  
 					</div>
+-->
 					<!-- Nav tabs end-->
-
+<!--  
 				</div>
 
 			</div>
 
 		</div>
+-->		 
 		<!-- MiDDLE end -->
+<!--	
 </section>
-<!--
-						Accordion
-					-->
-					<div class="accordion shadow-xs" id="accordionBottomBorder" data-aos="fade-in" data-aos-delay="250">
 
-						<div class="card border-bottom bl-0 br-0 bt-0">
-							<div class="card-header b-0 p-0 border bg-transparent" id="cleanHeadingBorder1">
-								<h2 class="mb-0">
-									<button class="fs--18 btn btn-link btn-block btn-lg text-align-start text-decoration-none text-dark" type="button" data-toggle="collapse" data-target="#borderCollapse1" aria-expanded="true" aria-controls="borderCollapse1">
-										Do I have a business email address?
-										<span class="group-icon float-end">
-											<i class="fi fi-arrow-start-slim"></i>
-											<i class="fi fi-arrow-down-slim"></i>
-										</span>
-									</button>
-								</h2>
-							</div>
+  -->	
 
-							<div id="borderCollapse1" class="collapse show" aria-labelledby="cleanHeadingBorder1" data-parent="#accordionBottomBorder">
-								<div class="card-body">
-									<p class="lead">
-
-										We are not able to offer you a dedicated email service for a custom email address like office@mydomain.com at this time. 
-										An easy way to create your own business email address is using a cheap hosting plan. <a href="#!">Here is an informative guide</a>.
-
-									</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="card border-bottom bl-0 br-0 bt-0">
-							<div class="card-header b-0 p-0 border bg-transparent" id="cleanHeadingBorder2">
-								<h2 class="mb-0">
-									<button class="fs--18 btn btn-link btn-block btn-lg text-align-start text-decoration-none text-dark collapsed" type="button" data-toggle="collapse" data-target="#borderCollapse2" aria-expanded="false" aria-controls="borderCollapse2">
-										Do I have a traffic limit?
-										<span class="group-icon float-end">
-											<i class="fi fi-arrow-start-slim"></i>
-											<i class="fi fi-arrow-down-slim"></i>
-										</span>
-									</button>
-								</h2>
-							</div>
-
-							<div id="borderCollapse2" class="collapse" aria-labelledby="cleanHeadingBorder2" data-parent="#accordionBottomBorder">
-								<div class="card-body">
-									<p class="lead">
-										No, there is no such thing like "traffic limit" or "order limit".
-									</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="card border-bottom bl-0 br-0 bt-0">
-							<div class="card-header b-0 p-0 border bg-transparent" id="cleanHeadingBorder3">
-								<h2 class="mb-0">
-									<button class="fs--18 btn btn-link btn-block btn-lg text-align-start text-decoration-none text-dark collapsed" type="button" data-toggle="collapse" data-target="#shadowCollapse3" aria-expanded="false" aria-controls="shadowCollapse3">
-										Can I upgrade my plan later?
-										<span class="group-icon float-end">
-											<i class="fi fi-arrow-start-slim"></i>
-											<i class="fi fi-arrow-down-slim"></i>
-										</span>
-									</button>
-								</h2>
-							</div>
-
-							<div id="shadowCollapse3" class="collapse" aria-labelledby="cleanHeadingBorder3" data-parent="#accordionBottomBorder">
-								<div class="card-body">
-									<p class="lead">
-										Sure! You can upgrade or downgrade your plan.
-									</p>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="card border-bottom bl-0 br-0 bt-0">
-							<div class="card-header b-0 p-0 border bg-transparent" id="cleanHeadingBorder4">
-								<h2 class="mb-0">
-									<button class="fs--18 btn btn-link btn-block btn-lg text-align-start text-decoration-none text-dark collapsed" type="button" data-toggle="collapse" data-target="#shadowCollapse4" aria-expanded="false" aria-controls="shadowCollapse4">
-										Can I upgrade my plan later?
-										<span class="group-icon float-end">
-											<i class="fi fi-arrow-start-slim"></i>
-											<i class="fi fi-arrow-down-slim"></i>
-										</span>
-									</button>
-								</h2>
-							</div>
-
-							<div id="shadowCollapse4" class="collapse" aria-labelledby="cleanHeadingBorder4" data-parent="#accordionBottomBorder">
-								<div class="card-body">
-									<p class="lead">
-										Sure! You can upgrade or downgrade your plan.
-									</p>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="card border-bottom bl-0 br-0 bt-0">
-							<div class="card-header b-0 p-0 border bg-transparent" id="cleanHeadingBorder5">
-								<h2 class="mb-0">
-									<button class="fs--18 btn btn-link btn-block btn-lg text-align-start text-decoration-none text-dark collapsed" type="button" data-toggle="collapse" data-target="#shadowCollapse5" aria-expanded="false" aria-controls="shadowCollapse5">
-										What happens if prices goes up?
-										<span class="group-icon float-end">
-											<i class="fi fi-arrow-start-slim"></i>
-											<i class="fi fi-arrow-down-slim"></i>
-										</span>
-									</button>
-								</h2>
-							</div>
-
-							<div id="shadowCollapse5" class="collapse" aria-labelledby="cleanHeadingBorder5" data-parent="#accordionBottomBorder">
-								<div class="card-body">
-									<p class="lead">
-										You keep the intial plan price for your existing account. If you open a new account, the new price is applied.
-									</p>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="card b-0">
-							<div class="card-header b-0 p-0 border bg-transparent" id="cleanHeadingBorder6">
-								<h2 class="mb-0">
-									<button class="fs--18 btn btn-link btn-block btn-lg text-align-start text-decoration-none text-dark collapsed" type="button" data-toggle="collapse" data-target="#shadowCollapse6" aria-expanded="false" aria-controls="shadowCollapse6">
-										Can I transfer/sell my account?
-										<span class="group-icon float-end">
-											<i class="fi fi-arrow-start-slim"></i>
-											<i class="fi fi-arrow-down-slim"></i>
-										</span>
-									</button>
-								</h2>
-							</div>
-
-							<div id="shadowCollapse6" class="collapse" aria-labelledby="cleanHeadingBorder6" data-parent="#accordionBottomBorder">
-								<div class="card-body">
-									<p class="lead">
-										Sure! You can transfer or sell your account.
-									</p>
-								</div>
-							</div>
-						</div>
-
-					</div>
-
-
-<script src="assets/js/core.min.js"></script>
+<script src="${contextPath}/resources/assets/js/core.min.js"></script>
 

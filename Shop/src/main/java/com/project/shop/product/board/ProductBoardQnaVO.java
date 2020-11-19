@@ -2,7 +2,10 @@ package com.project.shop.product.board;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+
 //상품문의 
+@Component
 public class ProductBoardQnaVO {
 
 	private int product_qna_num;// 상품 질문 번호
@@ -15,13 +18,18 @@ public class ProductBoardQnaVO {
 	private Date reg_date;// 등록 날짜
 	private int views; // 조회수
 	private int parent_num; // 부모글 번호
-
+	private int rowNum;
+	
 	public ProductBoardQnaVO() {
 
 	}
 
+	
+	
+	
 	public ProductBoardQnaVO(int product_qna_num, String product_id, String member_id, String title, String contents,
-			String image, int qna_category_num, Date reg_date, int views, int parent_num) {
+			String image, int qna_category_num, Date reg_date, int views, int parent_num, int rowNum) {
+		super();
 		this.product_qna_num = product_qna_num;
 		this.product_id = product_id;
 		this.member_id = member_id;
@@ -32,6 +40,18 @@ public class ProductBoardQnaVO {
 		this.reg_date = reg_date;
 		this.views = views;
 		this.parent_num = parent_num;
+		this.rowNum = rowNum;
+	}
+
+
+
+
+	public int getRowNum() {
+		return rowNum;
+	}
+
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
 	}
 
 	public int getproduct_qna_num() {

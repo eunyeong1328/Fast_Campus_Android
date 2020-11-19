@@ -10,6 +10,8 @@ public interface ProductService {
 	public List<ProductVO> productOption(String product_id) throws Exception;
 	public String productCategoryName(int productCategoryNum) throws Exception;
 	public int getTotalCount(int productCategoryNum) throws Exception;
+	public Paging pagingInfo(int productCategoryNum, String cPage) throws Exception;
+	
 	//상연
 	public List<ProductVO> bestList();
 	public List<ProductVO> newList();

@@ -17,6 +17,7 @@
 		<result property="reg_date" column="reg_date" />
 		<result property="views" column="views"/>
 		<result property="parent_num" column="parent_num" />
+		<result property="rowNum" column="listNum"/>
 	</resultMap>	
 	
 	<!-- 아진 -->
@@ -24,7 +25,7 @@
         <![CDATA[
         	SELECT *
         	FROM ( SELECT ROWNUM R_NUM, P.*
-        			FROM (SELECT * FROM product_qna WHERE product_id=#{product_id} 
+        			FROM (SELECT ROWNUM listNum, q.*  FROM product_qna q WHERE product_id=#{product_id} 
         					ORDER BY product_qna_num desc ) P )
 	  		WHERE R_NUM BETWEEN #{begin} and #{end}
 	  	]]>
