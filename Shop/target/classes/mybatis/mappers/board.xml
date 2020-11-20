@@ -64,6 +64,7 @@
 		FROM MEMBER_QNA Q, QNA_CATEGORY C 
 		WHERE Q.qna_category_num = C.qna_category_num 
 		and Q.member_qna_num = #{member_qna_num}
+		and Q.member_id = #{member_id}
 	</select>
 
 	<!-- 1:1 문의 insert문 -->
@@ -82,12 +83,13 @@
 		SET TITLE = #{title}, 
 		CONTENTS = #{contents}, 
 		IMAGE = #{image}, 
-		QNA_CATEGORY_NUM = 1, 
+		QNA_CATEGORY_NUM = #{qna_category_num}, 
 		ORDER_NUM = #{order_num}, 
 		EMAIL = #{email}, 
 		PHONE = #{phone}, 
 		REG_DATE = SYSDATE 
 		WHERE MEMBER_QNA_NUM = #{member_qna_num}
+		AND MEMBER_ID = #{member_id}
 	</update>
 
 	<!-- 공지사항 게시글 갯수 조회 -->

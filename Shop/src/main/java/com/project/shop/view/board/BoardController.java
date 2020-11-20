@@ -68,7 +68,6 @@ public class BoardController {
 	public ModelAndView getMemQList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
-		mav.setViewName(viewName);
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
@@ -79,6 +78,7 @@ public class BoardController {
 			map.put("member_id", memberVO.getMember_id());
 			List<BoardVO> MemQ = boardService.getMemQList(map);
 			mav.addObject("MemQList", MemQ);
+			mav.setViewName(viewName);
 		} else {
 			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
 			mav.addObject("message", message);
@@ -98,9 +98,7 @@ public class BoardController {
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		
 		if (memberVO != null && memberVO.getMember_id() != null) {
-			if (viewName.equals("/board/memQ-insert")) {
-				mav.setViewName(viewName);
-			}
+			mav.setViewName(viewName);
 			String action = (String) request.getParameter("action");
 			if (action != null && action.equals("memQ-insert")) {
 				vo.setMember_id(memberVO.getMember_id());
@@ -119,23 +117,29 @@ public class BoardController {
 //	1:1 문의 글 수정
 	@RequestMapping(value="/memQ-update.do", method={RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView memQUpdate(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		
-		BoardVO memQ = boardService.getMemQ(vo);
-		mav.addObject("memQ", memQ);
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		
-		if (viewName.equals("/board/memQ-update")) {
+		if (memberVO != null && memberVO.getMember_id() != null) {
+			vo.setMember_id(memberVO.getMember_id());
+			BoardVO memQ = boardService.getMemQ(vo);
+			mav.addObject("memQ", memQ);
 			mav.setViewName(viewName);
+			
+			String action = (String) request.getParameter("action");
+			if (action != null && action.equals("memQ-update")) {
+				vo.setMember_id(memberVO.getMember_id());
+				boardService.memQUpdate(vo);
+				mav.setViewName("redirect:memQ.do?member_qna_num=" + vo.getMember_qna_num());
+			}
+		} else {
+			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
+			mav.addObject("message", message);
+			mav.setViewName("/member/loginForm");
 		}
-		
-		String action = (String) request.getParameter("action");
-		
-		if (action != null && action.equals("memQ-update")) {
-			boardService.memQUpdate(vo);
-			mav.setViewName("redirect:memQ.do?nowTab=tab-3&member_qna_num=" + memQ.getMember_qna_num());
-		} 
 		
 		return mav;
 	}
@@ -174,15 +178,25 @@ public class BoardController {
 	@RequestMapping("/memQ.do")
 	public ModelAndView getMemQ(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		
 		String viewName = (String) request.getAttribute("viewName");
-		mav.setViewName(viewName);
 		
-		getPaging(request, response);
-		mav.addObject("paging", paging);
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		
-		BoardVO memQ = boardService.getMemQ(vo);
-		mav.addObject("memQ", memQ);
+		if (memberVO != null && memberVO.getMember_id() != null) {
+			getPaging(request, response);
+			mav.addObject("paging", paging);
+			
+			vo.setMember_id(memberVO.getMember_id());
+			BoardVO memQ = boardService.getMemQ(vo);
+			
+			mav.addObject("memQ", memQ);
+			mav.setViewName(viewName);
+		} else {
+			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
+			mav.addObject("message", message);
+			mav.setViewName("/member/loginForm");
+		}
 		
 		return mav;
 	}

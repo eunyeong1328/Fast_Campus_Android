@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.shop.board.BoardService;
 import com.project.shop.board.BoardVO;
+import com.project.shop.member.MemberVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
