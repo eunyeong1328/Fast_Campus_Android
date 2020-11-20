@@ -199,4 +199,9 @@ public class ProductServiceImpl implements ProductService{
 		productDAO.deleteOption(name);
 	}
 
+	@Override
+	public void insertOption(ProductVO vo ) {
+		productDAO.insertOption(vo);
+	}
+
 }

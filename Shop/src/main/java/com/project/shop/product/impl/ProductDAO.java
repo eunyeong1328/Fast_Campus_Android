@@ -85,4 +85,7 @@ public class ProductDAO {
 	public void deleteOption(String name) {
 		sqlSession.delete("mappers.product.deleteProductOptionName",name);
 	}
+	public void insertOption(ProductVO vo) {
+		sqlSession.insert("mappers.product.insertProductOption",vo);
+	}
 }

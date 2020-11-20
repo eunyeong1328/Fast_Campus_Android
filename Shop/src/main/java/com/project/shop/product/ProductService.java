@@ -24,5 +24,5 @@ public interface ProductService {
 	public void updateProduct(ProductVO vo, MultipartHttpServletRequest request);
 	public List<ProductVO> loadOption(String request);
 	public void deleteOption(String name);
-	
+	public void insertOption(ProductVO vo);
 }

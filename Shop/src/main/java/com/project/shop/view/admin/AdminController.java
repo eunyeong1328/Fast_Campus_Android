@@ -120,13 +120,16 @@ public class AdminController extends BaseController {
 		
 	}
 	
-//	@RequestMapping(value = "/productOptionAdd.do",method=RequestMethod.GET)
-//	public ModelAndView productOptionAdd(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
-//			throws Exception {
-//		
-//		mav.addObject("list",service.loadOption(id));
-//		mav.setViewName("/admin/productOption");
-//		return mav;
-//	}
+	@RequestMapping(value = "/productOptionAdd.do",method=RequestMethod.GET)
+	public ModelAndView productOptionAdd(ProductVO vo,ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		System.out.println(vo);
+		if(vo != null) {
+			service.insertOption(vo);
+		}
+		mav.addObject("list",service.loadOption(request.getParameter("product_id")));
+		mav.setViewName("/admin/productOption");
+		return mav;
+	}
 	
 }
