@@ -32,6 +32,10 @@
 
 		<link rel="manifest" href="${contextPath}/resources/assets/images/manifest/manifest.json">
 		<meta name="theme-color" content="#377dff">
+		
+		<!-- 구글 로그인 api -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+  <script src="https://apis.google.com/js/api:client.js"></script>
 
 		<!--font-->
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
@@ -45,6 +49,7 @@
 			<article>
 			 	<tiles:insertAttribute name="body" />
 			</article>
+			<tiles:insertAttribute name="footer"/>
 		</div>
 </body>
         
