@@ -52,7 +52,7 @@
 
 					<div class="form-label-group mb-3">
 						<input placeholder="Company Name" id="addr_company_name" name="addr_company_name" type="text" class="form-control">
-						<label for="addr_company_name">Company Name</label>
+						<label for="addr_company_name">한글 인코딩 작업</label>
 					</div>
 
 				</div>
