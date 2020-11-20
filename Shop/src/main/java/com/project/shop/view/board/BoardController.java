@@ -1,5 +1,6 @@
 package com.project.shop.view.board;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.shop.board.BoardService;
@@ -98,13 +100,23 @@ public class BoardController {
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		
 		if (memberVO != null && memberVO.getMember_id() != null) {
+			
 			mav.setViewName(viewName);
 			String action = (String) request.getParameter("action");
+			
 			if (action != null && action.equals("memQ-insert")) {
+				MultipartFile file = vo.getFile();
+				String image = file.getOriginalFilename();
+				String fileSavePath = "C:\\MyStudy\\Bit_WebProject\\web-project\\Shop\\src\\main\\webapp\\resources\\memQ-file\\";
+				System.out.println(fileSavePath);
+				file.transferTo(new File(fileSavePath + image));
+				
+				vo.setImage(image);
 				vo.setMember_id(memberVO.getMember_id());
 				boardService.memQInsert(vo);
 				mav.setViewName("redirect:memberQ-tab.do?nowTab=tab-3");
 			}
+			
 		} else {
 			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
 			mav.addObject("message", message);
@@ -218,6 +230,9 @@ public class BoardController {
 			paging.setTotalRecord(pagingService.getMemQCount(memberVO));
 		}
 		
+//		전체 게시물 끝글번호 setter (미완성)
+//		paging.setListEndNum(listEndNum);
+		
 //		전체 게시물의 수 구하기
 		paging.setTotalPage();
 		
@@ -232,7 +247,7 @@ public class BoardController {
 //		begin, end
 		paging.setEnd(paging.getNowPage() * paging.getNumPerPage());
 		paging.setBegin(paging.getEnd() - paging.getNumPerPage() + 1);
-		
+
 //		블록
 		int nowPage = paging.getNowPage();
 		int currentBlock = (nowPage - 1) / paging.getPagePerBlock() + 1;

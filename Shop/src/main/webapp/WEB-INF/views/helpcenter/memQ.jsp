@@ -48,7 +48,7 @@
                                             ${memQ.contents}
                                         </p>
                                         <div class="detail-image">
-                                        	${memQ.image }
+                                        	<img src="C:/MyStudy/Bit_WebProject/web-project/Shop/src/main/webapp/resources/memQ-file/${memQ.image}">
                                         </div>
                                     </div>
                                     <div class="prev-next-list">
