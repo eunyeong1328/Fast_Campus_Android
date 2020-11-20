@@ -2,15 +2,36 @@ package com.project.shop.board;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardVO {
 
-//	공지사항
+//	파일 업로드(이미지)
+	private MultipartFile file;
+	private String image;
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	//	공지사항
 	private int notice_num;
 	private String title;
 	private String contents;
 	private Date reg_date;
 	private int views;
-	private String image;
 
 //	FAQ
 	private int faq_num;
@@ -78,14 +99,6 @@ public class BoardVO {
 		this.views = views;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
 	public int getFaq_num() {
 		return faq_num;
 	}
@@ -97,7 +110,11 @@ public class BoardVO {
 	public int getQna_category_num() {
 		return qna_category_num;
 	}
-
+	
+	public void setQna_category_num(String qna_category_num) {
+		this.qna_category_num = Integer.parseInt(qna_category_num);
+	}
+	
 	public void setQna_category_num(int qna_category_num) {
 		this.qna_category_num = qna_category_num;
 	}
