@@ -28,6 +28,26 @@ public class Paging {
 	private int beginPage = 0; // 현재 블록의 시작 페이지 번호
 	private int endPage = 0; // 현재 블록의 끝 페이지 번호
 
+//	게시글 시작 글번호와 끝 글번호 (시작글번호 default 1)
+	private int listBeginNum = 1;
+	private int listEndNum = 0;
+	
+	public int getListBeginNum() {
+		return listBeginNum;
+	}
+
+	public void setListBeginNum(int listBeginNum) {
+		this.listBeginNum = listBeginNum;
+	}
+
+	public int getListEndNum() {
+		return listEndNum;
+	}
+
+	public void setListEndNum(int listEndNum) {
+		this.listEndNum = listEndNum;
+	}
+
 //	전체 페이지 갯수 구하기
 //	totalRecord 값을 페이지당 표시할 글의 개수로 나누고
 //	나머지가 있으면 페이지 하나 더 추가

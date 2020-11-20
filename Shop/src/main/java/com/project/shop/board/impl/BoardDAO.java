@@ -1,13 +1,14 @@
 package com.project.shop.board.impl;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.shop.board.BoardVO;
+import com.project.shop.member.MemberVO;
 
 @Repository
 public class BoardDAO {
@@ -15,7 +16,7 @@ public class BoardDAO {
 	@Autowired
 	private SqlSessionTemplate board;
 	
-	public List<BoardVO> getNoticeList(Map<String, Integer> map) {
+	public List<BoardVO> getNoticeList(HashMap<String, Object> map) {
 		return board.selectList("mapper.board.getNoticeList", map);
 	}
 	
@@ -23,7 +24,7 @@ public class BoardDAO {
 		return board.selectOne("mapper.board.getNotice", vo);
 	}
 
-	public List<BoardVO> getFAQList(Map<String, Integer> map) {
+	public List<BoardVO> getFAQList(HashMap<String, Object> map) {
 		return board.selectList("mapper.board.getFAQList", map);
 	}
 	
@@ -31,11 +32,7 @@ public class BoardDAO {
 		return board.selectOne("mapper.board.getFAQ", vo);
 	}
 
-	public List<BoardVO> getProQList(Map<String, Integer> map) {
-		return board.selectList("mapper.board.getProQList", map);
-	}
-
-	public List<BoardVO> getMemQList(Map<String, Integer> map) {
+	public List<BoardVO> getMemQList(HashMap<String, Object> map) {
 		return board.selectList("mapper.board.getMemQList", map);
 	}
 

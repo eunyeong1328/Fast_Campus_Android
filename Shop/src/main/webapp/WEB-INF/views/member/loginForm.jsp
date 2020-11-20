@@ -10,11 +10,11 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<c:if test='${not empty message }'>
-<script>
-	alert('${message}');
-</script>
-</c:if>
+	<c:if test='${not empty message }'>
+		<script>
+			alert('${message}')
+		</script>
+	</c:if>
 </head>
 <body>
 
