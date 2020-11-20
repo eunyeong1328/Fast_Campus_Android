@@ -126,7 +126,7 @@
 										name="password" type="password" class="form-control">
 									<label for="account_password">비밀번호</label>
 								</div>
-								<a href="signin-password.jsp" class="btn fs--12"> 비밀번호 찾기 </a>
+								<a href="${contextPath}/member/signin-password.do" class="btn fs--12"> 비밀번호 찾기 </a>
 							</div>
 
 
