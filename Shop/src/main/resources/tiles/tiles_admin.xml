@@ -8,24 +8,33 @@
 	<definition name="adminLayout"	
 		template="/WEB-INF/views/common/admin/admin-layout.jsp">
 		<put-attribute name="title" value="쩝쩝박사 :: 관리자페이지" />
-		<put-attribute name="aside"
-			value="/WEB-INF/views/common/admin/admin-aside.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/common/admin/admin-header.jsp" />
+		<put-attribute name="aside" value="/WEB-INF/views/common/admin/admin-aside.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/common/admin/admin-footer.jsp" />
 	</definition>
 
 	<!-- 관리자 메인(대시보드) 레이아웃 -->
 	  <definition name="/admin/main" extends="adminLayout">
+	  <put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-mainTag.jsp"/>
          <put-attribute name="body" value="/WEB-INF/views/admin/admin-main.jsp" />
       </definition>  
       
       <!-- 관리자 회원목록 레이아웃 -->
 	  <definition name="/admin/member/memberList" extends="adminLayout">
+	  	<put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-boardTag.jsp"/>
          <put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberList.jsp" />
       </definition>  
       
       <!-- 관리자 회원상세 레이아웃 -->
-      	  <definition name="/admin/member/memberDetail" extends="adminLayout">
+      <definition name="/admin/member/memberDetail" extends="adminLayout">
+      	 <put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-boardTag.jsp"/>
          <put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberDetail.jsp" />
       </definition>  
+      
+      <!-- joy.관리자 공지사항 crud -->
+      <definition name="/admin/noticeList" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/admin-noticeList.jsp" />
+      </definition>
       
 </tiles-definitions>

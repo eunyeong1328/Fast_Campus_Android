@@ -7,10 +7,6 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 
 
-<script>
-</script>
-
-<body>
 <!-- HEADER -->
 			<header id="header" class="shadow-xs">
 
@@ -640,5 +636,3 @@
 				
 			</header>
 			<!-- /HEADER -->
-</body>
-</html>
