@@ -1,19 +1,24 @@
 package com.project.shop.view.product;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.shop.common.base.BaseController;
+import com.project.shop.member.MemberVO;
 import com.project.shop.product.Paging;
 import com.project.shop.product.ProductService;
 import com.project.shop.product.ProductVO;
@@ -120,9 +125,52 @@ public class ProductController extends BaseController{
 	}
 
 	@RequestMapping(value="productBoardQnaForm.do")
-	public ModelAndView boardQnaForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView boardQnaForm(@RequestParam(value="product_id") String product_id,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView (viewName);
+
+		//세션 멤버정보 가져오기
+		HttpSession session = request.getSession();
+		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
+		MemberVO memberInfo =(MemberVO)session.getAttribute("memberInfo");
+		System.out.println("isLogOn : "+isLogOn);
+		if(isLogOn == null || isLogOn == false) {
+			mav.setViewName("/member/loginForm");
+		}else if(isLogOn == true) {
+			mav.addObject("memberInfo", memberInfo);
+			mav.addObject("product_id", product_id );
+		}
 		return mav;
 	}
-}
+
+	@RequestMapping(value="/addBoardQna.do", method= {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView addBoardQna(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception{
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map map = new HashMap();
+		
+		String product_id = null;
+		//일반타입 파라미터 얻어오기
+		Enumeration enu = multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+			String value = multipartRequest.getParameter(name);
+			map.put(name, value);
+			System.out.println("name :" + name +"//value : "+value);
+			if(name.equals("product_id")) {
+				product_id = multipartRequest.getParameter("product_id");
+			}
+		}
+		
+		
+		//파일타입 파라미터 얻어오기 - 추가 구현해야 함
+		
+		
+		productBoardService.addBoardQna(map);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/product/productDetail.do?product_id="+product_id);
+		return mav;
+	}
+	
+	
+} 

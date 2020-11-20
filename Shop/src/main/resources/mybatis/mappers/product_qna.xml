@@ -37,4 +37,15 @@
 		WHERE product_id = #{product_id}	
 	</select>
 	
+	<select id="selectQnaNo" resultType="int">
+		SELECT nvl(max(product_qna_num),0) from product_qna
+	</select>
+	
+	<insert id="insertBoardQna" parameterType="java.util.HashMap">
+		INSERT INTO PRODUCT_QNA VALUES ( 
+			#{product_qna_num}, #{product_id}, #{member_id},
+			#{title}, #{contents}, null, 3,
+			sysdate, 0, 0 
+		)
+	</insert>
 </mapper>
