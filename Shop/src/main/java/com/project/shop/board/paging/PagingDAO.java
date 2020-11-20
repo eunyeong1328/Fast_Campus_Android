@@ -20,10 +20,6 @@ public class PagingDAO {
 		return board.selectOne("mapper.board.getFAQCount");
 	}
 
-	public int getProQCount() {
-		return board.selectOne("mapper.board.getProQCount");
-	}
-
 	public int getMemQCount() {
 		return board.selectOne("mapper.board.getMemQCount");
 	}

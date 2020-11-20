@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers.product_qna">
+
+	<resultMap id="product_qnaResult" type="product_qnaVO">
+		<result property="product_qna_num" column="product_qna_num" />  
+		<result property="product_id" column="product_id" />
+		<result property="member_id" column="member_id" />
+		<result property="title" column="title" />
+		<result property="contents" column="contents" />
+		<result property="image" column="image" />
+		<result property="qna_category_num" column="qna_category_num" />
+		<result property="reg_date" column="reg_date" />
+		<result property="views" column="views"/>
+		<result property="parent_num" column="parent_num" />
+		<result property="rowNum" column="listNum"/>
+	</resultMap>	
+	
+	<!-- 아진 -->
+	<select id="selectProductQna" parameterType="java.util.HashMap" resultMap="product_qnaResult"   >
+        <![CDATA[
+        	SELECT *
+        	FROM ( SELECT ROWNUM R_NUM, P.*
+        			FROM (SELECT ROWNUM listNum, q.*  FROM product_qna q WHERE product_id=#{product_id} 
+        					ORDER BY product_qna_num desc ) P )
+	  		WHERE R_NUM BETWEEN #{begin} and #{end}
+	  	]]>
+	</select>
+	
+	<select id="totalCount" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM product_qna
+		WHERE product_id = #{product_id}	
+	</select>
+	
+</mapper>

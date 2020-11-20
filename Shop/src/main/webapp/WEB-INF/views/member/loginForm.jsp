@@ -12,7 +12,7 @@
 <head>
 <c:if test='${not empty message }'>
 <script>
-	alert("아이디나  비밀번호가 틀립니다. 다시 로그인해주세요");
+	alert('${message}');
 </script>
 </c:if>
 </head>

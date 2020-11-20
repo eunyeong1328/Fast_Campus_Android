@@ -36,11 +36,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getProQList(Map<String, Integer> map) {
-		return boardDAO.getProQList(map);
-	}
-
-	@Override
 	public List<BoardVO> getMemQList(Map<String, Integer> map) {
 		return boardDAO.getMemQList(map);
 	}
@@ -48,6 +43,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void memQInsert(BoardVO vo) {
 		boardDAO.memQInsert(vo);
+	}
+
+	@Override
+	public BoardVO getMemQ(BoardVO vo) {
+		return boardDAO.getMemQ(vo);
+	}
+
+	@Override
+	public void memQUpdate(BoardVO vo) {
+		boardDAO.memQUpdate(vo);
 	}
 
 }

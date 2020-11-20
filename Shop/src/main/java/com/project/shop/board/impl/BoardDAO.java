@@ -42,5 +42,13 @@ public class BoardDAO {
 	public void memQInsert(BoardVO vo) {
 		board.insert("mapper.board.memqInsert", vo);
 	}
+
+	public BoardVO getMemQ(BoardVO vo) {
+		return board.selectOne("mapper.board.getMemQ", vo);
+	}
+
+	public void memQUpdate(BoardVO vo) {
+		board.update("mapper.board.memqUpdate", vo);
+	}
 	
 }

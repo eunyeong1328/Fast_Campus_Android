@@ -135,12 +135,12 @@ body.layout-admin #footer a { color: #121212; }
     width: 20%;
 }
 
-.detail_div {
+.detail-contents {
     width: 100%;
     border-bottom: 2px solid #600080;
 }
 
-.detail_div p {
+.detail-contents p {
     margin: 0;
     padding: 20px;
     color: #333;
@@ -184,7 +184,17 @@ body.layout-admin #footer a { color: #121212; }
     text-decoration: none;
 }
 
+/* insert form css */
+#container div.memq-title {
+}
 
+#container div.memq-title p {
+    display: inline-block;
+}
+
+#container div.memq-title div.category-select {
+    display: inline-block;
+}
 
 
 

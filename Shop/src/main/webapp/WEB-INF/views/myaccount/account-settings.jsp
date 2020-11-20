@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"	isELIgnored="false"
 	%>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath }"  />
 <%
   request.setCharacterEncoding("UTF-8");
 %>
+<
 	<body>
 
 		<div id="wrapper">
@@ -242,8 +242,9 @@
 														<div class="col-12 col-sm-6 col-md-6">
 
 															<div class="form-label-group mb-3">
-																<input required placeholder="First Name" id="account_first_name" name="account_first_name" type="text" class="form-control">
-																<label for="account_first_name">이름</label>
+																<input required placeholder="First Name" id="account_first_name" name="account_first_name" 
+																type="text" class="form-control" value="${member_info.member_id}" >
+																<label for="account_first_name">아이디</label>
 															</div>
 
 														</div>
@@ -251,8 +252,9 @@
 														<div class="col-12 col-sm-6 col-md-6">
 
 															<div class="form-label-group mb-3">
-																<input required placeholder="Last Name" id="account_last_name" name="account_last_name" type="text" class="form-control">
-																<label for="account_last_name">성</label>
+																<input required placeholder="Last Name" id="account_last_name" name="account_last_name" 
+																type="text" class="form-control"  value="${member_info.member_name}">
+																<label for="account_last_name">이름</label>
 															</div>
 
 														</div>
@@ -264,7 +266,8 @@
 
 															<div class="input-group-over">
 																<div class="form-label-group mb-3">
-																	<input readonly placeholder="Email Address" id="account_email" name="account_email" type="email" class="form-control" value="john.doe@gmail.com">
+																	<input readonly placeholder="Email Address" id="account_email" name="account_email"
+																	 type="email" class="form-control" value="${member_info.email}">
 																	<label for="account_email">이메일 주소</label>
 																</div>
 
@@ -289,7 +292,8 @@
 														<div class="col-12 col-sm-6 col-md-6">
 
 															<div class="form-label-group mb-3">
-																<input required placeholder="Phone Number" id="account_phone" name="account_phone" type="text" class="form-control">
+																<input required placeholder="Phone Number" id="account_phone" 
+																name="account_phone" type="text" class="form-control"  value="${member_info.phone}">
 																<label for="account_phone">휴대폰 번호</label>
 															</div>
 
@@ -338,7 +342,8 @@
 
 														<div class="input-group-over">
 															<div class="form-label-group mb-3">
-																<input placeholder="Current Password" id="account_current_password" name="account_current_password" type="password" class="form-control">
+																<input placeholder="Current Password" id="account_current_password" 
+																name="account_current_password" type="password" class="form-control" value = "${member_info.password}">
 																<label for="account_current_password">현재 비밀번호</label>
 															</div>
 
@@ -422,7 +427,8 @@
 
 														<div class="input-group-over">
 															<div class="form-label-group mb-1">
-																<input placeholder="Current Password" id="account_del_current_password" name="account_current_password" type="password" class="form-control">
+																<input placeholder="Current Password" id="account_del_current_password" name="account_current_password"
+																 type="password" class="form-control" value= "${member_info.password }">
 																<label for="account_del_current_password">현재 비밀번호</label>
 															</div>
 
@@ -458,8 +464,8 @@
 
 										<div class="border-top pt-4 mt-1">
 
-											<button type="submit" class="btn btn-primary">
-												<i class="fi fi-check"></i>
+											<button type="submit" class="btn btn-purple fs--20">
+												<i class="fi fi-check "></i>
 												변경사항 저장
 											</button>
 
@@ -476,7 +482,7 @@
 									<h3 class="h5 clearfix mb-3 mt-3">
 
 										<a href="#" 
-											data-href="_ajax/modal_address.html" 
+											data-href="${contextPath}/resources/_ajax/modal_address.jsp" 
 											data-ajax-modal-size="modal-md"
 											data-ajax-modal-centered="false"
 											data-ajax-modal-backdrop="static"
@@ -498,11 +504,11 @@
 
 											<div class="col">
 
-												<p class="mb-0"><b>John Doe</b></p>
-												<p class="mb-0">Road 741, No.44</p>
-												<p class="mb-0">New York / United States</p>
-												<p class="mb-0">My Company</p>
-												<p class="mb-0">+01-785-388-9450</p>
+												<p class="mb-0"><b>우편번호 :</b> &nbsp;&nbsp;	<b>${member_info.zipNo}</b></p>
+												<p class="mb-0"><b>도로명 주소 :</b> &nbsp;&nbsp;	<b>${member_info.load_address}</b></p>
+												<p class="mb-0"><b>지번 주소 :</b> &nbsp;&nbsp;	<b>${member_info.jibun_address}</b></p>
+												<p class="mb-0"><b>나머지 주소 :</b> &nbsp;&nbsp;	<b>${member_info.rest_address}</b></p>
+												
 
 												<p class="mb-0 mt-2 text-success">
 													<i class="fi fi-check"></i> &nbsp; 
@@ -514,7 +520,7 @@
 											<div class="col-4 col-sm-3 col-md-3 col-lg-2">
 
 												<a href="#" 
-													data-href="_ajax/modal_address.html" 
+													data-href="${contextPath}/resources/_ajax/modal_address.jsp" 
 													data-ajax-modal-size="modal-md"
 													data-ajax-modal-centered="false"
 													data-ajax-modal-backdrop="static"
@@ -530,10 +536,10 @@
 													data-ajax-confirm-title="확인해주세요" 
 													data-ajax-confirm-body="확실합니까? 배송지에서 제거하시겠습니까??" 
 													data-ajax-confirm-btn-yes-class="btn-sm btn-danger" 
-													data-ajax-confirm-btn-yes-text="Yes, Remove" 
+													data-ajax-confirm-btn-yes-text="제거" 
 													data-ajax-confirm-btn-yes-icon="fi fi-check" 
 													data-ajax-confirm-btn-no-class="btn-sm btn-light" 
-													data-ajax-confirm-btn-no-text="Cancel" 
+													data-ajax-confirm-btn-no-text="취소" 
 													data-ajax-confirm-btn-no-icon="fi fi-close" 
 													class="js-ajax-confirm float-end btn btn-sm btn-block btn-light fs--14 mb-0 mt-2">
 													삭제
@@ -570,7 +576,7 @@
 											<div class="col-4 col-sm-3 col-md-3 col-lg-2">
 
 												<a href="#" 
-													data-href="_ajax/modal_address.html" 
+													data-href="_ajax/modal_address.jsp" 
 													data-ajax-modal-size="modal-md"
 													data-ajax-modal-centered="false"
 													data-ajax-modal-backdrop="static"
@@ -980,4 +986,5 @@
 		    
 		    
 		<script src="${contextPath}/resources/assets/js/core.min.js"></script>
+		
 	

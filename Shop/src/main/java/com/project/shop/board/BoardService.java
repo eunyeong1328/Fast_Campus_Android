@@ -5,25 +5,23 @@ import java.util.Map;
 
 public interface BoardService {
 
-//	공지사항 전체 불러오기
+//	Notice List
 	List<BoardVO> getNoticeList(Map<String, Integer> map);
-	
-//	공지사항 상세페이지
-	BoardVO getNotice(BoardVO vo);
-
-//	FAQ 전체 불러오기
+//	FAQ List	
 	List<BoardVO> getFAQList(Map<String, Integer> map);
-	
-//	FAQ 상세페이지
-	BoardVO getFAQ(BoardVO vo);
-	
-//	상품문의 전체 불러오기
-	List<BoardVO> getProQList(Map<String, Integer> map);
-
-//	회원문의 전체 불러오기
+//	1:1 List
 	List<BoardVO> getMemQList(Map<String, Integer> map);
+	
+//	Notice detail
+	BoardVO getNotice(BoardVO vo);
+//	FAQ detail
+	BoardVO getFAQ(BoardVO vo);
+//	1:1 detail
+	BoardVO getMemQ(BoardVO vo);
 	
 //	회원문의 작성
 	void memQInsert(BoardVO vo);
+//	회원문의 수정
+	void memQUpdate(BoardVO vo);
 	
 }

@@ -22,4 +22,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/product/productDetail.jsp" />
 	</definition>
+	
+	<definition name="/product/productBoardQnaForm" extends="baseLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/productBoardQnaForm.jsp" />
+	</definition>
+	
 </tiles-definitions>
