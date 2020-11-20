@@ -63,18 +63,11 @@
 
 	<div id="wrapper" class="d-flex align-items-stretch flex-column">
 
-		<header>
-			<tiles:insertAttribute name="header" />
-			<!-- tiles.xml의 <definition>의 하위 태그인 <put-attribute>태그의 name이 header인 JSP를 표시합니다. -->
-		</header>
+		<tiles:insertAttribute name="header" />
 
-		<article>
-			<tiles:insertAttribute name="body" />
-		</article>
+		<tiles:insertAttribute name="body" />
 
-		<footer>
-			<tiles:insertAttribute name="footer" />
-		</footer>
+		<tiles:insertAttribute name="footer" />
 
 	</div>
 	

@@ -6,18 +6,9 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath }"  />
 <%
   request.setCharacterEncoding("UTF-8");
-%>  
+%>
 
-	<body class="layout-admin aside-sticky header-sticky" data-s2t-class="btn-primary btn-sm bg-gradient-default rounded-circle b-0">
-
-		<div id="wrapper" class="d-flex align-items-stretch flex-column">
-
-
-
-			<div id="wrapper_content" class="d-flex flex-fill">
-
-
-				<!-- MIDDLE -->
+<!-- MIDDLE -->
 				<div id="middle" class="flex-fill">
 
 
@@ -468,9 +459,3 @@
 
 				</div>
 				<!-- /MIDDLE -->
-
-			</div>
-
-
-
-			
