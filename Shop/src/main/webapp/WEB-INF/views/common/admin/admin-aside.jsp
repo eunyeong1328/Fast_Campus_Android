@@ -94,12 +94,12 @@
 										<ul class="nav flex-column fs--15">
 
 											<li class="nav-item">
-												<a class="nav-link js-ajax" href="util-text-backgrounds.html">
+												<a class="nav-link " href="${contextPath }/admin/productList.do">
 													상품목록
 												</a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link js-ajax" href="util-borders.html">
+												<a class="nav-link " href="${contextPath }/admin/productAdd.do">
 													상품입력
 												</a>
 											</li>
