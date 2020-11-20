@@ -191,46 +191,7 @@
 
 															<td>${item.member_date}</td>
 
-<!-- 															<td class="text-align-end">
-
-																<div class="dropdown">
-
-																	<a href="#" class="btn btn-sm btn-light rounded-circle"
-																		data-toggle="dropdown" aria-expanded="false"
-																		aria-haspopup="true"> <span class="group-icon">
-																			<i class="fi fi-dots-vertical-full"></i> <i
-																			class="fi fi-close"></i>
-																	</span>
-																	</a>
-															</td>
-
-															<div
-																class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-220">
-
-																<a class="dropdown-item text-truncate" href="#!"> <i
-																	class="fi fi-check"></i> Set Active
-																</a> <a class="dropdown-item text-truncate" href="#!"> <i
-																	class="fi fi-close"></i> Set Inactive
-																</a> <a href="#!"
-																	class="dropdown-item text-truncate js-ajax-confirm"
-																	data-href="page-list.html"
-																	data-ajax-confirm-body="Delete this page?"
-																	data-ajax-confirm-mode="ajax"
-																	data-ajax-confirm-method="GET"
-																	data-ajax-confirm-btn-yes-class="btn-sm btn-danger"
-																	data-ajax-confirm-btn-yes-text="Delete"
-																	data-ajax-confirm-btn-yes-icon="fi fi-check"
-																	data-ajax-confirm-btn-no-class="btn-sm btn-light"
-																	data-ajax-confirm-btn-no-text="Cancel"
-																	data-ajax-confirm-btn-no-icon="fi fi-close"
-																	data-ajax-confirm-success-target="#message_id_2"
-																	data-ajax-confirm-success-target-action="remove"> <i
-																	class="fi fi-thrash text-danger"></i> Delete
-																</a>
-
-															</div>
-
-														</tr> -->
+<!-- 															
 														<!-- /item -->
 														</c:forEach>
 														</c:otherwise>

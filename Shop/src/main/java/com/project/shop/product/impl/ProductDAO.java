@@ -72,4 +72,27 @@ public class ProductDAO {
 		return sqlSession.insert("mappers.product.insertItem",vo);
 	}
 	
+	public List<ProductVO> allList(){
+		return sqlSession.selectList("mappers.product.allList");
+	}
+	
+	public void deleteProduct(String rq) {
+		sqlSession.delete("mappers.product.deleteProductOption",rq);
+		sqlSession.delete("mappers.product.deleteItem",rq);
+		sqlSession.delete("mappers.product.deleteProduct",rq);
+	}
+	
+	public List<ProductVO> loadOne(String rq){
+		return sqlSession.selectList("mappers.product.loadOne", rq);
+	}
+	public void updateOne(ProductVO vo) {
+		sqlSession.update("mappers.product.updateItem", vo);
+		sqlSession.update("mappers.product.updateProduct", vo);
+	}
+	public List<ProductVO> loadOption(String rq) {
+		return sqlSession.selectList("mappers.product.loadOption", rq);
+	}
+	public void deleteOption(String name) {
+		sqlSession.delete("mappers.product.deleteProductOptionName",name);
+	}
 }

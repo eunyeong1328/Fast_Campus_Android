@@ -16,5 +16,11 @@ public interface ProductService {
 	public List<ProductVO> bestList();
 	public List<ProductVO> newList();
 	public int insertProduct(ProductVO vo,MultipartHttpServletRequest request);
+	public List<ProductVO> allList();
+	public void deleteProduct(String request);
+	public List<ProductVO> loadOne(String request);
+	public void updateProduct(ProductVO vo, MultipartHttpServletRequest request);
+	public List<ProductVO> loadOption(String request);
+	public void deleteOption(String name);
 	
 }
