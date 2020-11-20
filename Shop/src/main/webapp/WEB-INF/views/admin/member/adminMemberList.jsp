@@ -214,8 +214,7 @@
 															<td>일반</td>
 
 															<td>${item.member_date}</td>
-
-															<!-- 															
+															
 														<!-- /item -->
 													</c:forEach>
 												</c:otherwise>

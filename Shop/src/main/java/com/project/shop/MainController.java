@@ -16,34 +16,29 @@ import com.project.shop.common.base.BaseController;
 import com.project.shop.product.ProductService;
 import com.project.shop.product.ProductVO;
 
-
-
 /**
  * Handles requests for the application home page.
  */
 @Controller("mainController")
 @EnableAspectJAutoProxy
 public class MainController extends BaseController {
-		@Autowired
-		ProductService service;
+	@Autowired
+	ProductService service;
+	List<ProductVO> bestlist,newlist;
 	
-		@RequestMapping(value= "/main/main.do" ,method={RequestMethod.POST,RequestMethod.GET})
-		public ModelAndView main(ModelAndView mav,HttpServletRequest request, HttpServletResponse response) throws Exception{
-			List<ProductVO> bestlist = null,newlist = null;
-			
-			if(bestlist == null && newlist == null ) {
-				bestlist = service.bestList();
-				mav.addObject("bestlist",bestlist);
-				newlist = service.newList();
-				mav.addObject("newlist",newlist);
-			}
-			//HttpSession session;
-			
-			String viewName = (String) request.getAttribute("viewName");
-			mav.setViewName(viewName);
-			System.out.println("mav: " + mav);
-			System.out.println("as");
-			return mav;
+	@RequestMapping(value = "/main/main.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView main(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		if (bestlist == null && newlist == null) {
+			bestlist = service.bestList();
+			mav.addObject("bestlist", bestlist);
+			newlist = service.newList();
+			mav.addObject("newlist", newlist);
+		}
+
+		mav.setViewName((String)request.getAttribute("viewName"));
+		return mav;
 	}
-	
+
 }

@@ -825,7 +825,7 @@
 
 
 						<!-- item -->
-						<c:forEach var="bestlist" items="${bestlist}" begin="0" end="3">
+						<c:forEach var="newlist" items="${newlist}" begin="0" end="3">
 							<div class="order-2 col-6 col-lg-3 mb-4 mb-2-xs">
 
 							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
@@ -855,7 +855,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist.product_image}" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${newlist.product_image}" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -866,15 +866,15 @@
 											.text-truncate
 										-->
 										<span class="d-block fs--16 max-h-50 overflow-hidden">
-											<c:out value="${bestlist.product_name}" />
+											<c:out value="${newlist.product_name}" />
 										</span>
 
 										<!-- price -->
 										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
 
-											<del class="text-muted"><c:out value="${bestlist.price}" />원</del>  
+											<del class="text-muted"><c:out value="${newlist.price}" />원</del>  
 
-											<fmt:parseNumber value="${bestlist.price*((100-bestlist.discount)/100)}"/>원
+											<fmt:parseNumber value="${newlist.price*((100-newlist.discount)/100)}"/>원
 										</span>
 
 										<!-- rating -->
