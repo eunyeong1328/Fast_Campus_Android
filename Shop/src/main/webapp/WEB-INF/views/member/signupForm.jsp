@@ -138,9 +138,7 @@
 		}
 	} 
 </script>
-</head>
 
-<body>
 
 	<div id="wrapper">
 	

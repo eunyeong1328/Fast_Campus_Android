@@ -107,7 +107,5 @@
 		    data-ajax-modal-backdrop=""></div> --%>
 
 
-		<script src="${contextPath}/resources/assets/js/core.js"></script>
+
 		
-	</body>
-</html>

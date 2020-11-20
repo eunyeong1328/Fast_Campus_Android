@@ -8,6 +8,8 @@
 <%
   request.setCharacterEncoding("utf-8");
 %>
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 		<meta name="description" content="...">
 
@@ -43,9 +45,7 @@
 	</head>
 <body>
 		<div id="wrap">
-			<header>
 				<tiles:insertAttribute name="header" /> <!-- tiles.xml의 <definition>의 하위 태그인 <put-attribute>태그의 name이 header인 JSP를 표시합니다. -->
-			</header>
 			<article>
 			 	<tiles:insertAttribute name="body" />
 			</article>
@@ -53,4 +53,5 @@
 		</div>
 </body>
         
-        
+        </html>
+		<script src="${contextPath}/resources/assets/js/core.js"></script>
