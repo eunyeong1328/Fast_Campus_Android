@@ -97,7 +97,11 @@ public class BoardVO {
 	public int getQna_category_num() {
 		return qna_category_num;
 	}
-
+	
+	public void setQna_category_num(String qna_category_num) {
+		this.qna_category_num = Integer.parseInt(qna_category_num);
+	}
+	
 	public void setQna_category_num(int qna_category_num) {
 		this.qna_category_num = qna_category_num;
 	}

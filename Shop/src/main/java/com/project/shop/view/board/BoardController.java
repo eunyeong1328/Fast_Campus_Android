@@ -41,9 +41,6 @@ public class BoardController {
 		getPaging(request, response);
 		mav.addObject("paging", paging);
 		
-		String message = "공지사항입니다";
-		mav.addObject("message", message);
-		
 		List<BoardVO> notice = boardService.getNoticeList(map);
 		mav.addObject("NoticeList", notice);
 		
@@ -94,21 +91,27 @@ public class BoardController {
 //	1:1 문의 글 작성
 	@RequestMapping(value="/memQ-insert.do", method={RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView memQInsert(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		ModelAndView mav = new ModelAndView();
-		
 		String viewName = (String) request.getAttribute("viewName");
 		
-		if (viewName.equals("/board/memQ-insert")) {
-			mav.setViewName(viewName);
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		
+		if (memberVO != null && memberVO.getMember_id() != null) {
+			if (viewName.equals("/board/memQ-insert")) {
+				mav.setViewName(viewName);
+			}
+			String action = (String) request.getParameter("action");
+			if (action != null && action.equals("memQ-insert")) {
+				vo.setMember_id(memberVO.getMember_id());
+				boardService.memQInsert(vo);
+				mav.setViewName("redirect:memberQ-tab.do?nowTab=tab-3");
+			}
+		} else {
+			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
+			mav.addObject("message", message);
+			mav.setViewName("/member/loginForm");
 		}
-		
-		String action = (String) request.getParameter("action");
-		
-		if (action != null && action.equals("memQ-insert")) {
-			boardService.memQInsert(vo);
-			mav.setViewName("redirect:memberQ-tab.do?nowTab=tab-3");
-		} 
 		
 		return mav;
 	}

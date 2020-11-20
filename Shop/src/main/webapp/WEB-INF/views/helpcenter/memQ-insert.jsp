@@ -52,13 +52,12 @@
                                         <div class="memq-title">
                                             <p>제목</p>
                                             <div class="category-select">
-                                                <select>
-                                                    <option>선택해주세요.</option>
-                                                    <option>상품정보문의</option>
-                                                    <option>배송문의</option>
-                                                    <option>반품문의</option>
+                                                <select name="qna_category_num">
+                                                    <option selected="selected">선택해주세요.</option>
+                                                    <option value="1">배송</option>
+                                                    <option value="2">반품</option>
+                                                    <option value="3">상품</option>
                                                 </select>
-                                                <input type="text" name="member_id">
                                                 <input type="text" name="title">
                                             </div>
                                         </div>
