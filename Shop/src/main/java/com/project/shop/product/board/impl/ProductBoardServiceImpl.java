@@ -60,4 +60,10 @@ public class ProductBoardServiceImpl implements ProductBoardService{
 		}
 		return p;
 	}
+
+	@Override
+	public void addBoardQna(Map map) throws Exception {
+		System.out.println("여기는 보드 서비드다 오버");
+		productBoardDAO.insertBoardQna(map);
+	}
 }

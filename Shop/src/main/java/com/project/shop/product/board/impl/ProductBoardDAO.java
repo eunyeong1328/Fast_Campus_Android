@@ -23,4 +23,16 @@ public class ProductBoardDAO {
 				sqlSession.selectList("mappers.product_qna.selectProductQna", map);
 		return productQnaList;
 	}
+	public void insertBoardQna(Map map) {
+		int boardQnaNo = selectQnaNo()+1;
+		System.out.println("borardQnaNo: " + boardQnaNo);
+		map.put("product_qna_num", boardQnaNo);
+		sqlSession.insert("mappers.product_qna.insertBoardQna", map);
+	}
+	private int selectQnaNo() {
+		System.out.println("글번호 가져오기 전 ");
+		int qnaNo =sqlSession.selectOne("mappers.product_qna.selectQnaNo");
+		System.out.println("글번호 가져옴");
+		return qnaNo;
+	}
 }

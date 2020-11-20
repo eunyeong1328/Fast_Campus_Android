@@ -6,7 +6,9 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
-
+<script>
+	
+</script>
 <!-- 여기서부터 -->
          <!-- PRODUCT -->
          <section class="pt-5">

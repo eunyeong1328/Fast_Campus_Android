@@ -28,8 +28,10 @@
 						<p> &nbsp;&nbsp;&nbsp;&nbsp;상품에 대한 문의를 남기는 공간입니다.<br>&nbsp;&nbsp;&nbsp;&nbsp;배송, 주문(취소/교환/환불)관련 문의 및 요청사항은 1:1 문의에 남겨주세요.
 					</div>
 
-
-					<form novalidate class="bs-validate" method="post" action="#" enctype="multipart/form-data">
+<!--
+				  	<form novalidate class="bs-validate" method="post" action="${contextPath }/product/addBoardQna.do" enctype="multipart/form-data">
+-->					
+					<form  class="bs-validate" method="post" action="${contextPath }/product/addBoardQna.do" enctype="multipart/form-data">
 
 						<!--
 							
@@ -45,36 +47,41 @@
 									<!--
 										PRODUCT TITLE
 									-->
+									
+									
+									
 									<div class="form-label-group mb-3">
 										<table style="color: gray;" class="table">
 											<tbody>
 												<tr>
 													<th scope="row">작성자</th>
-													<td>이아진</td>
+													<td>${memberInfo.member_id }</td>
 												</tr>
 												<tr>
 													<th scope="row">이메일</th>
-													<td>leah@leah.com</td>
+													<td>${memberInfo.email }</td>
 												</tr>
 												<tr>
 													<th scope="row">핸드폰</th>
-													<td>010-0000-0000</td>
+													<td>${memberInfo.phone }</td>
 												</tr>
 											</tbody>
 										</table>
 										
 									</div>
-						
-									<input required placeholder="제목을 입력해주세요" id="product_title" name="product_title" type="text" value="" class="form-control">
+									<input  type="hidden" name="member_id" value="${memberInfo.member_id }" />
+									<input type="hidden" name="product_id" value="${product_id }"/>
+									<input type="hidden" name="qna_category_num" value="3"/>
+									<input id="product_title" name="title" required type="text"  placeholder="제목을 입력해주세요" class="form-control">
 										<label for="product_title"></label>
-
-									
-									<textarea name="product_description" class="summernote-editor w-100 h--350" 
+									<textarea name="contents" class="summernote-editor w-100 h--350" 
 										data-placeholder="문의사항을 적어주세요" 
 										data-min-height="350" 
 										data-max-height="2800" 
 										data-focus="false" 
 										data-lang="en-US" 
+										
+										data-ajax-confirm-callback-function='function(){window.location.href = "${contextPath}/product/productDetail.do?product_id=${product_id}";}'
 
 										data-ajax-url="_ajax/demo.summernote.php" 
 										data-ajax-params="['action','editor:image:upload']" 
@@ -90,16 +97,16 @@
 											]'></textarea>
 											
 											<br><br>
-											<a href="${contextPath }/product/productBoardQnaForm.do?product_id=${vo.product_id}">
-												<button type="submit" class="btn btn-purple btn-soft mb-1">
-													문의등록
-												</button>
-											</a>
+											
+												<input type="submit" class="btn btn-purple btn-soft mb-1" value="문의등록">
+												
+										<!--  
 											<a href="${contextPath }/product/productBoardQnaForm.do?product_id=${vo.product_id}">
 												<button type="button" class="btn btn-purple btn-soft mb-1">
 													이전으로
 												</button>
 											</a> 
+										-->
 								</div>
 
 
@@ -112,7 +119,7 @@
 
 										<label class="btn btn-warning cursor-pointer position-relative">
 
-											<input	name="product_image[]" 
+											<input	name="image" 
 													multiple="" 
 													type="file" 
 
