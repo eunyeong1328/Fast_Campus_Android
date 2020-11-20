@@ -51,6 +51,12 @@
 	<!--font-->
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
 	
+	<c:if test='${not empty message }'>
+		<script>
+			alert('${message}')
+		</script>
+	</c:if>
+	
 </head>
 
 <body class="layout-admin aside-sticky header-sticky">

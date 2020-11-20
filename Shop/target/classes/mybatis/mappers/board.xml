@@ -7,7 +7,7 @@
 <mapper namespace="mapper.board">
 
 	<!-- 공지사항 전체 목록 불러오기 -->
-	<select id="getNoticeList" parameterType="map" resultType="boardVO">
+	<select id="getNoticeList" parameterType="hashmap" resultType="boardVO">
 		SELECT *
 		FROM (SELECT ROWNUM R_NUM, N.*
       		  FROM (SELECT *
@@ -15,7 +15,7 @@
             		ORDER BY NOTICE_NUM DESC
              	    ) N
      		 )
-		WHERE R_NUM BETWEEN #{begin} AND #{end}
+		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
 
 	<!-- 공지사항 선택한 글 상세 불러오기 -->
@@ -26,14 +26,14 @@
 	</select>
 
 	<!-- FAQ 전체 목록 불러오기 -->
-	<select id="getFAQList" parameterType="map" resultType="boardVO">
+	<select id="getFAQList" parameterType="hashmap" resultType="boardVO">
 		SELECT * 
 		FROM (SELECT ROWNUM R_NUM, A.*
 			  FROM (SELECT F.FAQ_NUM, Q.QNA_CATEGORY_NAME, F.TITLE, F.CONTENTS  
 			  		FROM FAQ F, QNA_CATEGORY Q 
 					WHERE f.qna_category_num = q.qna_category_num 
 					ORDER BY f.faq_num) A)
-		WHERE R_NUM BETWEEN #{begin} AND #{end}
+		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
 	
 	<!-- FAQ 선택한 글 상세 불러오기 -->
@@ -45,15 +45,16 @@
 	</select>
 	
 	<!-- 1:1 문의 전체 목록 불러오기 -->
-	<select id="getMemQList" parameterType="map" resultType="boardVO">
+	<select id="getMemQList" parameterType="hashmap" resultType="boardVO">
 		SELECT * FROM 
 			(SELECT ROWNUM R_NUM, A.* FROM 
 			(SELECT member_qna_num, title, contents, image, qna_category_name, 
 			order_num, member_id, email, phone, reg_date 
 			FROM MEMBER_QNA Q, QNA_CATEGORY C 
 			WHERE Q.qna_category_num = C.qna_category_num 
+			AND q.member_id = #{member_id}
 			ORDER BY Q.member_qna_num DESC) A)
-		WHERE R_NUM BETWEEN #{begin} AND #{end}
+		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
 	
 <!-- 1:1 문의 선택한 글 상세 불러오기 -->
@@ -102,9 +103,10 @@
 	</select>
 	
 	<!-- 회원 1:1 문의 (member_qna) 게시글 갯수 조회 -->
-	<select id="getMemQCount" resultType="int">
+	<select id="getMemQCount" parameterType="memberVO" resultType="int">
 		SELECT COUNT(*) 
 		FROM MEMBER_QNA
+		WHERE MEMBER_ID = #{member_id}
 	</select>
 
 </mapper>

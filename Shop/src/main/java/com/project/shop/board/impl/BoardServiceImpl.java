@@ -1,7 +1,7 @@
 package com.project.shop.board.impl;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO boardDAO;
 	
 	@Override
-	public List<BoardVO> getNoticeList(Map<String, Integer> map) {
+	public List<BoardVO> getNoticeList(HashMap<String, Object> map) {
 		return boardDAO.getNoticeList(map);
 	}
 	
@@ -26,7 +26,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getFAQList(Map<String, Integer> map) {
+	public List<BoardVO> getFAQList(HashMap<String, Object> map) {
 		return boardDAO.getFAQList(map);
 	}
 
@@ -36,7 +36,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getMemQList(Map<String, Integer> map) {
+	public List<BoardVO> getMemQList(HashMap<String, Object> map) {
 		return boardDAO.getMemQList(map);
 	}
 
