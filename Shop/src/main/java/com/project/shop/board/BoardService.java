@@ -3,8 +3,6 @@ package com.project.shop.board;
 import java.util.HashMap;
 import java.util.List;
 
-import com.project.shop.member.MemberVO;
-
 public interface BoardService {
 
 //	Notice List

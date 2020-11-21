@@ -1,4 +1,4 @@
-package com.project.shop.board.paging;
+package com.project.shop.paging;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

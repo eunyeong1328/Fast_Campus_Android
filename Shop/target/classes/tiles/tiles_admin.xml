@@ -31,10 +31,17 @@
          <put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberDetail.jsp" />
       </definition>  
       
-      <!-- joy.관리자 공지사항 crud -->
+      <!-- joy.관리자 게시판 -->
+      <!-- 공지사항 -->
       <definition name="/admin/noticeList" extends="adminLayout">
 		<put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-boardTag.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/admin/admin-noticeList.jsp" />
+      </definition>
+      
+      <!-- FAQ -->
+      <definition name="/admin/faqList" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/admin-FAQList.jsp" />
       </definition>
       
 </tiles-definitions>

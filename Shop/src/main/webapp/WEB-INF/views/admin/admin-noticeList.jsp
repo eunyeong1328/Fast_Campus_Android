@@ -19,7 +19,7 @@
 					<div class="page-title bg-transparent b-0">
 
 						<h1 class="h4 mt-4 mb-0 px-3 font-weight-normal">
-							Page List
+							공지사항
 						</h1>
 						
 					</div>
@@ -39,7 +39,7 @@
 								<div class="float-end">
 
 									<a href="#!" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
-										add page
+										등록
 									</a>
 
 								</div>
@@ -90,17 +90,29 @@
 															<i></i>
 														</label>
 													</th>
+													<th>번호</th>
 													<th>
 														<span class="px-2 p-0-xs">
-															PAGE TITLE
+															제목
 														</span>
 													</th>
-													<th class="w--200 hidden-lg-down">VISITS</th>
-													<th class="w--200 hidden-lg-down">STATUS</th>
+													<th class="w--200 hidden-lg-down">조회수</th>
+													<th>작성날짜</th>
+													<th class="w--200 hidden-lg-down">게시여부</th>
 													<th class="w--60">&nbsp;</th>
 												</tr>
 											</thead>
-
+											
+											<c:if test="${empty NoticeList}">
+												<tbody id="item_list">
+													<tr>
+														<td colspan="6">등록된 공지사항이 없습니다.</td>
+													</tr>
+												</tbody>
+											</c:if>
+											
+											<c:if test="${not empty NoticeList}">
+											<c:forEach var="notice" items="${NoticeList}">
 											<tbody id="item_list">
 
 												<!-- item -->
@@ -112,120 +124,31 @@
 															<i></i>
 														</label>
 													</td>
-
+													<td>${notice.notice_num}</td>
 													<td>
 
 														<a href="#!" class="font-weight-medium text-muted mx-2 m-0-xs">
-															Lorem ipsum dolor
+															${notice.title}
 														</a>
 
 														<!-- MOBILE ONLY -->
 														<div class="fs--13 d-block d-xl-none">
 															<span class="d-block text-muted">Visits: 0</span>
 															<span class="badge badge-success font-weight-medium fs--12">Active</span>
-															<!-- <span class="badge badge-danger font-weight-medium fs--12">Inactive</span> -->
-														</div>
-														<!-- /MOBILE ONLY -->
-
-													</td>
-
-													<td class="hidden-lg-down">0</td>
-
-													<td class="hidden-lg-down">
-
-														<small class="badge badge-success font-medium text-uppercase">active</small>
-														<!-- <small class="badge badge-danger font-medium text-uppercase">inactive</small> -->
-
-													</td>
-
-													<td class="text-align-end">
-
-														<div class="dropdown">
-
-															<a href="#" class="btn btn-sm btn-light rounded-circle" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
-																<span class="group-icon">
-																	<i class="fi fi-dots-vertical-full"></i>
-																	<i class="fi fi-close"></i>
-																</span>
-															</a>
-
-
-															<div class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-220">
-
-																<a class="dropdown-item text-truncate" href="#!">
-																	<i class="fi fi-check"></i>
-																	Set Active
-																</a>
-
-																<a class="dropdown-item text-truncate" href="#!">
-																	<i class="fi fi-close"></i>
-																	Set Inactive
-																</a>
-
-																<a	 href="#!" 
-																	class="dropdown-item text-truncate js-ajax-confirm" 
-																	data-href="page-list.html" 
-																	data-ajax-confirm-body="Delete this page?" 
-
-																	data-ajax-confirm-mode="ajax" 
-																	data-ajax-confirm-method="GET" 
-
-																	data-ajax-confirm-btn-yes-class="btn-sm btn-danger" 
-																	data-ajax-confirm-btn-yes-text="Delete" 
-																	data-ajax-confirm-btn-yes-icon="fi fi-check" 
-
-																	data-ajax-confirm-btn-no-class="btn-sm btn-light" 
-																	data-ajax-confirm-btn-no-text="Cancel" 
-																	data-ajax-confirm-btn-no-icon="fi fi-close"
-
-																	data-ajax-confirm-success-target="#message_id_2" 
-																	data-ajax-confirm-success-target-action="remove">
-																	<i class="fi fi-thrash text-danger"></i>
-																	Delete
-																</a>
-
-															</div>
-
-														</div>
-
-													</td>
-
-												</tr>
-												<!-- /item -->
-
-
-												<!-- item -->
-												<tr id="message_id_2" class="text-muted">
-
-													<td class="hidden-lg-down">
-														<label class="form-checkbox form-checkbox-secondary float-start">
-															<input type="checkbox" name="item_id[]" value="2">
-															<i></i>
-														</label>
-													</td>
-
-													<td>
-
-														<a href="#!" class="font-weight-medium text-muted mx-2 m-0-xs">
-															Lorem ipsum dolor
-														</a>
-
-														<!-- MOBILE ONLY -->
-														<div class="fs--13 d-block d-xl-none">
-															<span class="d-block text-muted">Visits: 0</span>
-															<!-- <span class="badge badge-success font-weight-medium fs--12">Active</span> -->
 															<span class="badge badge-danger font-weight-medium fs--12">Inactive</span>
 														</div>
 														<!-- /MOBILE ONLY -->
 
 													</td>
 
-													<td class="hidden-lg-down">0</td>
-
+													<td class="hidden-lg-down">${notice.views}</td>
+													
+													<td>${notice.reg_date}</td>
+													
 													<td class="hidden-lg-down">
 
-														<!-- <small class="badge badge-success font-medium text-uppercase">active</small> -->
-														<small class="badge badge-danger font-medium text-uppercase">inactive</small>
+														<small class="badge badge-success font-medium text-uppercase">active</small>
+														<!-- <small class="badge badge-danger font-medium text-uppercase">inactive</small> -->
 
 													</td>
 
@@ -273,73 +196,6 @@
 																	data-ajax-confirm-success-target-action="remove">
 																	<i class="fi fi-thrash text-danger"></i>
 																	Delete
-																</a>
-
-															</div>
-
-														</div>
-
-													</td>
-
-												</tr>
-												<!-- /item -->
-
-
-												<!-- item -->
-												<tr id="message_id_2" class="text-muted">
-
-													<td class="hidden-lg-down">
-														<div class="bg-gray-200 w--20 h--20 rounded d-block"></div>
-													</td>
-
-													<td>
-
-														<a href="#!" class="font-weight-medium text-muted mx-2 m-0-xs">
-															This is a system page
-														</a>
-														<small class="d-block text-gray-500">* system page, cannot be deleted</small>
-
-														<!-- MOBILE ONLY -->
-														<div class="fs--13 d-block d-xl-none">
-															<span class="d-block text-muted">Visits: 0</span>
-															<span class="badge badge-success font-weight-medium fs--12">Active</span>
-															<!-- <span class="badge badge-danger font-weight-medium fs--12">Inactive</span> -->
-														</div>
-														<!-- /MOBILE ONLY -->
-
-													</td>
-
-													<td class="hidden-lg-down">0</td>
-
-													<td class="hidden-lg-down">
-
-														<small class="badge badge-success font-medium text-uppercase">active</small>
-														<!-- <small class="badge badge-danger font-medium text-uppercase">inactive</small> -->
-
-													</td>
-
-													<td class="text-align-end">
-
-														<div class="dropdown">
-
-															<a href="#!" class="btn btn-sm btn-light rounded-circle" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
-																<span class="group-icon">
-																	<i class="fi fi-dots-vertical-full"></i>
-																	<i class="fi fi-close"></i>
-																</span>
-															</a>
-
-
-															<div class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-220">
-
-																<a class="dropdown-item text-truncate" href="#!">
-																	<i class="fi fi-check"></i>
-																	Set Active
-																</a>
-
-																<a class="dropdown-item text-truncate" href="#!">
-																	<i class="fi fi-close"></i>
-																	Set Inactive
 																</a>
 
 															</div>
@@ -352,6 +208,8 @@
 												<!-- /item -->
 
 											</tbody>
+											</c:forEach>
+											</c:if>
 
 											<tfoot>
 												<tr class="text-muted fs--13">
@@ -361,13 +219,15 @@
 															<i></i>
 														</label>
 													</th>
+													<th>번호</th>
 													<th>
 														<span class="px-2 p-0-xs">
-															PAGE TITLE
+															제목
 														</span>
 													</th>
-													<th class="w--200 hidden-lg-down">VISITS</th>
-													<th class="w--200 hidden-lg-down">STATUS</th>
+													<th class="w--200 hidden-lg-down">조회수</th>
+													<th>작성날짜</th>
+													<th class="w--200 hidden-lg-down">게시여부</th>
 													<th class="w--60">&nbsp;</th>
 												</tr>
 											</tfoot>
@@ -463,26 +323,40 @@
 											<!-- pagination -->
 											<nav aria-label="pagination">
 												<ul class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
-
-													<li class="page-item disabled btn-pill ">
-														<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
-													</li>
+													<c:if test="${paging.beginPage == 1}">
+														<li class="page-item disabled btn-pill ">
+															<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
+														</li>
+													</c:if>
+													<c:if test="${paging.beginPage != 1}">
+														<li class="page-item">
+															<a class="page-link" href="noticeList.do?nowTab=${paging.nowTab }&cPage=${paging.endPage - 1 }" tabindex="-1" aria-disabled="true">Prev</a>
+														</li>
+													</c:if>
 													
-													<li class="page-item active" aria-current="page">
-														<a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-													</li>
+													<c:forEach var="pageNo" begin="${paging.beginPage }" end="${paging.endPage }">
+														<c:if test="${pageNo == paging.nowPage }">
+															<li class="page-item active" aria-current="page">
+																<a class="page-link" href="#">${pageNo } <span class="sr-only">(current)</span></a>
+															</li>
+														</c:if>
+														<c:if test="${pageNo != paging.nowPage }">
+															<li class="page-item" aria-current="page">
+																<a class="page-link" href="noticeList.do?cPage=${pageNo }">${pageNo } <span class="sr-only">(current)</span></a>
+															</li>
+														</c:if>
+													</c:forEach>
 													
-													<li class="page-item">
-														<a class="page-link" href="#">2</a>
-													</li>
-													
-													<li class="page-item">
-														<a class="page-link" href="#">3</a>
-													</li>
-													
-													<li class="page-item">
-														<a class="page-link" href="#">Next</a>
-													</li>
+													<c:if test="${paging.endPage >= paging.totalPage }">
+														<li class="page-item disabled btn-pill ">
+															<a class="page-link" href="#">Next</a>
+														</li>
+													</c:if>
+													<c:if test="${paging.endPage < paging.totalPage }">
+														<li class="page-item">
+															<a class="page-link" href="noticeList.do?nowTab=${paging.nowTab }&cPage=${paging.endPage + 1 }">Next</a>
+														</li>
+													</c:if>
 
 												</ul>
 											</nav>

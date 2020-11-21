@@ -1,4 +1,4 @@
-package com.project.shop.board.paging;
+package com.project.shop.paging;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

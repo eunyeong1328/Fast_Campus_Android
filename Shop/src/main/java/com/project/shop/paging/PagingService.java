@@ -1,4 +1,4 @@
-package com.project.shop.board.paging;
+package com.project.shop.paging;
 
 import com.project.shop.member.MemberVO;
 

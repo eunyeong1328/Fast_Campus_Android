@@ -17,9 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.shop.board.BoardService;
 import com.project.shop.board.BoardVO;
-import com.project.shop.board.paging.Paging;
-import com.project.shop.board.paging.PagingService;
 import com.project.shop.member.MemberVO;
+import com.project.shop.paging.Paging;
+import com.project.shop.paging.PagingService;
 
 @Controller("boardController")
 @RequestMapping("/board")

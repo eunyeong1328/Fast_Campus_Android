@@ -8,11 +8,12 @@
 <%
   request.setCharacterEncoding("utf-8");
 %>
+
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 		<meta name="description" content="...">
-
+		<title><tiles:insertAttribute name="title" /></title>
         <meta name="viewport" content="width=device-width, maximum-scale=5, initial-scale=1, user-scalable=0">
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 
@@ -36,22 +37,41 @@
 		<meta name="theme-color" content="#377dff">
 		
 		<!-- 구글 로그인 api -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-  <script src="https://apis.google.com/js/api:client.js"></script>
+  		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+  		<script src="https://apis.google.com/js/api:client.js"></script>
+  		<script src="http://code.jquery.com/jquery-latest.js"></script>
 
 		<!--font-->
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
-			<title><tiles:insertAttribute name="title" /></title>		<!-- tiles.xml의 <definition>의 하위 태그인 <put-attribute>태그의 name이 title인 값(value)을 표시합니다. -->
+		
 	</head>
 <body>
 		<div id="wrap">
-				<tiles:insertAttribute name="header" /> <!-- tiles.xml의 <definition>의 하위 태그인 <put-attribute>태그의 name이 header인 JSP를 표시합니다. -->
-			<article>
-			 	<tiles:insertAttribute name="body" />
-			</article>
-			<tiles:insertAttribute name="footer"/>
-		</div>
-</body>
-        
-        </html>
-		<script src="${contextPath}/resources/assets/js/core.js"></script>
+		
+			<tiles:insertAttribute name="header" /> <!-- tiles.xml의 <definition>의 하위 태그인 <put-attribute>태그의 name이 header인 JSP를 표시합니다. -->
+			
+			<tiles:insertAttribute name="body" />
+			
+			<tiles:insertAttribute name="footer" ignore="true" />
+			
+		</div><!-- /#wrapper -->
+
+
+		<!-- 
+			SHOP AJAX MODAL : ON LOAD 
+
+			Note: #onload_modal_shop is also used inside the modal
+			for the button "stop showing" to set a cookie!
+		-->
+		<div id="onload_modal_shop" class="hide js-onload js-ajax-modal" 
+			data-href="_ajax/modal_shop.html" 
+			data-ajax-modal-delay="3000" 
+			data-ajax-modal-size="modal-lg" 
+			data-ajax-modal-centered="true" 
+			data-ajax-modal-backdrop=""></div>
+
+
+		<script src="${contextPath}/resources/assets/js/core.min.js"></script>
+		
+	</body>
+</html>
