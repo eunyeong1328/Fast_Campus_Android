@@ -10,6 +10,7 @@
 		<put-attribute name="title" value="쩝쩝박사 :: 너도 할 수 있어, 쩝쩝박사" />
 		<put-attribute name="header"
 			value="/WEB-INF/views/common/header.jsp" />
+		
 	</definition>
 	
 	  <definition name="/member/loginForm" extends="baseLayout">

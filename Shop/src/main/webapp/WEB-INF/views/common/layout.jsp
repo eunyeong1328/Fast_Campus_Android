@@ -49,7 +49,7 @@
 			<article>
 			 	<tiles:insertAttribute name="body" />
 			</article>
-			<tiles:insertAttribute name="footer"/>
+				<tiles:insertAttribute name="footer" />
 		</div>
 </body>
         
