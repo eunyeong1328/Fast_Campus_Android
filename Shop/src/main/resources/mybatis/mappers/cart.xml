@@ -15,8 +15,8 @@
 </select>
 <insert id="insertProductInCart" parameterType="cartVO">
 	<![CDATA[
-		INSERT INTO cart(member_id, product_id)
-		VALUES( #{member_id}, #{product_id})
+		INSERT INTO cart(member_id, product_id, quantity)
+		VALUES( #{member_id}, #{product_id}, #{quantity})
 	]]>
 </insert>
 

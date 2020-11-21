@@ -4,23 +4,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+
 <%
    request.setCharacterEncoding("UTF-8");
 %>
-
 <script type="text/javascript">
-
-function add_cart(product_id) {
+var quantity="1";
+function changeQuantity() {
+	var selectOpt =  document.getElementById("opt_quantity");
+	 quantity = selectOpt.options[selectOpt.selectedIndex].text;
+	
+}
+function add_cart(product_id,quantity) {
+	
 	$.ajax({
 		type : "post",
 		async : false, //false인 경우 동기식으로 처리한다.
 		url : "${contextPath}/cart/addProductInCart.do",
 		data : {
-			product_id:product_id
+			product_id:product_id,
+			quantity:quantity
 		},
 		success : function(data, textStatus) {
-			//alert(data);
-		//	$('#message').append(data);
+		
 			if(data.trim()=='add_success'){
 				alert("카트에 등록되었습니다/.");
 			}else if(data.trim()=='already_existed'){
@@ -32,7 +38,6 @@ function add_cart(product_id) {
 			alert("에러가 발생했습니다."+data);
 		},
 		complete : function(data, textStatus) {
-			//alert("작업을완료 했습니다");
 		}
 	}); //end ajax	
 }
@@ -289,13 +294,11 @@ function add_cart(product_id) {
                               </select>
                            </c:if>
                            <br>
-                           <select class="form-control bs-select" name="option_quantity" title="Please Select..." required>
+                           <select id="opt_quantity" class="form-control bs-select" name="option_quantity" title="Please Select..." onChange="changeQuantity();" required>
                               <c:forEach var="i" begin="1" end="10" step="1">
-                                 <option value="i">${i } 개</option>
+                                 <option value="i">${i }</option>
                               </c:forEach>
                            </select>
-                           
-
                            <!-- ADD TO CART -->
                            <div class="clearfix d-flex d-block-xs">
                               
@@ -312,7 +315,9 @@ function add_cart(product_id) {
                                  </div>
 
                                  <div class="pl-2 pr-2 w-100-xs"> 
-                                    <button class="btn btn-danger bg-gradient-danger text-white px-4 b-0 d-block-xs w-100-xs"> 
+                                    <button class="btn btn-danger bg-gradient-danger text-white px-4 b-0 d-block-xs w-100-xs"
+                   		 onclick="javascript:add_cart('${vo.product_id}',quantity)"> 
+                   		
                                        <span class="px-4 p-0-xs">
                                           <i>
                                              <svg width="22px" height="22px" x="0px" y="0px" viewBox="0 10 459.529 500.529">
@@ -336,7 +341,6 @@ function add_cart(product_id) {
                                        <!-- /free shipping : optional : good for conversions -->
 
                                     </button>
-                                     <a href="javascript:add_cart('${vo.product_id}')">장바구니 담기</a>
                                  </div>
 
                               </div>

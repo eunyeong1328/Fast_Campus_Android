@@ -37,14 +37,19 @@ public class CartControllerImpl extends BaseController implements CartController
 
 	@Override
 	@RequestMapping(value="/addProductInCart.do", method= RequestMethod.POST, produces="application/text; charset=utf8")
-	public String addProductInCart(@RequestParam("product_id") String product_id, 
+	public String addProductInCart(@RequestParam("product_id") String product_id,
+								   @RequestParam("quantity") int quantity,
 															   HttpServletRequest request, 
 															   HttpServletResponse response) throws Exception {
+		System.out.println("================================================================================");
+		System.out.println("quantity"+quantity);
+		System.out.println("product_id"+product_id);
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO)session.getAttribute("memberInfo");
 		String member_id = memberVO.getMember_id();
 		cartVO.setMember_id(member_id);
 		cartVO.setProduct_id(product_id);
+		cartVO.setQuantity(quantity);
 		boolean isAreadyExisted = cartService.findCartProduct(cartVO);
 		if(isAreadyExisted==true) {
 			return "already_existed";
