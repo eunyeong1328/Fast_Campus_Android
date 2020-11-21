@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mappers.cart">
+
+<select id="selectCountInCart" resultType="String" parameterType="cartVO">
+   <![CDATA[
+		    select decode(count(*), 0, 'false', 'true') from cart
+			where product_id=#{product_id}
+			  and member_id=#{member_id} 
+    	]]>
+</select>
+<insert id="insertProductInCart" parameterType="cartVO">
+	<![CDATA[
+		INSERT INTO cart(member_id, product_id)
+		VALUES( #{member_id}, #{product_id})
+	]]>
+</insert>
+
+<select id="selectMaxCartId" resultType="int">
+    <![CDATA[
+		select nvl(max(cart_id), 0) + 1 from cart
+   	]]>
+</select>
+</mapper>

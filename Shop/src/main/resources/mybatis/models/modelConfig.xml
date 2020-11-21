@@ -17,6 +17,7 @@
   	<typeAlias type="com.project.shop.product.ProductVO" alias = "productVO"/>
   	<typeAlias type="com.project.shop.board.BoardVO" alias="boardVO" />
   	<typeAlias type="com.project.shop.product.board.ProductBoardQnaVO" alias="product_qnaVO"/>
+  	<typeAlias type="com.project.shop.cart.CartVO" alias="cartVO"/>
   </typeAliases>
   
 </configuration>

@@ -2,13 +2,42 @@
    pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <%
    request.setCharacterEncoding("UTF-8");
 %>
-<script>
-	
+
+<script type="text/javascript">
+
+function add_cart(product_id) {
+	$.ajax({
+		type : "post",
+		async : false, //false인 경우 동기식으로 처리한다.
+		url : "${contextPath}/cart/addProductInCart.do",
+		data : {
+			product_id:product_id
+		},
+		success : function(data, textStatus) {
+			//alert(data);
+		//	$('#message').append(data);
+			if(data.trim()=='add_success'){
+				alert("카트에 등록되었습니다/.");
+			}else if(data.trim()=='already_existed'){
+				alert("이미 카트에 등록된 상품입니다.");	
+			}
+			
+		},
+		error : function(data, textStatus) {
+			alert("에러가 발생했습니다."+data);
+		},
+		complete : function(data, textStatus) {
+			//alert("작업을완료 했습니다");
+		}
+	}); //end ajax	
+}
 </script>
+
 <!-- 여기서부터 -->
          <!-- PRODUCT -->
          <section class="pt-5">
@@ -307,6 +336,7 @@
                                        <!-- /free shipping : optional : good for conversions -->
 
                                     </button>
+                                     <a href="javascript:add_cart('${vo.product_id}')">장바구니 담기</a>
                                  </div>
 
                               </div>
