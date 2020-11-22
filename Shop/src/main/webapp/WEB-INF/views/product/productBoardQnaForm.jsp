@@ -72,20 +72,48 @@
 									<input  type="hidden" name="member_id" value="${memberInfo.member_id }" />
 									<input type="hidden" name="product_id" value="${product_id }"/>
 									<input type="hidden" name="qna_category_num" value="3"/>
-									<input id="product_title" name="title" required type="text"  placeholder="제목을 입력해주세요" class="form-control">
+									
+									<c:if test="${not empty product_qna_num }">
+										<input id="product_title" name="title" required type="text"  value="${qna.title }" class="form-control">
 										<label for="product_title"></label>
-									<textarea name="contents" class="summernote-editor w-100 h--350" 
+									</c:if>
+									<c:if test="${empty qproduct_qna_num }">
+										<input id="product_title" name="title" required type="text"  placeholder="제목을 입력해주세요" class="form-control">
+										<label for="product_title"></label>
+									</c:if>
+									
+									<c:if test="${not empty product_qna_num }">
+										<textarea name="contents" class="summernote-editor w-100 h--350" 
+										data-min-height="350" 
+										data-max-height="2800" 
+										data-focus="false" 
+										data-lang="en-US" 
+										data-ajax-url="_ajax/demo.summernote.php" 
+										data-ajax-params="['action','editor:image:upload']" 
+
+										data-toolbar='[
+												["style", ["style"]],
+												["font", ["bold", "italic", "underline", "clear"]],
+												["fontname", ["fontname"]],
+												["color", ["color"]],
+												["para", ["ul", "ol", "paragraph"]],
+												["table", ["table"]],
+												["help", ["help"]]
+											]'>${qna.contents }</textarea>
+											<br><br>
+											<input type="submit" class="btn btn-purple btn-soft mb-1" value="수정">
+											<input type="button" value="취소">
+									</c:if>
+									
+									<c:if test="${empty product_qna_num }">
+										<textarea name="contents" class="summernote-editor w-100 h--350" 
 										data-placeholder="문의사항을 적어주세요" 
 										data-min-height="350" 
 										data-max-height="2800" 
 										data-focus="false" 
 										data-lang="en-US" 
-										
-										data-ajax-confirm-callback-function='function(){window.location.href = "${contextPath}/product/productDetail.do?product_id=${product_id}";}'
-
 										data-ajax-url="_ajax/demo.summernote.php" 
 										data-ajax-params="['action','editor:image:upload']" 
-
 										data-toolbar='[
 												["style", ["style"]],
 												["font", ["bold", "italic", "underline", "clear"]],
@@ -99,6 +127,8 @@
 											<br><br>
 											
 												<input type="submit" class="btn btn-purple btn-soft mb-1" value="문의등록">
+									</c:if>
+									
 												
 										<!--  
 											<a href="${contextPath }/product/productBoardQnaForm.do?product_id=${vo.product_id}">
@@ -118,9 +148,9 @@
 									<div class="clearfix bg-light p-2 mb-2 rounded">
 
 										<label class="btn btn-warning cursor-pointer position-relative">
-
-											<input	name="image" 
-													multiple="" 
+<!-- 
+											<input	name="file" 
+													multiple="multiple"
 													type="file" 
 
 													data-file-ext="jpg,jpeg,png" 
@@ -140,8 +170,25 @@
 													data-file-btn-clear="a.js-file-btn-clear" 
 													data-file-preview-img-cover="true" 
 													data-file-preview-class="shadow-md my-2 mr-3 rounded float-start" 
-													class="custom-file-input absolute-full">
-
+													class="custom-file-input absolute-full"/> => 이거 적용하면 파일 안받아와짐.... 왤까... 휴 ... ㅋ
+ --> 										<input name="file" multiple="multiple" type="file" 
+ 													data-file-ext="jpg,jpeg,png" 
+ 													data-file-max-size-kb-per-file="3072" 
+ 													data-file-max-size-kb-total="30720" 
+													data-file-max-total-files="10" 
+													data-file-ext-err-msg="Allowed:" 
+													data-file-exist-err-msg="File already exists:" 
+													data-file-size-err-item-msg="File too large!" 
+													data-file-size-err-total-msg="Total allowed size exceeded!" 
+													data-file-size-err-max-msg="Maximum allowed files:" 
+													data-file-toast-position="top-center" 
+													data-file-preview-container=".js-file-preview-container" 
+													data-file-preview-img-height="100" 
+													data-file-preview-show-info="true" 
+													data-file-btn-clear="a.js-file-btn-clear" 
+													data-file-preview-img-cover="true" 
+													data-file-preview-class="shadow-md my-2 mr-3 rounded float-start" 
+													/> 
 												<span class="group-icon">
 													<i class="fi fi-arrow-upload"></i>
 													<i class="fi fi-circle-spin fi-spin"></i>

@@ -436,8 +436,35 @@
                aria-labelledby="cleanHeadingBorder2"
                data-parent="#accordionBottomBorder">
                <div class="card-body">
-                  <p class="lead">${qna.contents }</p>
+                 <!--   <p class="lead">${qna.contents }</p>-->
+                 <p> ${qna.contents }</p>
+                <p> 
+                <c:if test="${not empty qna.image1 }">
+                	<img src="${contextPath}/product/qnaDownload.do?qna_image=${qna.image1}">
+                </c:if>
+               <c:if test="${not empty qna.image2 }">
+                	<img src="${contextPath}/product/qnaDownload.do?qna_image=${qna.image2}">
+                </c:if>
+                <c:if test="${not empty qna.image3 }">
+                	<img src="${contextPath}/product/qnaDownload.do?qna_image=${qna.image3}">
+                </c:if>
+               <p>
+                <a href="${contextPath }/product/productBoardQnaForm.do?product_id=${vo.product_id}&product_qna_num=${qna.product_qna_num}">
+           		<button style="float: right;"type="button" class="btn btn-purple btn-soft mb-1">
+               	수정
+            	</button>
+         		</a> 
+         		<a href="${contextPath }/product/productBoardQnaForm.do?product_id=${vo.product_id}">
+            	<button style="float: right;"type="button" class="btn btn-purple btn-soft mb-1">
+               	삭제
+            	</button>
+         		</a> 
+               </p>
                </div>
+               
+          
+            
+            
             </div>
          </div>
          </c:forEach>
@@ -456,7 +483,7 @@
       </div>
       <!-- 글쓰기 -->
       
-      
+         
       
       <!-- pagination -->
                      <div>

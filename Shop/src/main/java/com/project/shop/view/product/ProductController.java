@@ -1,7 +1,11 @@
 package com.project.shop.view.product;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -126,6 +131,7 @@ public class ProductController extends BaseController{
 
 	@RequestMapping(value="productBoardQnaForm.do")
 	public ModelAndView boardQnaForm(@RequestParam(value="product_id") String product_id,
+									@RequestParam(value="product_qna_num") String product_qna_num,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView (viewName);
@@ -135,11 +141,16 @@ public class ProductController extends BaseController{
 		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
 		MemberVO memberInfo =(MemberVO)session.getAttribute("memberInfo");
 		System.out.println("isLogOn : "+isLogOn);
+	
+		//수정하기 버튼 => 해당글에 대한 정보 가져오기
+		
+		
 		if(isLogOn == null || isLogOn == false) {
 			mav.setViewName("/member/loginForm");
 		}else if(isLogOn == true) {
 			mav.addObject("memberInfo", memberInfo);
 			mav.addObject("product_id", product_id );
+			mav.addObject("product_qna_num", product_qna_num);
 		}
 		return mav;
 	}
@@ -150,6 +161,7 @@ public class ProductController extends BaseController{
 		Map map = new HashMap();
 		
 		String product_id = null;
+		
 		//일반타입 파라미터 얻어오기
 		Enumeration enu = multipartRequest.getParameterNames();
 		while(enu.hasMoreElements()) {
@@ -161,16 +173,67 @@ public class ProductController extends BaseController{
 				product_id = multipartRequest.getParameter("product_id");
 			}
 		}
+				//파일타입 파라미터 얻어오기 
+		System.out.println("엥1");
+		List<String> fileList = fileProcess(multipartRequest);//이미지 이름 리스트
+		System.out.println("엥2");
 		
-		
-		//파일타입 파라미터 얻어오기 - 추가 구현해야 함
-		
-		
+		int i=1;
+		if(fileList !=null) {
+			for(String image : fileList) {
+				if(image != null) {
+					map.put("image"+i, image);
+					i++;
+				}
+			}
+		}else {
+			for(i=1 ; i <=3 ; i++) {
+				System.out.println(i+"번째 등록된 파일이 없습니다.");
+				//map.put("image"+i, "null");
+				//i++;
+			}
+		}
 		productBoardService.addBoardQna(map);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/product/productDetail.do?product_id="+product_id);
 		return mav;
 	}
 	
+	//파일타입 파라미터 얻어오기 
+	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest) throws Exception{
+		List<String> fileNameList = new ArrayList<String>();
+	   
+		List<MultipartFile> fileList = multipartRequest.getFiles("file");
+		String path = "C:\\board\\";
+		//String path = "/resources/images/productQna/";
+		
+		if(fileList.isEmpty()) {
+			return null;
+		}
+	
+		for(MultipartFile mfile : fileList) {
+			String originalFileName = mfile.getOriginalFilename();
+			fileNameList.add(originalFileName);
+			System.out.println("이미지 파일 이름 : "+originalFileName);
+			
+			String saveFile = path + originalFileName;
+			File file = new File(saveFile);
+			if(!file.exists()) {
+				if(file.getParentFile().mkdirs()) {
+					file.createNewFile();
+				}
+			}
+			try {
+				mfile.transferTo(new File(saveFile));
+				System.out.println("저장...?");
+			}catch(IllegalStateException e) {
+				e.printStackTrace();
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return fileNameList;
+	}
 	
 } 

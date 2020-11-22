@@ -12,12 +12,14 @@
 		<result property="member_id" column="member_id" />
 		<result property="title" column="title" />
 		<result property="contents" column="contents" />
-		<result property="image" column="image" />
+		<result property="image1" column="image1" />
 		<result property="qna_category_num" column="qna_category_num" />
 		<result property="reg_date" column="reg_date" />
 		<result property="views" column="views"/>
 		<result property="parent_num" column="parent_num" />
 		<result property="rowNum" column="listNum"/>
+		<result property="image2" column="image2" />
+		<result property="image3" column="image3" />
 	</resultMap>	
 	
 	<!-- 아진 -->
@@ -44,8 +46,13 @@
 	<insert id="insertBoardQna" parameterType="java.util.HashMap">
 		INSERT INTO PRODUCT_QNA VALUES ( 
 			#{product_qna_num}, #{product_id}, #{member_id},
-			#{title}, #{contents}, null, 3,
-			sysdate, 0, 0 
+			#{title}, #{contents},#{image1}, 3,
+			sysdate, 0, 0 , #{image2} , #{image3}
 		)
 	</insert>
+	
+	<!-- 게시글에 대한 정보 가져오기 -->
+	<select id="selectQna" parameterType="int" resultType="product_qnaVO">
+	  SELECT * FROM PRODUCT_QNA WHERE product_qna_num = #{product_qna_num}
+	</select>
 </mapper>
