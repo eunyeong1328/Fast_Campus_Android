@@ -1,5 +1,7 @@
 package com.project.shop.myaccount.impl;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -18,4 +20,8 @@ public class MyAccountDAO {
 		return memberVO;
 	}
 	
+	public void modifyMemberInfo(HashMap memberMap) throws DataAccessException{
+		System.out.println("MyAccountDAO = " + memberMap.get("member_id"));
+		sqlSession.update("mappers.myaccount.modifyMemberInfo",memberMap);
+	}
 }

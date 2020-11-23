@@ -1,9 +1,14 @@
 package com.project.shop.view.myaccount;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,32 +24,11 @@ import com.project.shop.myaccount.MyAccountService;
 public class MyAccountController extends BaseController{
 	@Autowired
 	private MyAccountService myAccountService;
-//	@Autowired
-//	private MemberVO memberVO;
+	@Autowired
+	private MemberVO memberVO;
 	
-//	 @RequestMapping(value="/orders.do" ,method = RequestMethod.GET)
-//	 public ModelAndView orders(@RequestParam(required = false,value="message")  String message,
-//			   HttpServletRequest request, HttpServletResponse response)  throws Exception {
-//		HttpSession session=request.getSession();
-//		session=request.getSession();
-//		session.setAttribute("side_menu", "my_page"); //마이페이지 사이드 메뉴로 설정한다.
-//		
-//		String viewName=(String)request.getAttribute("viewName");
-//		ModelAndView mav = new ModelAndView(viewName);
-//		
-//
-//		return mav;
-//	}
-//	   
-//	 @RequestMapping(value="/favorites.do" ,method = RequestMethod.GET)
-//	   public ModelAndView favorites(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//	      ModelAndView mav = new ModelAndView();
-//	      HttpSession session=request.getSession();
-//	      
-//	      return mav;
-//	   }
-	 
-	@RequestMapping(value ="/account-settings.do",method = RequestMethod.GET) //회원정보 뛰우기
+	
+	@RequestMapping(value ="/account-settings.do" ) //회원정보 뛰우기
 	   public ModelAndView accountSettingsInfo(@RequestParam("member_id") String member_id,
 			   HttpServletRequest request, HttpServletResponse response) throws Exception {
 		 String viewName=(String)request.getAttribute("viewName");
@@ -57,13 +41,28 @@ public class MyAccountController extends BaseController{
 		 return mav;
 	   }
 	 
-//	 @RequestMapping(value="/modifyMyInfo.do", method = RequestMethod.POST)
-//	public ResponseEntity modifyInfo(@RequestParam("attribute") String attribute, // 수정할 회원 정보 속성을 저장한다.
-//								@RequestParam("value") String value, //회원 정보의 속성 값을 저장한다.
-//								HttpServletRequest request, HttpServletResponse response
-//			) throws Exception{
-//		return null;
-//		 
-//	 }
-	 
+	@RequestMapping(value="/modifyMemberInfo.do")
+	public ModelAndView modifyMemberInfo(
+			@RequestParam HashMap<String, String> memberMap,
+		HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		HttpSession session=request.getSession();
+		memberVO=(MemberVO)session.getAttribute("member_Info");
+		
+		System.out.println("HashMap memberid = " + memberMap.get("member_id"));		
+		System.out.println("password = " + memberMap.get("password"));
+		memberVO = (MemberVO)myAccountService.modifyMemberInfo(memberMap);
+		System.out.println("수정 처리 완료!!");
+		
+		//수정된 회원 정보를 다시 세션에 저장한다.
+		session.removeAttribute("member_Info");
+		session.setAttribute("member_Info", memberVO);
+		System.out.println("후 요청 : " + memberVO);
+		
+		String message="변경되었습니다."; 
+        mav.addObject("message", message);
+        mav.setViewName("redirect:/myaccount/account-settings.do?member_id=" + memberVO.getMember_id());
+		return mav;
+
+	}
 }

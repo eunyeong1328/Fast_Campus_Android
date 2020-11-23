@@ -102,7 +102,7 @@ public class MemberController extends BaseController{
       return resEntity;
    }
    
-   @RequestMapping(value="/overlapped.do" ,method = RequestMethod.POST)//id 以묐났泥댄겕
+   @RequestMapping(value="/overlapped.do" ,method = RequestMethod.POST)//id 
    public ResponseEntity overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
       ResponseEntity resEntity = null;
       String result = memberService.overlapped(id);
