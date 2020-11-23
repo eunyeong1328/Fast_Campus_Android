@@ -19,6 +19,10 @@
       <definition name="/member/signupForm" extends="baseLayout">
          <put-attribute name="body" value="/WEB-INF/views/member/signupForm.jsp" />
       </definition>
+      <!-- 비밀번호 찾기 -->
+       <definition name="/member/signin-password" extends="baseLayout">
+         <put-attribute name="body" value="/WEB-INF/views/member/signin-password.jsp" />
+      </definition>
   
 </tiles-definitions>
 
