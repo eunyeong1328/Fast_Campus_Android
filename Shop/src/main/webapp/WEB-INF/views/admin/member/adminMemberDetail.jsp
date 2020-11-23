@@ -66,11 +66,6 @@
 	}
 </script>
 
-<body class="layout-admin aside-sticky header-sticky">
-
-	<div id="wrapper" class="d-flex align-items-stretch flex-column">
-
-		<div id="wrapper_content" class="d-flex flex-fill">
 
 
 			<!-- MIDDLE -->
@@ -422,4 +417,3 @@
 			</div>
 			<!-- /MIDDLE -->
 
-		</div>

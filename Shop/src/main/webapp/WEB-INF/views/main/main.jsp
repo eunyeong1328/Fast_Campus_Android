@@ -825,7 +825,7 @@
 
 
 						<!-- item -->
-						<c:forEach var="bestlist" items="${bestlist}" begin="0" end="3">
+						<c:forEach var="newlist" items="${newlist}" begin="0" end="3">
 							<div class="order-2 col-6 col-lg-3 mb-4 mb-2-xs">
 
 							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
@@ -855,7 +855,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist.product_image}" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${newlist.product_image}" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -866,15 +866,15 @@
 											.text-truncate
 										-->
 										<span class="d-block fs--16 max-h-50 overflow-hidden">
-											<c:out value="${bestlist.product_name}" />
+											<c:out value="${newlist.product_name}" />
 										</span>
 
 										<!-- price -->
 										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
 
-											<del class="text-muted"><c:out value="${bestlist.price}" />원</del>  
+											<del class="text-muted"><c:out value="${newlist.price}" />원</del>  
 
-											<fmt:parseNumber value="${bestlist.price*((100-bestlist.discount)/100)}"/>원
+											<fmt:parseNumber value="${newlist.price*((100-newlist.discount)/100)}"/>원
 										</span>
 
 										<!-- rating -->
@@ -998,11 +998,6 @@
 			<!-- /INFO BOX -->
 
 
-
-
-			<!-- Footer -->
-			<footer id="footer" class="shadow-xs">
-				
 				<div class="container py-5">
 
 					<div class="row">
@@ -1168,104 +1163,4 @@
 				</div>
 
 
-				<div class="border-top">
-					<div class="container text-center py-5">
-
-						<!-- logo -->
-						<span class="h--70 d-inline-flex align-items-center">
-							<img src="${contextPath}/resources/images/drjjlogo.svg" width="110" height="70" alt="...">
-						</span>
-
-						<p class="m-0 text-gray-500 fs--14">
-
-							&copy; My Company Inc. 2015 – 2019. 
-
-							<br>
-
-							All Rights Reserved.
-						
-						</p>
-
-
-						<div class="mt-5"> 
-
-							<!-- social -->
-							<a href="#!" class="btn btn-sm btn-light transition-hover-top mb-2 rounded-circle" rel="noopener" aria-label="facebook page">
-								<i class="fi fi-social-facebook"></i> 
-							</a>
-
-							<a href="#!" class="btn btn-sm btn-light transition-hover-top mb-2 rounded-circle" rel="noopener" aria-label="twitter page">
-								<i class="fi fi-social-twitter"></i> 
-							</a>
-
-							<a href="#!" class="btn btn-sm btn-light transition-hover-top mb-2 rounded-circle" rel="noopener" aria-label="linkedin page">
-								<i class="fi fi-social-linkedin"></i> 
-							</a>
-
-							<a href="#!" class="btn btn-sm btn-light transition-hover-top mb-2 rounded-circle" rel="noopener" aria-label="youtube page">
-								<i class="fi fi-social-youtube"></i> 
-							</a>
-
-
-							<!-- credit cards -->
-							<ul class="list-inline mb-0 mt-2"> 
-
-								<li class="list-inline-item m-0"> 
-									<img width="38" height="24" class="lazy" data-src="${contextPath}/resources/assets/images/credit_card/visa.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="visa credit card icon">
-								</li> 
-
-								<li class="list-inline-item m-0"> 
-									<img width="38" height="24" class="lazy" data-src="${contextPath}/resources/assets/images/credit_card/mastercard.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="mastercard credit card icon">
-								</li> 
-
-								<li class="list-inline-item m-0"> 
-									<img width="38" height="24" class="lazy" data-src="${contextPath}/resources/assets/images/credit_card/discover.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="discover credit card icon">
-								</li>
-
-								<li class="list-inline-item m-0"> 
-									<img width="38" height="24" class="lazy" data-src="${contextPath}/resources/assets/images/credit_card/amazon.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="amazon credit card icon">
-								</li>
-								
-								<li class="list-inline-item m-0"> 
-									<img width="38" height="24" class="lazy" data-src="${contextPath}/resources/assets/images/credit_card/paypal.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="paypal credit card icon">
-								</li>
-
-								<li class="list-inline-item m-0"> 
-									<img width="38" height="24" class="lazy" data-src="${contextPath}/resources/assets/images/credit_card/skrill.svg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="skrill credit card icon">
-								</li>
-
-								<!-- more vendors on ${contextPath}/resources/assets/images/credit_card/ -->
-
-							</ul>
-
-						</div>
-
-
-					</div>
-				</div>
-
-			</footer>
-			<!-- /Footer -->
-
-
-		</div><!-- /#wrapper -->
-
-
-		<!-- 
-			SHOP AJAX MODAL : ON LOAD 
-
-			Note: #onload_modal_shop is also used inside the modal
-			for the button "stop showing" to set a cookie!
-		-->
-<%-- 		<div id="onload_modal_shop" class="hide js-onload js-ajax-modal" 
-		    data-href="${contextPath}/resources/_ajax/modal_shop.html" 
-		    data-ajax-modal-delay="3000" 
-		    data-ajax-modal-size="modal-lg" 
-		    data-ajax-modal-centered="true" 
-		    data-ajax-modal-backdrop=""></div> --%>
-
-
-		<script src="${contextPath}/resources/assets/js/core.js"></script>
-		
-	</body>
-</html>
+			

@@ -100,32 +100,102 @@
 		select * from product p , item i where p.product_id=i.product_id order by i.reg_date desc
 	</select>
 	
-	<insert id=" insertProduct" parameterType="productVO">
+	<insert id="insertProduct" parameterType="productVO">
 		<![CDATA[
 			insert into product (product_id,product_name,product_detail,sales_unit,product_size,packing_type,product_image,supplier,product_category_num)
 			values(#{product_id},#{product_name},#{product_detail},#{sales_unit},#{product_size},#{packing_type},#{product_image},#{supplier},${product_category_num})
 		]]>
 	</insert>
 	
-	<insert id=" insertProductCategory" parameterType="productVO">
+	<insert id="insertProductCategory" parameterType="productVO">
 		<![CDATA[
 			insert into product_category (product_category_num,product_category_name)
 			values(#{product_category_num},#{product_category_name})
 		]]>
 	</insert>
 	
-	<insert id=" insertProductOption" parameterType="productVO">
+	<insert id="insertProductOption" parameterType="productVO">
 		<![CDATA[
 			insert into product_option (option_name,option_price,option_quantity,product_id)
 			values(#{option_name},#{option_price},#{option_quantity},#{product_id})
 		]]>
 	</insert>
 	
-	<insert id=" insertitem" parameterType="productVO">
+	<insert id="insertItem" parameterType="productVO">
 		<![CDATA[
 			insert into item (item_num,price,stock,sales,discount,reg_date,unit_price,product_id)
 			values(#{item_num},#{price},#{stock},#{sales},#{discount},#{reg_date},#{unit_price},#{product_id})
 		]]>
 	</insert>
+	
+	<select id="allList" resultType="productVO">
+		select *
+		from product p
+		left outer join item i on i.product_id = p.product_id
+		left outer join product_category c on c.product_category_num = p.product_category_num
+		order by i.reg_date
+	</select>
+	
+	<delete id="deleteProductOption" parameterType="String">
+		delete from product_option where product_id=#{product_id}
+	</delete>
+	
+	<delete id="deleteItem" parameterType="String">
+		delete from item where product_id=#{product_id}
+	</delete>
+	
+	<delete id="deleteProduct" parameterType="String">
+		delete from product where product_id=#{product_id}
+	</delete>
+	
+	<delete id="deleteProductOptionName" parameterType="String">
+		delete from product_option where option_name=#{option_name}
+	</delete>
+	
+	<select id="loadOne" parameterType="String" resultType="productVO">
+		select p.product_id,p.product_name,p.product_detail,p.sales_unit,p.product_size,p.packing_type,p.supplier,
+		i.item_num,i.price,i.stock,i.sales,i.discount,i.reg_date,i.unit_price,c.product_category_num
+		from product p
+		left outer join item i on i.product_id = p.product_id
+		left outer join product_category c on c.product_category_num = p.product_category_num
+		where p.product_id=#{product_id}
+	</select>
+	
+	<update id="updateItem" parameterType="productVO">
+		update item
+		set price=#{price},
+		stock=#{stock},
+		sales=#{sales},
+		discount=#{discount},
+		reg_date=#{reg_date},
+		unit_price=#{unit_price} 
+		
+		where product_id=#{product_id}
+	</update>
+	
+	<update id="ProductOption" parameterType="productVO">
+		update product_category
+		set option_name=#{option_name},
+		option_price=#{option_price},
+		option_quantity=#{option_quantity} 
+		
+		where product_id=#{product_id}
+	</update>
+	
+	<update id="updateProduct" parameterType="productVO">
+		update product
+		set product_name=#{product_name},
+		product_detail=#{product_detail},
+		sales_unit=#{sales_unit},
+		packing_type=#{packing_type},
+		product_image=#{product_image},
+		supplier=#{supplier} 
+		
+		where product_id=#{product_id}
+	</update>
+	
+	<select id="loadOption" parameterType="productVO" resultType="productVO">
+		select * from product_option where product_id=#{product_id}
+	</select>
 	
 </mapper>

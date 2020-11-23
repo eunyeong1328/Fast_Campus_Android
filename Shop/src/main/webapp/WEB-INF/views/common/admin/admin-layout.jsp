@@ -33,7 +33,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
 
 		<!-- favicon -->
-		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="shortcut icon" href="${contextPath}/resources/images/favicon.ico">
 		<link rel="apple-touch-icon" href="${contextPath}/resources/demo.files/logo/icon_512x512.png">
 
 		<link rel="manifest" href="${contextPath}/resources/assets/images/manifest/manifest.json">
@@ -43,16 +43,33 @@
 
 </head>
 
+	
+	<tiles:insertAttribute name="tag" />
 
-			<header>
-				<tiles:insertAttribute name="aside" /> 
-			</header>
-			<article>
-			 	<tiles:insertAttribute name="body" />
-			</article>
-			<footer>
-				<tiles:insertAttribute name="footer" />
-			</footer>
-</body>
-        
-        
+			<tiles:insertAttribute name="header" />
+
+			<div id="wrapper_content" class="d-flex flex-fill">
+			
+				<tiles:insertAttribute name="aside" />
+				
+				<tiles:insertAttribute name="body" />
+			
+			</div>
+
+			<tiles:insertAttribute name="footer" />
+		
+		</div>
+		
+		<script src="${contextPath}/resources/assets/js/core.min.js"></script>
+
+		<div id="page_js_files"><!-- specific page javascript files here --></div>
+
+	</body>
+</html>
+
+
+
+
+
+
+

@@ -7,8 +7,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <%
   request.setCharacterEncoding("UTF-8");
-
-%>
+%>  
 
 <!--여기서부터 시작-->
 			<!-- PAGE TITLE -->

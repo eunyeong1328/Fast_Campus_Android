@@ -1,12 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"
     isELIgnored="false"
     %>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<%
+  request.setCharacterEncoding("utf-8");
+%>
 
-			<!-- FOOTER -->
+<!-- FOOTER -->
 			<footer id="footer" class="aside-primary text-white">
 				<div class="p-3 fs--14">
 					&copy; My Company LLC
@@ -74,34 +77,3 @@
 				</div>
 			</footer>
 			<!-- /FOOTER -->
-
-
-		</div><!-- /#wrapper -->
-
-
-
-		<script src="${contextPath}/resources/assets/js/core.js"></script>
-
-
-		<!--
-
-			[SOW Ajax Navigation Plugin] [AJAX ONLY, IF USED]
-			If you have specific page js files, wrap them inside #page_js_files 
-			Ajax Navigation will use them for this page! 
-			This way you can load this page in a normal way and/or via ajax.
-			(you can change/add more containers in sow.config.js)
-
-			+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			NOTE: This is mostly for frontend, full ajax navigation!
-			Admin Panels use a backend, so the content should be served without
-			menu, header, etc! Else, the ajax has no reason to be used because will
-			not minimize server load!
-
-			/documentation/plugins-sow-ajax-navigation.html
-			+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-		-->
-		<div id="page_js_files"><!-- specific page javascript files here --></div>
-
-	</body>
-</html>

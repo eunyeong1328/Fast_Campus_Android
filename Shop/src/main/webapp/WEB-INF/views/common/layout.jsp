@@ -8,6 +8,8 @@
 <%
   request.setCharacterEncoding("utf-8");
 %>
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 		<meta name="description" content="...">
 
@@ -32,6 +34,10 @@
 
 		<link rel="manifest" href="${contextPath}/resources/assets/images/manifest/manifest.json">
 		<meta name="theme-color" content="#377dff">
+		
+		<!-- 구글 로그인 api -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+  <script src="https://apis.google.com/js/api:client.js"></script>
 
 		<!--font-->
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
@@ -39,13 +45,13 @@
 	</head>
 <body>
 		<div id="wrap">
-			<header>
 				<tiles:insertAttribute name="header" /> <!-- tiles.xml의 <definition>의 하위 태그인 <put-attribute>태그의 name이 header인 JSP를 표시합니다. -->
-			</header>
 			<article>
 			 	<tiles:insertAttribute name="body" />
 			</article>
+			<tiles:insertAttribute name="footer"/>
 		</div>
 </body>
         
-        
+        </html>
+		<script src="${contextPath}/resources/assets/js/core.js"></script>

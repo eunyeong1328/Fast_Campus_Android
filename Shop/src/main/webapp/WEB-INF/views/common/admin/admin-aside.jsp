@@ -1,15 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"
     isELIgnored="false"
     %>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}" />
-
-
-
-
-				<!-- 
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<%
+  request.setCharacterEncoding("utf-8");
+%>
+<!-- 
 
 					SIDEBAR 
 
@@ -94,12 +93,12 @@
 										<ul class="nav flex-column fs--15">
 
 											<li class="nav-item">
-												<a class="nav-link js-ajax" href="util-text-backgrounds.html">
+												<a class="nav-link " href="${contextPath }/admin/productList.do">
 													상품목록
 												</a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link js-ajax" href="util-borders.html">
+												<a class="nav-link " href="${contextPath }/admin/productAdd.do">
 													상품입력
 												</a>
 											</li>
@@ -150,7 +149,7 @@
 									<h6 class="fs--15 mb-1 text-white font-weight-normal">고객센터</h6>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link js-ajax" href="#">
+									<a class="nav-link js-ajax" href="${contextPath}/admin/noticeList.do">
 										<i class="fi fi-loud"></i>
 										공지사항
 									</a>

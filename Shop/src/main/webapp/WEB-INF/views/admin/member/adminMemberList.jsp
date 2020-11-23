@@ -15,14 +15,6 @@
 		
 	}
 </script>
-<body class="layout-admin aside-sticky header-sticky">
-
-	<div id="wrapper" class="d-flex align-items-stretch flex-column">
-
-
-
-
-		<div id="wrapper_content" class="d-flex flex-fill">
 
 			<!-- MIDDLE -->
 			<div id="middle" class="flex-fill">
@@ -214,8 +206,7 @@
 															<td>일반</td>
 
 															<td>${item.member_date}</td>
-
-															<!-- 															
+															
 														<!-- /item -->
 													</c:forEach>
 												</c:otherwise>
@@ -281,5 +272,3 @@
 
 			</div>
 			<!-- /MIDDLE -->
-
-		</div>

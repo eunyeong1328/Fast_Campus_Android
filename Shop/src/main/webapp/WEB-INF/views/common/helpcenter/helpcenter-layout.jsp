@@ -51,24 +51,23 @@
 	<!--font-->
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
 	
+	<c:if test='${not empty message }'>
+		<script>
+			alert('${message}')
+		</script>
+	</c:if>
+	
 </head>
 
 <body class="layout-admin aside-sticky header-sticky">
 
 	<div id="wrapper" class="d-flex align-items-stretch flex-column">
 
-		<header>
-			<tiles:insertAttribute name="header" />
-			<!-- tiles.xml의 <definition>의 하위 태그인 <put-attribute>태그의 name이 header인 JSP를 표시합니다. -->
-		</header>
+		<tiles:insertAttribute name="header" />
 
-		<article>
-			<tiles:insertAttribute name="body" />
-		</article>
+		<tiles:insertAttribute name="body" />
 
-		<footer>
-			<tiles:insertAttribute name="footer" />
-		</footer>
+		<tiles:insertAttribute name="footer" />
 
 	</div>
 	
