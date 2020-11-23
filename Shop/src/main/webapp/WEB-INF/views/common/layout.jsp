@@ -49,9 +49,11 @@
 			<article>
 			 	<tiles:insertAttribute name="body" />
 			</article>
-			<tiles:insertAttribute name="footer"/>
+		<footer>
+			<tiles:insertAttribute name="footer" />
+		</footer>
 		</div>
 </body>
         
-        </html>
 		<script src="${contextPath}/resources/assets/js/core.js"></script>
+        </html>
