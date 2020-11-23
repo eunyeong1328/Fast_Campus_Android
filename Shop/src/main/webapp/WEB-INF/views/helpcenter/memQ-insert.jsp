@@ -76,7 +76,7 @@
                                         </div>
                                         <div class="memq-contents">
                                             <p>내용</p>
-                                            <p>
+                                            <div>
                                                 1:1 문의 작성 전 확인해주세요!<br><br>
                                                 반품/환불<br>
                                                 - 제품 하자 혹은 이상으로 반품(환불)이 필요한 경우 사진과 함께 구체적인 내용을 남겨주세요.<br><br>
@@ -86,7 +86,7 @@
                                                 배송<br>
                                                 - 배송일 및 배송시간 지정은 불가능합니다.<br><br>
                                                 # 전화번호, 이메일, 주소, 계좌번호 등의 상세 개인정보가 문의 내용에 저장되지 않도록 주의해 주시기 바랍니다.<br>
-                                            </p>
+                                            </div>
                                             <textarea name="contents" rows="5" cols="80"></textarea>
                                         </div>
                                         <div class="memq-image">
@@ -95,10 +95,9 @@
                                         </div>
                                         <div class="memq-submit">
                                             <input type="submit" value="등록">
+                                    		<a href="page-list.html" class="list">목록</a>
                                         </div>
                                     </form>
-
-                                    <a href="page-list.html" class="list">목록</a>
 
                                 </div>
                                 <!-- insert form end -->

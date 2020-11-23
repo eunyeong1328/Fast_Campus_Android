@@ -42,6 +42,7 @@
 							<h3 class="joy-table-title">
                                 1:1 문의
                                 <p>모든 의문... 쩝쩝박사에게!</p>
+								<a class="insert" href="memQ-insert.do?nowTab=${paging.nowTab }">글쓰기</a>
                             </h3>
 							
 							<table class="joy-table">
@@ -105,7 +106,6 @@
 									<li><a href="memberQ-tab.do?nowTab=${paging.nowTab }&cPage=${paging.endPage + 1 }">Next</a></li>
 								</c:if>
 								
-								<li><a class="insert" href="memQ-insert.do?nowTab=${paging.nowTab }">글쓰기</a></li>
 							</ul>
 						</div>
 						<!-- tab-3 end -->
