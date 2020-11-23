@@ -42,6 +42,7 @@ public class AdminController extends BaseController {
 	public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		System.out.println("admin: " + viewName);
 		
 		getPaging(request, response);
 		mav.addObject("paging", paging);
@@ -57,12 +58,38 @@ public class AdminController extends BaseController {
 	public ModelAndView faqList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		System.out.println("admin: " + viewName);
 		
 		getPaging(request, response);
 		mav.addObject("paging", paging);
 		
 		List<BoardVO> faq = boardService.getFAQList(map);
 		mav.addObject("FAQList", faq);
+		
+		return mav;
+	}
+	
+//	관리자 1:1 문의
+	@RequestMapping(value="memberQnaList.do")
+	public ModelAndView memQList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		System.out.println("admin: " + viewName);
+		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		
+		if (memberVO != null && memberVO.getMember_id().equals("admin")) {
+			getPaging(request, response);
+			mav.addObject("paging", paging);
+			List<BoardVO> memQ = boardService.getMemQListAll(map);
+			mav.addObject("MemQList", memQ);
+			mav.setViewName(viewName);
+		} else {
+			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
+			mav.addObject("message", message);
+			mav.setViewName("/member/loginForm");
+		}
 		
 		return mav;
 	}
@@ -179,19 +206,15 @@ public class AdminController extends BaseController {
 	
 //	Paging
 	public void getPaging(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
-		String nowTab = request.getParameter("nowTab");
-		
-		if (nowTab == null || nowTab == "tab-1") {
-			paging.setNowTab("tab-1");
+		String viewName = (String) request.getAttribute("viewName");
+		System.out.println("paging admin: " + viewName);
+
+		if (viewName.equals("/admin/noticeList")) {
 			paging.setTotalRecord(pagingService.getNoticeCount());
-		} else if (nowTab.equals("tab-2")) {
-			paging.setNowTab(nowTab);
+		} else if (viewName.equals("/admin/faqList")) {
 			paging.setTotalRecord(pagingService.getFAQCount());
-		} else if (nowTab.equals("tab-3")) {
-			paging.setNowTab(nowTab);
-			paging.setTotalRecord(pagingService.getMemQCount(memberVO));
+		} else if (viewName.equals("/admin/memberQnaList")) {
+			paging.setTotalRecord(pagingService.getMemQCountAll());
 		}
 		
 //		전체 게시물 끝글번호 setter (미완성)

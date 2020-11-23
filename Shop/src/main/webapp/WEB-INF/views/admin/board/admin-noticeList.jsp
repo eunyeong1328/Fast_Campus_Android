@@ -330,7 +330,7 @@
 													</c:if>
 													<c:if test="${paging.beginPage != 1}">
 														<li class="page-item">
-															<a class="page-link" href="noticeList.do?nowTab=${paging.nowTab }&cPage=${paging.endPage - 1 }" tabindex="-1" aria-disabled="true">Prev</a>
+															<a class="page-link" href="noticeList.do?cPage=${paging.endPage - 1 }" tabindex="-1" aria-disabled="true">Prev</a>
 														</li>
 													</c:if>
 													
@@ -354,7 +354,7 @@
 													</c:if>
 													<c:if test="${paging.endPage < paging.totalPage }">
 														<li class="page-item">
-															<a class="page-link" href="noticeList.do?nowTab=${paging.nowTab }&cPage=${paging.endPage + 1 }">Next</a>
+															<a class="page-link" href="noticeList.do?cPage=${paging.endPage + 1 }">Next</a>
 														</li>
 													</c:if>
 

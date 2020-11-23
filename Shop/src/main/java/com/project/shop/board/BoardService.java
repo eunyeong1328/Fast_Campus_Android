@@ -9,8 +9,10 @@ public interface BoardService {
 	List<BoardVO> getNoticeList(HashMap<String, Object> map);
 //	FAQ List	
 	List<BoardVO> getFAQList(HashMap<String, Object> map);
-//	1:1 List
+//	1:1 List (로그인회원 id로 검색)
 	List<BoardVO> getMemQList(HashMap<String, Object> map);
+//	1:1 List (id가 admin일 때 전체 리스트 불러오기)
+	List<BoardVO> getMemQListAll(HashMap<String, Object> map);
 
 //	Notice detail
 	BoardVO getNotice(BoardVO vo);

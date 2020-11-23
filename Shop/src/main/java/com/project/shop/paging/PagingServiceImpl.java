@@ -26,4 +26,9 @@ public class PagingServiceImpl implements PagingService {
 		return pagingDAO.getMemQCount(memberVO);
 	}
 
+	@Override
+	public int getMemQCountAll() {
+		return pagingDAO.getMemQCountAll();
+	}
+
 }

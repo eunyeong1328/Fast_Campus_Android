@@ -56,4 +56,9 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.memQUpdate(vo);
 	}
 
+	@Override
+	public List<BoardVO> getMemQListAll(HashMap<String, Object> map) {
+		return boardDAO.getMemQListAll(map);
+	}
+
 }

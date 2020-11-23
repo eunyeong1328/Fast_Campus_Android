@@ -10,7 +10,10 @@ public interface PagingService {
 //	FAQ 글 개수 구하기
 	int getFAQCount();
 
-//	MemQ 글 개수 구하기
+//	MemQ 로그인회원 글 개수 구하기
 	int getMemQCount(MemberVO memverVO);
+	
+//	MemQ 전체 글 개수 구하기
+	int getMemQCountAll();
 	
 }

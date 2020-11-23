@@ -40,7 +40,7 @@ public class FileDownloadController{
 		String filePath=CURR_IMAGE_REPO_PATH+"\\"+product_image;
 		File image=new File(filePath);
 		
-		System.out.println("이미지 표시 왜안돼냐고 ");
+		System.out.println("이미지 표시 왜안돼냐고 zzzzㅋㅋㅋㅋ개웃기다이거 ");
 		if (image.exists()) { 
 			//Thumbnails.of(image).size(121,154).outputFormat("png").toOutputStream(out);
 			Thumbnails.of(image).size(586,600).outputFormat("png").toOutputStream(out);

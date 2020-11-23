@@ -26,13 +26,13 @@
 					<div class="container">
 						<ul class="nav">
 							<li class="tab-link" data-tab="tab-1">
-								<a href="notice-tab.do?nowTab=tab-1">공지사항</a>
+								<a href="notice-tab.do">공지사항</a>
 							</li>
 							<li class="tab-link" data-tab="tab-2">
-								<a href="faq-tab.do?nowTab=tab-2">FAQ</a>
+								<a href="faq-tab.do">FAQ</a>
 							</li>
 							<li class="tab-link current" data-tab="tab-3">
-								<a href="memberQ-tab.do?nowTab=tab-3">1:1 문의</a>
+								<a href="memberQ-tab.do">1:1 문의</a>
 							</li>
 						</ul>
 			
@@ -42,7 +42,7 @@
 							<h3 class="joy-table-title">
                                 1:1 문의
                                 <p>모든 의문... 쩝쩝박사에게!</p>
-								<a class="insert" href="memQ-insert.do?nowTab=${paging.nowTab }">글쓰기</a>
+								<a class="insert" href="memQ-insert.do">글쓰기</a>
                             </h3>
 							
 							<table class="joy-table">
@@ -86,7 +86,7 @@
 								</c:if>
 								<c:if test="${paging.beginPage != 1}">
 									<li>
-										<a href="memberQ-tab.do?nowTab=${paging.nowTab }&cPage=${paging.beginPage - 1 }">Prev</a>
+										<a href="memberQ-tab.do?cPage=${paging.beginPage - 1 }">Prev</a>
 									</li>
 								</c:if>
 									
@@ -95,7 +95,7 @@
 										<li class="active">${pageNo }</li>
 									</c:if>
 									<c:if test="${pageNo != paging.nowPage }">
-										<li><a href="memberQ-tab.do?nowTab=${paging.nowTab }&cPage=${pageNo }">${pageNo }</a></li>
+										<li><a href="memberQ-tab.do?cPage=${pageNo }">${pageNo }</a></li>
 									</c:if>
 								</c:forEach>
 									
@@ -103,7 +103,7 @@
 									<li><p class="disabled">Next</p></li>
 								</c:if>
 								<c:if test="${paging.endPage < paging.totalPage }">
-									<li><a href="memberQ-tab.do?nowTab=${paging.nowTab }&cPage=${paging.endPage + 1 }">Next</a></li>
+									<li><a href="memberQ-tab.do?cPage=${paging.endPage + 1 }">Next</a></li>
 								</c:if>
 								
 							</ul>

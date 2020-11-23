@@ -39,6 +39,7 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
+		System.out.println("member: " + viewName);
 		
 		getPaging(request, response);
 		mav.addObject("paging", paging);
@@ -55,6 +56,7 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
+		System.out.println("member: " + viewName);
 		
 		getPaging(request, response);
 		mav.addObject("paging", paging);
@@ -70,6 +72,7 @@ public class BoardController {
 	public ModelAndView getMemQList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
+		System.out.println("member: " + viewName);
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
@@ -81,6 +84,7 @@ public class BoardController {
 			List<BoardVO> MemQ = boardService.getMemQList(map);
 			mav.addObject("MemQList", MemQ);
 			mav.setViewName(viewName);
+			System.out.println("member: " + viewName);
 		} else {
 			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
 			mav.addObject("message", message);
@@ -95,6 +99,7 @@ public class BoardController {
 	public ModelAndView memQInsert(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
+		System.out.println("member: " + viewName);
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
@@ -102,6 +107,7 @@ public class BoardController {
 		if (memberVO != null && memberVO.getMember_id() != null) {
 			
 			mav.setViewName(viewName);
+			System.out.println("member: " + viewName);
 			String action = (String) request.getParameter("action");
 			
 			if (action != null && action.equals("memQ-insert")) {
@@ -115,6 +121,7 @@ public class BoardController {
 				vo.setMember_id(memberVO.getMember_id());
 				boardService.memQInsert(vo);
 				mav.setViewName("redirect:memberQ-tab.do?nowTab=tab-3");
+				
 			}
 			
 		} else {
@@ -215,18 +222,17 @@ public class BoardController {
 	
 //	Paging
 	public void getPaging(HttpServletRequest request, HttpServletResponse response) {
+		String viewName = (String) request.getAttribute("viewName");
+		System.out.println("paging member: " + viewName);
+		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
-		String nowTab = request.getParameter("nowTab");
 		
-		if (nowTab == null || nowTab == "tab-1") {
-			paging.setNowTab("tab-1");
+		if (viewName.equals("/board/notice-tab")) {
 			paging.setTotalRecord(pagingService.getNoticeCount());
-		} else if (nowTab.equals("tab-2")) {
-			paging.setNowTab(nowTab);
+		} else if (viewName.equals("/board/faq-tab")) {
 			paging.setTotalRecord(pagingService.getFAQCount());
-		} else if (nowTab.equals("tab-3")) {
-			paging.setNowTab(nowTab);
+		} else if (viewName.equals("/board/memberQ-tab")) {
 			paging.setTotalRecord(pagingService.getMemQCount(memberVO));
 		}
 		

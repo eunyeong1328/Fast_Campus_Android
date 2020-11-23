@@ -26,13 +26,13 @@
 					<div class="container">
 						<ul class="nav">
 							<li class="tab-link current" data-tab="tab-1">
-								<a href="notice-tab.do?nowTab=tab-1">공지사항</a>
+								<a href="notice-tab.do">공지사항</a>
 							</li>
 							<li class="tab-link" data-tab="tab-2">
-								<a href="faq-tab.do?nowTab=tab-2">FAQ</a>
+								<a href="faq-tab.do">FAQ</a>
 							</li>
 							<li class="tab-link" data-tab="tab-3">
-								<a href="memberQ-tab.do?nowTab=tab-3">1:1 문의</a>
+								<a href="memberQ-tab.do">1:1 문의</a>
 							</li>
 						</ul>
 						

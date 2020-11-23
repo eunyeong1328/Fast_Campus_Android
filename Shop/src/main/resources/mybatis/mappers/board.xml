@@ -44,7 +44,19 @@
 		AND f.faq_num = #{faq_num}
 	</select>
 	
-	<!-- 1:1 문의 전체 목록 불러오기 -->
+	<!-- 1:1 문의 전체 목록 -->
+	<select id="getMemQListAll" parameterType="hashmap" resultType="boardVO">
+		SELECT * FROM 
+			(SELECT ROWNUM R_NUM, A.* FROM 
+			(SELECT member_qna_num, title, contents, image, qna_category_name, 
+			order_num, member_id, email, phone, reg_date 
+			FROM MEMBER_QNA Q, QNA_CATEGORY C 
+			WHERE Q.qna_category_num = C.qna_category_num 
+			ORDER BY Q.member_qna_num DESC) A)
+		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
+	</select>
+	
+	<!-- 1:1 문의 로그인회원 목록 불러오기 -->
 	<select id="getMemQList" parameterType="hashmap" resultType="boardVO">
 		SELECT * FROM 
 			(SELECT ROWNUM R_NUM, A.* FROM 
@@ -110,5 +122,10 @@
 		FROM MEMBER_QNA
 		WHERE MEMBER_ID = #{member_id}
 	</select>
-
+	
+	<!-- 회원 1:1 문의 전체 글 갯수 -->
+	<select id="getMemQCountAll" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER_QNA
+	</select>
 </mapper>

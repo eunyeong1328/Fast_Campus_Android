@@ -25,5 +25,9 @@ public class PagingDAO {
 	public int getMemQCount(MemberVO memberVO) {
 		return board.selectOne("mapper.board.getMemQCount", memberVO);
 	}
+
+	public int getMemQCountAll() {
+		return board.selectOne("mapper.board.getMemQCountAll");
+	}
 	
 }

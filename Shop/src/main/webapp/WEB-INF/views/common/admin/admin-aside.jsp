@@ -149,7 +149,7 @@
 									<h6 class="fs--15 mb-1 text-white font-weight-normal">고객센터</h6>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link js-ajax" href="${contextPath}/admin/noticeList.do?nowTab=tab-1">
+									<a class="nav-link js-ajax" href="${contextPath}/admin/noticeList.do">
 										<i class="fi fi-loud"></i>
 										공지사항
 									</a>
@@ -161,7 +161,7 @@
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link js-ajax" href="${contextPath}/admin/faqList.do?nowTab=tab-2">
+									<a class="nav-link js-ajax" href="${contextPath}/admin/faqList.do">
 										<i class="fi fi-squared-info"></i>
 										자주하는 질문
 									</a>
@@ -173,7 +173,7 @@
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link js-ajax" href="">
+									<a class="nav-link js-ajax" href="${contextPath}/admin/memberQnaList.do">
 										<i class="fi fi-support-headphones"></i>
 										1:1 문의
 									</a>

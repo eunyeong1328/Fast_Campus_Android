@@ -15,33 +15,39 @@
 
 	<!-- 관리자 메인(대시보드) 레이아웃 -->
 	  <definition name="/admin/main" extends="adminLayout">
-	  <put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-mainTag.jsp"/>
+	  <put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-mainTag.jsp"/>
          <put-attribute name="body" value="/WEB-INF/views/admin/admin-main.jsp" />
       </definition>  
       
       <!-- 관리자 회원목록 레이아웃 -->
 	  <definition name="/admin/member/memberList" extends="adminLayout">
-	  	<put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-boardTag.jsp"/>
+	  	<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
          <put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberList.jsp" />
       </definition>  
       
       <!-- 관리자 회원상세 레이아웃 -->
       <definition name="/admin/member/memberDetail" extends="adminLayout">
-      	 <put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-boardTag.jsp"/>
+      	 <put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
          <put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberDetail.jsp" />
       </definition>  
       
       <!-- joy.관리자 게시판 -->
       <!-- 공지사항 -->
       <definition name="/admin/noticeList" extends="adminLayout">
-		<put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-boardTag.jsp"/>
-		<put-attribute name="body" value="/WEB-INF/views/admin/admin-noticeList.jsp" />
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-noticeList.jsp" />
       </definition>
       
       <!-- FAQ -->
       <definition name="/admin/faqList" extends="adminLayout">
-		<put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-boardTag.jsp"/>
-		<put-attribute name="body" value="/WEB-INF/views/admin/admin-FAQList.jsp" />
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-FAQList.jsp" />
+      </definition>
+      
+      <!-- memberQNA -->
+      <definition name="/admin/memberQnaList" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-memberQnaList.jsp" />
       </definition>
       
 </tiles-definitions>
