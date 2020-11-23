@@ -1,6 +1,10 @@
 package com.project.shop.view.admin;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,6 +41,7 @@ public class AdminController extends BaseController {
 	
 	Paging paging = new Paging();
 	HashMap<String, Object> map = new HashMap<String, Object>();
+	private String CURR_IMAGE_REPO_PATH = "C:\\Users\\bitcamp\\git\\web-project\\Shop\\src\\main\\webapp\\resources\\images\\notice";
 	
 //	관리자 공지사항
 	@RequestMapping(value="noticeList.do")
@@ -53,7 +59,57 @@ public class AdminController extends BaseController {
 		return mav;
 	}
 	
-//	관리자 FAQ
+//	관리자 공지사항 등록
+	@RequestMapping(value="/noticeInsert.do", method={RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView noticeInsert(MultipartHttpServletRequest multipartRequest, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		
+		if (memberVO != null && memberVO.getMember_id().equals("admin")) {
+			mav.setViewName(viewName);
+			
+			String action = (String) request.getParameter("action");
+			if (action != null && action.equals("noticeInsert")) {
+				fileProcess(multipartRequest);
+				boardService.noticeInsert(map);
+				mav.setViewName("/admin/noticeList");
+			}
+		} else {
+			String message = "관리자만 본 서비스를 이용하실 수 있습니다.";
+			mav.addObject("message", message);
+			mav.setViewName("/member/loginForm");
+		}
+		
+		return mav;
+	}
+	
+	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest) throws IOException {
+		List<String> fileList= new ArrayList<String>();
+		Iterator<String> filenames = multipartRequest.getFileNames();
+		
+		while(filenames.hasNext()) {
+			String fileName = filenames.next();
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			String originalFilename = mFile.getOriginalFilename();
+			fileList.add(originalFilename);
+			File file = new File(CURR_IMAGE_REPO_PATH + "\\" + fileName);
+			if(mFile.getSize() != 0) {
+				if (! file.exists()) {
+					if(file.getParentFile().mkdirs()) {
+						file.createNewFile();
+					}
+				}
+				mFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + originalFilename));
+			}
+		}
+		map.put("file", fileList);
+		return fileList;
+	}
+
+	//	관리자 FAQ
 	@RequestMapping(value="faqList.do")
 	public ModelAndView faqList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");

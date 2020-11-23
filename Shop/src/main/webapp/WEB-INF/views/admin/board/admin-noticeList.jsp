@@ -38,7 +38,7 @@
 
 								<div class="float-end">
 
-									<a href="#!" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
+									<a href="${contextPath}/admin/noticeInsert.do" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
 										등록
 									</a>
 

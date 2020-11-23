@@ -91,7 +91,7 @@
                                         </div>
                                         <div class="memq-image">
                                             <p>이미지</p>
-                                            <input type="file" name="file">
+                                            <input type="image" name="file">
                                         </div>
                                         <div class="memq-submit">
                                             <input type="submit" value="등록">

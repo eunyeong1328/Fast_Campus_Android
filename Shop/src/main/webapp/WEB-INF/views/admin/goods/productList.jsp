@@ -4,25 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath }"  />
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>상품 목록 </title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-<style>
-	.mini{
-		width: 80px;
-		height: 80px;
-		margin-right: 60px;
-	}
-</style>
-</head>
-<body class="layout-admin aside-sticky header-sticky">
 
-	<div id="wrapper" class="d-flex align-items-stretch flex-column">
-
-		<div id="wrapper_content" class="d-flex flex-fill">
 
 			<div id="middle" class="flex-fill">
 
@@ -82,9 +64,3 @@
 
 			</div>
 
-		</div>
-
-	</div>
-
-</body>
-</html>

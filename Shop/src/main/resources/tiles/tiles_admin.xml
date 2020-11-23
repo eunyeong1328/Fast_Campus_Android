@@ -29,6 +29,27 @@
       <definition name="/admin/member/memberDetail" extends="adminLayout">
       	 <put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
          <put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberDetail.jsp" />
+      </definition>
+      
+      <!-- 상연 상품 -->
+      <definition name="/admin/productAdd" extends="adminLayout">
+      	<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+         <put-attribute name="body" value="/WEB-INF/views/admin/goods/productAdd.jsp"/>
+      </definition>
+      
+      <definition name="/admin/productList" extends="adminLayout">
+      	 <put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+         <put-attribute name="body" value="/WEB-INF/views/admin/goods/productList.jsp"/>
+      </definition>
+      
+      <definition name="/admin/productUpdate" extends="adminLayout">
+      	<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+         <put-attribute name="body" value="/WEB-INF/views/admin/goods/productUpdate.jsp"/>
+      </definition>
+      
+      <definition name="/admin/productOption" extends="adminLayout">
+      	<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+         <put-attribute name="body" value="/WEB-INF/views/admin/goods/productOption.jsp"/>
       </definition>  
       
       <!-- joy.관리자 게시판 -->
@@ -36,6 +57,11 @@
       <definition name="/admin/noticeList" extends="adminLayout">
 		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-noticeList.jsp" />
+      </definition>
+      
+      <definition name="/admin/noticeInsert" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-noticeInsert.jsp" />
       </definition>
       
       <!-- FAQ -->

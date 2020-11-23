@@ -2,28 +2,38 @@ package com.project.shop.board;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+@Component
 public class BoardVO {
 
-//	파일 업로드(이미지)
-	private MultipartFile file;
-	private String image;
+	private String image1;
+	private String image2;
+	private String image3;
 	
-	public MultipartFile getFile() {
-		return file;
+	public String getImage1() {
+		return image1;
 	}
 
-	public void setFile(MultipartFile file) {
-		this.file = file;
+	public void setImage1(String image1) {
+		this.image1 = image1;
 	}
 
-	public String getImage() {
-		return image;
+	public String getImage2() {
+		return image2;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImage2(String image2) {
+		this.image2 = image2;
+	}
+
+	public String getImage3() {
+		return image3;
+	}
+
+	public void setImage3(String image3) {
+		this.image3 = image3;
 	}
 
 	//	공지사항

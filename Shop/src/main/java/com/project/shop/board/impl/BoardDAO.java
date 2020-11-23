@@ -36,8 +36,8 @@ public class BoardDAO {
 		return board.selectList("mapper.board.getMemQList", map);
 	}
 
-	public void memQInsert(BoardVO vo) {
-		board.insert("mapper.board.memqInsert", vo);
+	public void memQInsert(HashMap<String, Object> map) {
+		board.insert("mapper.board.memqInsert", map);
 	}
 
 	public BoardVO getMemQ(BoardVO vo) {
@@ -50,6 +50,10 @@ public class BoardDAO {
 
 	public List<BoardVO> getMemQListAll(HashMap<String, Object> map) {
 		return board.selectList("mapper.board.getMemQListAll", map);
+	}
+
+	public void noticeInsert(HashMap<String, Object> map) {
+		board.insert("mapper.board.noticeInsert", map);
 	}
 	
 }

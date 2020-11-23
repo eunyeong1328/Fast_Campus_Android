@@ -1,7 +1,11 @@
 package com.project.shop.view.board;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.shop.board.BoardService;
@@ -32,6 +37,8 @@ public class BoardController {
 	
 	Paging paging = new Paging();
 	HashMap<String, Object> map = new HashMap<String, Object>();
+	HashMap<String, String> map2 = new HashMap<String, String>();
+	private String CURR_IMAGE_REPO_PATH = "C:\\Users\\bitcamp\\git\\web-project\\Shop\\src\\main\\webapp\\resources\\images\\notice";
 
 //	고객센터 notice-tab 페이지
 	@RequestMapping("/notice-tab.do")
@@ -96,7 +103,7 @@ public class BoardController {
 	
 //	1:1 문의 글 작성
 	@RequestMapping(value="/memQ-insert.do", method={RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView memQInsert(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView memQInsert(MultipartHttpServletRequest multipartRequest, BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("member: " + viewName);
@@ -107,19 +114,17 @@ public class BoardController {
 		if (memberVO != null && memberVO.getMember_id() != null) {
 			
 			mav.setViewName(viewName);
-			System.out.println("member: " + viewName);
 			String action = (String) request.getParameter("action");
 			
 			if (action != null && action.equals("memQ-insert")) {
-				MultipartFile file = vo.getFile();
-				String image = file.getOriginalFilename();
-				String fileSavePath = "C:\\MyStudy\\Bit_WebProject\\web-project\\Shop\\src\\main\\webapp\\resources\\memQ-file\\";
-				System.out.println(fileSavePath);
-				file.transferTo(new File(fileSavePath + image));
-				
-				vo.setImage(image);
-				vo.setMember_id(memberVO.getMember_id());
-				boardService.memQInsert(vo);
+				Enumeration enu = multipartRequest.getParameterNames();
+				while(enu.hasMoreElements()){
+					String name = (String) enu.nextElement();
+					String value = multipartRequest.getParameter(name);
+					map2.put(name, value);
+				}
+				fileProcess(multipartRequest);
+				boardService.memQInsert(map2);
 				mav.setViewName("redirect:memberQ-tab.do?nowTab=tab-3");
 				
 			}
@@ -132,6 +137,28 @@ public class BoardController {
 		
 		return mav;
 	}
+	
+	private void fileProcess(MultipartHttpServletRequest multipartRequest) throws IOException {
+		Iterator<String> filenames = multipartRequest.getFileNames();
+		
+		while(filenames.hasNext()) {
+			String fileName = filenames.next();
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			String originalFilename = mFile.getOriginalFilename();
+			File file = new File(CURR_IMAGE_REPO_PATH + "\\" + fileName);
+			if(mFile.getSize() != 0) {
+				if (! file.exists()) {
+					if(file.getParentFile().mkdirs()) {
+						file.createNewFile();
+					}
+				}
+				mFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + originalFilename));
+			}
+		}
+		map2.put("file", fileName);
+//		return fileList;
+	}
+	
 	
 //	1:1 문의 글 수정
 	@RequestMapping(value="/memQ-update.do", method={RequestMethod.POST, RequestMethod.GET})
@@ -219,7 +246,6 @@ public class BoardController {
 		
 		return mav;
 	}
-	
 //	Paging
 	public void getPaging(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");

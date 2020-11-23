@@ -17,6 +17,13 @@
      		 )
 		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
+	
+	<!-- 공지사항 insert문 -->
+	<insert id="noticeInsert" parameterType="hashmap">
+		INSERT INTO NOTICE VALUES 
+		((SELECT NVL(MAX(NOTICE_NUM),0) + 1 FROM NOTICE), 
+		#{title}, #{contents}, SYSDATE, 0, #{image})
+	</insert>
 
 	<!-- 공지사항 선택한 글 상세 불러오기 -->
 	<select id="getNotice" parameterType="boardVO" resultType="boardVO">
@@ -80,11 +87,11 @@
 	</select>
 
 	<!-- 1:1 문의 insert문 -->
-	<insert id="memqInsert" parameterType="boardVO">
+	<insert id="memqInsert" parameterType="hashmap">
 		INSERT INTO MEMBER_QNA VALUES 
 		((SELECT NVL(MAX(MEMBER_QNA_NUM),0) + 1 FROM MEMBER_QNA), 
 		#{title}, #{contents}, 
-		#{image}, #{qna_category_num}, #{order_num}, 
+		#{file}, #{qna_category_num}, #{order_num}, 
 		(SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_ID = #{member_id}), 
 		#{email}, #{phone}, SYSDATE)
 	</insert>

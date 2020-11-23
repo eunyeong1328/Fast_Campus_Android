@@ -42,8 +42,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void memQInsert(BoardVO vo) {
-		boardDAO.memQInsert(vo);
+	public void memQInsert(HashMap<String, Object> map) {
+		boardDAO.memQInsert(map);
 	}
 
 	@Override
@@ -59,6 +59,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> getMemQListAll(HashMap<String, Object> map) {
 		return boardDAO.getMemQListAll(map);
+	}
+
+	@Override
+	public void noticeInsert(HashMap<String, Object> map) {
+		boardDAO.noticeInsert(map);
 	}
 
 }

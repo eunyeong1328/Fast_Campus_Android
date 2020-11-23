@@ -41,6 +41,22 @@
 <!--font-->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+
+<style>
+.mini{
+		width: 80px;
+		height: 80px;
+		margin-right: 60px;
+	}
+</style>
+
+	<c:if test='${not empty message }'>
+		<script>
+			alert('${message}')
+		</script>
+	</c:if>
+	
 </head>
 	
 	<tiles:insertAttribute name="tag" />
