@@ -77,53 +77,70 @@ public class MemberController extends BaseController{
 		return mav;
 	}
 	
-	@RequestMapping(value="/googleLogin.do",method = RequestMethod.POST)
-	public MemberVO googleLogin(@RequestBody String param) {
-		String member_id = null;
-		MemberVO memberVO = null;
-		
-		try {
-			NetHttpTransport transport = GoogleNetHttpTransport.newTrustedTransport();
-			String idTokenString = param.split("=")[1];
-
-
-			GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, JSON_FACTORY)
-					// Specify the CLIENT_ID of the app that accesses the backend:
-					.setAudience(Collections.singletonList(CLIENT_ID))
-					// Or, if multiple clients access the backend:
-					//.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
-					.build();
-
-			// (Receive idTokenString by HTTPS POST)
-
-			GoogleIdToken idToken = verifier.verify(idTokenString);
-			if (idToken != null) {
-				Payload payload = idToken.getPayload();
-
-				// Print user identifier
-				member_id = payload.getSubject();
-				System.out.println("User ID: " + member_id);
-
-				// Get profile information from payload
-				String email = payload.getEmail();
-				String member_name = (String) payload.get("name");
-				boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-				
-				memberVO.setMember_id(member_id);
-				memberVO.setMember_name(member_name);
-				memberVO.setEmail(email);
-				
-
-				// Use or store profile information
-
-			}
-
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-
-		return memberVO;
-	}
+//	@RequestMapping(value="/googleLogin.do",method = RequestMethod.POST)
+//	public ModelAndView googleLogin(@RequestBody String param, HttpServletRequest request, HttpServletResponse response) {
+//		ModelAndView mav = new ModelAndView();
+//		
+//		try {
+//			NetHttpTransport transport = GoogleNetHttpTransport.newTrustedTransport();
+//			String idTokenString = param.split("=")[1];
+//
+//
+//			GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, JSON_FACTORY)
+//					// Specify the CLIENT_ID of the app that accesses the backend:
+//					.setAudience(Collections.singletonList(CLIENT_ID))
+//					// Or, if multiple clients access the backend:
+//					//.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
+//					.build();
+//
+//			// (Receive idTokenString by HTTPS POST)
+//
+//			GoogleIdToken idToken = verifier.verify(idTokenString);
+//			if (idToken != null) {
+//				Payload payload = idToken.getPayload();
+//
+//				// Print user identifier
+//				String member_id = payload.getSubject();
+//				System.out.println("구글로그인의 User ID: " + member_id);
+//
+//				// Get profile information from payload
+//				String email = payload.getEmail();
+//				String member_name = (String) payload.get("name");
+//				System.out.println(email);
+//				
+//				MemberVO vo = new MemberVO();
+//				vo.setMember_id(member_id);
+//				vo.setMember_name(member_name);
+//				vo.setEmail(email);
+//				
+//
+//				System.out.println("가기전 memberVO"+vo);
+//				//DB에서 로그인 값이 있는지 확인
+////				vo = memberService.SnsLogin(vo);
+//				
+//				//값이 있으면 바로 로그인
+//				if(vo!= null && vo.getMember_name()!=null) {
+//					System.out.println(vo);
+//					System.out.println("로그인을 진행하니다.");
+//					mav.addObject(vo);
+//					mav.setViewName("/member/login.do");
+//					
+//				} else {
+//					System.out.println(vo);
+//					System.out.println("회원가입을 진행합니다.");
+//					mav.setViewName("/main/main.do");
+//				}				
+//				
+//				
+//
+//			}
+//
+//		}catch(Exception e) {
+//			System.out.println(e);
+//		}
+//
+//		return mav;
+//	}
 
 
 	@RequestMapping(value="/logout.do" ,method = RequestMethod.GET)

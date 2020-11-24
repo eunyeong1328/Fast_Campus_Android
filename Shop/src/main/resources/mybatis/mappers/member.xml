@@ -31,6 +31,13 @@
 			and password = #{password}
 		]]>
 	</select>
+	
+	<select id="SnsLogin" parameterType="memberVO" resultType="memberVO">
+		<![CDATA[
+			select * from member
+			where member_id = #{member_id}
+		]]>
+	</select>
 
 	<!-- cdata[ 사용이유 : 특수문자 사용하는데 제한을 푼다. -->
 	<insert id="insertNewMember" parameterType="memberVO">
@@ -47,6 +54,31 @@
  								birthday) values(
  								#{member_id},
  								 #{password}, 
+ 								 #{member_name},
+ 								  #{email}, 
+ 								  #{phone}, 
+ 								  #{zipNo}, 
+								#{load_address},
+								  #{jibun_address}, 
+								  #{rest_address},
+								   #{birthday}
+								   )
+								   ]]>
+		
+	</insert>
+	
+		<insert id="insertSnsMember" parameterType="memberVO">
+		<![CDATA[
+			insert into member(member_id,
+								 member_name,
+								 email,
+								 phone,
+								 zipNo,
+								load_address,
+								jibun_address,  
+								rest_address,
+ 								birthday) values(
+ 								#{member_id},
  								 #{member_name},
  								  #{email}, 
  								  #{phone}, 

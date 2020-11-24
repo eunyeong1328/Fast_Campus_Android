@@ -22,6 +22,11 @@ public class MemberDAO {
 		return member;
 	}
 	
+	public MemberVO SnsLogin(MemberVO user) throws DataAccessException{
+		MemberVO member = (MemberVO)sqlSession.selectOne("mappers.member.SnsLogin",user);
+		return member;
+	}
+	
 	public void insertNewMember(MemberVO memberVO) throws DataAccessException{
 		sqlSession.insert("mappers.member.insertNewMember", memberVO);
 	}
