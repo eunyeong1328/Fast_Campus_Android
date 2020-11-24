@@ -68,7 +68,7 @@ public class SnsMemberController extends BaseController{
 				//DB에서 로그인 값이 있는지 확인
 				vo = memberService.SnsLogin(vo);
 				
-				//값이 있으면 바로 로그인
+				//vo에 값이 있으면 바로 로그인, 아니면 회원가입창으로 이동
 				if(vo!= null && vo.getMember_name()!=null) {
 					System.out.println(vo);
 					System.out.println("로그인을 진행하니다.");
@@ -78,7 +78,7 @@ public class SnsMemberController extends BaseController{
 				} else {
 					System.out.println(vo);
 					System.out.println("회원가입을 진행합니다.");
-					mav.setViewName("/main/main.do");
+					mav.setViewName("/member/signupForm");
 				}				
 				
 				
