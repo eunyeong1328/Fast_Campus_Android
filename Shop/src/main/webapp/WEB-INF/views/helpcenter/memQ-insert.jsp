@@ -90,10 +90,15 @@
                                             </div>
                                             <textarea name="contents" rows="5" cols="80"></textarea>
                                         </div>
-                                        <div class="memq-image">
+                                        <div class="memq-image" id="fileDiv">
                                             <p>이미지</p>
+                                            <div>
                                             <input name="file" type="file" multiple="multiple">
+                                            <a href="#this" name="delete" class="btn">삭제하기</a>
+                                            </div>
                                         </div>
+	                                        <a href="#this" id="add" class="btn">파일 추가하기</a>
+                                        
                                         <div class="memq-submit">
                                             <input type="submit" value="등록">
                                     		<a href="memberQ-tab.do" class="list">목록</a>

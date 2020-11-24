@@ -44,8 +44,8 @@ public class BoardDAO {
 		return board.selectOne("mapper.board.getMemQ", vo);
 	}
 
-	public void memQUpdate(BoardVO vo) {
-		board.update("mapper.board.memqUpdate", vo);
+	public void memQUpdate(HashMap<String, String> map) {
+		board.update("mapper.board.memqUpdate", map);
 	}
 
 	public List<BoardVO> getMemQListAll(HashMap<String, Object> map) {

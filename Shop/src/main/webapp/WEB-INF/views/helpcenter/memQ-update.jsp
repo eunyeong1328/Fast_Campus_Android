@@ -47,18 +47,16 @@
 							<!-- insert form -->
                                 <div id="memq-insert">
 
-                                    <form action="memQ-update.do" method="post" enctype="multipart/form-data">
-                                    	<input type="hidden" name="action" value="memQ-update">
+                                    <form action="memqUpdate.do" method="post" enctype="multipart/form-data">
+                                    	<input type="hidden" name="action" value="memqUpdate">
                                     	<input type="hidden" name="member_id" value="${memQ.member_id }">
                                     	<input type="hidden" name="member_qna_num" value="${memQ.member_qna_num }">
+                                    	<input type="hidden" name="qna_category_num" value="${memQ.qna_category_num }">
                                         <div class="memq-title">
                                             <p>제목</p>
                                             <div class="category-select">
-                                                <select name="qna_category_num">
-                                                    <option selected="selected">선택해주세요.</option>
-                                                    <option value="1">배송</option>
-                                                    <option value="2">반품</option>
-                                                    <option value="3">상품</option>
+                                                <select>
+                                                    <option value="${memQ.qna_category_num }">${memQ.qna_category_name }</option>
                                                 </select>
                                                 <input type="text" name="title" value="${memQ.title }">
                                             </div>
@@ -93,14 +91,15 @@
                                         </div>
                                         <div class="memq-image">
                                             <p>이미지</p>
-                                            <input type="text" name="image" value="${memQ.image }">
+                                            <a href="#this" id="add" class="btn">파일 추가하기</a>
+                                            <input name="file" type="file" multiple="multiple">
+                                            <a href="#this" name="delete" class="btn">삭제하기</a>
                                         </div>
                                         <div class="memq-submit">
                                             <input type="submit" value="등록">
+		                                    <a href="memberQ-tab.do" class="list">목록</a>
                                         </div>
                                     </form>
-
-                                    <a href="memberQ-tab.do" class="list">목록</a>
 
                                 </div>
                                 <!-- insert form end -->

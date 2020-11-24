@@ -24,7 +24,7 @@ public interface BoardService {
 //	회원문의 작성
 	void memQInsert(HashMap<String, String> map);
 //	회원문의 수정
-	void memQUpdate(BoardVO vo);
+	void memQUpdate(HashMap<String, String> map);
 
 //	공지사항 작성
 	void noticeInsert(HashMap<String, Object> map);

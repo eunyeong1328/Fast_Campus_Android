@@ -57,6 +57,31 @@
 		</script>
 	</c:if>
 	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("a[name='delete']").on("click", function(e) {
+				e.preventDefault();
+				fn_fileDelete($(this));
+			})
+			$("#add").on("click", function(e) {
+				e.preventDefault();
+				fn_fileAdd();
+			})
+		});
+		function fn_fileDelete(obj) {
+			obj.parent().remove();
+		}
+		function fn_fileAdd() {
+			var str = "<div><input name='file' type='file' multiple='multiple'><a href='#this' name='delete' class='btn'>삭제하기</a></div>";
+			$("#fileDiv").append(str);
+	
+			$("a[name='delete']").on("click", function(e) {
+				e.preventDefault();
+				fn_fileDelete($(this));
+			})
+		}
+	</script>
+
 </head>
 
 <body class="layout-admin aside-sticky header-sticky">

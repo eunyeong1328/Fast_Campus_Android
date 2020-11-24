@@ -18,12 +18,12 @@
 		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
 	
-	 	<!-- 공지사항 insert문 -->
-<!-- 	<insert id="noticeInsert" parameterType="hashmap"> -->
-<!-- 		INSERT INTO NOTICE VALUES  -->
-<!-- 		((SELECT NVL(MAX(NOTICE_NUM),0) + 1 FROM NOTICE),  -->
-<!-- 		#{title}, #{contents}, SYSDATE, 0, #{image}) -->
-<!-- 	</insert> -->
+	 <!-- 공지사항 insert문 -->
+	<insert id="noticeInsert" parameterType="hashmap">
+		INSERT INTO NOTICE VALUES 
+		((SELECT NVL(MAX(NOTICE_NUM),0) + 1 FROM NOTICE), 
+		#{title}, #{contents}, SYSDATE, 0, #{image1}, #{image2}, #{image3})
+	</insert>
 
 	<!-- 공지사항 선택한 글 상세 불러오기 -->
 	<select id="getNotice" parameterType="boardVO" resultType="boardVO">
@@ -97,7 +97,7 @@
 	</insert>
 	
 	<!-- 1:1 문의 update문 -->
-	<update id="memqUpdate" parameterType="boardVO">
+	<update id="memqUpdate" parameterType="hashmap">
 		UPDATE MEMBER_QNA 
 		SET TITLE = #{title}, 
 		CONTENTS = #{contents}, 
@@ -106,8 +106,6 @@
 		IMAGE3 = #{image3}, 
 		QNA_CATEGORY_NUM = #{qna_category_num}, 
 		ORDER_NUM = #{order_num}, 
-		EMAIL = #{email}, 
-		PHONE = #{phone}, 
 		REG_DATE = SYSDATE 
 		WHERE MEMBER_QNA_NUM = #{member_qna_num}
 		AND MEMBER_ID = #{member_id}

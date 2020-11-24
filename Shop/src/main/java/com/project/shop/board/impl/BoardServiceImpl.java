@@ -52,8 +52,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void memQUpdate(BoardVO vo) {
-		boardDAO.memQUpdate(vo);
+	public void memQUpdate(HashMap<String, String> map) {
+		boardDAO.memQUpdate(map);
 	}
 
 	@Override

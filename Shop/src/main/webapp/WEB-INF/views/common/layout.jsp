@@ -51,8 +51,8 @@
 			<tiles:insertAttribute name="header" /> <!-- tiles.xml의 <definition>의 하위 태그인 <put-attribute>태그의 name이 header인 JSP를 표시합니다. -->
 			
 			<tiles:insertAttribute name="body" />
-			
-			<tiles:insertAttribute name="footer" ignore="true"/>
+	
+			<tiles:insertAttribute name="footer" />
 			
 		</div><!-- /#wrapper -->
 

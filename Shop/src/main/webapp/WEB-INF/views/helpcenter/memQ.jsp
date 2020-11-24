@@ -47,9 +47,22 @@
                                         <p>
                                             ${memQ.contents}
                                         </p>
-                                        <div class="detail-image">
-                                        	<img src="C:/MyStudy/Bit_WebProject/web-project/Shop/src/main/webapp/resources/memQ-file/${memQ.image}">
-                                        </div>
+                                        <c:if test="${not empty memQ.image1 }">
+                							<div class="detail-image">
+                								<img src="/board/fileDownload.do?image=${memQ.image1}">
+                							</div>
+                						</c:if>
+                						<c:if test="${not empty memQ.image2 }">
+                							<div class="detail-image">
+                								<img src="/board/fileDownload.do?image=${memQ.image2}">
+                							</div>
+                						</c:if>
+                						<c:if test="${not empty memQ.image3 }">
+                							<div class="detail-image">
+                								<img src="/board/fileDownload.do?image=${memQ.image3}">
+                							</div>
+                						</c:if>
+                                        
                                     </div>
                                     <div class="prev-next-list">
                                     	<c:if test="${memQ.member_qna_num <= 1}">
@@ -67,7 +80,7 @@
                                     	</c:if>
                                     	
                                     	<a href="memQ-update.do?member_qna_num=${memQ.member_qna_num }" class="list">수정</a>
-                                        <a href="memberQ-tab.do?nowTab=${paging.nowTab }&cPage=${paging.nowPage }" class="list">목록</a>
+                                        <a href="memberQ-tab.do?cPage=${paging.nowPage }" class="list">목록</a>
                                     </div>
                                 </div>
                             </div>
