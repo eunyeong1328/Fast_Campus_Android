@@ -33,7 +33,6 @@ public class MyAccountServiceImpl implements MyAccountService{
 
 	@Override
 	public MemberVO modifyAddressInfo(HashMap memberMap) throws Exception {
-		myAccountDAO.
 		return null;
 	}
 
