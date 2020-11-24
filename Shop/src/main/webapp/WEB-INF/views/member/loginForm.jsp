@@ -21,7 +21,7 @@
 									});
 							attachSignin(document.getElementById('customBtn'));
 						});
-	};
+	}; 
 
 	function attachSignin(element)  {
 		auth2.attachClickHandler(element, {},
@@ -29,6 +29,32 @@
 		    		var id_token = googleUser.getAuthResponse().id_token;
 		    		
 		    		var xhr = new XMLHttpRequest();
+		    		xhr.onload = function(){
+		    			if(xhr.status ===200 || xhr.status ===201){
+		    				console.log("성공!!");
+		    				var memberInfo = JSON.parse(xhr.responseText);
+		    				console.log(memberInfo);		    				
+		    				/*member_date 값이 null일 경우 회원가입창으로
+		    				null이 아닐 경우 로그인으로  */
+		    				if(memberInfo.member_date!=null){
+		    					/* 로그인시킴 */
+		    					
+		    				} else {
+		    					/* 회원가입창으로 */
+		    					location.href="${contextPath}/member/signupForm.do";
+		    					
+		    				}
+		    				
+		    				
+		    				
+		    				
+		    				
+		    				
+		    				
+		    			} else {
+		    				console.error(xhr.responseText);
+		    			}
+		    		}
 		    		xhr.open('POST', '${contextPath}/snsMember/googleLogin.do');
 		    		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		    		xhr.send('idtoken=' + id_token);
@@ -37,6 +63,8 @@
 		          console.log(JSON.stringify(error, undefined, 2));
 		        });
 	}
+	
+	
 	
 </script>
 

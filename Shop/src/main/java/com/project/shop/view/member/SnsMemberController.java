@@ -10,8 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
@@ -35,9 +36,11 @@ public class SnsMemberController extends BaseController{
 	private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 
 	
-	@RequestMapping(value="/googleLogin.do",method = RequestMethod.POST)
-	public ModelAndView googleLogin(@RequestBody String param, HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
+	@RequestMapping(value="/googleLogin.do", produces="application/x-www-form-urlencoded; charset=utf8", method = RequestMethod.POST)
+	@ResponseBody
+	public String googleLogin(@RequestBody String param, HttpServletRequest request, HttpServletResponse response) {
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonMember = null;
 		
 		try {
 			NetHttpTransport transport = GoogleNetHttpTransport.newTrustedTransport();
@@ -66,22 +69,23 @@ public class SnsMemberController extends BaseController{
 				System.out.println("가기전 memberVO"+vo);
 				
 				//DB에서 로그인 값이 있는지 확인
-				vo = memberService.SnsLogin(vo);
+				MemberVO memberVO = memberService.SnsLogin(vo);
 				
 				//vo에 값이 있으면 바로 로그인, 아니면 회원가입창으로 이동
-				if(vo!= null && vo.getMember_name()!=null) {
-					System.out.println(vo);
+				if(memberVO!= null && memberVO.getMember_name()!=null) {
+					System.out.println(vo);					
 					System.out.println("로그인을 진행하니다.");
-					mav.addObject(vo);
-					return memberController.login(vo, request, response);
+					jsonMember = mapper.writeValueAsString(memberVO);
 					
 				} else {
+					vo.setPassword("0000");
+					System.out.println(memberVO);
 					System.out.println(vo);
 					System.out.println("회원가입을 진행합니다.");
-					mav.setViewName("/member/signupForm");
+					jsonMember = mapper.writeValueAsString(vo);
 				}				
 				
-				
+//json형태로 넘겨서 loginForm.jsp에서 받아서 처리				
 
 			}
 
@@ -89,6 +93,6 @@ public class SnsMemberController extends BaseController{
 			System.out.println(e);
 		}
 
-		return mav;
+		return jsonMember;
 	}
 }
