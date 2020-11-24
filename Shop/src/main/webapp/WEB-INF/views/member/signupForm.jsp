@@ -7,7 +7,6 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 
-
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	function execDaumPostcode() {

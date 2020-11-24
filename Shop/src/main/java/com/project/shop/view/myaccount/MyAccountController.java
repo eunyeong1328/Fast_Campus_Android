@@ -63,6 +63,35 @@ public class MyAccountController extends BaseController{
         mav.addObject("message", message);
         mav.setViewName("redirect:/myaccount/account-settings.do?member_id=" + memberVO.getMember_id());
 		return mav;
-
 	}
+	
+	//새 배송지 추가
+	
+	//배송지 수정
+	@RequestMapping(value="/modifyAddressInfo.do")
+	public ModelAndView modifyMemberAddressInfo(
+			@RequestParam HashMap<String, String> memberMap,
+		HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		HttpSession session=request.getSession();
+		memberVO=(MemberVO)session.getAttribute("member_Info");
+		
+		System.out.println("HashMap memberid = " + memberMap.get("member_id"));		
+		System.out.println("password = " + memberMap.get("password"));
+		memberVO = (MemberVO)myAccountService.modifyAddressInfo(memberMap);
+		
+		System.out.println("수정 처리 완료!!");
+		
+		//수정된 회원 정보를 다시 세션에 저장한다.
+		session.removeAttribute("member_Info");
+		session.setAttribute("member_Info", memberVO);
+		System.out.println("후 요청 : " + memberVO);
+		
+		String message="변경되었습니다."; 
+        mav.addObject("message", message);
+        mav.setViewName("redirect:/myaccount/account-settings.do?member_id=" + memberVO.getMember_id());
+		return mav;
+	}
+	
+	//새 배송지 삭제
 }

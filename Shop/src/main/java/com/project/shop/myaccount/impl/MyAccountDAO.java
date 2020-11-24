@@ -24,4 +24,9 @@ public class MyAccountDAO {
 		System.out.println("MyAccountDAO = " + memberMap.get("member_id"));
 		sqlSession.update("mappers.myaccount.modifyMemberInfo",memberMap);
 	}
+	
+	public void modifyAddressInfo(HashMap memberMap) throws DataAccessException{
+		System.out.println("MyAccountDAO = " + memberMap.get("member_id"));
+		sqlSession.update("mappers.myaccount.modifyAddressInfo",memberMap);
+	}
 }

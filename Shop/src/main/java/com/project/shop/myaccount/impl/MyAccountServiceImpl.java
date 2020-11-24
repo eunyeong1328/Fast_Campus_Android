@@ -31,4 +31,10 @@ public class MyAccountServiceImpl implements MyAccountService{
 		return myAccountDAO.selectMyDetailInfo(member_id);
 	}
 
+	@Override
+	public MemberVO modifyAddressInfo(HashMap memberMap) throws Exception {
+		myAccountDAO.
+		return null;
+	}
+
 }
