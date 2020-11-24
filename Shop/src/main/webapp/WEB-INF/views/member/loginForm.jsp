@@ -41,7 +41,18 @@
 		    					
 		    				} else {
 		    					/* 회원가입창으로 */
-		    					location.href="${contextPath}/member/signupForm.do";
+		    					alert(memberInfo.member_id);
+		    					$.ajax({
+		    						type : "POST",
+		    						url: "${contextPath}/snsMember/googleSignup.do",
+		    						dataType: "json",
+		    						data: memberInfo,
+		    						error: function(){
+		    							alert("통신실패");
+		    						}		    						
+		    					})
+		    							    					
+		    					/* location.href="${contextPath}/member/signupForm.do"; */
 		    					
 		    				}
 		    				

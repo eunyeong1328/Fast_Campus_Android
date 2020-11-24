@@ -95,4 +95,9 @@ public class SnsMemberController extends BaseController{
 
 		return jsonMember;
 	}
+	
+	@RequestMapping(value="/googleSignup.do", produces="application/x-www-form-urlencoded; charset=utf8", method = RequestMethod.POST)
+	public void googleSignup() {
+		
+	}
 }

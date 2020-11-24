@@ -187,7 +187,7 @@
 
 
 							<div class="form-label-group mb-3">
-								<input required placeholder="_member_id" id="_member_id"
+								<input required placeholder="_member_id" id="_member_id" value="${memberInfo.member_id }"
 									name="_member_id" type="text" label="아이디"
 									class="form-control col-md-9"
 									style="margin-bottom: 0; display: inline-block"> <label
