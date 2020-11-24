@@ -80,8 +80,7 @@ public class SnsMemberController extends BaseController{
 					System.out.println("회원가입을 진행합니다.");
 					mav.setViewName("/member/signupForm");
 				}				
-				
-				
+				//이 정보를 사용할 거면 JSOn으로 데이터 받아서 처리
 
 			}
 

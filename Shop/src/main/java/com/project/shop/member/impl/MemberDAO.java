@@ -30,4 +30,10 @@ public class MemberDAO {
 		String result =  sqlSession.selectOne("mappers.member.selectOverlappedID",id);
 		return result;
 	}
+	
+	public MemberVO SnsLogin(MemberVO user) throws DataAccessException{
+		MemberVO member = (MemberVO)sqlSession.selectOne("mappers.member.SnsLogin",user);
+		return member;
+	}
+
 }

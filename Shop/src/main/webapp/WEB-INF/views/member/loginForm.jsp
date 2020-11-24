@@ -9,11 +9,87 @@
 
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<script>
+   var googleUser = {};
+   var startApp = function() {
+      gapi.load('auth2',   function() {
+                     // Retrieve the singleton for the GoogleAuth library and set up the client.
+                     auth2 = gapi.auth2
+                           .init({
+                              client_id : '1090287714877-qd2ikq55m2grble3eltcrr4h9s1dpu6b.apps.googleusercontent.com',
+                              cookiepolicy : 'single_host_origin',
+                           // Request scopes in addition to 'profile' and 'email'
+                           //scope: 'additional_scope'
+                           });
+                     attachSignin(document.getElementById('customBtn'));
+                  });
+   };
+
+   function attachSignin(element)  {
+      auth2.attachClickHandler(element, {},
+              function(googleUser) {
+                var id_token = googleUser.getAuthResponse().id_token;
+                
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '${contextPath}/snsMember/googleLogin.do');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send('idtoken=' + id_token);
+                
+              }, function(error) {
+                console.log(JSON.stringify(error, undefined, 2));
+              });
+   }
+   
+</script>
+
+
+<style type="text/css">
+#customBtn {
+	display: inline-block;
+	background: white;
+	color: #444;
+	width: 190px;
+	border-radius: 5px;
+	border: thin solid #888;
+	box-shadow: 1px 1px 1px grey;
+	white-space: nowrap;
+}
+
+#customBtn:hover {
+	cursor: pointer;
+}
+
+span.label {
+	font-family: serif;
+	font-weight: normal;
+}
+
+span.icon {
+	background: url('${contextPath}/resources/images/btn_google_light.png')
+		transparent 5px 50% no-repeat;
+	display: inline-block;
+	vertical-align: middle;
+	width: 42px;
+	height: 42px;
+}
+
+span.buttonText {
+	display: inline-block;
+	vertical-align: middle;
+	padding-left: 42px;
+	padding-right: 42px;
+	font-size: 14px;
+	font-weight: bold;
+	/* Use the Roboto font that is loaded in the <head> */
+	font-family: 'Roboto', sans-serif;
+}
+</style>
+
 <head>
 <c:if test='${not empty message }'>
-<script>
-	alert('${message}');
-</script>
+	<script>
+		alert('${message}');
+	</script>
 </c:if>
 </head>
 <body>
@@ -28,7 +104,8 @@
 
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb fs--14">
-						<li class="breadcrumb-item"><a href="${contextPath}/main/main.do">Home</a></li>
+						<li class="breadcrumb-item"><a
+							href="${contextPath}/main/main.do">Home</a></li>
 						<li class="breadcrumb-item active" aria-current="page">Account</li>
 					</ol>
 				</nav>
@@ -106,7 +183,7 @@
 		</section>
 		<!-- /FORM -->
 
-<!-- function login_confirm(frm){
+		<!-- function login_confirm(frm){
 	var id = frm.member_id.value;
 	var pw = frm.password.value;
 
@@ -141,12 +218,19 @@
 									facebook
 								</a>
 							</div>
-
+							<!-- 구글로 로그인  -->
 							<div class="col-6">
-								<a href="#"
-									class="btn btn-sm btn-block bg-googleplay transition-hover-top mt-1 text-white"
-									rel="noopener"> <i>G</i> google
-								</a>
+								<!-- In the callback, you would hide the gSignInWrapper element on a successful sign in -->
+								<div id="gSignInWrapper">
+									<div id="customBtn" class="customGPlusSignIn">
+										<span class="icon"></span> <span class="buttonText">Google</span>
+									</div>
+								</div>
+								<div id="name"></div>
+								<script>
+									startApp();
+								</script>
+
 							</div>
 
 						</div>

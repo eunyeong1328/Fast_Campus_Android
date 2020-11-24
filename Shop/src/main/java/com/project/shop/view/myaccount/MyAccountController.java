@@ -72,6 +72,7 @@ public class MyAccountController extends BaseController{
 	public ModelAndView modifyMemberAddressInfo(
 			@RequestParam HashMap<String, String> memberMap,
 		HttpServletRequest request, HttpServletResponse response) throws Exception{
+		System.out.println("왜 값이 안 넘어오는 건데?? 하....");
 		ModelAndView mav = new ModelAndView();
 		HttpSession session=request.getSession();
 		memberVO=(MemberVO)session.getAttribute("member_Info");

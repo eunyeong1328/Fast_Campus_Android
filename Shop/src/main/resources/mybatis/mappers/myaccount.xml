@@ -47,7 +47,6 @@
 	<update id="modifyAddressInfo" parameterType="java.util.HashMap">
 	   UPDATE MEMBER 
 			   <set>
-			   PHONE=#{phone},
 			   ZIPNO=#{zipNo},
 			   LOAD_ADDRESS=#{load_address},
 			   JIBUN_ADDRESS=#{jibun_address},

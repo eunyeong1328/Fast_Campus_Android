@@ -70,8 +70,8 @@
     });
 }
 </script>
-<form novalidate class="bs-validate" method="post" action="#">
-
+<form novalidate class="bs-validate" method="post" action="${contextPath}/myaccount/modifyAddressInfo.do">												
+	  <input type="hidden" id="member_id" name="member_id" value="${member_info.member_id}">
 	<div class="modal-header">
 		<h2 class="modal-title fs--18 m-0">주소</h2>
 
@@ -90,7 +90,7 @@
 				<div class="form-label-group mb-3">
 					<input required placeholder="zipNo" id="zipNo" name="zipNo"
 						type="text" class="form-control"> <label
-						for="addr_first_name">우편번호</label>
+						for="zipNo">우편번호</label>
 				</div>
 
 			</div>
@@ -190,9 +190,13 @@
 		</div>
 
 	</div>
-
+<script>
+	function fn(){
+		alert('${member_info.member_id}');
+	}
+</script>
 	<div class="modal-footer">
-		<button type="submit" class="btn btn-sm btn-primary">
+		<button type="submit" class="btn btn-sm btn-primary" onclick="fn()">
 			<i class="fi fi-check"></i> 변경사항 저장
 		</button>
 

@@ -75,9 +75,8 @@
 									</a></li>
 
 									<li class="nav-item active"><a class="nav-link px-0"
-										href="${contextPath}/myaccount/account-settings.do?member_id=${member_Info.member_id}"> 
-										<i
-											class="fi fi-arrow-end m-0 fs--12"></i> <span
+										href="${contextPath}/myaccount/account-settings.do?member_id=${member_Info.member_id}">
+											<i class="fi fi-arrow-end m-0 fs--12"></i> <span
 											class="px-2 d-inline-block"> 마이 페이지 </span>
 									</a></li>
 
@@ -152,8 +151,8 @@
 													-->
 												<label
 													class="w--100 h--100 rounded text-center position-relative d-inline-block cursor-pointer  bg-white"
-														style="background-image: url('${contextPath}/resources/images/grade_image/grade1.PNG')">
-														
+													style="background-image: url('${contextPath}/resources/images/grade_image/grade1.PNG')">
+
 													<%--  <a href="#?action=remove_avatar"
 													class="js-file-upload-avatar-ajax-circle-remove-preadded position-absolute bottom-0 mb--n15 w-100 z-index-3">
 														<span
@@ -169,10 +168,10 @@
 														style="background-image: url('${contextPath}/resources/images/grade_image/grade1.PNG')"
 														>
 													</span>
-												</span>  --%><!-- 
+												</span>  --%>
+													<!-- 
 															upload field (등급 나타내는 곳)
-														--> <!-- 사진 삽입 --> 
-														<!-- <input name="account_avatar"
+														--> <!-- 사진 삽입 --> <!-- <input name="account_avatar"
 													type="file" data-file-ext="jpg, png"
 													data-file-max-size-kb-per-file="5000"
 													data-file-ext-err-msg="Allowed:"
@@ -195,9 +194,9 @@
 														</svg> -->
 
 												</label>
-												<p style = "margin-bottom color:purple">회원등급</p>
+												<p style="margin-bottom color: purple">회원등급</p>
 											</div>
-											
+
 											<!-- /avatar -->
 
 
@@ -311,7 +310,8 @@
 														</div>
 
 														<!-- `SOW : Form Advanced` plugin used -->
-														<a href="account_current_password" class="btn fs--12 btn-password-type-toggle"
+														<a href="account_current_password"
+															class="btn fs--12 btn-password-type-toggle"
 															data-target="#account_current_password"> <span
 															class="group-icon"> <i class="fi fi-eye m-0"></i>
 																<i class="fi fi-close m-0"></i>
@@ -428,17 +428,18 @@
 									<div class="border-top pt-4 mt-1">
 
 										<button type="submit" class="btn btn-purple fs--20">
-											<i class="fi fi-check " onclick="fn_modify_myaccount()"></i> 변경사항 저장
+											<i class="fi fi-check " onclick="fn_modify_myaccount()"></i>
+											변경사항 저장
 										</button>
 									</div>
 									<script>
-										function fn_modify_myaccount(){
+										function fn_modify_myaccount() {
 											const result = confirm("변경되었습니다");
 										}
 									</script>
 
 								</form>
-							<!-- form 태그 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+								<!-- form 태그 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 							</div>
 
 
@@ -488,15 +489,19 @@
 										</div>
 
 										<div class="col-4 col-sm-3 col-md-3 col-lg-2">
-
+										<script>
+											function fn(){
+												alert('아이디 : ${member_info.member_id}');
+											}
+										</script>
 											<a href="#"
 												data-href="${contextPath}/resources/_ajax/modal_address.jsp"
 												data-ajax-modal-size="modal-md"
 												data-ajax-modal-centered="false"
 												data-ajax-modal-backdrop="static"
-												class="js-ajax-modal float-end btn btn-sm btn-block btn-light fs--14 mb-0">
-												수정 </a>
-												 <a href="#" data-href="#?action=delete&amp;item_id=1"
+												class="js-ajax-modal float-end btn btn-sm btn-block btn-light fs--14 mb-0"
+												onclick = "fn()">
+												수정 </a> <a href="#" data-href="#?action=delete&amp;item_id=1"
 												data-ajax-confirm-mode="regular"
 												data-ajax-confirm-size="modal-md"
 												data-ajax-confirm-centered="false"
@@ -542,15 +547,13 @@
 
 										<div class="col-4 col-sm-3 col-md-3 col-lg-2">
 
-											<a href="#" data-href="${contextPath}/resources/_ajax/modal_address.jsp"
+											<a href="${contextPath}/myaccount/modifyAddressInfo.do"
+												data-href="${contextPath}/resources/_ajax/modal_address.jsp"
 												data-ajax-modal-size="modal-md"
 												data-ajax-modal-centered="false"
 												data-ajax-modal-backdrop="static"
 												class="js-ajax-modal float-end btn btn-sm btn-block btn-light fs--14 mb-0">
-												수정 
-												</a> 
-												삭제
-												<a href="#" data-href="#?action=delete&amp;item_id=1"
+												수정 </a>  <a href="#" data-href="#?action=delete&amp;item_id=1"
 												data-ajax-confirm-mode="regular"
 												data-ajax-confirm-size="modal-md"
 												data-ajax-confirm-centered="false"
