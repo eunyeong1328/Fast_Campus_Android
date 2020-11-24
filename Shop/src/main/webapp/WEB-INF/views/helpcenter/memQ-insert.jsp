@@ -47,8 +47,9 @@
 							<!-- insert form -->
                                 <div id="memq-insert">
 
-                                    <form action="memQ-insert.do" method="post" enctype="multipart/form-data">
-                                    	<input type="hidden" name="action" value="memQ-insert">
+                                    <form action="memqAdd.do" method="post" enctype="multipart/form-data">
+                                    	<input type="hidden" name="action" value="memqAdd">
+                                    	<input type="hidden" name="member_id" value="${memberInfo.member_id }">
                                         <div class="memq-title">
                                             <p>제목</p>
                                             <div class="category-select">
@@ -68,11 +69,11 @@
                                         </div>
                                         <div class="memq-email">
                                             <p>이메일</p>
-                                            <input type="text" name="email" placeholder="이메일을 입력하세요">
+                                            <input type="text" name="email" value="${memberInfo.email }">
                                         </div>
                                         <div class="memq-phone">
                                             <p>전화번호</p>
-                                            <input type="text" name="phone">
+                                            <input type="text" name="phone" value="${memberInfo.phone }">
                                         </div>
                                         <div class="memq-contents">
                                             <p>내용</p>
@@ -91,7 +92,7 @@
                                         </div>
                                         <div class="memq-image">
                                             <p>이미지</p>
-                                            <input type="image" name="file">
+                                            <input name="file" type="file" multiple="multiple">
                                         </div>
                                         <div class="memq-submit">
                                             <input type="submit" value="등록">

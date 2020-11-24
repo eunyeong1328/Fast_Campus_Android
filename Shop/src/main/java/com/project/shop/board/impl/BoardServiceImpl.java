@@ -42,7 +42,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void memQInsert(HashMap<String, Object> map) {
+	public void memQInsert(HashMap<String, String> map) {
 		boardDAO.memQInsert(map);
 	}
 

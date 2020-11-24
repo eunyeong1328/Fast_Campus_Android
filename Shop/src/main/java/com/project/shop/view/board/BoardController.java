@@ -38,7 +38,6 @@ public class BoardController {
 	Paging paging = new Paging();
 	HashMap<String, Object> map = new HashMap<String, Object>();
 	HashMap<String, String> map2 = new HashMap<String, String>();
-	private String CURR_IMAGE_REPO_PATH = "C:\\Users\\bitcamp\\git\\web-project\\Shop\\src\\main\\webapp\\resources\\images\\notice";
 
 //	고객센터 notice-tab 페이지
 	@RequestMapping("/notice-tab.do")
@@ -101,62 +100,87 @@ public class BoardController {
 		return mav;
 	}
 	
-//	1:1 문의 글 작성
-	@RequestMapping(value="/memQ-insert.do", method={RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView memQInsert(MultipartHttpServletRequest multipartRequest, BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+//	1:1 문의 글 작성 setViewName
+	@RequestMapping(value="/memQ-insert.do")
+	public ModelAndView memQInsertView(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
-		String viewName = (String) request.getAttribute("viewName");
-		System.out.println("member: " + viewName);
-		
+
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
-		
-		if (memberVO != null && memberVO.getMember_id() != null) {
-			
+		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
+
+		if (memberVO != null && isLogOn == true) {
 			mav.setViewName(viewName);
-			String action = (String) request.getParameter("action");
-			
-			if (action != null && action.equals("memQ-insert")) {
-				Enumeration enu = multipartRequest.getParameterNames();
-				while(enu.hasMoreElements()){
-					String name = (String) enu.nextElement();
-					String value = multipartRequest.getParameter(name);
-					map2.put(name, value);
-				}
-				fileProcess(multipartRequest);
-				boardService.memQInsert(map2);
-				mav.setViewName("redirect:memberQ-tab.do?nowTab=tab-3");
-				
-			}
-			
+			mav.addObject("memberInfo", memberVO);
 		} else {
 			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
 			mav.addObject("message", message);
 			mav.setViewName("/member/loginForm");
 		}
-		
 		return mav;
 	}
 	
-	private void fileProcess(MultipartHttpServletRequest multipartRequest) throws IOException {
-		Iterator<String> filenames = multipartRequest.getFileNames();
-		
-		while(filenames.hasNext()) {
-			String fileName = filenames.next();
-			MultipartFile mFile = multipartRequest.getFile(fileName);
-			String originalFilename = mFile.getOriginalFilename();
-			File file = new File(CURR_IMAGE_REPO_PATH + "\\" + fileName);
-			if(mFile.getSize() != 0) {
-				if (! file.exists()) {
-					if(file.getParentFile().mkdirs()) {
-						file.createNewFile();
+//	1:1 문의 글 작성
+	@RequestMapping(value = "/memqAdd.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView memQInsert(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String action = (String) multipartRequest.getParameter("action");
+
+		if (action != null && action.equals("memqAdd")) {
+			Enumeration enu = multipartRequest.getParameterNames();
+			while (enu.hasMoreElements()) {
+				String name = (String) enu.nextElement();
+				String value = multipartRequest.getParameter(name);
+				map2.put(name, value);
+			}
+			List<String> fileList = fileProcess(multipartRequest);
+			int i = 1;
+			if (fileList != null) {
+				for (String image : fileList) {
+					if (image != null) {
+						map2.put("image" + i, image);
+						i++;
 					}
 				}
-				mFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + originalFilename));
+			} else {
+				for (i = 1; i <= 3; i++) {
+					System.out.println(i + "번째 등록된 파일이 없습니다.");
+				}
+			}
+			boardService.memQInsert(map2);
+			mav.setViewName("redirect:memberQ-tab.do");
+		}
+
+		return mav;
+	}
+	
+	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest) throws IOException {
+		List<String> fileNameList = new ArrayList<String>();
+		List<MultipartFile> fileList = multipartRequest.getFiles("file");
+		String path = "C:\\Users\\member\\git\\web-project\\Shop\\src\\main\\webapp\\resources\\memQ\\";
+		if (fileList.isEmpty()) {
+			return null;
+		}
+		for (MultipartFile mfile : fileList) {
+			String originFileName = mfile.getOriginalFilename();
+			fileNameList.add(originFileName);
+			String save = path + originFileName;
+			File file = new File(save);
+			if(!file.exists()) {
+				if(file.getParentFile().mkdirs()) {
+					file.createNewFile();
+				}
+			}
+			try {
+				mfile.transferTo(new File(save));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
-		map2.put("file", fileName);
-//		return fileList;
+		return fileNameList;
 	}
 	
 	

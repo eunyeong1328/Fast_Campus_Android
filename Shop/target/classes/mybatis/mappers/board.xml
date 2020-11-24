@@ -18,12 +18,12 @@
 		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
 	
-	<!-- 공지사항 insert문 -->
-	<insert id="noticeInsert" parameterType="hashmap">
-		INSERT INTO NOTICE VALUES 
-		((SELECT NVL(MAX(NOTICE_NUM),0) + 1 FROM NOTICE), 
-		#{title}, #{contents}, SYSDATE, 0, #{image})
-	</insert>
+	 	<!-- 공지사항 insert문 -->
+<!-- 	<insert id="noticeInsert" parameterType="hashmap"> -->
+<!-- 		INSERT INTO NOTICE VALUES  -->
+<!-- 		((SELECT NVL(MAX(NOTICE_NUM),0) + 1 FROM NOTICE),  -->
+<!-- 		#{title}, #{contents}, SYSDATE, 0, #{image}) -->
+<!-- 	</insert> -->
 
 	<!-- 공지사항 선택한 글 상세 불러오기 -->
 	<select id="getNotice" parameterType="boardVO" resultType="boardVO">
@@ -55,7 +55,7 @@
 	<select id="getMemQListAll" parameterType="hashmap" resultType="boardVO">
 		SELECT * FROM 
 			(SELECT ROWNUM R_NUM, A.* FROM 
-			(SELECT member_qna_num, title, contents, image, qna_category_name, 
+			(SELECT member_qna_num, title, contents, image1, image2, image3, qna_category_name, 
 			order_num, member_id, email, phone, reg_date 
 			FROM MEMBER_QNA Q, QNA_CATEGORY C 
 			WHERE Q.qna_category_num = C.qna_category_num 
@@ -67,7 +67,7 @@
 	<select id="getMemQList" parameterType="hashmap" resultType="boardVO">
 		SELECT * FROM 
 			(SELECT ROWNUM R_NUM, A.* FROM 
-			(SELECT member_qna_num, title, contents, image, qna_category_name, 
+			(SELECT member_qna_num, title, contents, image1, image2, image3, qna_category_name, 
 			order_num, member_id, email, phone, reg_date 
 			FROM MEMBER_QNA Q, QNA_CATEGORY C 
 			WHERE Q.qna_category_num = C.qna_category_num 
@@ -78,7 +78,7 @@
 	
 <!-- 1:1 문의 선택한 글 상세 불러오기 -->
 	<select id="getMemQ" parameterType="boardVO" resultType="boardVO">
-		SELECT member_qna_num, title, contents, image, qna_category_name, 
+		SELECT member_qna_num, title, contents, image1, image2, image3, qna_category_name, 
 			order_num, member_id, email, phone, reg_date 
 		FROM MEMBER_QNA Q, QNA_CATEGORY C 
 		WHERE Q.qna_category_num = C.qna_category_num 
@@ -91,9 +91,9 @@
 		INSERT INTO MEMBER_QNA VALUES 
 		((SELECT NVL(MAX(MEMBER_QNA_NUM),0) + 1 FROM MEMBER_QNA), 
 		#{title}, #{contents}, 
-		#{file}, #{qna_category_num}, #{order_num}, 
+		#{image1}, #{qna_category_num}, #{order_num}, 
 		(SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_ID = #{member_id}), 
-		#{email}, #{phone}, SYSDATE)
+		#{email}, #{phone}, SYSDATE, #{image2}, #{image3})
 	</insert>
 	
 	<!-- 1:1 문의 update문 -->
@@ -101,7 +101,9 @@
 		UPDATE MEMBER_QNA 
 		SET TITLE = #{title}, 
 		CONTENTS = #{contents}, 
-		IMAGE = #{image}, 
+		IMAGE1 = #{image1}, 
+		IMAGE2 = #{image2}, 
+		IMAGE3 = #{image3}, 
 		QNA_CATEGORY_NUM = #{qna_category_num}, 
 		ORDER_NUM = #{order_num}, 
 		EMAIL = #{email}, 

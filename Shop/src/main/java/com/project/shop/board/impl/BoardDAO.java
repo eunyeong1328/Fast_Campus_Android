@@ -36,7 +36,7 @@ public class BoardDAO {
 		return board.selectList("mapper.board.getMemQList", map);
 	}
 
-	public void memQInsert(HashMap<String, Object> map) {
+	public void memQInsert(HashMap<String, String> map) {
 		board.insert("mapper.board.memqInsert", map);
 	}
 
