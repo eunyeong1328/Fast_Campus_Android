@@ -36,8 +36,8 @@
 		<meta name="theme-color" content="#377dff">
 		
 		<!-- 구글 로그인 api -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-  <script src="https://apis.google.com/js/api:client.js"></script>
+ 		 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+ 		 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 		<!--font-->
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
@@ -56,4 +56,5 @@
 </body>
         
 		<script src="${contextPath}/resources/assets/js/core.js"></script>
+		<script src="https://apis.google.com/js/api:client.js"></script>
         </html>
