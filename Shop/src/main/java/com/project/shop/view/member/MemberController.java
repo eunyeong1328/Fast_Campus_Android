@@ -39,9 +39,6 @@ public class MemberController extends BaseController{
    public ModelAndView login(MemberVO user ,
                            HttpServletRequest request, 
                            HttpServletResponse response) throws Exception {
-      System.out.println(user.getMember_id());
-      System.out.println(user.getPassword());
-      System.out.println(memberVO);
       ModelAndView mav = new ModelAndView();
       memberVO = memberService.login(user);
       System.out.println("sql 실행");

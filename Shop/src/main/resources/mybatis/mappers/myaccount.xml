@@ -36,15 +36,14 @@
 			   <set>
 			   password = #{password},
 			   member_name=#{member_name},
-			   email=#{email},
-			   phone=#{phone}		   
+			   email=#{email}
 			   </set>
 		where 
 		member_id=#{member_id}
 	</update>	
 	
 	<!-- 배송지 수정 -->
-	<update id="modifyAddressInfo" parameterType="java.util.HashMap">
+	<!-- <update id="modifyAddressInfo" parameterType="java.util.HashMap">
 	   UPDATE MEMBER 
 			   <set>
 			   ZIPNO=#{zipNo},
@@ -54,6 +53,6 @@
 			   </set>
 		WHERE 
 		MEMBER_ID = #{member_id}
-	</update>	
+	</update>	 -->
 	
 </mapper>

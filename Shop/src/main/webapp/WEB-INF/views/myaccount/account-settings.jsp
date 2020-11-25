@@ -547,7 +547,7 @@
 
 										<div class="col-4 col-sm-3 col-md-3 col-lg-2">
 
-											<a href="${contextPath}/myaccount/modifyAddressInfo.do"
+											<a href="#"
 												data-href="${contextPath}/resources/_ajax/modal_address.jsp"
 												data-ajax-modal-size="modal-md"
 												data-ajax-modal-centered="false"
