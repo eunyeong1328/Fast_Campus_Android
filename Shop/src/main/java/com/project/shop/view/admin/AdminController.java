@@ -1,30 +1,18 @@
 package com.project.shop.view.admin;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.shop.board.BoardService;
-import com.project.shop.board.BoardVO;
 import com.project.shop.common.base.BaseController;
-import com.project.shop.member.MemberVO;
-import com.project.shop.paging.Paging;
-import com.project.shop.paging.PagingService;
 import com.project.shop.product.ProductService;
 import com.project.shop.product.ProductVO;
 
@@ -34,122 +22,6 @@ public class AdminController extends BaseController {
 	@Autowired
 	ProductService service;
 	
-	@Autowired
-	private BoardService boardService;
-	@Autowired
-	private PagingService pagingService;
-	
-	Paging paging = new Paging();
-	HashMap<String, Object> map = new HashMap<String, Object>();
-	private String CURR_IMAGE_REPO_PATH = "C:\\Users\\bitcamp\\git\\web-project\\Shop\\src\\main\\webapp\\resources\\images\\notice";
-	
-//	관리자 공지사항
-	@RequestMapping(value="noticeList.do")
-	public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		System.out.println("admin: " + viewName);
-		
-		getPaging(request, response);
-		mav.addObject("paging", paging);
-		
-		List<BoardVO> notice = boardService.getNoticeList(map);
-		mav.addObject("NoticeList", notice);
-		
-		return mav;
-	}
-	
-//	관리자 공지사항 등록
-	@RequestMapping(value="/noticeInsert.do", method={RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView noticeInsert(MultipartHttpServletRequest multipartRequest, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		String viewName = (String) request.getAttribute("viewName");
-		
-		HttpSession session = request.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
-		
-		if (memberVO != null && memberVO.getMember_id().equals("admin")) {
-			mav.setViewName(viewName);
-			
-			String action = (String) request.getParameter("action");
-			if (action != null && action.equals("noticeInsert")) {
-				fileProcess(multipartRequest);
-				boardService.noticeInsert(map);
-				mav.setViewName("/admin/noticeList");
-			}
-		} else {
-			String message = "관리자만 본 서비스를 이용하실 수 있습니다.";
-			mav.addObject("message", message);
-			mav.setViewName("/member/loginForm");
-		}
-		
-		return mav;
-	}
-	
-	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest) throws IOException {
-		List<String> fileList= new ArrayList<String>();
-		Iterator<String> filenames = multipartRequest.getFileNames();
-		
-		while(filenames.hasNext()) {
-			String fileName = filenames.next();
-			MultipartFile mFile = multipartRequest.getFile(fileName);
-			String originalFilename = mFile.getOriginalFilename();
-			fileList.add(originalFilename);
-			File file = new File(CURR_IMAGE_REPO_PATH + "\\" + fileName);
-			if(mFile.getSize() != 0) {
-				if (! file.exists()) {
-					if(file.getParentFile().mkdirs()) {
-						file.createNewFile();
-					}
-				}
-				mFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + originalFilename));
-			}
-		}
-		map.put("file", fileList);
-		return fileList;
-	}
-
-	//	관리자 FAQ
-	@RequestMapping(value="faqList.do")
-	public ModelAndView faqList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		System.out.println("admin: " + viewName);
-		
-		getPaging(request, response);
-		mav.addObject("paging", paging);
-		
-		List<BoardVO> faq = boardService.getFAQList(map);
-		mav.addObject("FAQList", faq);
-		
-		return mav;
-	}
-	
-//	관리자 1:1 문의
-	@RequestMapping(value="memberQnaList.do")
-	public ModelAndView memQList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		System.out.println("admin: " + viewName);
-		
-		HttpSession session = request.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
-		
-		if (memberVO != null && memberVO.getMember_id().equals("admin")) {
-			getPaging(request, response);
-			mav.addObject("paging", paging);
-			List<BoardVO> memQ = boardService.getMemQListAll(map);
-			mav.addObject("MemQList", memQ);
-			mav.setViewName(viewName);
-		} else {
-			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
-			mav.addObject("message", message);
-			mav.setViewName("/member/loginForm");
-		}
-		
-		return mav;
-	}
-
 	@RequestMapping(value = "/productAdd.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView productAdd(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -258,52 +130,6 @@ public class AdminController extends BaseController {
 		mav.addObject("list",service.loadOption(request.getParameter("product_id")));
 		mav.setViewName("/admin/productOption");
 		return mav;
-	}
-	
-//	Paging
-	public void getPaging(HttpServletRequest request, HttpServletResponse response) {
-		String viewName = (String) request.getAttribute("viewName");
-		System.out.println("paging admin: " + viewName);
-
-		if (viewName.equals("/admin/noticeList")) {
-			paging.setTotalRecord(pagingService.getNoticeCount());
-		} else if (viewName.equals("/admin/faqList")) {
-			paging.setTotalRecord(pagingService.getFAQCount());
-		} else if (viewName.equals("/admin/memberQnaList")) {
-			paging.setTotalRecord(pagingService.getMemQCountAll());
-		}
-		
-//		전체 게시물 끝글번호 setter (미완성)
-//		paging.setListEndNum(listEndNum);
-		
-//		전체 게시물의 수 구하기
-		paging.setTotalPage();
-		
-//		현재 페이지 구하기
-		String cPage = request.getParameter("cPage");
-		if (cPage != null) {
-			paging.setNowPage(Integer.parseInt(cPage));
-		} else {
-			paging.setNowPage(1);
-		}
-		
-//		begin, end
-		paging.setEnd(paging.getNowPage() * paging.getNumPerPage());
-		paging.setBegin(paging.getEnd() - paging.getNumPerPage() + 1);
-
-//		블록
-		int nowPage = paging.getNowPage();
-		int currentBlock = (nowPage - 1) / paging.getPagePerBlock() + 1;
-		
-		paging.setEndPage(currentBlock * paging.getPagePerBlock());
-		paging.setBeginPage(paging.getEndPage() - paging.getPagePerBlock() + 1);
-		
-//		끝페이지가 전체페이지수보다 크면 끝페이지값 전체페이지수로 변경
-		if (paging.getEndPage() > paging.getTotalPage()) {
-			paging.setEndPage(paging.getTotalPage());
-		}
-		
-		map.put("paging", paging);
 	}
 	
 }

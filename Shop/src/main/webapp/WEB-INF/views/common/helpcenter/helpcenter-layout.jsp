@@ -58,6 +58,7 @@
 	</c:if>
 	
 	<script type="text/javascript">
+		
 		$(document).ready(function() {
 			$("a[name='delete']").on("click", function(e) {
 				e.preventDefault();
@@ -92,7 +93,7 @@
 
 		<tiles:insertAttribute name="body" />
 
-		<tiles:insertAttribute name="footer" />
+		<tiles:insertAttribute name="footer" ignore="true" />
 
 	</div>
 	

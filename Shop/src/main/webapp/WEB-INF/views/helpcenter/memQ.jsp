@@ -16,8 +16,6 @@
 			<div id="middle" class="flex-fill">
 
 				<!-- PAGE LIST -->
-				<div class="clearfix">
-					<div role="tabpanel">
 
                         <!-- Tab panes -->
                         <div class="tab-content">
@@ -26,7 +24,7 @@
                                 	1:1 문의
                                 	<p>모든 의문... 쩝쩝박사에게!</p>
                             	</h3>
-                                <div class="joy-notice-detail">
+                                <div class="joy-board-detail">
                                     <table class="joy-table-detail">
                                         <tr>
                                         	<th>카테고리</th>
@@ -44,51 +42,72 @@
                                         </tr>
                                     </table>
                                     <div class="detail-contents">
-                                        <p>
+                                        <p class="contents">
                                             ${memQ.contents}
                                         </p>
-                                        <c:if test="${not empty memQ.image1 }">
-                							<div class="detail-image">
-                								<img src="/board/fileDownload.do?image=${memQ.image1}">
-                							</div>
-                						</c:if>
-                						<c:if test="${not empty memQ.image2 }">
-                							<div class="detail-image">
-                								<img src="/board/fileDownload.do?image=${memQ.image2}">
-                							</div>
-                						</c:if>
-                						<c:if test="${not empty memQ.image3 }">
-                							<div class="detail-image">
-                								<img src="/board/fileDownload.do?image=${memQ.image3}">
-                							</div>
-                						</c:if>
-                                        
+                                        <div class="image-box">
+	                                        <c:if test="${not empty memQ.image1 }">
+	                							<div class="detail-image">
+	                								<img src="${contextPath }/board/fileDownload.do?image=${memQ.image1}">
+	                							</div>
+	                						</c:if>
+	                						<c:if test="${not empty memQ.image2 }">
+	                							<div class="detail-image">
+	                								<img src="${contextPath }/board/fileDownload.do?image=${memQ.image2}">
+	                							</div>
+	                						</c:if>
+	                						<c:if test="${not empty memQ.image3 }">
+	                							<div class="detail-image">
+	                								<img src="${contextPath }/board/fileDownload.do?image=${memQ.image3}">
+	                							</div>
+	                						</c:if>
+                                        </div>
                                     </div>
-                                    <div class="prev-next-list">
-                                    	<c:if test="${memQ.member_qna_num <= 1}">
-                                        	<p class="disabled">이전글</p>
-                                    	</c:if>
-                                    	<c:if test="${memQ.member_qna_num > 1 }">
-                                        	<a href="notice.do?notice_num=${faq.faq_num - 1}">이전글</a>
-                                    	</c:if>
-                                    	
-                                    	<c:if test="${memQ.member_qna_num >= 8 }">
-                                        	<p class="disabled">다음글</p>
-                                    	</c:if>
-                                    	<c:if test="${memQ.member_qna_num < 8 }">
-                                        	<a href="memQ.do?member_qna_num=${memQ.member_qna_num + 1}">다음글</a>
-                                    	</c:if>
-                                    	
-                                    	<a href="memQ-update.do?member_qna_num=${memQ.member_qna_num }" class="list">수정</a>
-                                        <a href="memberQ-tab.do?cPage=${paging.nowPage }" class="list">목록</a>
-                                    </div>
-                                </div>
+									<div class="prev-next-list">
+										<c:if test="${memQ.pre_no == 0 }">
+											<p class="disabled">이전글</p>
+										</c:if>
+										<c:if test="${memQ.pre_no != 0 }">
+											<c:choose>
+												<c:when
+													test="${(memQ.member_qna_num - 1) == maxPre || memQ.member_qna_num == maxPre}">
+													<a
+														href="memQ.do?member_qna_num=${memQ.member_qna_num - 1}&cPage=${paging.nowPage}">이전글</a>
+												</c:when>
+												<c:otherwise>
+													<a
+														href="memQ.do?member_qna_num=${memQ.member_qna_num - 1}&cPage=${paging.nowPage + 1}">이전글</a>
+												</c:otherwise>
+											</c:choose>
+										</c:if>
+				
+										<c:if test="${memQ.next_no == 0 }">
+											<p class="disabled">다음글</p>
+										</c:if>
+										<c:if test="${memQ.next_no != 0 }">
+											<c:choose>
+												<c:when
+													test="${maxPre == 0 || (memQ.member_qna_num + 1) == maxPre}">
+													<a
+														href="memQ.do?member_qna_num=${memQ.member_qna_num + 1}&cPage=${paging.nowPage}">다음글</a>
+												</c:when>
+												<c:when test="${notice.notice_num == maxPre}">
+													<a
+														href="memQ.do?member_qna_num=${memQ.member_qna_num + 1}&cPage=${paging.nowPage}">다음글</a>
+												</c:when>
+												<c:otherwise>
+													<a
+														href="memQ.do?member_qna_num=${memQ.member_qna_num + 1}&cPage=${paging.nowPage - 1}">다음글</a>
+												</c:otherwise>
+											</c:choose>
+										</c:if>
+				
+										<a href="memberQ-tab.do?cPage=${paging.nowPage }" class="list">목록</a>
+									</div>
+								</div>
                             </div>
                         </div>
 
-					</div>
-
-				</div>
 				<!-- /PAGE LIST -->
 
 			</div>

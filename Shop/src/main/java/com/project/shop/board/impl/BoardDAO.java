@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.shop.board.BoardVO;
-import com.project.shop.member.MemberVO;
 
 @Repository
 public class BoardDAO {
@@ -36,7 +35,7 @@ public class BoardDAO {
 		return board.selectList("mapper.board.getMemQList", map);
 	}
 
-	public void memQInsert(HashMap<String, String> map) {
+	public void memQInsert(HashMap<String, Object> map) {
 		board.insert("mapper.board.memqInsert", map);
 	}
 
@@ -44,7 +43,7 @@ public class BoardDAO {
 		return board.selectOne("mapper.board.getMemQ", vo);
 	}
 
-	public void memQUpdate(HashMap<String, String> map) {
+	public void memQUpdate(HashMap<String, Object> map) {
 		board.update("mapper.board.memqUpdate", map);
 	}
 

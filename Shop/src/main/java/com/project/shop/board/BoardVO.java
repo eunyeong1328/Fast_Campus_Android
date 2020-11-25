@@ -3,11 +3,10 @@ package com.project.shop.board;
 import java.sql.Date;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class BoardVO {
-
+	
 	private String image1;
 	private String image2;
 	private String image3;
@@ -36,8 +35,10 @@ public class BoardVO {
 		this.image3 = image3;
 	}
 
-	//	공지사항
+//	공지사항
 	private int notice_num;
+	private int next_no;
+	private int pre_no;
 	private String title;
 	private String contents;
 	private Date reg_date;
@@ -199,6 +200,22 @@ public class BoardVO {
 
 	public void setQna_category_name(String qna_category_name) {
 		this.qna_category_name = qna_category_name;
+	}
+
+	public int getNext_no() {
+		return next_no;
+	}
+
+	public void setNext_no(int next_no) {
+		this.next_no = next_no;
+	}
+
+	public int getPre_no() {
+		return pre_no;
+	}
+
+	public void setPre_no(int pre_no) {
+		this.pre_no = pre_no;
 	}
 	
 }

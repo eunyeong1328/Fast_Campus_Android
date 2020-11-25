@@ -51,12 +51,14 @@
                                     	<input type="hidden" name="action" value="memqUpdate">
                                     	<input type="hidden" name="member_id" value="${memQ.member_id }">
                                     	<input type="hidden" name="member_qna_num" value="${memQ.member_qna_num }">
-                                    	<input type="hidden" name="qna_category_num" value="${memQ.qna_category_num }">
                                         <div class="memq-title">
                                             <p>제목</p>
                                             <div class="category-select">
-                                                <select>
-                                                    <option value="${memQ.qna_category_num }">${memQ.qna_category_name }</option>
+                                                <select name="qna_category_num">
+                                                    <option value="${memQ.qna_category_num }" selected>${memQ.qna_category_name }</option>
+                                                    <option value="1">배송</option>
+                                                    <option value="2">반품</option>
+                                                    <option value="3">상품</option>
                                                 </select>
                                                 <input type="text" name="title" value="${memQ.title }">
                                             </div>
@@ -76,7 +78,7 @@
                                         </div>
                                         <div class="memq-contents">
                                             <p>내용</p>
-                                            <p>
+                                            <div>
                                                 1:1 문의 작성 전 확인해주세요!<br><br>
                                                 반품/환불<br>
                                                 - 제품 하자 혹은 이상으로 반품(환불)이 필요한 경우 사진과 함께 구체적인 내용을 남겨주세요.<br><br>
@@ -86,14 +88,18 @@
                                                 배송<br>
                                                 - 배송일 및 배송시간 지정은 불가능합니다.<br><br>
                                                 # 전화번호, 이메일, 주소, 계좌번호 등의 상세 개인정보가 문의 내용에 저장되지 않도록 주의해 주시기 바랍니다.<br>
-                                            </p>
+                                            </div>
                                             <textarea name="contents" rows="5" cols="80">${memQ.contents }</textarea>
                                         </div>
-                                        <div class="memq-image">
+                                        <div class="memq-image" id="fileDiv">
                                             <p>이미지</p>
-                                            <a href="#this" id="add" class="btn">파일 추가하기</a>
-                                            <input name="file" type="file" multiple="multiple">
-                                            <a href="#this" name="delete" class="btn">삭제하기</a>
+                                            <div>
+	                                            <input name="file" type="file" multiple="multiple">
+	                                            <a href="#this" name="delete" class="btn">삭제하기</a>
+                                            </div>
+                                        </div>
+                                        <div>
+	                                    	<a href="#this" id="add" class="btn">파일 추가하기</a>
                                         </div>
                                         <div class="memq-submit">
                                             <input type="submit" value="등록">

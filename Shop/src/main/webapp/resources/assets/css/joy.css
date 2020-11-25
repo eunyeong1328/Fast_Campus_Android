@@ -121,11 +121,15 @@ body.layout-admin #footer a { color: #121212; }
 #header .navbar { margin-bottom: 0; }
 
 /* page-detail.html */
-.joy-notice-detail .joy-table-detail {
-    width: 100%;
-    border-top: 2px solid #600080;
+
+div.joy-board-detail {
     color: #333;
     font-size: 14px;
+}
+
+.joy-board-detail .joy-table-detail {
+    width: 100%;
+    border-top: 2px solid #600080;
 }
 
 .joy-table-detail tr {
@@ -147,11 +151,10 @@ body.layout-admin #footer a { color: #121212; }
     border-bottom: 2px solid #600080;
 }
 
-.detail-contents p {
+.detail-contents p.contents {
     margin: 0;
     padding: 20px;
     color: #333;
-    font-size: 14px;
 }
 
 .prev-next-list {

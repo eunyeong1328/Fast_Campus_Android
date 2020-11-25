@@ -22,9 +22,9 @@ public interface BoardService {
 	BoardVO getMemQ(BoardVO vo);
 	
 //	회원문의 작성
-	void memQInsert(HashMap<String, String> map);
+	void memQInsert(HashMap<String, Object> map);
 //	회원문의 수정
-	void memQUpdate(HashMap<String, String> map);
+	void memQUpdate(HashMap<String, Object> map);
 
 //	공지사항 작성
 	void noticeInsert(HashMap<String, Object> map);

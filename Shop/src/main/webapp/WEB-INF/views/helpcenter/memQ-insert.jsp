@@ -54,7 +54,7 @@
                                             <p>제목</p>
                                             <div class="category-select">
                                                 <select name="qna_category_num">
-                                                    <option selected="selected">선택해주세요.</option>
+                                                    <option selected>선택해주세요.</option>
                                                     <option value="1">배송</option>
                                                     <option value="2">반품</option>
                                                     <option value="3">상품</option>
@@ -93,12 +93,13 @@
                                         <div class="memq-image" id="fileDiv">
                                             <p>이미지</p>
                                             <div>
-                                            <input name="file" type="file" multiple="multiple">
-                                            <a href="#this" name="delete" class="btn">삭제하기</a>
+	                                            <input name="file" type="file" multiple="multiple">
+	                                            <a href="#this" name="delete" class="btn">삭제하기</a>
                                             </div>
                                         </div>
-	                                        <a href="#this" id="add" class="btn">파일 추가하기</a>
-                                        
+	                                    <div>
+	                                    	<a href="#this" id="add" class="btn">파일 추가하기</a>
+                                        </div>
                                         <div class="memq-submit">
                                             <input type="submit" value="등록">
                                     		<a href="memberQ-tab.do" class="list">목록</a>
