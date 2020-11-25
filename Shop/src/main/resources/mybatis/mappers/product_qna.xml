@@ -51,8 +51,23 @@
 		)
 	</insert>
 	
-	<!-- 게시글에 대한 정보 가져오기 -->
+	<!-- 상품문의 게시글에 대한 정보 가져오기 -->
 	<select id="selectQna" parameterType="int" resultType="product_qnaVO">
 	  SELECT * FROM PRODUCT_QNA WHERE product_qna_num = #{product_qna_num}
 	</select>
+	
+	<!-- 상품문의 게시판 업데이트 -->
+	<update id="updateBoardQna" parameterType="java.util.HashMap">
+		UPDATE product_qna 
+		SET 
+		TITLE = #{title}, CONTENTS= #{contents}, 
+		IMAGE1 = #{image1}, IMAGE2 = #{image2} , IMAGE3 = #{image3}
+		WHERE PRODUCT_QNA_NUM = #{product_qna_num}
+	</update>
+	
+	<!-- 상품문의 게시판 삭제 -->
+	<delete id="deleteBoardQna" parameterType="int">
+		DELETE FROM product_qna
+		WHERE product_qna_num = #{product_qna_num}
+	</delete>
 </mapper>
