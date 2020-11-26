@@ -32,10 +32,10 @@ public class MyAccountServiceImpl implements MyAccountService{
 	}
 
 	@Override
-	public MemberVO modifyAddressInfo(HashMap memberMap) throws Exception {
-		System.out.println("요건 배송지 수정 요청이다.= " + memberMap.get("member_id"));
-		myAccountDAO.modifyAddressInfo(memberMap);
-		String member_id=(String)memberMap.get("member_id");
+	public MemberVO modifyAddressInfo(HashMap map) throws Exception {
+		System.out.println("요건 배송지 수정 요청 아이디이다. " + map.get("member_id"));
+		myAccountDAO.modifyAddressInfo(map);
+		String member_id=(String)map.get("member_id");
 		return myAccountDAO.selectMyDetailInfo(member_id);
 	}
 

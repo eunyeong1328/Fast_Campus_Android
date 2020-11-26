@@ -28,7 +28,7 @@ public class MyAccountController extends BaseController{
 	private MemberVO memberVO;
 	
 	//계정 정보 확인
-	@RequestMapping(value ="/account-settings.do" ) 
+	@RequestMapping(value ="/account-settings.do") 
 	   public ModelAndView accountSettingsInfo(
 			   HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//session에서 획득한  memberInfo 정보
@@ -76,12 +76,23 @@ public class MyAccountController extends BaseController{
 		ModelAndView mav = new ModelAndView();
 		HttpSession session=request.getSession();
 		memberVO=(MemberVO)session.getAttribute("memberInfo");
-		System.out.println("모달창에서 값이 넘어오는 지 확인 : " + memberMap.get("zipNo"));
-		System.out.println("모달창에서 값이 넘어오는 지 확인 : " + memberMap);
-		System.out.println();
-		System.out.println("HashMap memberid = " + memberMap.get("member_id"));		
-		System.out.println("password = " + memberMap.get("password"));
-		memberVO = (MemberVO)myAccountService.modifyAddressInfo(memberMap);
+		String member_id = memberVO.getMember_id();
+		String zipNo = memberMap.get("zipNo");
+		String load_address = memberMap.get("load_address");
+		String jibun_address = memberMap.get("jibun_address");
+		String rest_address = memberMap.get("rest_address");
+		
+		System.out.println("아이디: " + member_id + " 우편번호  :" + zipNo + 
+				" 도로명 주소 : " + load_address + " 지번 주소: "+ jibun_address + " 나머지 주소 : "+rest_address);
+
+		HashMap<String,String> map = new HashMap<String, String>();
+		map.put("zipNo",zipNo);
+		map.put("load_address",load_address);
+		map.put("jibun_address",jibun_address);
+		map.put("rest_address",rest_address);
+		map.put("member_id",member_id);
+		
+		memberVO = (MemberVO)myAccountService.modifyAddressInfo(map);
 		System.out.println("수정 처리 완료!!");
 		
 		//수정된 회원 정보를 다시 세션에 저장한다.

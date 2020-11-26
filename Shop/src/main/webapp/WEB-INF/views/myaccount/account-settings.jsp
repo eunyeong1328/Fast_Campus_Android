@@ -484,20 +484,17 @@
 											</p>
 
 										</div>
-
+										
 										<div class="col-4 col-sm-3 col-md-3 col-lg-2">
-										<script>
-											function fn(){
-												alert('아이디 : ${memberinfo.member_id}');
-											}
-										</script>
+										
 											<a href="#"
+												name = "member_id" id = "member_id" value= "${memberinfo.member_id}"
 												data-href="${contextPath}/resources/_ajax/modal_address.jsp"
 												data-ajax-modal-size="modal-md"
 												data-ajax-modal-centered="false"
 												data-ajax-modal-backdrop="static"
 												class="js-ajax-modal float-end btn btn-sm btn-block btn-light fs--14 mb-0"
-												onclick = "fn()">
+												>
 												수정 </a>
 												<a href="#" data-href="#?action=delete&amp;item_id=1"
 												data-ajax-confirm-mode="regular"

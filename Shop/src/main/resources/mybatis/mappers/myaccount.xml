@@ -44,16 +44,16 @@
 	</update>	
 	
 	<!-- 배송지 수정 -->
-	<!-- <update id="modifyAddressInfo" parameterType="java.util.HashMap">
+	<update id="modifyAddressInfo" parameterType="java.util.HashMap">
 	   UPDATE MEMBER 
 			   <set>
-			   ZIPNO=#{zipNo},
-			   LOAD_ADDRESS=#{load_address},
-			   JIBUN_ADDRESS=#{jibun_address},
-			   REST_ADDRESS=#{rest_address},		   
+			   zipNo=#{zipNo},
+			   load_address=#{load_address},
+			   jibun_address=#{jibun_address},
+			   rest_address=#{rest_address}		   
 			   </set>
 		WHERE 
-		MEMBER_ID = #{member_id}
-	</update>	 -->
+		member_id = #{member_id}
+	</update>	 
 	
 </mapper>
