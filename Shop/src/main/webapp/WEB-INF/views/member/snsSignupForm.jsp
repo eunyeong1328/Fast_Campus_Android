@@ -127,7 +127,6 @@
 											type="hidden" class="form-control" readonly>
 							</div>
 
-
 							<div class="input-group-over">
 								<div class="form-label-group mb-3">
 									<input required placeholder="Password" name="password"
@@ -141,9 +140,11 @@
 														name="Password_check" id="password_check2"
 														value="${memberInfo.password }" type="hidden"
 														class="form-control">
-
 									</div>
 									
+									<input required placeholder="member_status" id="member_status"
+											value="구글" name="member_status"
+											type="hidden" class="form-control" readonly>
 									
 									
 									<div class="form-label-group mb-3">

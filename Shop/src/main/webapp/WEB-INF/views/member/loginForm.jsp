@@ -34,17 +34,12 @@
 		    				console.log("성공!!");
 		    				var memberInfo = JSON.parse(xhr.responseText);
 		    				console.log(memberInfo);		    				
-		    				/*member_date 값이 null일 경우 회원가입창으로
-		    				null이 아닐 경우 로그인으로  */
-		    				if(memberInfo.member_date!=null){
-		    					/* 로그인시킴 */
-		    					location.href= "${contextPath}/main/main.do";
-		    					
+		    				/*member_date 값이 null일 경우 회원가입창으로 null이 아닐 경우 로그인으로  */
+		    				if(memberInfo.member_date!=null){		    					
+		    					location.href= "${contextPath}/main/main.do";		    					
 		    				} else {		    							    					
-		    					location.href="${contextPath}/member/snsSignupForm.do";
-		    					
-		    				}		    				
-		    				
+		    					location.href="${contextPath}/member/snsSignupForm.do";		    					
+		    				}		    						    				
 		    			} else {
 		    				console.error(xhr.responseText);
 		    			}
@@ -191,15 +186,6 @@ span.buttonText {
 	</section>
 	<!-- /FORM -->
 
-	<!-- function login_confirm(frm){
-	var id = frm.member_id.value;
-	var pw = frm.password.value;
-
-	if ((id == "" || id.length == 0) || (pw == "" || pw.length == 0)) {
-		alert("아이디와 비밀번호는 필수입니다.");
-	}
-} -->
-
 
 	<!-- CONNECT WITH -->
 	<section class="py-5 border-top">
@@ -226,6 +212,7 @@ span.buttonText {
 								facebook
 							</a>
 						</div>
+						
 						<!-- 구글로 로그인  -->
 						<div class="col-6">
 							<!-- In the callback, you would hide the gSignInWrapper element on a successful sign in -->

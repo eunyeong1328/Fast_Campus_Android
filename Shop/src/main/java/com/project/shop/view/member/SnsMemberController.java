@@ -85,9 +85,7 @@ public class SnsMemberController extends BaseController{
 					System.out.println("회원가입을 진행합니다.");
 					session.setAttribute("memberInfo", vo);
 					jsonMember = mapper.writeValueAsString(vo);
-				}				
-				
-//json형태로 넘겨서 loginForm.jsp에서 받아서 처리				
+				}							
 
 			}
 
@@ -97,16 +95,5 @@ public class SnsMemberController extends BaseController{
 
 		return jsonMember;
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/googleSignup.do", produces="application/x-www-form-urlencoded; charset=utf8")
-	public ModelAndView googleSignup(@RequestBody MemberVO vo) {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("MemberVO",vo);
-		mv.setViewName("/member/loginForm");
-		
-		return mv;
-		
-		
-	}
+
 }
