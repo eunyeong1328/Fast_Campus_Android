@@ -72,10 +72,10 @@
 </script>
 <form novalidate class="bs-validate" method="post" action="${contextPath}/myaccount/modifyAddressInfo.do">		
 		<!-- hidden으로  id값 가져오기  -->										
-	  <input type="hidden" id="member_id" name="member_id" value="${contextPath}/src/main/webapp/WEB-INF/views/myaccount/account-settings/${member_info.member_id}">
-	   <img src="${contextPath}/resources/images/item_image/${vo.product_image}">
-	  <p>이런 씨 왜 아이디 값 안 가져오냐교 !!! ${member_info.member_id}</p>
-	  
+	<%--   <input type="hidden" id="member_id" name="member_id" value="${contextPath}/src/main/webapp/WEB-INF/views/myaccount/account-settings/${member_info.member_id}"> --%>
+	 <%--   <img src="${contextPath}/resources/images/item_image/${vo.product_image}">
+	  <p>이런 씨 왜 아이디 값 안 가져오냐교 !!! ${member_info.member_id}</p> --%>
+	 
 	<div class="modal-header">
 		<h2 class="modal-title fs--18 m-0">주소</h2>
 

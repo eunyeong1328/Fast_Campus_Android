@@ -446,11 +446,11 @@
 								<h3 class="h5 clearfix mb-3 mt-3">
 
 									<a href="#"
-										data-href="${contextPath}/resources/_ajax/modal_address.jsp"
-										data-ajax-modal-size="modal-md"
-										data-ajax-modal-centered="true"
-										data-ajax-modal-backdrop="static"
-										class="js-ajax-modal float-end btn btn-sm btn-primary fs--14 mb-0">
+										data-href="${contextPath}/resources/_ajax/modal_address.jsp" 
+											data-ajax-modal-size="modal-md"
+											data-ajax-modal-centered="false"
+											data-ajax-modal-backdrop="static"
+											class="js-ajax-modal float-end btn btn-sm btn-primary fs--14 mb-0">
 										새 배송지 추가 </a> <span class="float-start mt-2"> <span
 										class="text-primary">배송</span> 주소
 									</span>
@@ -498,7 +498,8 @@
 												data-ajax-modal-backdrop="static"
 												class="js-ajax-modal float-end btn btn-sm btn-block btn-light fs--14 mb-0"
 												onclick = "fn()">
-												수정 </a> <a href="#" data-href="#?action=delete&amp;item_id=1"
+												수정 </a>
+												<a href="#" data-href="#?action=delete&amp;item_id=1"
 												data-ajax-confirm-mode="regular"
 												data-ajax-confirm-size="modal-md"
 												data-ajax-confirm-centered="false"
