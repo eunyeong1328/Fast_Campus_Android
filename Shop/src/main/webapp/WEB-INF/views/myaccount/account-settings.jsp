@@ -6,7 +6,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-
 <body>
 
 	<div id="wrapper">
@@ -50,7 +49,7 @@
 								<span class="group-icon px-2 py-2 float-start"> <i
 									class="fi fi-bars-2"></i> <i class="fi fi-close"></i>
 								</span> <span class="h5 py-2 m-0 float-start"> Account Menu </span>
-							</button>f
+							</button>
 
 							<!-- desktop only -->
 							<h5 class="pt-3 pb-3 m-0 d-none d-lg-block">
@@ -235,7 +234,7 @@
 															<input required placeholder="email" id="email"
 																name="email" type="text" class="form-control"
 																value="${memberinfo.email}"> <label
-																for="account_phone">이메일</label>
+																for="email">이메일</label>
 														</div>
 
 														<div id="email_edit_info"
@@ -253,7 +252,7 @@
 															<input required placeholder="phone" id="phone"
 																name="phone" type="text" class="form-control"
 																value="${memberinfo.phone}"> <label
-																for="account_phone">휴대폰 번호</label>
+																for="phone">휴대폰 번호</label>
 														</div>
 
 													</div>
@@ -325,7 +324,7 @@
 													<div class="input-group-over">
 														<div class="form-label-group mb-3">
 															<input placeholder="New Password" id="password"
-																name="password" type="password" class="form-control">
+																name="password" type="password" class="form-control" value="${memberinfo.password}">
 															<label for="password">새 비밀번호</label>
 														</div>
 
@@ -426,17 +425,16 @@
 
 									<div class="border-top pt-4 mt-1">
 
-										<button type="submit" class="btn btn-purple fs--20">
-											<i class="fi fi-check " onclick="fn_modify_myaccount()"></i>
+										<button type="submit" class="btn btn-purple fs--20"  onclick = "saveChanges()">
+											<i class="fi fi-check "></i>
 											변경사항 저장
 										</button>
 									</div>
-									<script>
-										function fn_modify_myaccount() {
+									<script type="text/javascript">
+										function saveChanges() {
 											const result = confirm("변경되었습니다");
 										}
 									</script>
-
 								</form>
 								<!-- form 태그 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 							</div>

@@ -36,7 +36,8 @@
 			   <set>
 			   password = #{password},
 			   member_name=#{member_name},
-			   email=#{email}
+			   email=#{email},
+			   phone=#{phone}
 			   </set>
 		where 
 		member_id=#{member_id}
