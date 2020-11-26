@@ -66,4 +66,29 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.noticeInsert(map);
 	}
 
+	@Override
+	public void faqInsert(BoardVO vo) {
+		boardDAO.faqInsert(vo);
+	}
+
+	@Override
+	public void noticeUpdate(HashMap<String, Object> map) {
+		boardDAO.noticeUpdate(map);
+	}
+
+	@Override
+	public void faqUpdate(BoardVO vo) {
+		boardDAO.faqUpdate(vo);
+	}
+
+	@Override
+	public void noticeDelete(BoardVO vo) {
+		boardDAO.noticeDelete(vo);
+	}
+
+	@Override
+	public void faqDelete(BoardVO vo) {
+		boardDAO.faqDelete(vo);
+	}
+
 }

@@ -20,8 +20,8 @@ import com.project.shop.member.MemberVO;
 import com.project.shop.paging.Paging;
 import com.project.shop.paging.PagingService;
 
-@Controller
-@RequestMapping(value = "/admin")
+@Controller("adminBoardController")
+@RequestMapping(value = "/adminboard")
 public class AdminBoardController {
 
 	@Autowired
@@ -30,7 +30,6 @@ public class AdminBoardController {
 	private PagingService pagingService;
 	
 	FileController filecon = new FileController();
-	PagingController pagecon = new PagingController();
 	
 	Paging paging = new Paging();
 	HashMap<String, Object> map = new HashMap<String, Object>();
@@ -40,9 +39,8 @@ public class AdminBoardController {
 	public ModelAndView getNoticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-
-		map = pagecon.getPaging(request, response);
-		paging = (Paging) map.get("paging");
+		System.out.println("admin noticeList: " + viewName);
+		getPaging(request, response);
 		mav.addObject("paging", paging);
 
 		List<BoardVO> noticeList = boardService.getNoticeList(map);
@@ -52,13 +50,12 @@ public class AdminBoardController {
 	}
 	
 //	관리자 FAQ
-	@RequestMapping(value="faqList.do")
+	@RequestMapping(value="/faqList.do")
 	public ModelAndView getFAQList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
-		map = pagecon.getPaging(request, response);
-		paging = (Paging) map.get("paging");
+		getPaging(request, response);
 		mav.addObject("paging", paging);
 		
 		List<BoardVO> faqList = boardService.getFAQList(map);
@@ -68,7 +65,7 @@ public class AdminBoardController {
 	}
 	
 //	관리자 1:1 문의
-	@RequestMapping(value="memberQnaList.do")
+	@RequestMapping(value="/memberQnaList.do")
 	public ModelAndView memQList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
@@ -78,8 +75,7 @@ public class AdminBoardController {
 		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
 		
 		if (isLogOn == true && memberVO.getMember_id().equals("admin")) {
-			map = pagecon.getPaging(request, response);
-			paging = (Paging) map.get("paging");
+			getPaging(request, response);
 			mav.addObject("paging", paging);
 			
 			List<BoardVO> memQList = boardService.getMemQListAll(map);
@@ -93,11 +89,59 @@ public class AdminBoardController {
 		return mav;
 	}
 	
+//	글 상세 불러오기
+	@RequestMapping("/notice.do")
+	public ModelAndView getNotice(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+
+		getPaging(request, response);
+		mav.addObject("paging", paging);
+
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		mav.addObject("member_id", memberVO.getMember_id());
+		
+		List<BoardVO> noticeList = boardService.getNoticeList(map);
+
+		for (BoardVO noti : noticeList) {
+			if (noti.getNotice_num() == vo.getNotice_num()) {
+				BoardVO notice = noti;
+				mav.addObject("notice", notice);
+			}
+		}
+		return mav;
+	}
+	
+	@RequestMapping("/faq.do")
+	public ModelAndView getFAQ(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+
+		getPaging(request, response);
+		mav.addObject("paging", paging);
+
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		mav.addObject("member_id", memberVO.getMember_id());
+		
+		List<BoardVO> faqList = boardService.getFAQList(map);
+
+		for (BoardVO fa : faqList) {
+			if (fa.getFaq_num() == vo.getFaq_num()) {
+				BoardVO faq = fa;
+				mav.addObject("faq", faq);
+			}
+		}
+		return mav;
+	}
+	
 //	관리자 공지사항 등록 setViewName
 	@RequestMapping(value="/noticeInsert.do")
 	public ModelAndView noticeInsertView(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
+		System.out.println("/admin/board VIEWNAME: " + viewName);
 
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
@@ -114,18 +158,211 @@ public class AdminBoardController {
 	}
 	
 //	관리자 공지사항 등록
-	@RequestMapping(value="/noticeAdd.do", method={RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/noticeAdd.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView noticeInsert(MultipartHttpServletRequest multipartRequest, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		System.out.println("/admin/board VIEWNAME: " + viewName);
 		String action = (String) request.getParameter("action");
 		
 		if (action != null && action.equals("noticeAdd")) {
 			map = filecon.fileUpload(multipartRequest, response);
 			boardService.noticeInsert(map);
-			mav.setViewName("/admin/noticeList");
+			mav.setViewName("redirect:/adminboard/noticeList.do");
 		}
 		
 		return mav;
+	}
+
+//	관리자 FAQ 등록
+	@RequestMapping(value="/faqInsert.do")
+	public ModelAndView FAQInsert(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		System.out.println("/admin/board VIEWNAME: " + viewName);
+
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
+
+		if (isLogOn == true && memberVO.getMember_id().equals("admin")) {
+			mav.setViewName(viewName);
+			String action = (String) request.getParameter("action");
+			
+			if (action != null && action.equals("faqAdd")) {
+				boardService.faqInsert(vo);
+				mav.setViewName("redirect:/adminboard/faqList.do");
+			}
+		} else {
+			String message = "관리자만 본 서비스를 이용하실 수 있습니다.";
+			mav.addObject("message", message);
+			mav.setViewName("/member/loginForm");
+		}
+		return mav;
+	}
+	
+//	공지사항 글 수정 setView
+	@RequestMapping(value = "/noticeUpdate.do")
+	public ModelAndView noticeUpdateView(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
+
+		if (isLogOn == true && memberVO.getMember_id().equals("admin")) {
+			mav.setViewName(viewName);
+			BoardVO notice = boardService.getNotice(vo);
+			mav.addObject("notice", notice);
+		} else {
+			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
+			mav.addObject("message", message);
+			mav.setViewName("/member/loginForm");
+		}
+		return mav;
+	}
+
+//	공지사항 글 수정
+	@RequestMapping(value = "/noticeUpdating.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView memQUpdate(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String action = (String) multipartRequest.getParameter("action");
+		String notice_num = multipartRequest.getParameter("notice_num");
+		if (action != null && action.equals("noticeUpdating")) {
+			map = filecon.fileUpload(multipartRequest, response);
+			boardService.noticeUpdate(map);
+			mav.setViewName("redirect:/adminboard/notice.do?notice_num=" + notice_num);
+		}
+
+		return mav;
+	}
+	
+//	관리자 FAQ 수정
+	@RequestMapping(value="/faqUpdate.do")
+	public ModelAndView FAQUpdate(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
+
+		if (isLogOn == true && memberVO.getMember_id().equals("admin")) {
+			mav.setViewName(viewName);
+			BoardVO faq = boardService.getFAQ(vo);
+			mav.addObject("faq", faq);
+			
+			String action = (String) request.getParameter("action");
+			
+			if (action != null && action.equals("faqUpdate")) {
+				boardService.faqUpdate(vo);
+				mav.setViewName("redirect:/adminboard/faq.do?faq_num=" + vo.getFaq_num());
+			}
+		} else {
+			String message = "관리자만 본 서비스를 이용하실 수 있습니다.";
+			mav.addObject("message", message);
+			mav.setViewName("/member/loginForm");
+		}
+		return mav;
+	}
+	
+//	관리자 공지사항 삭제
+	@RequestMapping(value = "/noticeDelete.do")
+	public ModelAndView noticeDelete(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		boardService.noticeDelete(vo);
+		mav.setViewName("redirect:/adminboard/noticeList.do");
+		return mav;
+	}
+	
+//	관리자 FAQ 삭제
+	@RequestMapping(value = "/faqDelete.do")
+	public ModelAndView faqDelete(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		boardService.faqDelete(vo);
+		mav.setViewName("redirect:/adminboard/faqList.do");
+		return mav;
+	}
+/*	
+//	관리자 1:1 답변 등록 setViewName
+	@RequestMapping(value="/faqInsert.do")
+	public ModelAndView FAQInsertView(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
+
+		if (isLogOn == true && memberVO.getMember_id().equals("admin")) {
+			mav.setViewName(viewName);
+		} else {
+			String message = "관리자만 본 서비스를 이용하실 수 있습니다.";
+			mav.addObject("message", message);
+			mav.setViewName("/member/loginForm");
+		}
+		return mav;
+	}
+	
+//	관리자 1:1 답변 등록
+	@RequestMapping(value="/faqAdd.do", method={RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView FAQInsert(MultipartHttpServletRequest multipartRequest, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String action = (String) request.getParameter("action");
+		
+		if (action != null && action.equals("faqAdd")) {
+			map = filecon.fileUpload(multipartRequest, response);
+//			boardService.faqInsert(map);
+			mav.setViewName("/admin/faqList");
+		}
+		
+		return mav;
+	}
+*/	
+//	Paging
+	public void getPaging(HttpServletRequest request, HttpServletResponse response) {
+		
+		String viewName = (String) request.getAttribute("viewName");
+
+		if (viewName.equals("/adminboard/noticeList") || viewName.equals("/adminboard/notice")) {
+			paging.setTotalRecord(pagingService.getNoticeCount());
+			System.out.println("paging notice insert 후 list notice count " + paging.getTotalRecord());
+		} else if (viewName.equals("/adminboard/faqList") || viewName.equals("/adminboard/faq")) {
+			paging.setTotalRecord(pagingService.getFAQCount());
+		} else if (viewName.equals("/adminboard/memberQnaList") || viewName.equals("/adminboard/memberQ")) {
+			paging.setTotalRecord(pagingService.getMemQCountAll());
+		}
+
+//		전체 게시물의 수 구하기
+		paging.setTotalPage();
+
+//		현재 페이지 구하기
+		String cPage = request.getParameter("cPage");
+		if (cPage != null) {
+			paging.setNowPage(Integer.parseInt(cPage));
+		} else {
+			paging.setNowPage(1);
+		}
+		
+//		begin, end
+		paging.setEnd(paging.getNowPage() * paging.getNumPerPage());
+		paging.setBegin(paging.getEnd() - paging.getNumPerPage() + 1);
+
+//		블록
+		int nowPage = paging.getNowPage();
+		int currentBlock = (nowPage - 1) / paging.getPagePerBlock() + 1;
+
+		paging.setEndPage(currentBlock * paging.getPagePerBlock());
+		paging.setBeginPage(paging.getEndPage() - paging.getPagePerBlock() + 1);
+
+//		끝페이지가 전체페이지수보다 크면 끝페이지값 전체페이지수로 변경
+		if (paging.getEndPage() > paging.getTotalPage()) {
+			paging.setEndPage(paging.getTotalPage());
+		}
+		
+		map.put("paging", paging);
+		
 	}
 	
 }

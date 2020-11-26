@@ -16,13 +16,13 @@
 					-->
 	<div class="page-title bg-transparent b-0">
 
-		<h1 class="h4 mt-4 mb-0 px-3 font-weight-normal">공지사항 등록</h1>
+		<h1 class="h4 mt-4 mb-0 px-3 font-weight-normal">FAQ 등록</h1>
 
 	</div>
 
-	<form novalidate class="bs-validate" method="post" action="${contextPath }/adminboard/noticeAdd.do"
+	<form novalidate class="bs-validate" method="post" action="${contextPath }/adminboard/faqInsert.do"
 		enctype="multipart/form-data">
-		<input type="hidden" name="action" value="noticeAdd">
+		<input type="hidden" name="action" value="faqAdd">
 
 		<!--
 							
@@ -41,7 +41,15 @@
 					<div class="form-label-group mb-3">
 						<input required placeholder="Product Title" id="product_title"
 							name="title" type="text" value="" class="form-control">
-						<label for="product_title">공지사항 제목</label>
+						<label for="product_title">FAQ 제목</label>
+					</div>
+					<div class="form-label-group mb-3">
+						<select name="qna_category_num" class="form-control">
+							<option selected>선택해주세요.</option>
+							<option value="1">배송</option>
+							<option value="2">반품</option>
+							<option value="3">상품</option>
+						</select>
 					</div>
 
 
@@ -63,7 +71,7 @@
 									-->
 					<textarea name="contents"
 						class="summernote-editor w-100 h--350"
-						data-placeholder="공지사항의 내용을 입력해주세요." data-min-height="350"
+						data-placeholder="FAQ의 내용을 입력해주세요." data-min-height="350"
 						data-max-height="2800" data-focus="false" data-lang="en-US"
 						data-ajax-url="_ajax/demo.summernote.php"
 						data-ajax-params="['action','editor:image:upload']"
@@ -79,69 +87,6 @@
 												["help", ["help"]]
 											]'></textarea>
 					<small class="text-gray-400">* shift + enter = new line</small>
-
-				</div>
-
-
-				<div class="col-12 col-lg-12 col-xl-4 mb-5">
-
-					<!--
-										PRODUCT IMAGES
-									-->
-					<div class="clearfix bg-light p-2 mb-2 rounded">
-
-						<label class="btn btn-warning cursor-pointer position-relative">
-
-							<input name="file" multiple="multiple" type="file"
-							data-file-ext="jpg,jpeg,png"
-							data-file-max-size-kb-per-file="3072"
-							data-file-max-size-kb-total="30720"
-							data-file-max-total-files="10" data-file-ext-err-msg="Allowed:"
-							data-file-exist-err-msg="File already exists:"
-							data-file-size-err-item-msg="File too large!"
-							data-file-size-err-total-msg="Total allowed size exceeded!"
-							data-file-size-err-max-msg="Maximum allowed files:"
-							data-file-toast-position="top-center"
-							data-file-preview-container=".js-file-preview-container"
-							data-file-preview-img-height="100"
-							data-file-preview-show-info="true"
-							data-file-btn-clear="a.js-file-btn-clear"
-							data-file-preview-img-cover="true"
-							data-file-preview-class="shadow-md my-2 mr-3 rounded float-start"
-							class="custom-file-input absolute-full"> 
-							<span class="group-icon"> 
-								<i class="fi fi-arrow-upload"></i> 
-								<i class="fi fi-circle-spin fi-spin"></i>
-							</span> 
-							<span>Upload Images</span>
-
-						</label>
-
-						<!-- remove button -->
-						<a href="#" title="Clear Files" data-toggle="tooltip"
-							class="js-file-btn-clear hide btn btn-secondary mb-2"> <i
-							class="fi fi-close m-0"></i>
-						</a>
-
-						<!-- info -->
-						<small class="d-block text-muted"> Upload up to 10 product
-							images (jpg, jpeg, png). </small>
-
-						<!--
-												
-											Container : files are pushed here!
-											.hide-empty = container hidden if empty
-
-										-->
-						<div
-							class="js-file-preview-container d-inline-block position-relative clearfix hide-empty">
-							<!-- container -->
-						</div>
-
-					</div>
-
-
-
 
 				</div>
 

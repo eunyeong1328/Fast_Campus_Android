@@ -38,7 +38,7 @@
 
 								<div class="float-end">
 
-									<a href="${contextPath}/admin/noticeInsert.do" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
+									<a href="${contextPath}/adminboard/noticeInsert.do" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
 										등록
 									</a>
 
@@ -127,7 +127,7 @@
 													<td>${notice.notice_num}</td>
 													<td>
 
-														<a href="#!" class="font-weight-medium text-muted mx-2 m-0-xs">
+														<a href="${contextPath}/adminboard/notice.do?notice_num=${notice.notice_num}&cPage=${paging.nowPage}" class="font-weight-medium text-muted mx-2 m-0-xs">
 															${notice.title}
 														</a>
 

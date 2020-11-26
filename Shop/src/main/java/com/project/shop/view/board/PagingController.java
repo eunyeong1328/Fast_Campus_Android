@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.project.shop.member.MemberVO;
 import com.project.shop.paging.Paging;
 import com.project.shop.paging.PagingService;
@@ -20,7 +19,7 @@ public class PagingController {
 	Paging paging = new Paging();
 	HashMap<String, Object> map = new HashMap<String, Object>();
 	
-//	Paging
+//	Paging @@@@@@ 편하게 보려고 복사본임 지울거임 @@@@@@@@@@@
 	public HashMap<String, Object> getPaging(HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
 
@@ -61,10 +60,10 @@ public class PagingController {
 		if (paging.getEndPage() > paging.getTotalPage()) {
 			paging.setEndPage(paging.getTotalPage());
 		}
-
+		
 		map.put("paging", paging);
 		
 		return map;
+		
 	}
-	
 }

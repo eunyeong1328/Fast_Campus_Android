@@ -37,6 +37,7 @@
 		<link rel="apple-touch-icon" href="${contextPath}/resources/demo.files/logo/icon_512x512.png">
 
 		<link rel="manifest" href="${contextPath}/resources/assets/images/manifest/manifest.json">
+		
 		<meta name="theme-color" content="#377dff">
 <!--font-->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">

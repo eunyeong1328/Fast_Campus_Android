@@ -19,7 +19,7 @@
 					<div class="page-title bg-transparent b-0">
 
 						<h1 class="h4 mt-4 mb-0 px-3 font-weight-normal">
-							공지사항
+							자주하는 질문
 						</h1>
 						
 					</div>
@@ -38,7 +38,7 @@
 
 								<div class="float-end">
 
-									<a href="#!" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
+									<a href="${contextPath}/adminboard/faqInsert.do" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
 										등록
 									</a>
 
@@ -127,7 +127,7 @@
 													<td>${faq.qna_category_name }</td>
 													<td>
 
-														<a href="#!" class="font-weight-medium text-muted mx-2 m-0-xs">
+														<a href="${contextPath}/adminboard/faq.do?faq_num=${faq.faq_num}&cPage=${paging.nowPage}" class="font-weight-medium text-muted mx-2 m-0-xs">
 															${faq.title}
 														</a>
 

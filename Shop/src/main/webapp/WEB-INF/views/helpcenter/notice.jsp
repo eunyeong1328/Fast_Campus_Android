@@ -41,7 +41,9 @@
 						</tr>
 					</table>
 					<div class="detail-contents">
-						<p class="contents">${notice.contents}</p>
+						<p class="contents">
+							${notice.contents}
+						</p>
 						<div class="image-box">
 							<c:if test="${not empty notice.image1 }">
 								<div class="detail-image">
@@ -71,8 +73,7 @@
 							<c:choose>
 								<c:when
 									test="${(notice.notice_num - 1) == maxPre || notice.notice_num == maxPre}">
-									<a
-										href="notice.do?notice_num=${notice.notice_num - 1}&cPage=${paging.nowPage}">이전글</a>
+									<a href="notice.do?notice_num=${notice.notice_num - 1}&cPage=${paging.nowPage}">이전글</a>
 								</c:when>
 								<c:otherwise>
 									<a

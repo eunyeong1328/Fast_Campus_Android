@@ -54,26 +54,54 @@
       
       <!-- joy.관리자 게시판 -->
       <!-- 공지사항 -->
-      <definition name="/admin/noticeList" extends="adminLayout">
+      <definition name="/adminboard/noticeList" extends="adminLayout">
 		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-noticeList.jsp" />
       </definition>
       
-      <definition name="/admin/noticeInsert" extends="adminLayout">
-		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
-		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-noticeInsert.jsp" />
-      </definition>
-      
       <!-- FAQ -->
-      <definition name="/admin/faqList" extends="adminLayout">
+      <definition name="/adminboard/faqList" extends="adminLayout">
 		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-FAQList.jsp" />
       </definition>
       
       <!-- memberQNA -->
-      <definition name="/admin/memberQnaList" extends="adminLayout">
+      <definition name="/adminboard/memberQnaList" extends="adminLayout">
 		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-memberQnaList.jsp" />
+      </definition>
+      
+      <!-- Insert -->
+      <definition name="/adminboard/noticeInsert" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-noticeInsert.jsp" />
+      </definition>
+      
+      <definition name="/adminboard/faqInsert" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-faqInsert.jsp" />
+      </definition>
+      
+      <!-- Update -->
+      <definition name="/adminboard/noticeUpdate" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-noticeUpdate.jsp" />
+      </definition>
+      
+      <definition name="/adminboard/faqUpdate" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-faqUpdate.jsp" />
+      </definition>
+      
+      <!-- 게시글보기 -->
+      <definition name="/adminboard/notice" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-notice.jsp" />
+      </definition>
+      
+      <definition name="/adminboard/faq" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-faq.jsp" />
       </definition>
       
 </tiles-definitions>

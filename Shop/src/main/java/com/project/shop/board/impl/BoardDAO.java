@@ -54,5 +54,25 @@ public class BoardDAO {
 	public void noticeInsert(HashMap<String, Object> map) {
 		board.insert("mapper.board.noticeInsert", map);
 	}
+
+	public void faqInsert(BoardVO vo) {
+		board.insert("mapper.board.faqInsert", vo);
+	}
+
+	public void noticeUpdate(HashMap<String, Object> map) {
+		board.update("mapper.board.noticeUpdate", map);
+	}
+
+	public void faqUpdate(BoardVO vo) {
+		board.update("mapper.board.faqUpdate", vo);
+	}
+
+	public void noticeDelete(BoardVO vo) {
+		board.delete("mapper.board.noticeDelete", vo);
+	}
+
+	public void faqDelete(BoardVO vo) {
+		board.delete("mapper.board.faqDelete", vo);
+	}
 	
 }

@@ -26,6 +26,14 @@ public class Paging {
 		return listBeginNum;
 	}
 
+	@Override
+	public String toString() {
+		return "Paging [nowPage=" + nowPage + ", nowBlock=" + nowBlock + ", numPerPage=" + numPerPage
+				+ ", pagePerBlock=" + pagePerBlock + ", totalRecord=" + totalRecord + ", totalPage=" + totalPage
+				+ ", totalBlock=" + totalBlock + ", begin=" + begin + ", end=" + end + ", beginPage=" + beginPage
+				+ ", endPage=" + endPage + ", listBeginNum=" + listBeginNum + ", listEndNum=" + listEndNum + "]";
+	}
+
 	public void setListBeginNum(int listBeginNum) {
 		this.listBeginNum = listBeginNum;
 	}

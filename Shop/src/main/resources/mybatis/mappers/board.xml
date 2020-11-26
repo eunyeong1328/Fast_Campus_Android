@@ -30,7 +30,7 @@
 			  FROM (SELECT F.FAQ_NUM, Q.QNA_CATEGORY_NAME, F.TITLE, F.CONTENTS  
 			  		FROM FAQ F, QNA_CATEGORY Q 
 					WHERE f.qna_category_num = q.qna_category_num 
-					ORDER BY f.faq_num) A) 
+					ORDER BY f.faq_num DESC) A) 
 		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
 	
@@ -60,45 +60,52 @@
 			order_num, member_id, email, phone, reg_date 
 			FROM MEMBER_QNA Q, QNA_CATEGORY C 
 			WHERE Q.qna_category_num = C.qna_category_num 
-			AND q.member_id = 'a'
+			AND q.member_id = #{member_id}
 			ORDER BY Q.member_qna_num DESC) A)
 		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
 
 <!-- ****************************************** 선택한 글 상세 보기 ****************************************** -->
 
-	<!-- 공지사항 선택한 글 상세 불러오기 -->
-<!-- 	<select id="getNotice" parameterType="boardVO" resultType="boardVO"> -->
-<!-- 		SELECT * -->
-<!-- 		FROM NOTICE -->
-<!-- 		WHERE NOTICE_NUM = #{notice_num} -->
-<!-- 	</select> -->
+	<!-- 공지사항 선택한 글 불러오기 -->
+	<select id="getNotice" parameterType="boardVO" resultType="boardVO">
+		SELECT *
+		FROM NOTICE
+		WHERE NOTICE_NUM = #{notice_num}
+	</select>
 	
-	<!-- FAQ 선택한 글 상세 불러오기 -->
-<!-- 	<select id="getFAQ" parameterType="boardVO" resultType="boardVO"> -->
-<!-- 		SELECT F.FAQ_NUM , Q.QNA_CATEGORY_NAME , F.TITLE, F.CONTENTS -->
-<!-- 		FROM FAQ F, QNA_CATEGORY Q -->
-<!-- 		WHERE f.qna_category_num = q.qna_category_num -->
-<!-- 		AND f.faq_num = #{faq_num} -->
-<!-- 	</select> -->
+	<!-- FAQ 선택한 글 불러오기 -->
+	<select id="getFAQ" parameterType="boardVO" resultType="boardVO">
+		SELECT F.FAQ_NUM , Q.QNA_CATEGORY_NAME , F.TITLE, F.CONTENTS
+		FROM FAQ F, QNA_CATEGORY Q
+		WHERE f.qna_category_num = q.qna_category_num
+		AND f.faq_num = #{faq_num}
+	</select>
 	
-	<!-- 1:1 문의 선택한 글 상세 불러오기 -->
-<!-- 	<select id="getMemQ" parameterType="boardVO" resultType="boardVO"> -->
-<!-- 		SELECT member_qna_num, title, contents, image1, image2, image3, qna_category_name,  -->
-<!-- 			order_num, member_id, email, phone, reg_date  -->
-<!-- 		FROM MEMBER_QNA Q, QNA_CATEGORY C  -->
-<!-- 		WHERE Q.qna_category_num = C.qna_category_num  -->
-<!-- 		and Q.member_qna_num = #{member_qna_num} -->
-<!-- 		and Q.member_id = #{member_id} -->
-<!-- 	</select> -->
+	<!-- 1:1 문의 선택한 글 불러오기 -->
+	<select id="getMemQ" parameterType="boardVO" resultType="boardVO">
+		SELECT member_qna_num, title, contents, image1, image2, image3, qna_category_name, 
+			order_num, member_id, email, phone, reg_date 
+		FROM MEMBER_QNA Q, QNA_CATEGORY C 
+		WHERE Q.qna_category_num = C.qna_category_num 
+		and Q.member_qna_num = #{member_qna_num}
+		and Q.member_id = #{member_id}
+	</select>
 	
 <!-- ****************************************** insert ****************************************** -->
 
-	<!-- 공지사항 -->
+	<!-- 관리자 공지사항 -->
 	<insert id="noticeInsert" parameterType="hashmap">
 		INSERT INTO NOTICE VALUES 
 		((SELECT NVL(MAX(NOTICE_NUM),0) + 1 FROM NOTICE), 
 		#{title}, #{contents}, SYSDATE, 0, #{image1}, #{image2}, #{image3})
+	</insert>
+	
+	<!-- 관리자 FAQ -->
+	<insert id="faqInsert" parameterType="boardVO">
+		INSERT INTO FAQ VALUES 
+		((SELECT NVL(MAX(FAQ_NUM),0) + 1 FROM FAQ), 
+		#{qna_category_num}, #{title}, #{contents})
 	</insert>
 
 	<!-- 1:1 문의 -->
@@ -127,6 +134,27 @@
 		WHERE MEMBER_QNA_NUM = #{member_qna_num}
 		AND MEMBER_ID = #{member_id}
 	</update>
+	
+	<!-- 공지사항 update문 -->
+	<update id="noticeUpdate" parameterType="hashmap">
+		UPDATE NOTICE 
+		SET TITLE = #{title}, 
+		CONTENTS = #{contents}, 
+		IMAGE1 = #{image1}, 
+		IMAGE2 = #{image2}, 
+		IMAGE3 = #{image3}, 
+		REG_DATE = SYSDATE 
+		WHERE NOTICE_NUM = #{notice_num}
+	</update>
+	
+	<!-- FAQ update문 -->
+	<update id="faqUpdate" parameterType="hashmap">
+		UPDATE FAQ 
+		SET TITLE = #{title}, 
+		CONTENTS = #{contents}, 
+		QNA_CATEGORY_NUM = #{qna_category_num} 
+		WHERE FAQ_NUM = #{faq_num}
+	</update>
 
 <!-- ****************************************** 게시판 글 개수 조회 ****************************************** -->
 
@@ -154,5 +182,17 @@
 		SELECT COUNT(*)
 		FROM MEMBER_QNA
 	</select>
+	
+<!-- ****************************************** delete ****************************************** -->
+	
+	<!-- 공지사항 delete문 -->
+	<delete id="noticeDelete" parameterType="boardVO">
+		DELETE FROM NOTICE WHERE NOTICE_NUM = ${notice_num}
+	</delete>
+	
+	<!-- FAQ delete문 -->
+	<delete id="faqDelete" parameterType="boardVO">
+		DELETE FROM FAQ WHERE FAQ_NUM = ${faq_num}
+	</delete>
 	
 </mapper>

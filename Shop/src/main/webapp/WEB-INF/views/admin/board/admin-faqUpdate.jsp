@@ -16,13 +16,14 @@
 					-->
 	<div class="page-title bg-transparent b-0">
 
-		<h1 class="h4 mt-4 mb-0 px-3 font-weight-normal">공지사항 등록</h1>
+		<h1 class="h4 mt-4 mb-0 px-3 font-weight-normal">FAQ 수정</h1>
 
 	</div>
 
-	<form novalidate class="bs-validate" method="post" action="${contextPath }/adminboard/noticeAdd.do"
+	<form novalidate class="bs-validate" method="post" action="${contextPath }/adminboard/faqUpdate.do"
 		enctype="multipart/form-data">
-		<input type="hidden" name="action" value="noticeAdd">
+		<input type="hidden" name="action" value="faqUpdate">
+		<input type="hidden" name="faq_num" value="${faq.faq_num }">
 
 		<!--
 							
@@ -40,8 +41,15 @@
 									-->
 					<div class="form-label-group mb-3">
 						<input required placeholder="Product Title" id="product_title"
-							name="title" type="text" value="" class="form-control">
-						<label for="product_title">공지사항 제목</label>
+							name="title" type="text" value="${faq.title }" class="form-control" style="padding-top: 6px">
+					</div>
+					<div class="form-label-group mb-3">
+						<select name="qna_category_num" class="form-control" style="padding-top: 6px">
+							<option value="${faq.qna_category_num }" selected>${faq.qna_category_name }</option>
+							<option value="1">배송</option>
+							<option value="2">반품</option>
+							<option value="3">상품</option>
+						</select>
 					</div>
 
 
@@ -63,7 +71,7 @@
 									-->
 					<textarea name="contents"
 						class="summernote-editor w-100 h--350"
-						data-placeholder="공지사항의 내용을 입력해주세요." data-min-height="350"
+						data-min-height="350"
 						data-max-height="2800" data-focus="false" data-lang="en-US"
 						data-ajax-url="_ajax/demo.summernote.php"
 						data-ajax-params="['action','editor:image:upload']"
@@ -77,7 +85,7 @@
 												["insert", ["link", "picture", "hr"]],
 												["view", ["codeview"]],
 												["help", ["help"]]
-											]'></textarea>
+											]'>${faq.contents }</textarea>
 					<small class="text-gray-400">* shift + enter = new line</small>
 
 				</div>

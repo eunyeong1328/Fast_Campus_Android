@@ -28,5 +28,16 @@ public interface BoardService {
 
 //	공지사항 작성
 	void noticeInsert(HashMap<String, Object> map);
+//	FAQ 작성
+	void faqInsert(BoardVO vo);
+	
+//	공지사항 수정
+	void noticeUpdate(HashMap<String, Object> map);
+//	FAQ 수정
+	void faqUpdate(BoardVO vo);
+	
+//	삭제
+	void noticeDelete(BoardVO vo);
+	void faqDelete(BoardVO vo);
 	
 }

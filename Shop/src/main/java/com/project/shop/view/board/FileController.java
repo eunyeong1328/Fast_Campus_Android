@@ -76,7 +76,7 @@ public class FileController {
 		multipartRequest.setCharacterEncoding("utf-8");
 		List<String> fileNameList = new ArrayList<String>();
 		   
-		List<MultipartFile> fileList = multipartRequest.getFiles("file");
+		List<MultipartFile> fileList = multipartRequest.getFiles("file[]");
 		
 		if(fileList.isEmpty()) {
 			return null;
