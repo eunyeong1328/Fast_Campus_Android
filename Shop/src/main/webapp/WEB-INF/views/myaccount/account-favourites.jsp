@@ -139,8 +139,33 @@
 
 				<div class="col-12 col-sm-12 col-md-12 col-lg-9">
 
+				<c:choose>
+				<c:when test="${empty favList }">
+					<div class="container">
 
-					<!-- item -->
+					<div class="row">
+
+						<div class="col-12 col-md-8 col-lg-9 order-md-1 mb-5">
+
+							<div class="text-center mb-5">
+	
+								<h1 class="mb--80">
+									찜 리스트가 존재하지 않습니다.
+								</h1>
+
+								<img class="img-fluid max-w-350" src="${contextPath}/resources/demo.files/svg/ecommerce/undraw_empty_cart_co35.svg" alt="..." style="margin-bottom:50px">
+								<br>
+								<a href="#!" class="badge badge-pill badge-purple badge-soft font-weight-normal p-2">
+									쇼핑하러 가기
+								</a>
+
+							</div>
+
+						</div>
+				
+				</c:when>
+				<c:otherwise>
+									<!-- item -->
 					<c:forEach var="favList" items="${favList }" begin="0" end="3">
 						<div
 							class="clearfix p-3 shadow-xs shadow-md-hover mb-3 rounded bg-white">
@@ -192,10 +217,11 @@
 
 									<button type="submit"
 										class="btn btn-sm btn-primary fs--14 w-100-xs d-block-xs">
-										Add to cart</button>
+										장바구니에 추가</button>
 
 									<div class="clearfix mt-2">
-										<a href="#!" data-href="#?action=delete&amp;item_id=1"
+										<a href="#!"
+										data-href="${contextPath}/myaccount/deleteFav.do?product_id=${favList.product_id}"
 											data-ajax-confirm-mode="regular"
 											data-ajax-confirm-size="modal-md"
 											data-ajax-confirm-centered="false"
@@ -207,9 +233,9 @@
 											data-ajax-confirm-btn-no-class="btn-sm btn-light"
 											data-ajax-confirm-btn-no-text="Cancel"
 											data-ajax-confirm-btn-no-icon="fi fi-close"
-											data-ajax-confirm-callback-function=""
+											data-ajax-confirm-callback-function='function(){windWow.location.href = "${contextPath}/myaccount/account-favourites.do";}'
 											class="js-ajax-confirm btn btn-sm btn-light d-block-xs font-regular fs--14 w-100-xs d-block-xs">
-											Remove </a>
+											삭제 </a>
 
 									</div>
 
@@ -221,12 +247,8 @@
 						<!-- /item -->
 
 					</c:forEach>
-
-
-
-
-
-					<!-- pagination -->
+					
+	<!-- pagination -->
 					<nav aria-label="pagination" class="mt-5">
 						<ul
 							class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
@@ -249,6 +271,15 @@
 						</ul>
 					</nav>
 					<!-- pagination -->
+
+				
+				</c:otherwise>
+				
+				</c:choose>
+
+
+
+					
 
 
 

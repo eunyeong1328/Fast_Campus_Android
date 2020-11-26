@@ -83,10 +83,23 @@ public class MyAccountController extends BaseController{
 	  String viewName=(String)request.getAttribute("viewName");
 	  ModelAndView mav =  new ModelAndView(viewName);
 	  List<ProductVO> favList = myAccountService.listFavList(member_id);
-	  System.out.println(favList.get(0));
 	  mav.addObject("favList", favList);
 	  return mav;
 	 }
+	  
+	  @RequestMapping(value="/deleteFav.do")
+	  public ModelAndView removeGoodsImage( @RequestParam("product_id") String product_id,
+              HttpServletRequest request, HttpServletResponse response)  throws Exception {
+		  HttpSession session=request.getSession(); 
+	      MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+	      String member_id = memberVO.getMember_id();
+	      System.out.println("member_id: "+member_id +", product_id: " + product_id );
+		  ModelAndView mav = new ModelAndView();
+//		  myAccountService.deleteFav(product_id, member_id);
+		  mav.setViewName("redirect:/myaccount/account-favourites.do");
+		  return mav;
+	  }
+	  
 		 
 
 }
