@@ -1,7 +1,10 @@
 package com.project.shop.view.myaccount;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.shop.common.base.BaseController;
 import com.project.shop.member.MemberVO;
 import com.project.shop.myaccount.MyAccountService;
+import com.project.shop.product.ProductVO;
 
 @Controller
 @RequestMapping(value="/myaccount")
@@ -65,5 +69,24 @@ public class MyAccountController extends BaseController{
 //		return null;
 //		 
 //	 }
-	 
+	
+		
+	//정원
+	
+	  @RequestMapping(value="/account-favourites.do")
+	  public ModelAndView accountFavourites( HttpServletRequest request, HttpServletResponse response)
+			  throws Exception {
+		  HttpSession session=request.getSession(); 
+	      MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+	      String member_id = memberVO.getMember_id();
+
+	  String viewName=(String)request.getAttribute("viewName");
+	  ModelAndView mav =  new ModelAndView(viewName);
+	  List<ProductVO> favList = myAccountService.listFavList(member_id);
+	  System.out.println(favList.get(0));
+	  mav.addObject("favList", favList);
+	  return mav;
+	 }
+		 
+
 }

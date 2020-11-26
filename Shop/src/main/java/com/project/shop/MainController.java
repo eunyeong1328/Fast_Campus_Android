@@ -30,12 +30,12 @@ public class MainController extends BaseController {
 	public ModelAndView main(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		if (bestlist == null && newlist == null) {
+
 			bestlist = service.bestList();
 			mav.addObject("bestlist", bestlist);
 			newlist = service.newList();
 			mav.addObject("newlist", newlist);
-		}
+
 
 		mav.setViewName((String)request.getAttribute("viewName"));
 		return mav;
