@@ -11,7 +11,7 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-		<meta name="description" content="...">
+      <meta name="description" content="...">
 
         <meta name="viewport" content="width=device-width, maximum-scale=5, initial-scale=1, user-scalable=0">
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
@@ -28,9 +28,9 @@
         <link rel="stylesheet" href="${contextPath}/resources/assets/css/vendor_bundle.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
 
-		<!-- favicon -->
-		<link rel="shortcut icon" href="${contextPath}/resources/images/fvc.svg">
-		<link rel="apple-touch-icon" href="${contextPath}/resources/images/fvc.svg">
+      <!-- favicon -->
+      <link rel="shortcut icon" href="${contextPath}/resources/images/fvc.svg">
+      <link rel="apple-touch-icon" href="${contextPath}/resources/images/fvc.svg">
 
 		<link rel="manifest" href="${contextPath}/resources/assets/images/manifest/manifest.json">
 		<meta name="theme-color" content="#377dff">
@@ -39,10 +39,10 @@
  		 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
  		 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-		<!--font-->
-		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
-			<title><tiles:insertAttribute name="title" /></title>		<!-- tiles.xml의 <definition>의 하위 태그인 <put-attribute>태그의 name이 title인 값(value)을 표시합니다. -->
-	</head>
+      <!--font-->
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
+         <title><tiles:insertAttribute name="title" /></title>      <!-- tiles.xml의 <definition>의 하위 태그인 <put-attribute>태그의 name이 title인 값(value)을 표시합니다. -->
+   </head>
 <body>
 		<div id="wrap">
 				<tiles:insertAttribute name="header" /> <!-- tiles.xml의 <definition>의 하위 태그인 <put-attribute>태그의 name이 header인 JSP를 표시합니다. -->

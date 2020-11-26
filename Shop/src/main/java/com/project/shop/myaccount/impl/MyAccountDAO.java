@@ -1,7 +1,6 @@
 package com.project.shop.myaccount.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +21,12 @@ public class MyAccountDAO {
 		return memberVO;
 	}
 	
-	public List<ProductVO> listFavList(String member_id) throws Exception {		
-		ArrayList<ProductVO> favList = (ArrayList)sqlSession.selectList("mappers.myaccount.listFavList",member_id);
-		return favList;
+	public void modifyMemberInfo(HashMap memberMap) throws DataAccessException{
+		System.out.println("MyAccountDAO = " + memberMap.get("member_id"));
+		sqlSession.update("mappers.myaccount.modifyMemberInfo",memberMap);
 	}
 	
+	public void modifyAddressInfo(HashMap map) throws DataAccessException{
+		sqlSession.update("mappers.myaccount.modifyAddressInfo",map);
+	}
 }

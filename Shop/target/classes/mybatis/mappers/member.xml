@@ -76,4 +76,11 @@
 	   where member_id = #{id}
 	</select>
 	
+	<select id="SnsLogin" parameterType="memberVO" resultType="memberVO">
+		<![CDATA[
+			select * from member
+			where member_id = #{member_id}
+		]]>
+	</select>
+	
 </mapper>

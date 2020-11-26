@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "mappers.myaccount">
+<mapper namespace="mappers.myaccount">
 
 <resultMap id="productResult" type="productVO">
 		<result property="product_id" column="product_id" />  
@@ -39,7 +39,7 @@
 			select * from member
 			where member_id=#{member_id}
     	]]>
-</select>
+	</select>
 
 <select id = "listFavList" resultMap = "productResult" parameterType="String">
 	 <![CDATA[
@@ -48,4 +48,30 @@
     	]]>
 </select>
 
+	<!-- 회원수정 -->
+	<update id="modifyMemberInfo" parameterType="java.util.HashMap">
+	   update member 
+			   <set>
+			   password = #{password},
+			   member_name=#{member_name},
+			   email=#{email},
+			   phone=#{phone}
+			   </set>
+		where 
+		member_id=#{member_id}
+	</update>	
+	
+	<!-- 배송지 수정 -->
+	<update id="modifyAddressInfo" parameterType="java.util.HashMap">
+	   UPDATE MEMBER 
+			   <set>
+			   zipNo=#{zipNo},
+			   load_address=#{load_address},
+			   jibun_address=#{jibun_address},
+			   rest_address=#{rest_address}		   
+			   </set>
+		WHERE 
+		member_id = #{member_id}
+	</update>	 
+	
 </mapper>
