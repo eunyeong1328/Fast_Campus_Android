@@ -58,7 +58,6 @@ public class ProductDAO {
 	
 	public int insertProduct (ProductVO vo) {
 		sqlSession.insert("mappers.product.insertProduct",vo);
-		sqlSession.insert("mappers.product.insertProductOption",vo);
 		return sqlSession.insert("mappers.product.insertItem",vo);
 	}
 	
