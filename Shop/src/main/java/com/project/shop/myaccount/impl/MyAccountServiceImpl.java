@@ -1,6 +1,7 @@
 package com.project.shop.myaccount.impl;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,10 @@ public class MyAccountServiceImpl implements MyAccountService{
 		String member_id=(String)map.get("member_id");
 		return myAccountDAO.selectMyDetailInfo(member_id);
 	}
+	
+	@Override
+	   public List<ProductVO> listFavList(String member_id) throws Exception {      
+	      return myAccountDAO.listFavList(member_id);
+	   }
 
 }

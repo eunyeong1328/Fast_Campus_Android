@@ -36,9 +36,5 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public MemberVO SnsLogin(MemberVO user) throws DataAccessException{
-		MemberVO member = (MemberVO)sqlSession.selectOne("mappers.member.SnsLogin",user);
-		return member;
-	}
 
 }

@@ -1,6 +1,8 @@
 package com.project.shop.myaccount.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +31,9 @@ public class MyAccountDAO {
 	public void modifyAddressInfo(HashMap map) throws DataAccessException{
 		sqlSession.update("mappers.myaccount.modifyAddressInfo",map);
 	}
+	
+	public List<ProductVO> listFavList(String member_id) throws Exception {      
+	      ArrayList<ProductVO> favList = (ArrayList)sqlSession.selectList("mappers.myaccount.listFavList",member_id);
+	      return favList;
+	   }
 }
