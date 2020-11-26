@@ -94,7 +94,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<ProductVO> newList() {
-		return productDAO.bestList();
+		return productDAO.newList();
 	}
 
 	@Override
@@ -113,13 +113,13 @@ public class ProductServiceImpl implements ProductService{
 		String uploadFileName;
 		MultipartFile mFile = null;
         String orgFileName = ""; //진짜 파일명
-               
+        
         while(iterator.hasNext()) {
             uploadFileName = iterator.next();
             mFile = request.getFile(uploadFileName);
             
             orgFileName = mFile.getOriginalFilename();    
-            
+            System.out.println(orgFileName);
             if(orgFileName != null && orgFileName.length() != 0) { //sysFileName 생성
                try {                    
                     mFile.transferTo(new File(dir + File.separator + orgFileName)); // C:/Upload/sysFileName 파일 저장
@@ -127,8 +127,8 @@ public class ProductServiceImpl implements ProductService{
                     e.printStackTrace();
                 }
             }//if
+            vo.setProduct_image(orgFileName);
         }//while
-        vo.setProduct_image(orgFileName);
         System.out.println(vo);
 		
 		//DB에 상품 추가
@@ -202,6 +202,16 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void insertOption(ProductVO vo ) {
 		productDAO.insertOption(vo);
+	}
+
+	@Override
+	public String checkProduct(String id) {
+		return productDAO.checkProduct(id);
+	}
+
+	@Override
+	public String checkItem(String id) {
+		return productDAO.checkItem(id);
 	}
 
 }

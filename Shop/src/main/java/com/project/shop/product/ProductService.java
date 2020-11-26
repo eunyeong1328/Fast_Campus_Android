@@ -25,4 +25,6 @@ public interface ProductService {
 	public List<ProductVO> loadOption(String request);
 	public void deleteOption(String name);
 	public void insertOption(ProductVO vo);
+	public String checkProduct(String id);
+	public String checkItem(String id);
 }
