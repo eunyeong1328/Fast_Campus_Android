@@ -259,7 +259,7 @@
 								<!-- dropdown -->
 								<div aria-labelledby="dropdownAccountOptions" class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15">
 									<div class="dropdown-header">
-										${memberInfo.member_id }님
+										${memberInfo.member_name }님
 									</div>
 
 									<div class="dropdown-divider"></div>

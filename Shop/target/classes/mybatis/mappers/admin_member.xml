@@ -52,12 +52,16 @@
 	    	<where>
 	    	<choose>
 	    	<when test="search_type=='member_id'"> 
-	    (MEMBER_DATE BETWEEN #{beginDate} and #{endDate}) 
+	    (MEMBER_DATE BETWEEN #{beginDate} and (TO_DATE(#{endDate})+1)) 
 			and member_id like '%' || #{search_word} || '%'  
 			</when> 
 			<when test="search_type=='member_name'"> 
-	    	(MEMBER_DATE BETWEEN #{beginDate} and #{endDate}) 
+	    	(MEMBER_DATE BETWEEN #{beginDate} and (TO_DATE(#{endDate})+1)) 
 			and member_name like '%' || #{search_word} || '%'  
+			</when>  
+			<when test="search_type=='member_status'"> 
+	    	(MEMBER_DATE BETWEEN #{beginDate} and (TO_DATE(#{endDate})+1)) 
+			and member_status like '%' || #{search_word} || '%'  
 			</when>  
 			</choose>
 			</where>
@@ -68,9 +72,7 @@
 	]]>
 
 	
-	</select>
-	
-	<!-- 회원등급 가져오기 -->
+	</select>		
 	
 	
 	<!-- 회원상세 -->
@@ -94,7 +96,8 @@
 			   REST_ADDRESS=#{rest_address},
 			   BIRTHDAY=#{birthday},
 			   POINT=#{point},
-			   MEMBER_DATE=#{member_date}			   
+			   MEMBER_DATE=#{member_date},
+			   pre_score = #{pre_score}			   
 			   </set>
 		WHERE 
 		MEMBER_ID=#{member_id}

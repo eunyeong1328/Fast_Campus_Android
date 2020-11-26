@@ -93,19 +93,6 @@
 		</div><!-- /#wrapper -->
 
 
-		<!-- 
-			SHOP AJAX MODAL : ON LOAD 
-
-			Note: #onload_modal_shop is also used inside the modal
-			for the button "stop showing" to set a cookie!
-		-->
-<%-- 		<div id="onload_modal_shop" class="hide js-onload js-ajax-modal" 
-		    data-href="${contextPath}/resources/_ajax/modal_shop.html" 
-		    data-ajax-modal-delay="3000" 
-		    data-ajax-modal-size="modal-lg" 
-		    data-ajax-modal-centered="true" 
-		    data-ajax-modal-backdrop=""></div> --%>
-
 
 
 		

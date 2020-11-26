@@ -51,7 +51,8 @@
 								load_address,
 								jibun_address,  
 								rest_address,
- 								birthday) values(
+ 								birthday,
+ 								member_status) values(
  								#{member_id},
  								 #{password}, 
  								 #{member_name},
@@ -61,36 +62,13 @@
 								#{load_address},
 								  #{jibun_address}, 
 								  #{rest_address},
-								   #{birthday}
+								   #{birthday},
+								   #{member_status}
 								   )
 								   ]]>
 		
 	</insert>
 	
-		<insert id="insertSnsMember" parameterType="memberVO">
-		<![CDATA[
-			insert into member(member_id,
-								 member_name,
-								 email,
-								 phone,
-								 zipNo,
-								load_address,
-								jibun_address,  
-								rest_address,
- 								birthday) values(
- 								#{member_id},
- 								 #{member_name},
- 								  #{email}, 
- 								  #{phone}, 
- 								  #{zipNo}, 
-								#{load_address},
-								  #{jibun_address}, 
-								  #{rest_address},
-								   #{birthday}
-								   )
-								   ]]>
-		
-	</insert>
 	
 	<select id="selectOverlappedID" parameterType="String" resultType="String">
 	   select decode(count(*),1, 'true', 0, 'false')
