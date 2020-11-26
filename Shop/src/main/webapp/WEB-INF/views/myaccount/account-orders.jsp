@@ -67,7 +67,7 @@
 									</a></li>
 
 									<li class="nav-item"><a class="nav-link px-0"
-										href="${contextPath}/myaccount/account-settings.do?member_id=${member_Info.member_id}"> <i
+										href="${contextPath}/myaccount/account-settings.do"> <i
 											class="fi fi-arrow-end m-0 fs--12"></i> <span
 											class="px-2 d-inline-block"> 마이 페이지 </span>
 									</a></li>

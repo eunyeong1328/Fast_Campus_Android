@@ -74,8 +74,8 @@
 			type : "post",
 			async : false,
 			url : "${contextPath}/member/overlapped.do", //호출 후
-			dataType : "text",
-			data : {id : _id},
+			dataType : "text", 
+			data : {id : _id}, 
 			success : function(data, textStatus) { //result로 true,false전달
 				if (data == 'false') {
 					alert("사용할 수 있는 ID입니다.");
@@ -101,7 +101,7 @@
 		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 				if(exptext.test(email)==false){
 					//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우			
-					alert("이 메일형식이 올바르지 않습니다. \n 올바른 전자 메일 주소를 입력해주세요(알파벳+숫자@알파벳+숫자)");
+					alert("이 메일 형식이 올바르지 않습니다. \n 올바른 전자 메일 주소를 입력해주세요(알파벳+숫자@알파벳+숫자)");
 					document.addjoin.email.focus();
 					return false;
 				}else{
@@ -115,15 +115,17 @@
 		var pwd1 = $("#password_check1").val();
 		var pwd2 = $("#password_check2").val();
 		var s_result = $('#s_result');
-		
+		/*<span style = "text-size:10px; color: blue;" id = "s_result" >동일한 비밀번호를 입력해주세요</span>  */
 		if(pwd1 == pwd2){
 			//alert(pwd1);
 			//alert(pwd2);
 			compare_result = true;
-			 $('#s_result').text("비밀번호가 일치합니다.");
+			 $('#s_result').text("✔  비밀번호가 일치합니다.");
+			 $('#s_result').css('color','green')
 		}else{
 			compare_result = false;
-			 $('#s_result').text("비밀번호가 일치하지 않습니다.");
+			 $('#s_result').text("✖ 비밀번호가 일치하지 않습니다.");
+			 $('#s_result').css('color','red')
 		}
 	}
 
@@ -211,7 +213,7 @@
 											id="password_check2" type="text" class="form-control" onKeyUp = "fn_compare_pwd()">
 										<label for="Password_check">비밀번호 확인</label>
 										
-										<span style = "text-size:10px" id = "s_result">비밀번호가 일치하지 않습니다.</span>
+										<span style = "text-size:10px; color: rgba(0, 0, 255, 0.411);" id = "s_result" >동일한 비밀번호를 입력해주세요</span>
 									</p>
 									</div>
 									

@@ -276,7 +276,7 @@
 										찜 리스트 <small>(3)</small>
 									</a>
 
-									<a href="${contextPath}/myaccount/account-settings.do?member_id=${memberInfo.member_id }" title="Account Settings" class="dropdown-item text-truncate font-weight-light">
+									<a href="${contextPath}/myaccount/account-settings.do" title="Account Settings" class="dropdown-item text-truncate font-weight-light">
 										마이페이지 
 									</a>
 

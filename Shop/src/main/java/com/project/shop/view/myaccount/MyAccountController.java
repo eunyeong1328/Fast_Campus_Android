@@ -27,43 +27,54 @@ public class MyAccountController extends BaseController{
 	@Autowired
 	private MemberVO memberVO;
 	
-	
-	@RequestMapping(value ="/account-settings.do" ) //회원정보 뛰우기
-	   public ModelAndView accountSettingsInfo(@RequestParam("member_id") String member_id,
+	//계정 정보 확인
+	@RequestMapping(value ="/account-settings.do" ) 
+	   public ModelAndView accountSettingsInfo(
 			   HttpServletRequest request, HttpServletResponse response) throws Exception {
-		 String viewName=(String)request.getAttribute("viewName");
-		 ModelAndView mav = new ModelAndView(viewName);
-		 System.out.println(member_id);
-//		 String member_id = request.getParameter("member_id");
-		 MemberVO member_Info = myAccountService.accountSettingsInfo(member_id);
-		 System.out.println(member_Info);
-		 mav.addObject("member_info", member_Info);
-		 return mav;
+		//session에서 획득한  memberInfo 정보
+		HttpSession session=request.getSession(); 
+		memberVO = (MemberVO) session.getAttribute("memberInfo");
+		String member_id = memberVO.getMember_id();
+		
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		System.out.println(member_id);
+//		String member_id = request.getParameter("member_id");
+		MemberVO memberInfo = myAccountService.accountSettingsInfo(member_id);
+		System.out.println(memberInfo);
+		mav.addObject("memberinfo", memberInfo);
+		return mav;
 	   }
 	 
+	//계정 수정
 	@RequestMapping(value="/modifyMemberInfo.do")
 	public ModelAndView modifyMemberInfo(
 			@RequestParam HashMap<String, String> memberMap,
 		HttpServletRequest request, HttpServletResponse response) throws Exception{
-		ModelAndView mav = new ModelAndView();
 		HttpSession session=request.getSession();
-		memberVO=(MemberVO)session.getAttribute("member_Info");
+		memberVO=(MemberVO)session.getAttribute("memberInfo");
+		String member_id = memberVO.getMember_id();
 		
-		System.out.println("HashMap memberid = " + memberMap.get("member_id"));		
-		System.out.println("password = " + memberMap.get("password"));
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		
+		System.out.println("HashMap 휴대폰 번호 = " + memberMap.get("phone"));		
 		memberVO = (MemberVO)myAccountService.modifyMemberInfo(memberMap);
 		System.out.println("수정 처리 완료!!");
+		System.out.println("휴대폰 번호 = " + memberVO.getPhone());
 		
 		//수정된 회원 정보를 다시 세션에 저장한다.
-		session.removeAttribute("member_Info");
-		session.setAttribute("member_Info", memberVO);
+		session.removeAttribute("memberInfo");
+		session.setAttribute("memberInfo", memberVO);
 		System.out.println("후 요청 : " + memberVO);
 		
 		String message="변경되었습니다."; 
         mav.addObject("message", message);
-        mav.setViewName("redirect:/myaccount/account-settings.do?member_id=" + memberVO.getMember_id());
+        mav.setViewName("redirect:/myaccount/account-settings.do");
 		return mav;
 	}
+	
+	
 	
 	//새 배송지 추가
 	

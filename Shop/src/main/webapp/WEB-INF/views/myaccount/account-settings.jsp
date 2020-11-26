@@ -7,7 +7,6 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 
-
 <body>
 
 	<div id="wrapper">
@@ -51,7 +50,7 @@
 								<span class="group-icon px-2 py-2 float-start"> <i
 									class="fi fi-bars-2"></i> <i class="fi fi-close"></i>
 								</span> <span class="h5 py-2 m-0 float-start"> Account Menu </span>
-							</button>
+							</button>f
 
 							<!-- desktop only -->
 							<h5 class="pt-3 pb-3 m-0 d-none d-lg-block">
@@ -75,7 +74,7 @@
 									</a></li>
 
 									<li class="nav-item active"><a class="nav-link px-0"
-										href="${contextPath}/myaccount/account-settings.do?member_id=${member_Info.member_id}">
+										href="${contextPath}/myaccount/account-settings.do">
 											<i class="fi fi-arrow-end m-0 fs--12"></i> <span
 											class="px-2 d-inline-block"> 마이 페이지 </span>
 									</a></li>
@@ -210,7 +209,7 @@
 														<div class="form-label-group mb-3">
 															<input required placeholder="member_id" id="member_id"
 																name="member_id" type="text" class="form-control"
-																value="${member_info.member_id}" readonly> <label
+																value="${memberinfo.member_id}" readonly> <label
 																for="account_first_name">아이디</label>
 														</div>
 
@@ -221,7 +220,7 @@
 														<div class="form-label-group mb-3">
 															<input required placeholder="member_name"
 																id="member_name" name="member_name" type="text"
-																class="form-control" value="${member_info.member_name}">
+																class="form-control" value="${memberinfo.member_name}">
 															<label for="account_last_name">이름</label>
 														</div>
 
@@ -235,7 +234,7 @@
 														<div class="form-label-group mb-6">
 															<input required placeholder="email" id="email"
 																name="email" type="text" class="form-control"
-																value="${member_info.email}"> <label
+																value="${memberinfo.email}"> <label
 																for="account_phone">이메일</label>
 														</div>
 
@@ -253,7 +252,7 @@
 														<div class="form-label-group mb-3">
 															<input required placeholder="phone" id="phone"
 																name="phone" type="text" class="form-control"
-																value="${member_info.phone}"> <label
+																value="${memberinfo.phone}"> <label
 																for="account_phone">휴대폰 번호</label>
 														</div>
 
@@ -305,7 +304,7 @@
 															<input placeholder="Current Password"
 																id="account_current_password"
 																name="account_current_password" type="password"
-																class="form-control" value="${member_info.password}">
+																class="form-control" value="${memberinfo.password}">
 															<label for="account_current_password">현재 비밀번호</label>
 														</div>
 
@@ -390,7 +389,7 @@
 															<input placeholder="Current Password"
 																id="account_del_current_password"
 																name="account_current_password" type="password"
-																class="form-control" value="${member_info.password }">
+																class="form-control" value="${memberinfo.password }">
 															<label for="account_del_current_password">현재 비밀번호</label>
 														</div>
 
@@ -469,16 +468,16 @@
 										<div class="col">
 
 											<p class="mb-0">
-												<b>우편번호 :</b> &nbsp;&nbsp; <b>${member_info.zipNo}</b>
+												<b>우편번호 :</b> &nbsp;&nbsp; <b>${memberinfo.zipNo}</b>
 											</p>
 											<p class="mb-0">
-												<b>도로명 주소 :</b> &nbsp;&nbsp; <b>${member_info.load_address}</b>
+												<b>도로명 주소 :</b> &nbsp;&nbsp; <b>${memberinfo.load_address}</b>
 											</p>
 											<p class="mb-0">
-												<b>지번 주소 :</b> &nbsp;&nbsp; <b>${member_info.jibun_address}</b>
+												<b>지번 주소 :</b> &nbsp;&nbsp; <b>${memberinfo.jibun_address}</b>
 											</p>
 											<p class="mb-0">
-												<b>나머지 주소 :</b> &nbsp;&nbsp; <b>${member_info.rest_address}</b>
+												<b>나머지 주소 :</b> &nbsp;&nbsp; <b>${memberinfo.rest_address}</b>
 											</p>
 
 
@@ -491,7 +490,7 @@
 										<div class="col-4 col-sm-3 col-md-3 col-lg-2">
 										<script>
 											function fn(){
-												alert('아이디 : ${member_info.member_id}');
+												alert('아이디 : ${memberinfo.member_id}');
 											}
 										</script>
 											<a href="#"
