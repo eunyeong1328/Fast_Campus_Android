@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
@@ -41,6 +43,7 @@ public class SnsMemberController extends BaseController{
 	public String googleLogin(@RequestBody String param, HttpServletRequest request, HttpServletResponse response) {
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonMember = null;
+		HttpSession session = request.getSession();
 		
 		try {
 			NetHttpTransport transport = GoogleNetHttpTransport.newTrustedTransport();
@@ -72,16 +75,15 @@ public class SnsMemberController extends BaseController{
 				MemberVO memberVO = memberService.SnsLogin(vo);
 				
 				//vo에 값이 있으면 바로 로그인, 아니면 회원가입창으로 이동
-				if(memberVO!= null && memberVO.getMember_name()!=null) {
-					System.out.println(vo);					
+				if(memberVO!= null && memberVO.getMember_name()!=null) {				
 					System.out.println("로그인을 진행하니다.");
 					jsonMember = mapper.writeValueAsString(memberVO);
+					memberController.login(memberVO, request, response);
 					
 				} else {
 					vo.setPassword("0000");
-					System.out.println(memberVO);
-					System.out.println(vo);
 					System.out.println("회원가입을 진행합니다.");
+					session.setAttribute("memberInfo", vo);
 					jsonMember = mapper.writeValueAsString(vo);
 				}				
 				
@@ -96,8 +98,15 @@ public class SnsMemberController extends BaseController{
 		return jsonMember;
 	}
 	
-	@RequestMapping(value="/googleSignup.do", produces="application/x-www-form-urlencoded; charset=utf8", method = RequestMethod.POST)
-	public void googleSignup() {
+	@ResponseBody
+	@RequestMapping(value="/googleSignup.do", produces="application/x-www-form-urlencoded; charset=utf8")
+	public ModelAndView googleSignup(@RequestBody MemberVO vo) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("MemberVO",vo);
+		mv.setViewName("/member/loginForm");
+		
+		return mv;
+		
 		
 	}
 }

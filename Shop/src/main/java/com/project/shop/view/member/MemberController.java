@@ -81,6 +81,7 @@ public class MemberController extends BaseController{
 	@RequestMapping(value="/addMember.do" ,method = RequestMethod.POST)
 	public ResponseEntity addMember(@ModelAttribute("memberVO") MemberVO _memberVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("회원가입: "+_memberVO);
 		response.setContentType("text/html; charset=utf-8");
 		response.setHeader("Context-Type", "text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");

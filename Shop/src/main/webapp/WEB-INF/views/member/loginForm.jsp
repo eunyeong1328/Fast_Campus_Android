@@ -9,6 +9,7 @@
 
 <script>
 	var googleUser = {};
+
 	var startApp = function() {
 		gapi.load('auth2',	function() {
 							// Retrieve the singleton for the GoogleAuth library and set up the client.
@@ -27,7 +28,6 @@
 		auth2.attachClickHandler(element, {},
 		        function(googleUser) {
 		    		var id_token = googleUser.getAuthResponse().id_token;
-		    		
 		    		var xhr = new XMLHttpRequest();
 		    		xhr.onload = function(){
 		    			if(xhr.status ===200 || xhr.status ===201){
@@ -38,29 +38,12 @@
 		    				null이 아닐 경우 로그인으로  */
 		    				if(memberInfo.member_date!=null){
 		    					/* 로그인시킴 */
+		    					location.href= "${contextPath}/main/main.do";
 		    					
-		    				} else {
-		    					/* 회원가입창으로 */
-		    					alert(memberInfo.member_id);
-		    					$.ajax({
-		    						type : "POST",
-		    						url: "${contextPath}/snsMember/googleSignup.do",
-		    						dataType: "json",
-		    						data: memberInfo,
-		    						error: function(){
-		    							alert("통신실패");
-		    						}		    						
-		    					})
-		    							    					
-		    					/* location.href="${contextPath}/member/signupForm.do"; */
+		    				} else {		    							    					
+		    					location.href="${contextPath}/member/snsSignupForm.do";
 		    					
-		    				}
-		    				
-		    				
-		    				
-		    				
-		    				
-		    				
+		    				}		    				
 		    				
 		    			} else {
 		    				console.error(xhr.responseText);
@@ -189,22 +172,12 @@ span.buttonText {
 									onclick="login_confirm(this.form)">로그인</button>
 							</div>
 
-							<!-- <div class="col-12 col-md-6 mt-4">
-										<button type="button" class="btn btn-block">
-											회원가입
-										</button>
-                  </div> -->
+
 
 							<div class="col-12 col-md-6 mt-4">
 								<a href="${contextPath}/member/signupForm.do"
 									class="btn btn-block"> 회원가입 </a>
 							</div>
-
-							<!-- <div class="col-12 col-md-6 mt-4 text-align-end text-center-xs">
-										<a href="signup.html" class="btn px-0">
-											Don't have an account yet?
-										</a>
-									</div> -->
 
 						</div>
 
