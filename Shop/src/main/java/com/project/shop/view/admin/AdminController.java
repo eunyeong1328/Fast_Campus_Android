@@ -6,9 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -88,14 +91,12 @@ public class AdminController extends BaseController {
 	
 	@RequestMapping(value = "/update.do", method = RequestMethod.POST)
 	public ModelAndView update(ModelAndView mav,ProductVO vo ,MultipartHttpServletRequest request) {
-		
 		if(vo != null && request != null) {
 			service.updateProduct(vo,request);
 		}
 		mav.addObject("list",service.allList());
 		mav.setViewName("/admin/productList");
 		return mav;
-				
 	}
 	
 	@RequestMapping(value = "/productOption.do",method=RequestMethod.GET)
@@ -107,37 +108,47 @@ public class AdminController extends BaseController {
 			return mav;
 		}else {
 			mav.addObject("list",service.loadOption(request.getParameter("product_id")));
+			mav.addObject("id",request.getParameter("product_id"));
 			mav.setViewName((String) request.getAttribute("viewName"));
 			return mav;
 		}
 		
-		
-		
 	}
 	
 	@RequestMapping(value = "/productOptionDelete.do",method=RequestMethod.GET)
-	public ModelAndView productOptionDelete(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
+	public String productOptionDelete(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String id = request.getParameter("product_id");
 		if(id != null) {
 			service.deleteOption(request.getParameter("option_name"));
 		}
-		mav.addObject("list",service.loadOption(id));
-		mav.setViewName("/admin/productOption");
-		return mav;
-		
+		return "redirect:productOption.do?product_id="+id;
 	}
 	
 	@RequestMapping(value = "/productOptionAdd.do",method=RequestMethod.GET)
-	public ModelAndView productOptionAdd(ProductVO vo,ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
+	public String productOptionAdd(ProductVO vo, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		System.out.println(vo);
+		String id = request.getParameter("product_id");
 		if(vo != null) {
 			service.insertOption(vo);
 		}
-		mav.addObject("list",service.loadOption(request.getParameter("product_id")));
-		mav.setViewName("/admin/productOption");
-		return mav;
+		return "redirect:productOption.do?product_id="+id;
+	}
+	
+	@RequestMapping(value = "/checkProduct.do",method=RequestMethod.POST)
+	public ResponseEntity checkProduct(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
+		  ResponseEntity resEntity = null;
+	      String result = service.checkProduct(id);
+	      resEntity =new ResponseEntity(result, HttpStatus.OK);
+	      return resEntity;
+	}
+	
+	@RequestMapping(value = "/checkItem.do",method=RequestMethod.POST)
+	public ResponseEntity checkItem(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
+		  ResponseEntity resEntity = null;
+	      String result = service.checkItem(id);
+	      resEntity =new ResponseEntity(result, HttpStatus.OK);
+	      return resEntity;
 	}
 	
 }
