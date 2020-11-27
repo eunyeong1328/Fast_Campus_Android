@@ -51,14 +51,30 @@
 	 <![CDATA[
 			select * from product p , item i, mylist m 
 			where p.product_id=i.product_id and p.product_id=m.product_id and m.member_id=#{member_id}
+			order by m.mylist_date desc
+			
+    	]]>
+	</select>
+	
+		<select id="listFavitem" resultType="String"
+		parameterType="java.util.HashMap">
+	 <![CDATA[
+			select p.product_id from product p , item i, mylist m 
+			where p.product_id=i.product_id and p.product_id=m.product_id 
+			and m.member_id=#{member_id} and m.product_id=#{product_id}
     	]]>
 	</select>
 
 	<!-- 마이리스트 삭제 -->
 	<delete id="deleteFavList" parameterType="String">
-		delete from mylist 
+		delete from mylist
 		where member_id=#{member_id} and product_id=#{product_id}
 	</delete>
+
+	<!-- 마이리스트 추가 -->
+	<insert id="addFavList" parameterType="java.util.HashMap">
+		insert into mylist(member_id, product_id) values(#{member_id},#{product_id})
+	</insert>
 
 	<!-- 회원수정 -->
 	<update id="modifyMemberInfo" parameterType="java.util.HashMap">

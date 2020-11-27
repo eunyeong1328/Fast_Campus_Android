@@ -31,9 +31,9 @@
 				<form action="productOptionAdd.do">
 					<section>
 						<input type="button" onclick="option_add()" class="btn btn-primary" value="옵션추가" /><br><br>
-						<table class="table table-striped table-dark">
+						<table class="table table-align-middle border-bottom mb-6">
 							<thead>
-								<tr>
+								<tr class="text-muted fs--13">
 									<th>No</th>
 									<th>product_id</th>
 									<th>옵션명</th>
@@ -43,7 +43,7 @@
 								</tr>
 								<c:choose>
 									<c:when test="${empty list}">
-										<tr>
+										<tr class="text-muted fs--13">
 											
 											<td colspan=6 class="fixed"><strong>조회된 상품이
 													없습니다.</strong></td>
@@ -51,7 +51,7 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="option" items="${list}" varStatus="option_num">
-											<tr>
+											<tr class="text-muted fs--13">
 												<td>${option_num.count}</td>
 												<td>${option.product_id}</td>
 												<td>${option.option_name}</td>

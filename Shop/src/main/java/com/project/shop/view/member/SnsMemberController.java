@@ -75,13 +75,11 @@ public class SnsMemberController extends BaseController{
 				
 				//vo에 값이 있으면 바로 로그인, 아니면 회원가입창으로 이동
 				if(memberVO!= null && memberVO.getMember_name()!=null) {				
-					System.out.println("로그인을 진행하니다.");
 					jsonMember = mapper.writeValueAsString(memberVO);
 					memberController.login(memberVO, request, response);
 					
 				} else {
 					vo.setPassword("0000");
-					System.out.println("회원가입을 진행합니다.");
 					session.setAttribute("memberInfo", vo);
 					jsonMember = mapper.writeValueAsString(vo);
 				}							

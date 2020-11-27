@@ -265,11 +265,11 @@
 									<div class="dropdown-divider"></div>
 
 									<a href="${contextPath}/myaccount/account-orders.do" title="My Orders" class="dropdown-item text-truncate font-weight-light">
-										내 주문 <small>(2)</small>
+										내 주문
 									</a>
 
 									<a href="${contextPath}/myaccount/account-favourites.do" title="My Favourites" class="dropdown-item text-truncate font-weight-light">
-										찜 리스트 <small>(3)</small>
+										찜 리스트
 									</a>
 
 									<a href="${contextPath}/myaccount/account-settings.do" title="Account Settings" class="dropdown-item text-truncate font-weight-light">

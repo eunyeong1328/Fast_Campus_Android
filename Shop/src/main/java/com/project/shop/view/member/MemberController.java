@@ -47,10 +47,16 @@ public class MemberController extends BaseController{
          session.setAttribute("isLogOn", true);
          session.setAttribute("memberInfo",memberVO);
          
+         String _action = (String)request.getParameter("_action");
          String action=(String)session.getAttribute("action");
+         
          if(action!=null && action.equals("/order/orderEachGoods.do")){
             mav.setViewName("forward:"+action);
-         }else{
+         }else if(_action!=null && _action.equals("productDetail")){
+        	 String product_id = (String)request.getParameter("product_id");
+        	 mav.setViewName("redirect:/product/productDetail.do?product_id="+product_id);
+        	 
+         }else{         
             mav.setViewName("redirect:/main/main.do");
          }            
       }else{

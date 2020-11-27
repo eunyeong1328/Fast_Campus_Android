@@ -102,8 +102,8 @@
 	
 	<insert id="insertProduct" parameterType="productVO">
 		<![CDATA[
-			insert into product (product_id,product_name,product_detail,sales_unit,product_size,packing_type,product_image,supplier,product_category_num)
-			values(#{product_id},#{product_name},#{product_detail},#{sales_unit},#{product_size},#{packing_type},#{product_image},#{supplier},${product_category_num})
+			insert into product (product_id,product_name,product_detail,sales_unit,product_size,packing_type,product_image,supplier,product_category_num,product_detail_image)
+			values(#{product_id},#{product_name},#{product_detail},#{sales_unit},#{product_size},#{packing_type},#{product_image},#{supplier},#{product_category_num},#{product_detail_image})
 		]]>
 	</insert>
 	
@@ -182,7 +182,8 @@
 		packing_type=#{packing_type},
 		product_image=#{product_image},
 		supplier=#{supplier},
-		product_category_num=#{product_category_num}
+		product_category_num=#{product_category_num},
+		product_detail_image=#{product_detail_image}
 		
 		where product_id=#{product_id}
 	</update>
@@ -202,5 +203,21 @@
 		from item 
 		where item_num = #{item_num}
 	</select>
+	
+	<select id="totalList" resultType="int">
+		select count(*)
+		from product p
+		left outer join item i on i.product_id = p.product_id
+		left outer join product_category c on c.product_category_num = p.product_category_num
+	</select>
+	
+	<select id="listProduct" parameterType="java.util.HashMap" resultMap="productResult"   >
+        select * 
+		from (select rownum r_num,c.* 
+		from (select p.*,i.item_num,i.price,i.stock,i.sales,i.discount,i.reg_date,i.unit_price 
+			from product p , item i where p.product_id = i.product_id order by i.reg_date desc)
+		c)
+		WHERE R_NUM BETWEEN #{begin} and #{end}
+ 	</select>
 	
 </mapper>
