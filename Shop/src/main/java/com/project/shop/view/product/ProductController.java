@@ -125,7 +125,17 @@ public class ProductController extends BaseController{
 		List<ProductBoardQnaVO> productBoardQnaList = productBoardService.getListQna(map);
 		mav.addObject("qnaList", productBoardQnaList);
 		
-		//
+		//관리자 로그인
+		HttpSession session = request.getSession();
+		Boolean isLogOn = (Boolean)session.getAttribute("isLogOn");
+		MemberVO vo = (MemberVO)session.getAttribute("memberInfo");
+
+		if(isLogOn !=null && isLogOn.equals(true) && vo !=null) {
+			if(vo.getMember_id().equals("admin")) {
+				mav.addObject("member_id", vo.getMember_id());
+			}
+		}
+		
 		if(request.getParameter("msg") !=null) {
 			mav.addObject("msg", request.getParameter("msg"));
 		}
@@ -136,6 +146,7 @@ public class ProductController extends BaseController{
 	// 상품QNA 글쓰기 폼 요청
 	@RequestMapping(value="/insertQnaForm.do", method=RequestMethod.GET)
 	public ModelAndView boardQnaForm(@RequestParam(value="product_id") String product_id,
+			@RequestParam(value="product_qna_num", required=false ) String product_qna_num,
 						HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
@@ -145,12 +156,17 @@ public class ProductController extends BaseController{
 		System.out.println("isLogOn 확인 : "+isLogOn);
 		MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
 		mav.addObject("product_id", product_id);
-		System.out.println("글쓰기폼요청 컨트롤러");
-		if(isLogOn == null) {
-			System.out.println("엥2");
+
+		if(isLogOn == null || isLogOn.equals(false) || memberInfo == null) {
 			mav.setViewName("/member/loginForm");
 		}else if(isLogOn.equals(true)) {
-			System.out.println("엥1");
+			if(memberInfo.getMember_id().equals("admin")) {
+				//부모글번호 전송
+				mav.addObject("parent_num", product_qna_num);
+				System.out.println("부모글번호 : "+product_qna_num);
+			}else {
+				mav.addObject("parent_num", 0);
+			}
 			mav.addObject("memberInfo", memberInfo);
 		}
 		return mav;
@@ -175,7 +191,7 @@ public class ProductController extends BaseController{
 			}
 		}
 		//파일타입 파라미터 얻어오기 
-		List<String> fileList = fileProcess(multipartRequest);//이미지 이름 리스트
+		List<String> fileList = fileProcess(multipartRequest, product_id);//이미지 이름 리스트
 		
 		int i=1;
 		if(fileList !=null) {
@@ -194,7 +210,7 @@ public class ProductController extends BaseController{
 	}
 	//상품QNA 글 수정폼 요청
 	@RequestMapping(value="/updateQnaForm.do", method=RequestMethod.POST)
-	public ModelAndView boardQnaForm(@RequestParam(value="product_id") String product_id,
+	public ModelAndView updateQnaForm(@RequestParam(value="product_id") String product_id,
 			@RequestParam(value="product_qna_num") String product_qna_num,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("글수정폼 컨트롤러...");
@@ -209,16 +225,14 @@ public class ProductController extends BaseController{
 		mav.addObject("memberInfo", memberInfo);
 		mav.addObject("product_id", product_id );
 		
-		if(isLogOn == null || isLogOn == false) {
+		if(isLogOn == null || isLogOn == false || memberInfo ==null) {
 			mav.setViewName("/member/loginForm");
-		}else if(isLogOn == true && product_qna_num !=null && product_qna_num !="") {
+		}else if(isLogOn == true && memberInfo !=null && product_qna_num !=null && product_qna_num !="") {
 			//수정하기 버튼 => 해당글에 대한 정보 가졍
 			ProductBoardQnaVO qna =productBoardService.getProductQna(Integer.parseInt(product_qna_num));
 			if(qna.getmember_id().equals(memberInfo.getMember_id())) {
-				System.out.println("와와11");
 				mav.addObject("qna", qna);
 			}else { //게시글작성자와 현재유저와 다를 경우
-				System.out.println("product_id :" +product_id);
 				mav.setViewName("redirect:/product/productDetail.do?");
 				mav.addObject("msg", "게시글 작성자가 아닙니다.");
 			}
@@ -230,16 +244,18 @@ public class ProductController extends BaseController{
 	public ModelAndView updateQna(@RequestParam Map<String, String> map,
 									@RequestParam("product_id") String product_id,
 								MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception{
-		System.out.println("수정 컨트롤러");
-		String title = map.get("title");
-		System.out.println("title: " + title);
-		
+		List<String> imageList = fileProcess(multipartRequest, product_id);
+		int i=1;
+		for(String image : imageList) {
+			System.out.println("image : "+image);
+			map.put("image"+i, image);
+			i++;
+		}
 		productBoardService.editBoaardQna(map);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/product/productDetail.do");
 		mav.addObject("product_id", product_id);
 		return mav;
-		
 	}
 	
 	
@@ -253,10 +269,12 @@ public class ProductController extends BaseController{
 		HttpSession session = request.getSession();
 		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
 		MemberVO memberInfo =(MemberVO)session.getAttribute("memberInfo");
+		System.out.println("isLogOn: "+isLogOn);
+		System.out.println("memberInfo: "+memberInfo);
 		mav.addObject("memberInfo", memberInfo);
 		mav.addObject("product_id", product_id );
 				
-		if(isLogOn == null || isLogOn == false) {
+		if(isLogOn == null || isLogOn == false || memberInfo == null ) {
 			mav.setViewName("/member/loginForm");
 		}else if(isLogOn == true && product_qna_num !=null && product_qna_num !="") {
 			mav.setViewName( "redirect:/product/productDetail.do");
@@ -264,10 +282,8 @@ public class ProductController extends BaseController{
 			int qna_num = Integer.parseInt(product_qna_num);
 			ProductBoardQnaVO qna =productBoardService.getProductQna(qna_num);
 			if(qna.getmember_id().equals(memberInfo.getMember_id())) {
-				System.out.println("와와11");
 				productBoardService.deleteBoardQna(qna_num);	
 			}else { //게시글작성자와 현재유저와 다를 경우
-				System.out.println("어쩌라는거지");
 				mav.addObject("msg", "게시글 작성자가 아닙니다.");
 			}
 		}
@@ -277,12 +293,15 @@ public class ProductController extends BaseController{
 	
 	
 	//파일타입 파라미터 얻어오기 
-	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest) throws Exception{
+	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest, String product_id) throws Exception{
 		List<String> fileNameList = new ArrayList<String>();
 	   
 		List<MultipartFile> fileList = multipartRequest.getFiles("file");
-		String path = "C:\\board\\";
-		//String path = "/resources/images/productQna/";
+		//String path = "C:\\board\\";
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberInfo =(MemberVO)session.getAttribute("memberInfo");
+		int qnaNO = productBoardService.getTotalCount(product_id);
+		String path = "C:\\users\\bitcamp\\git\\web-project\\Shop\\src\\main\\webapp\\resources\\images\\product_qna\\"+qnaNO+"\\";
 		
 		if(fileList.isEmpty()) {
 			return null;
@@ -296,13 +315,10 @@ public class ProductController extends BaseController{
 			String saveFile = path + originalFileName;
 			File file = new File(saveFile);
 			if(!file.exists()) {
-				if(file.getParentFile().mkdirs()) {
-					file.createNewFile();
-				}
+				file.mkdirs();
 			}
 			try {
 				mfile.transferTo(new File(saveFile));
-				System.out.println("저장...?");
 			}catch(IllegalStateException e) {
 				e.printStackTrace();
 			}catch(IOException e) {

@@ -35,7 +35,7 @@ public class ProductBoardDAO {
 		ProductBoardQnaVO productQna = sqlSession.selectOne("mappers.product_qna.selectQna", product_qna_num);
 		return productQna;
 	}
-	private int selectQnaNo() {
+	public int selectQnaNo() {
 		System.out.println("글번호 가져오기 전 ");
 		int qnaNo =sqlSession.selectOne("mappers.product_qna.selectQnaNo");
 		System.out.println("글번호 가져옴");

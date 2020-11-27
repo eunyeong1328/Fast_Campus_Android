@@ -385,10 +385,10 @@
 			<h2 class="mb-0">
 				<button style="background-color: lightgray;" class="btn btn-link btn-block btn-lg text-align-start text-decoration-none text-dark" 
 						type="button" data-toggle="collapse" data-target="#shadowCollapseOne" aria-expanded="true" aria-controls="shadowCollapseOne">
-					 <span style="display: inline-block; width: 10%;">글번호</span> <span
+					 <span style="text-align: center;display: inline-block; width: 10%;">글번호</span> <span
                         style="display: inline-block; width: 55%;">글제목</span> <span
-                        style="display: inline-block; width: 15%;">작성자</span> <span
-                        style="display: inline-block; width: 15%;">작성일</span>
+                        style="text-align: center;display: inline-block; width: 15%;">작성자</span> <span
+                        style="text-align: center;display: inline-block; width: 15%;">작성일</span>
 					
 				</button>
 			</h2>
@@ -406,16 +406,23 @@
 <form method="post" 
 	action="${contextPath }/product/updateQnaForm.do?product_id=${vo.product_id}&product_qna_num=${qnaList[0].product_qna_num}">
 
-	 <c:if test="${not empty qnaList }">
+	 <c:if test="${not empty qnaList[0] }">
 	<div class="card shadow-md b-0 mb-2">
 		<div class="card-header mb-0 p-0 b-0 bg-transparent" id="cleanHeadingTwo">
 			<h2 class="mb-0">
 				<button class="btn btn-link btn-block btn-lg text-align-start text-decoration-none text-dark collapsed" 
 						type="button" data-toggle="collapse" data-target="#shadowCollapseTwo" aria-expanded="false" aria-controls="shadowCollapseTwo">
-					 <span style="display: inline-block; width: 10%;"> <c:out value="${qnaList[0].product_qna_num}" /></span> <!-- ${qna.product_qna_num } -->
+					 <span style="text-align: center;display: inline-block; width: 10%;"> <c:out value="${qnaList[0].rowNum}" /></span> 
+				<!--  	 <span style="display: inline-block; width: 10%;"> <c:out value="${qnaList[0].product_qna_num}" /></span> -->
+	                 <c:if test="${qnaList[0].parent_num != 0 }">
+	                 	<span  style="display: inline-block; width: 4%;" class="badge badge-soft badge-pill badge-indigo">RE</span>
+	                 	<span style="display: inline-block; width: 51%;"><c:out value="${qnaList[0].title}" /> </span>
+	                 </c:if>
+	                  <c:if test="${qnaList[0].parent_num == 0 }">
 	                 <span style="display: inline-block; width: 55%;"><c:out value="${qnaList[0].title}" /> </span> <!-- ${qna.title } -->
-	                 <span style="display: inline-block; width: 15%;"><c:out value="${qnaList[0].member_id}" /></span> <!-- ${qna.member_id } -->
-	                 <span style="display: inline-block; width: 15%;"><c:out value="${qnaList[0].reg_date}" /></span> <!-- ${qna.reg_date } -->
+	                </c:if>
+	                 <span style="text-align: center; display: inline-block; width: 15%;"><c:out value="${qnaList[0].member_id}" /></span> <!-- ${qna.member_id } -->
+	                 <span style="text-align: center;display: inline-block; width: 15%;"><c:out value="${qnaList[0].reg_date}" /></span> <!-- ${qna.reg_date } -->
 					<span class="group-icon float-end">
 						<i class="fi fi-arrow-start-slim"></i>
 						<i class="fi fi-arrow-down-slim"></i>
@@ -428,10 +435,11 @@
 			<div class="card-body">
 			
 				${qnaList[0].contents}
-				
 				<p>
 					<c:if test="${not empty qnaList[0].image1 }">
 					<img src="${contextPath}/product/qnaDownload.do?qna_image=${qnaList[0].image1}">
+					1. ${qnaList[0].product_qna_num } 2. ${qnaList[0].image1}
+					 <img src="${contextPath}/resources/images/product_qna/${qnaList[0].product_qna_num}/${qnaList[0].image1}">
 					</c:if>
 					<c:if test="${not empty qnaList[0].image2 }">
 					<img src="${contextPath}/product/qnaDownload.do?qna_image=${qnaList[0].image2}">
@@ -442,21 +450,30 @@
 				</p>
 				
 				<p>
-				
-	                	<!--  <a href="${contextPath }/product/productBoardQnaForm.do?product_id=${vo.product_id}&product_qna_num=${qnaList[0].product_qna_num}">
-	           			    -->
-	           			    <button style="float: right;"type="submit" class="btn btn-purple btn-soft mb-1">
+				   <c:choose>
+				   	<c:when test="${member_id=='admin' }">
+				   		<a href="${contextPath }/product/insertQnaForm.do?product_id=${vo.product_id}&product_qna_num=${qnaList[0].product_qna_num}">
+				   			<button style="float: right;"type="button" class="btn btn-purple btn-soft mb-1">
+			               		답변
+			            	</button>
+			            </a>
+			           
+				   	</c:when>
+				   	<c:otherwise>
+						  <button style="float: right;"type="submit" class="btn btn-purple btn-soft mb-1">
 			               	수정
 			            	</button>
-	         		<!-- 
-	         			</a>
-	         	 -->
+	         		
 		         		<a href="${contextPath }/product/deleteBoardQna.do?product_id=${vo.product_id}&product_qna_num=${qnaList[0].product_qna_num}">
 			            	<button style="float: right;"type="button" class="btn btn-purple btn-soft mb-1">
 			               	삭제
 			            	</button>
-		         		</a>
-		         	</p>	
+		         		</a>    	
+				   	
+				   	</c:otherwise>
+				   </c:choose>
+		        </p>	
+		        
 			</div>
 		</div>
 	</div>
@@ -465,16 +482,24 @@
 
 <form method="post" 
 	action="${contextPath }/product/updateQnaForm.do?product_id=${vo.product_id}&product_qna_num=${qnaList[1].product_qna_num}">	
-	 <c:if test="${not empty qnaList }">
+	 <c:if test="${not empty qnaList[1] }">
 	<div class="card shadow-md b-0 mb-2">
 		<div class="card-header mb-0 p-0 b-0 bg-transparent" id="cleanHeadingThree">
 			<h2 class="mb-0">
 				<button class="btn btn-link btn-block btn-lg text-align-start text-decoration-none text-dark collapsed" type="button" 
 				data-toggle="collapse" data-target="#shadowCollapseThree" aria-expanded="false" aria-controls="shadowCollapseThree">
-					 <span style="display: inline-block; width: 10%;"> <c:out value="${qnaList[1].product_qna_num}" /></span> <!-- ${qna.product_qna_num } -->
-	                 <span style="display: inline-block; width: 55%;"><c:out value="${qnaList[1].title}" /> </span> <!-- ${qna.title } -->
-	                 <span style="display: inline-block; width: 15%;"><c:out value="${qnaList[1].member_id}" /></span> <!-- ${qna.member_id } -->
-	                 <span style="display: inline-block; width: 15%;"><c:out value="${qnaList[1].reg_date}" /></span> <!-- ${qna.reg_date } -->
+					 <span style="text-align: center;display: inline-block; width: 10%;"> <c:out value="${qnaList[1].rowNum}" /></span> 
+					<!--  <span style="display: inline-block; width: 10%;"> <c:out value="${qnaList[1].product_qna_num}" /></span>  -->
+	                 <c:if test="${qnaList[1].parent_num != 0 }">
+	                 <span style="dispaly:inline-block; width:4%;" class="badge badge-soft badge-pill badge-indigo"  >RE</span>
+	                  <span style="display: inline-block; width: 51%;"><c:out value="${qnaList[1].title}" /> </span>
+	                 </c:if>
+	                 <c:if test="${qnaList[1].parent_num == 0 }" >
+	                  <span style="display: inline-block; width: 55%;"><c:out value="${qnaList[1].title}" /> </span>
+	                 </c:if>
+	                 <!-- ${qna.title } -->
+	                 <span style="text-align: center;display: inline-block; width: 15%;"><c:out value="${qnaList[1].member_id}" /></span> <!-- ${qna.member_id } -->
+	                 <span style="text-align: center;display: inline-block; width: 15%;"><c:out value="${qnaList[1].reg_date}" /></span> <!-- ${qna.reg_date } -->
 					<span class="group-icon float-end">
 						<i class="fi fi-arrow-start-slim"></i>
 						<i class="fi fi-arrow-down-slim"></i>
@@ -501,21 +526,28 @@
 				</p>
 				
 				<p>
-				<!--  
-	                	<a href="${contextPath }/product/productBoardQnaForm.do?product_id=${vo.product_id}&product_qna_num=${qnaList[1].product_qna_num}">
-	           	-->		   
-	           			    <button style="float: right;"type="submit" class="btn btn-purple btn-soft mb-1">
+				   <c:choose>
+				   	<c:when test="${member_id=='admin' }">
+				   		<a href="${contextPath }/product/insertQnaForm.do?product_id=${vo.product_id}&product_qna_num=${qnaList[1].product_qna_num}">
+				   			<button style="float: right;"type="button" class="btn btn-purple btn-soft mb-1">
+			               		답변
+			            	</button>
+			            </a>
+				   	</c:when>
+				   	<c:otherwise>
+						  <button style="float: right;"type="submit" class="btn btn-purple btn-soft mb-1">
 			               	수정
 			            	</button>
-			      <!--  	
-	         			</a>&nbsp;
-	         	-->      
+	         		
 		         		<a href="${contextPath }/product/deleteBoardQna.do?product_id=${vo.product_id}&product_qna_num=${qnaList[1].product_qna_num}">
 			            	<button style="float: right;"type="button" class="btn btn-purple btn-soft mb-1">
 			               	삭제
 			            	</button>
-		         		</a> 
-		         	</p>	
+		         		</a>    	
+				   	
+				   	</c:otherwise>
+				   </c:choose>
+		        </p>	
 			</div>
 		</div>
 	</div>
@@ -524,16 +556,23 @@
 
 <form method="post" 
 	action="${contextPath }/product/updateQnaForm.do?product_id=${vo.product_id}&product_qna_num=${qnaList[2].product_qna_num}">		
-	 <c:if test="${not empty qnaList }">
+	 <c:if test="${not empty qnaList[2] }">
 	<div class="card shadow-md b-0 mb-2">
 		<div class="card-header mb-0 p-0 b-0 bg-transparent" id="cleanHeadingFour">
 			<h2 class="mb-0">
 				<button class="btn btn-link btn-block btn-lg text-align-start text-decoration-none text-dark collapsed" type="button" 
 					data-toggle="collapse" data-target="#shadowCollapseFour" aria-expanded="false" aria-controls="shadowCollapseFour">
-					 <span style="display: inline-block; width: 10%;"> <c:out value="${qnaList[2].product_qna_num}" /></span> <!-- ${qna.product_qna_num } -->
+					  	 <span style="text-align: center;display: inline-block; width: 10%;"> <c:out value="${qnaList[2].rowNum}" /></span> 
+				<!--  	 <span style="display: inline-block; width: 10%;"> <c:out value="${qnaList[2].product_qna_num}" /></span>--> <!-- ${qna.product_qna_num } -->
+	                 <c:if test="${qnaList[2].parent_num != 0 }">
+	                 <span style="display: inline-block; width: 4%;" class="badge badge-soft badge-pill badge-indigo">RE</span>
+	                 <span style="display: inline-block; width: 51%;"><c:out value="${qnaList[2].title}" /> </span>
+	                 </c:if>
+	                  <c:if test="${qnaList[2].parent_num == 0 }"> 
 	                 <span style="display: inline-block; width: 55%;"><c:out value="${qnaList[2].title}" /> </span> <!-- ${qna.title } -->
-	                 <span style="display: inline-block; width: 15%;"><c:out value="${qnaList[2].member_id}" /></span> <!-- ${qna.member_id } -->
-	                 <span style="display: inline-block; width: 15%;"><c:out value="${qnaList[2].reg_date}" /></span> <!-- ${qna.reg_date } -->
+	                 </c:if>
+	                 <span style="text-align: center;display: inline-block; width: 15%; text-align: center;"><c:out value="${qnaList[2].member_id}" /></span> <!-- ${qna.member_id } -->
+	                 <span style="text-align: center;display: inline-block; width: 15%;"><c:out value="${qnaList[2].reg_date}" /></span> <!-- ${qna.reg_date } -->
 					<span class="group-icon float-end">
 						<i class="fi fi-arrow-start-slim"></i>
 						<i class="fi fi-arrow-down-slim"></i>
@@ -560,21 +599,29 @@
 				</p>
 				
 				<p>
-				<!--  
-	                	<a href="${contextPath }/product/productBoardQnaForm.do?product_id=${vo.product_id}&product_qna_num=${qnaList[2].product_qna_num}">
-	           	-->		   
-	           			    <button style="float: right;"type="submit" class="btn btn-purple btn-soft mb-1">
+				   <c:choose>
+				   	<c:when test="${member_id=='admin' }">
+				   		<a href="${contextPath }/product/insertQnaForm.do?product_id=${vo.product_id}&product_qna_num=${qnaList[2].product_qna_num}">
+				   			<button style="float: right;"type="button" class="btn btn-purple btn-soft mb-1">
+			               		답변
+			            	</button>
+			            </a>
+				   	</c:when>
+				   	<c:otherwise>
+						  <button style="float: right;"type="submit" class="btn btn-purple btn-soft mb-1">
 			               	수정
 			            	</button>
-	         	<!--  
-	         			</a>&nbsp;
-		         -->	
+	         		
 		         		<a href="${contextPath }/product/deleteBoardQna.do?product_id=${vo.product_id}&product_qna_num=${qnaList[2].product_qna_num}">
-			            	<button style="float: right;"type="submit" class="btn btn-purple btn-soft mb-1">
+			            	<button style="float: right;"type="button" class="btn btn-purple btn-soft mb-1">
 			               	삭제
 			            	</button>
-		         		</a> 
-		         	</p>	
+		         		</a>    	
+				   	
+				   	</c:otherwise>
+				   </c:choose>
+		        </p>	
+		        
 			</div>
 		</div>
 	</div>

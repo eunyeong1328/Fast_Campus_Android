@@ -34,7 +34,7 @@
 				  	<form novalidate class="bs-validate" method="post" action="${contextPath }/product/addBoardQna.do" enctype="multipart/form-data">
 -->
 					<form class="bs-validate" method="post"
-						action="${contextPath }/product/addBoardQna.do"
+						action="${contextPath }/product/insertQna.do"
 						enctype="multipart/form-data">
 
 						<section>
@@ -66,7 +66,7 @@
 									<input type="hidden" name="member_id"value="${memberInfo.member_id }" /> 
 									<input type="hidden" name="product_id" value="${product_id }" /> 
 									<input type="hidden" name="qna_category_num" value="3" /> 
-									
+									<input type="hidden" name="parent_num" value="${parent_num }" />
 									<input id="product_title" name="title" required type="text"
 										placeholder="제목을 입력해주세요" class="form-control"> 
 									<label	for="product_title"></label>
@@ -88,9 +88,18 @@
 									]'></textarea>
 
 									<br>
-									<br> <input type="submit"
-										class="btn btn-purple btn-soft mb-1" value="문의등록">
-
+									<br> 
+									<c:choose>
+										<c:when test="${parent_num==0 }">
+											<input type="submit"
+											class="btn btn-purple btn-soft mb-1" value="문의등록">
+											
+										</c:when>
+										<c:otherwise>
+											<input type="submit" class="btn btn-purple btn-soft mb-1" value="답변등록">
+										</c:otherwise>
+									</c:choose>
+									
 
 
 									<!--  
