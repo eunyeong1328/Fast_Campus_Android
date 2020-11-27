@@ -89,25 +89,22 @@ public class MyAccountController extends BaseController{
 		  mav.setViewName("redirect:/myaccount/account-favourites.do");
 		  return mav;
 	  }
+	  
 	  @RequestMapping(value="/addFav.do")
 	  public void addFav(@RequestParam("product_id") String product_id,
-              HttpServletRequest request, HttpServletResponse response) throws Exception{
+			  HttpServletRequest request, HttpServletResponse response) throws Exception{
 
-	    	  HttpSession session=request.getSession(); 
-		      MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
-		      if(memberVO == null) {
-      
-		      } else {
-		    	  String member_id = memberVO.getMember_id();
-		    	  System.out.println("member_id: "+member_id +", product_id: " + product_id );
-		    	  HashMap<String, String> ids = new HashMap<String, String>();
-		    	  ids.put("product_id", product_id);
-		    	  ids.put("member_id", member_id);
-//			  myAccountService.addFav(ids);
-		    	  
-		      }
-			  
-	          
+		  HttpSession session=request.getSession(); 
+		  MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");		      
+		  String member_id = memberVO.getMember_id();
+		  System.out.println("member_id: "+member_id +", product_id: " + product_id );
+		  HashMap<String, String> ids = new HashMap<String, String>();
+		  ids.put("product_id", product_id);
+		  ids.put("member_id", member_id);
+		  myAccountService.addFav(ids);		    	  
+
+
+
 
 	  }
 	  

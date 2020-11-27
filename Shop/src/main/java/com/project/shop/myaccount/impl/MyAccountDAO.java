@@ -40,4 +40,8 @@ public class MyAccountDAO {
 	public void deleteFav(HashMap ids) throws Exception{
 		sqlSession.delete("mappers.myaccount.deleteFavList",ids);
 	}
+	
+	public void addFav(HashMap ids) throws Exception{
+		sqlSession.insert("mappers.myaccount.addFavList",ids);
+	}
 }

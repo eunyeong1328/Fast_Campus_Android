@@ -153,20 +153,22 @@
 
 
 									<!-- add to favourite : logged in -->
+									
+									<c:choose>
+								<c:when test="${isLogOn==true and not empty memberInfo }">
+										<a href="#"
+											class="btn-toggle btn bg-white shadow-lg btn-sm rounded-circle mb-2"
+											data-toggle="tooltip" data-original-title="찜 리스트에 담기"
+											data-placement="left"
+											data-toggle-ajax-url-on="${contextPath}/myaccount/addFav.do?product_id=${vo.product_id}"
+											data-toast-success-message="찜 리스트에 담겼습니다."
+											data-toast-success-position="bottom-center"><i
+											class="fi fi-heart-slim"></i>
+										</a>
+								</c:when>
+							</c:choose>								
+									
 									<a href="#"
-										class="btn-toggle btn bg-white shadow-lg btn-sm rounded-circle mb-2"
-										data-toggle="tooltip" data-original-title="add to favourite"
-										data-placement="left"
-										data-toggle-ajax-url-on="demo.files/php/demo.ajax_request.php?product_id=1&amp;action=add_to_favourite"
-										data-toast-success-message="Added to your favourite!"
-										data-toast-success-position="bottom-center"> <i
-										class="fi fi-heart-slim"></i>
-									</a> <a href="#"
-										class="btn bg-white shadow-lg btn-sm rounded-circle mb-2"
-										title="" data-toggle="tooltip" data-placement="left"
-										data-original-title="add to compare"> <i
-										class="fi fi-graph"></i>
-									</a> <a href="#"
 										class="btn btn-danger shadow-lg btn-sm rounded-circle mb-2"
 										title="" data-toggle="tooltip" data-placement="left"
 										data-original-title="add to cart"> <i class="fi fi-cart-1"></i>

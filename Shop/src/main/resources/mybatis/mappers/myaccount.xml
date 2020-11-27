@@ -56,9 +56,14 @@
 
 	<!-- 마이리스트 삭제 -->
 	<delete id="deleteFavList" parameterType="String">
-		delete from mylist 
+		delete from mylist
 		where member_id=#{member_id} and product_id=#{product_id}
 	</delete>
+
+	<!-- 마이리스트 추가 -->
+	<insert id="addFavList" parameterType="String">
+		insert into mylist values(#{member_id},#{product_id})
+	</insert>
 
 	<!-- 회원수정 -->
 	<update id="modifyMemberInfo" parameterType="java.util.HashMap">

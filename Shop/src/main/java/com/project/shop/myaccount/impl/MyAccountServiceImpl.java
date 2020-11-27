@@ -52,4 +52,9 @@ public class MyAccountServiceImpl implements MyAccountService{
 		
 	}
 
+	@Override
+	public void addFav(HashMap ids) throws Exception {
+		myAccountDAO.addFav(ids);
+	}
+
 }
