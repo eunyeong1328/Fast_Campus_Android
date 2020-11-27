@@ -50,7 +50,11 @@ public class MemberController extends BaseController{
          String action=(String)session.getAttribute("action");
          if(action!=null && action.equals("/order/orderEachGoods.do")){
             mav.setViewName("forward:"+action);
-         }else{
+         }else if(action!=null && action.equals("productDetail")){
+        	 String product_id = (String)session.getAttribute("product_id");
+        	 mav.setViewName("redirect:/product/productDetail.do?product_id="+product_id);
+        	 
+         }else{         
             mav.setViewName("redirect:/main/main.do");
          }            
       }else{

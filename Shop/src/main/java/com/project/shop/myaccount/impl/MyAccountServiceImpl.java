@@ -54,7 +54,11 @@ public class MyAccountServiceImpl implements MyAccountService{
 
 	@Override
 	public void addFav(HashMap ids) throws Exception {
-		myAccountDAO.addFav(ids);
+		String product_id = (String)ids.get("product_id");
+		String _product_id = (String)myAccountDAO.listFavItem(ids);
+		if(!(product_id.equals(_product_id))) {			
+			myAccountDAO.addFav(ids);
+		}
 	}
 
 }

@@ -6,6 +6,7 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
+
 <c:if test="${not empty msg }">
 	<script>
 		alert("게시글 작성자가 아닙니다");
@@ -136,9 +137,9 @@
                                           "
                                           src="demo.files/images/unsplash/products/smartwatch_3.jpg" 
                                           alt="...">
-                                       -->
+                                       --><%-- 
 										<img class="bg-suprime img-fluid rounded max-h-600"
-											src="${contextPath}/product/thumbnails.do?product_id=${vo.product_id}&product_category_num=${vo.product_category_num}ㅎㅎ">
+											src="${contextPath}/product/thumbnails.do?product_id=${vo.product_id}&product_category_num=${vo.product_category_num}"> --%>
 									</div>
 								</div>
 
@@ -350,7 +351,7 @@
 									<a href="#"
 										class="js-ajax-modal btn btn-light h-100 d-flex justify-content-center align-items-center"
 										data-toggle="tooltip" data-original-title="찜 리스트에 담기"
-										data-href="${contextPath }/resources/_ajax/modal_signin_md.html"
+										data-href="${contextPath }/resources/_ajax/modal_signin_md.jsp?product_id=${vo.product_id}"
 										data-ajax-modal-size="modal-md"
 										data-ajax-modal-backdrop="static"
 										data-ajax-modal-centered="true"> <i
