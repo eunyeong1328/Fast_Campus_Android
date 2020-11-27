@@ -62,10 +62,10 @@
 						<c:forEach var="faq" items="${FAQList}">
 							<tbody>
 								<tr>
-									<td>${faq.faq_num}</td>
+									<td>${faq.r_num}</td>
 									<td>${faq.qna_category_name}</td>
 									<td>
-										<a href="faq.do?faq_num=${faq.faq_num}&cPage=${paging.nowPage}">${faq.title}</a>
+										<a href="faq.do?r_num=${faq.r_num}&cPage=${paging.nowPage}">${faq.title}</a>
 									</td>
 								</tr>
 							</tbody>

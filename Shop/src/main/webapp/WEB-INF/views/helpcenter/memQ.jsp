@@ -23,6 +23,7 @@
                                 <h3 class="joy-table-title">
                                 	1:1 문의
                                 	<p>모든 의문... 쩝쩝박사에게!</p>
+		                            <a href="memQ-update.do?member_qna_num=${memQ.member_qna_num}&cPage=${paging.nowPage}" class="insert">수정</a>
                             	</h3>
                                 <div class="joy-board-detail">
                                     <table class="joy-table-detail">
@@ -64,42 +65,32 @@
                                         </div>
                                     </div>
 									<div class="prev-next-list">
+										<!-- 이전글이 없음, pre_no = 0 -->
 										<c:if test="${memQ.pre_no == 0 }">
 											<p class="disabled">이전글</p>
 										</c:if>
+										<!-- 이전글이 있음, pre_no != 0 -->
 										<c:if test="${memQ.pre_no != 0 }">
-											<c:choose>
-												<c:when
-													test="${(memQ.member_qna_num - 1) == maxPre || memQ.member_qna_num == maxPre}">
-													<a
-														href="memQ.do?member_qna_num=${memQ.member_qna_num - 1}&cPage=${paging.nowPage}">이전글</a>
-												</c:when>
-												<c:otherwise>
-													<a
-														href="memQ.do?member_qna_num=${memQ.member_qna_num - 1}&cPage=${paging.nowPage + 1}">이전글</a>
-												</c:otherwise>
-											</c:choose>
+											<c:if test="${memQ.r_num > paging.begin }">
+												<a href="memQ.do?r_num=${memQ.pre_no}&cPage=${paging.nowPage}">이전글</a>
+											</c:if>
+											<c:if test="${memQ.r_num == paging.begin }">
+												<a href="memQ.do?r_num=${memQ.pre_no}&cPage=${paging.nowPage - 1}">이전글</a>
+											</c:if>
 										</c:if>
-				
+										
+										<!-- 다음글이 보이지 않게, next_no = 0 -->
 										<c:if test="${memQ.next_no == 0 }">
 											<p class="disabled">다음글</p>
 										</c:if>
+										<!-- 다음글이 있음, next_no != 0 -->
 										<c:if test="${memQ.next_no != 0 }">
-											<c:choose>
-												<c:when
-													test="${maxPre == 0 || (memQ.member_qna_num + 1) == maxPre}">
-													<a
-														href="memQ.do?member_qna_num=${memQ.member_qna_num + 1}&cPage=${paging.nowPage}">다음글</a>
-												</c:when>
-												<c:when test="${notice.notice_num == maxPre}">
-													<a
-														href="memQ.do?member_qna_num=${memQ.member_qna_num + 1}&cPage=${paging.nowPage}">다음글</a>
-												</c:when>
-												<c:otherwise>
-													<a
-														href="memQ.do?member_qna_num=${memQ.member_qna_num + 1}&cPage=${paging.nowPage - 1}">다음글</a>
-												</c:otherwise>
-											</c:choose>
+											<c:if test="${memQ.r_num < paging.end }">
+												<a href="memQ.do?r_num=${memQ.next_no}&cPage=${paging.nowPage}">다음글</a>
+											</c:if>
+											<c:if test="${memQ.r_num == paging.end }">
+												<a href="memQ.do?r_num=${memQ.next_no}&cPage=${paging.nowPage + 1}">다음글</a>
+											</c:if>
 										</c:if>
 				
 										<a href="memberQ-tab.do?cPage=${paging.nowPage }" class="list">목록</a>

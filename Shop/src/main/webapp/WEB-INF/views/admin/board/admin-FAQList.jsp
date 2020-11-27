@@ -123,7 +123,7 @@
 															<i></i>
 														</label>
 													</td>
-													<td>${faq.faq_num}</td>
+													<td>${faq.r_num}</td>
 													<td>${faq.qna_category_name }</td>
 													<td>
 

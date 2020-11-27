@@ -58,11 +58,16 @@
 						<c:forEach var="memQ" items="${MemQList}">
 							<tbody>
 								<tr>
-									<td>${memQ.member_qna_num}</td>
+									<td>${memQ.r_num}</td>
 									<td>${memQ.qna_category_name}</td>
-									<td><a
-										href="memQ.do?member_qna_num=${memQ.member_qna_num}&cPage=${paging.nowPage}">
-											${memQ.title } </a></td>
+									<c:if test="${memQ.parent_num == 0 }">
+										<td><a href="memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}">${memQ.title } </a></td>
+									</c:if>
+									<c:if test="${memQ.parent_num != 0 }">
+										<td><a href="memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}">
+										<span class="badge badge-soft badge-pill badge-purple">Purple</span>
+										${memQ.title } </a></td>
+									</c:if>
 									<td>${memQ.member_id}</td>
 									<td>${memQ.reg_date}</td>
 								</tr>

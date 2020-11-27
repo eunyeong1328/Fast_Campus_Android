@@ -124,7 +124,7 @@
 															<i></i>
 														</label>
 													</td>
-													<td>${notice.notice_num}</td>
+													<td>${notice.r_num}</td>
 													<td>
 
 														<a href="${contextPath}/adminboard/notice.do?notice_num=${notice.notice_num}&cPage=${paging.nowPage}" class="font-weight-medium text-muted mx-2 m-0-xs">

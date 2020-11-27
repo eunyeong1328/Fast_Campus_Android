@@ -105,7 +105,7 @@ public class AdminBoardController {
 		List<BoardVO> noticeList = boardService.getNoticeList(map);
 
 		for (BoardVO noti : noticeList) {
-			if (noti.getNotice_num() == vo.getNotice_num()) {
+			if (noti.getR_num() == vo.getR_num() || noti.getNotice_num() == vo.getNotice_num()) {
 				BoardVO notice = noti;
 				mav.addObject("notice", notice);
 			}
@@ -128,11 +128,40 @@ public class AdminBoardController {
 		List<BoardVO> faqList = boardService.getFAQList(map);
 
 		for (BoardVO fa : faqList) {
-			if (fa.getFaq_num() == vo.getFaq_num()) {
+			if (fa.getR_num() == vo.getR_num() || fa.getFaq_num() == vo.getFaq_num()) {
 				BoardVO faq = fa;
 				mav.addObject("faq", faq);
 			}
 		}
+		return mav;
+	}
+	
+	@RequestMapping("/memQ.do")
+	public ModelAndView getMemQ(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		
+		if (memberVO != null && memberVO.getMember_id() != null) {
+			getPaging(request, response);
+			mav.addObject("paging", paging);
+			
+			List<BoardVO> memQList = boardService.getMemQListAll(map);
+			
+			for (BoardVO mem : memQList) {
+				if (mem.getR_num() == vo.getR_num() || mem.getMember_qna_num() == vo.getMember_qna_num()) {
+					BoardVO memQ = mem;
+					mav.addObject("memQ", memQ);
+				}
+			}
+		} else {
+			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
+			mav.addObject("message", message);
+			mav.setViewName("/member/loginForm");
+		}
+		
 		return mav;
 	}
 	
@@ -330,7 +359,7 @@ public class AdminBoardController {
 			System.out.println("paging notice insert 후 list notice count " + paging.getTotalRecord());
 		} else if (viewName.equals("/adminboard/faqList") || viewName.equals("/adminboard/faq")) {
 			paging.setTotalRecord(pagingService.getFAQCount());
-		} else if (viewName.equals("/adminboard/memberQnaList") || viewName.equals("/adminboard/memberQ")) {
+		} else if (viewName.equals("/adminboard/memberQnaList") || viewName.equals("/adminboard/memQ")) {
 			paging.setTotalRecord(pagingService.getMemQCountAll());
 		}
 

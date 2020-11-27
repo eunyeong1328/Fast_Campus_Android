@@ -135,13 +135,14 @@ public class BoardController {
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
-
+		String cPage = request.getParameter("cPage");
+		
 		if (memberVO != null && isLogOn == true) {
 			mav.setViewName(viewName);
 			vo.setMember_id(memberVO.getMember_id());
 			BoardVO memQ = boardService.getMemQ(vo);
-			mav.addObject("memberInfo", memberVO);
 			mav.addObject("memQ", memQ);
+			mav.addObject("cPage", cPage);
 			mav.setViewName(viewName);
 		} else {
 			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
@@ -156,11 +157,13 @@ public class BoardController {
 	public ModelAndView memQUpdate(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String action = (String) multipartRequest.getParameter("action");
+		String cPage = multipartRequest.getParameter("cPage");
 		String member_qna_num = multipartRequest.getParameter("member_qna_num");
+		
 		if (action != null && action.equals("memqUpdate")) {
 			map = filecon.fileUpload(multipartRequest, response);
 			boardService.memQUpdate(map);
-			mav.setViewName("redirect:memQ.do?member_qna_num=" + member_qna_num);
+			mav.setViewName("redirect:memQ.do?member_qna_num=" + member_qna_num + "&cPage=" + cPage);
 		}
 
 		return mav;
@@ -177,14 +180,9 @@ public class BoardController {
 		
 		List<BoardVO> noticeList = boardService.getNoticeList(map);
 		
-		int maxPre = 0;
 		for (BoardVO noti : noticeList) {
-			if (maxPre < noti.getPre_no()) {
-				maxPre = noti.getPre_no();
-				mav.addObject("maxPre", maxPre);
-			}
-			
-			if (noti.getNotice_num() == vo.getNotice_num()) {
+			if (noti.getR_num() == vo.getR_num() || noti.getNotice_num() == vo.getNotice_num()) {
+				boardService.noticeViewUpdate(vo.getNotice_num());
 				BoardVO notice = noti;
 				mav.addObject("notice", notice);
 			}
@@ -202,14 +200,8 @@ public class BoardController {
 
 		List<BoardVO> faqList = boardService.getFAQList(map);
 		
-		int maxPre = 0;
 		for (BoardVO fa : faqList) {
-			if (maxPre < fa.getPre_no()) {
-				maxPre = fa.getPre_no();
-				mav.addObject("maxPre", maxPre);
-			}
-			
-			if (fa.getFaq_num() == vo.getFaq_num()) {
+			if (fa.getR_num() == vo.getR_num() || fa.getFaq_num() == vo.getFaq_num()) {
 				BoardVO faq = fa;
 				mav.addObject("faq", faq);
 			}
@@ -230,15 +222,11 @@ public class BoardController {
 			mav.addObject("paging", paging);
 			
 			map.put("member_id", memberVO.getMember_id());
+			System.out.println("ㅁㅁ???????" + memberVO.getMember_id());
 			List<BoardVO> memQList = boardService.getMemQList(map);
 			
-			int maxPre = 0;
 			for (BoardVO mem : memQList) {
-				if (maxPre < mem.getPre_no()) {
-					maxPre = mem.getPre_no();
-					mav.addObject("maxPre", maxPre);
-				}
-				if (mem.getMember_qna_num() == vo.getMember_qna_num()) {
+				if (mem.getR_num() == vo.getR_num() || mem.getMember_qna_num() == vo.getMember_qna_num()) {
 					BoardVO memQ = mem;
 					mav.addObject("memQ", memQ);
 				}
@@ -281,6 +269,8 @@ public class BoardController {
 //		begin, end
 		paging.setEnd(paging.getNowPage() * paging.getNumPerPage());
 		paging.setBegin(paging.getEnd() - paging.getNumPerPage() + 1);
+		System.out.println(paging.getEnd());
+		System.out.println(paging.getBegin());
 
 //		블록
 		int nowPage = paging.getNowPage();

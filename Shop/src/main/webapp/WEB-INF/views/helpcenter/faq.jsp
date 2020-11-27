@@ -40,41 +40,34 @@
 						<p class="contents">${faq.contents}</p>
 					</div>
 					<div class="prev-next-list">
+						<!-- 이전글이 없음, pre_no = 0 -->
 						<c:if test="${faq.pre_no == 0 }">
 							<p class="disabled">이전글</p>
 						</c:if>
+						<!-- 이전글이 있음, pre_no != 0 -->
 						<c:if test="${faq.pre_no != 0 }">
-							<c:choose>
-								<c:when
-									test="${(faq.faq_num - 1) == maxPre || faq.faq_num == maxPre}">
-									<a
-										href="faq.do?faq_num=${faq.faq_num - 1}&cPage=${paging.nowPage}">이전글</a>
-								</c:when>
-								<c:otherwise>
-									<a
-										href="faq.do?faq_num=${faq.faq_num - 1}&cPage=${paging.nowPage + 1}">이전글</a>
-								</c:otherwise>
-							</c:choose>
+							<c:if test="${faq.r_num > paging.begin }">
+								<a href="faq.do?r_num=${faq.pre_no}&cPage=${paging.nowPage}">이전글</a>
+							</c:if>
+							<c:if test="${faq.r_num == paging.begin }">
+								<a
+									href="faq.do?r_num=${faq.pre_no}&cPage=${paging.nowPage - 1}">이전글</a>
+							</c:if>
 						</c:if>
 
+						<!-- 다음글이 보이지 않게, next_no = 0 -->
 						<c:if test="${faq.next_no == 0 }">
 							<p class="disabled">다음글</p>
 						</c:if>
+						<!-- 다음글이 있음, next_no != 0 -->
 						<c:if test="${faq.next_no != 0 }">
-							<c:choose>
-								<c:when test="${maxPre == 0 || (faq.faq_num + 1) == maxPre}">
-									<a
-										href="faq.do?faq_num=${faq.faq_num + 1}&cPage=${paging.nowPage}">다음글</a>
-								</c:when>
-								<c:when test="${faq.faq_num == maxPre}">
-									<a
-										href="faq.do?faq_num=${faq.faq_num + 1}&cPage=${paging.nowPage}">다음글</a>
-								</c:when>
-								<c:otherwise>
-									<a
-										href="faq.do?faq_num=${faq.faq_num + 1}&cPage=${paging.nowPage - 1}">다음글</a>
-								</c:otherwise>
-							</c:choose>
+							<c:if test="${faq.r_num < paging.end }">
+								<a href="faq.do?r_num=${faq.next_no}&cPage=${paging.nowPage}">다음글</a>
+							</c:if>
+							<c:if test="${faq.r_num == paging.end }">
+								<a
+									href="faq.do?r_num=${faq.next_no}&cPage=${paging.nowPage + 1}">다음글</a>
+							</c:if>
 						</c:if>
 
 						<a href="faq-tab.do?cPage=${paging.nowPage }" class="list">목록</a>

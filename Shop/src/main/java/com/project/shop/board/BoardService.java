@@ -40,4 +40,7 @@ public interface BoardService {
 	void noticeDelete(BoardVO vo);
 	void faqDelete(BoardVO vo);
 	
+//	조회수
+	void noticeViewUpdate(int notice_num);
+	
 }

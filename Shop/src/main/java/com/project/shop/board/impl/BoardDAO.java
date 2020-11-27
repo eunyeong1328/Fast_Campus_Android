@@ -74,5 +74,9 @@ public class BoardDAO {
 	public void faqDelete(BoardVO vo) {
 		board.delete("mapper.board.faqDelete", vo);
 	}
+
+	public void noticeViewUpdate(int notice_num) {
+		board.update("mapper.board.noticeViewUpdate", notice_num);
+	}
 	
 }

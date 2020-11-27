@@ -35,7 +35,19 @@ public class BoardVO {
 		this.image3 = image3;
 	}
 
-//	공지사항
+//	row_num
+	private int r_num;
+	private int parent_num;
+
+	public int getR_num() {
+		return r_num;
+	}
+
+	public void setR_num(int r_num) {
+		this.r_num = r_num;
+	}
+
+	//	공지사항
 	private int notice_num;
 	private int next_no;
 	private int pre_no;
@@ -53,7 +65,6 @@ public class BoardVO {
 	private int product_qna_num;
 	private String product_id;
 	private String member_id;
-	private int parent_num;
 	private String product_name;
 
 //	1:1 문의

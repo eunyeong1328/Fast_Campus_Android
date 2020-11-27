@@ -104,4 +104,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-faq.jsp" />
       </definition>
       
+      <definition name="/adminboard/memQ" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-memQ.jsp" />
+      </definition>
+      
 </tiles-definitions>

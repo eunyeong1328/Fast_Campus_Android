@@ -125,13 +125,21 @@
 															<i></i>
 														</label>
 													</td>
-													<td>${memQ.member_qna_num}</td>
+													<td>${memQ.r_num}</td>
 													<td>${memQ.qna_category_name }</td>
 													<td>
-
-														<a href="#!" class="font-weight-medium text-muted mx-2 m-0-xs">
-															${memQ.title}
-														</a>
+														<c:if test="${memQ.parent_num == 0 }">
+															<a href="${contextPath}/adminboard/memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}" 
+																class="font-weight-medium text-muted mx-2 m-0-xs">
+																${memQ.title}
+															</a>
+														</c:if>
+														<c:if test="${memQ.parent_num != 0 }">
+															<a href="${contextPath}/adminboard/memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}" 
+																class="font-weight-medium text-muted mx-2 m-0-xs">
+															<span class="badge badge-soft badge-pill badge-purple">Purple</span>
+															${memQ.title } </a>
+														</c:if>
 
 														<!-- MOBILE ONLY -->
 														<div class="fs--13 d-block d-xl-none">

@@ -66,41 +66,32 @@
 						</div>
 					</div>
 					<div class="prev-next-list">
+						<!-- 이전글이 없음, pre_no = 0 -->
 						<c:if test="${notice.pre_no == 0 }">
 							<p class="disabled">이전글</p>
 						</c:if>
+						<!-- 이전글이 있음, pre_no != 0 -->
 						<c:if test="${notice.pre_no != 0 }">
-							<c:choose>
-								<c:when
-									test="${(notice.notice_num - 1) == maxPre || notice.notice_num == maxPre}">
-									<a href="notice.do?notice_num=${notice.notice_num - 1}&cPage=${paging.nowPage}">이전글</a>
-								</c:when>
-								<c:otherwise>
-									<a
-										href="notice.do?notice_num=${notice.notice_num - 1}&cPage=${paging.nowPage + 1}">이전글</a>
-								</c:otherwise>
-							</c:choose>
+							<c:if test="${notice.r_num > paging.begin }">
+								<a href="notice.do?r_num=${notice.pre_no}&cPage=${paging.nowPage}">이전글</a>
+							</c:if>
+							<c:if test="${notice.r_num == paging.begin }">
+								<a href="notice.do?r_num=${notice.pre_no}&cPage=${paging.nowPage - 1}">이전글</a>
+							</c:if>
 						</c:if>
-
+						
+						<!-- 다음글이 보이지 않게, next_no = 0 -->
 						<c:if test="${notice.next_no == 0 }">
 							<p class="disabled">다음글</p>
 						</c:if>
+						<!-- 다음글이 있음, next_no != 0 -->
 						<c:if test="${notice.next_no != 0 }">
-							<c:choose>
-								<c:when
-									test="${maxPre == 0 || (notice.notice_num + 1) == maxPre}">
-									<a
-										href="notice.do?notice_num=${notice.notice_num + 1}&cPage=${paging.nowPage}">다음글</a>
-								</c:when>
-								<c:when test="${notice.notice_num == maxPre}">
-									<a
-										href="notice.do?notice_num=${notice.notice_num + 1}&cPage=${paging.nowPage}">다음글</a>
-								</c:when>
-								<c:otherwise>
-									<a
-										href="notice.do?notice_num=${notice.notice_num + 1}&cPage=${paging.nowPage - 1}">다음글</a>
-								</c:otherwise>
-							</c:choose>
+							<c:if test="${notice.r_num < paging.end }">
+								<a href="notice.do?r_num=${notice.next_no}&cPage=${paging.nowPage}">다음글</a>
+							</c:if>
+							<c:if test="${notice.r_num == paging.end }">
+								<a href="notice.do?r_num=${notice.next_no}&cPage=${paging.nowPage + 1}">다음글</a>
+							</c:if>
 						</c:if>
 
 						<a href="notice-tab.do?cPage=${paging.nowPage }" class="list">목록</a>

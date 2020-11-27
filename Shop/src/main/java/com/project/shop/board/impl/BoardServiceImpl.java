@@ -91,4 +91,9 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.faqDelete(vo);
 	}
 
+	@Override
+	public void noticeViewUpdate(int notice_num) {
+		boardDAO.noticeViewUpdate(notice_num);
+	}
+
 }

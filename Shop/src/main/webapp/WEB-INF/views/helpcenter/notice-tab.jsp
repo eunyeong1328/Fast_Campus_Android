@@ -64,9 +64,9 @@
 						<c:forEach var="notice" items="${NoticeList}">
 							<tbody>
 								<tr>
-									<td>${notice.notice_num}</td>
+									<td>${notice.r_num}</td>
 									<td>
-										<a href="notice.do?notice_num=${notice.notice_num}&cPage=${paging.nowPage}">${notice.title}</a>
+										<a href="notice.do?r_num=${notice.r_num}&cPage=${paging.nowPage}&notice_num=${notice.notice_num}">${notice.title}</a>
 									</td>
 									<td>쩝쩝박사</td>
 									<td>${notice.reg_date}</td>

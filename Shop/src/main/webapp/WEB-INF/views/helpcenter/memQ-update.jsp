@@ -50,7 +50,8 @@
                                     <form action="memqUpdate.do" method="post" enctype="multipart/form-data">
                                     	<input type="hidden" name="action" value="memqUpdate">
                                     	<input type="hidden" name="member_id" value="${memQ.member_id }">
-                                    	<input type="hidden" name="member_qna_num" value="${memQ.member_qna_num }">
+                                    	<input type="hidden" name="member_qna_num" value="${memQ.member_qna_num}">
+                                    	<input type="hidden" name="cPage" value="${cPage }">
                                         <div class="memq-title">
                                             <p>제목</p>
                                             <div class="category-select">
@@ -103,7 +104,7 @@
                                         </div>
                                         <div class="memq-submit">
                                             <input type="submit" value="등록">
-		                                    <a href="memberQ-tab.do" class="list">목록</a>
+		                                    <a href="memberQ-tab.do?cPage=${paging.nowPage}" class="list">목록</a>
                                         </div>
                                     </form>
 

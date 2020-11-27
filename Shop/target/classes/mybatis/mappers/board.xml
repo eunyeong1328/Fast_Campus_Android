@@ -9,15 +9,15 @@
 	
 	<!-- 공지사항 -->
 	<select id="getNoticeList" parameterType="hashmap" resultType="boardVO">
-		SELECT *
+		SELECT * 
 		FROM (SELECT ROWNUM R_NUM, N.*, 
-					 LEAD(notice_num, 1) OVER (ORDER BY notice_num DESC) AS PRE_NO, 
-					 LAG(notice_num, 1) OVER (ORDER BY notice_num DESC) AS NEXT_NO 
+					 LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
+					 LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
 			  FROM (SELECT * 
 			  		FROM NOTICE 
-			  		ORDER BY NOTICE_NUM DESC
+			  		ORDER BY NOTICE_NUM DESC 
 			  		) N 
-			  )
+			  ) 
 		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
 
@@ -25,8 +25,8 @@
 	<select id="getFAQList" parameterType="hashmap" resultType="boardVO">
 		SELECT * 
 		FROM (SELECT ROWNUM R_NUM, A.*, 
-					 LEAD(FAQ_NUM, 1) OVER (ORDER BY FAQ_NUM DESC) AS PRE_NO, 
-					 LAG(FAQ_NUM, 1) OVER (ORDER BY FAQ_NUM DESC) AS NEXT_NO 
+					 LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
+					 LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
 			  FROM (SELECT F.FAQ_NUM, Q.QNA_CATEGORY_NAME, F.TITLE, F.CONTENTS  
 			  		FROM FAQ F, QNA_CATEGORY Q 
 					WHERE f.qna_category_num = q.qna_category_num 
@@ -36,32 +36,37 @@
 	
 	<!-- 1:1 문의(관리자용) 전체 -->
 	<select id="getMemQListAll" parameterType="hashmap" resultType="boardVO">
-		SELECT * FROM 
-			(SELECT ROWNUM R_NUM, A.*, 
-					LEAD(member_qna_num, 1) OVER (ORDER BY member_qna_num DESC) AS PRE_NO, 
-					LAG(member_qna_num, 1) OVER (ORDER BY member_qna_num DESC) AS NEXT_NO 
-			FROM 
-			(SELECT member_qna_num, title, contents, image1, image2, image3, qna_category_name, 
-			order_num, member_id, email, phone, reg_date 
-			FROM MEMBER_QNA Q, QNA_CATEGORY C 
-			WHERE Q.qna_category_num = C.qna_category_num 
-			ORDER BY Q.member_qna_num DESC) A)
+		SELECT * 
+		FROM 
+    		(SELECT ROWNUM R_NUM, A.*, LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
+            LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
+     		FROM 
+    		    (SELECT member_qna_num, parent_num, title, contents, image1, image2, image3, qna_category_name, 
+				order_num, member_id, email, phone, reg_date 
+				FROM MEMBER_QNA Q, QNA_CATEGORY C 
+				WHERE Q.qna_category_num = C.qna_category_num 
+         		START WITH parent_num = 0 
+      		    CONNECT BY PRIOR member_qna_num = parent_num 
+     		    ORDER SIBLINGS BY member_qna_num DESC) A)
 		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
 	
 	<!-- 1:1 문의 로그인회원 -->
 	<select id="getMemQList" parameterType="hashmap" resultType="boardVO">
-		SELECT * FROM 
-			(SELECT ROWNUM R_NUM, A.*, 
-					LEAD(member_qna_num, 1) OVER (ORDER BY member_qna_num DESC) AS PRE_NO, 
-					LAG(member_qna_num, 1) OVER (ORDER BY member_qna_num DESC) AS NEXT_NO 
-			FROM 
-			(SELECT member_qna_num, title, contents, image1, image2, image3, qna_category_name, 
-			order_num, member_id, email, phone, reg_date 
-			FROM MEMBER_QNA Q, QNA_CATEGORY C 
-			WHERE Q.qna_category_num = C.qna_category_num 
-			AND q.member_id = #{member_id}
-			ORDER BY Q.member_qna_num DESC) A)
+		SELECT * 
+		FROM 
+    		(SELECT ROWNUM R_NUM, A.*, LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
+            LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
+     		FROM 
+    		    (SELECT member_qna_num, parent_num, title, contents, image1, image2, image3, qna_category_name, 
+				order_num, member_id, email, phone, reg_date 
+				FROM MEMBER_QNA Q, QNA_CATEGORY C 
+				WHERE Q.qna_category_num = C.qna_category_num 
+				AND Q.member_id = #{member_id}
+				OR Q.member_id = 'admin' 
+         		START WITH parent_num = 0 
+      		    CONNECT BY PRIOR member_qna_num = parent_num 
+     		    ORDER SIBLINGS BY member_qna_num DESC) A)
 		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
 
@@ -76,7 +81,7 @@
 	
 	<!-- FAQ 선택한 글 불러오기 -->
 	<select id="getFAQ" parameterType="boardVO" resultType="boardVO">
-		SELECT F.FAQ_NUM , Q.QNA_CATEGORY_NAME , F.TITLE, F.CONTENTS
+		SELECT F.FAQ_NUM , q.qna_category_num, Q.QNA_CATEGORY_NAME , F.TITLE, F.CONTENTS
 		FROM FAQ F, QNA_CATEGORY Q
 		WHERE f.qna_category_num = q.qna_category_num
 		AND f.faq_num = #{faq_num}
@@ -84,8 +89,8 @@
 	
 	<!-- 1:1 문의 선택한 글 불러오기 -->
 	<select id="getMemQ" parameterType="boardVO" resultType="boardVO">
-		SELECT member_qna_num, title, contents, image1, image2, image3, qna_category_name, 
-			order_num, member_id, email, phone, reg_date 
+		SELECT q.member_qna_num, q.title, q.contents, q.image1, q.image2, q.image3, q.qna_category_num, c.qna_category_name, 
+			q.order_num, q.member_id, q.email, q.phone, q.reg_date 
 		FROM MEMBER_QNA Q, QNA_CATEGORY C 
 		WHERE Q.qna_category_num = C.qna_category_num 
 		and Q.member_qna_num = #{member_qna_num}
@@ -116,6 +121,18 @@
 		#{image1}, #{qna_category_num}, #{order_num}, 
 		(SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_ID = #{member_id}), 
 		#{email}, #{phone}, SYSDATE, #{image2}, #{image3})
+	</insert>
+	
+	<!-- 1:1 문의 답변 등록 -->
+	<insert id="memqAdminInsert" parameterType="hashmap">
+		INSERT INTO MEMBER_QNA values(
+		(select nvl(max(member_qna_num),0)+1 from member_qna), 
+		#{title}, #{contents}, #{image1}, 
+		(select qna_category_num from member_qna where member_qna_num = #{member_qna_num}), 
+		(select order_num from member_qna where member_qna_num = #{member_qna_num}),  
+		#{member_id}, #{email}, #{phone}, SYSDATE, #{image2}, #{image3}, 
+		(select member_qna_num from member_qna where member_qna_num = #{member_qna_num}) 
+		);
 	</insert>
 	
 <!-- ****************************************** update ****************************************** -->
@@ -175,6 +192,7 @@
 		SELECT COUNT(*) 
 		FROM MEMBER_QNA
 		WHERE MEMBER_ID = #{member_id}
+		OR MEMBER_ID = 'admin'
 	</select>
 	
 	<!-- 회원 1:1 문의 전체 -->
@@ -195,4 +213,9 @@
 		DELETE FROM FAQ WHERE FAQ_NUM = ${faq_num}
 	</delete>
 	
+<!-- ****************************************** 조회수 ****************************************** -->
+	<update id="noticeViewUpdate" parameterType="int"> 
+	UPDATE NOTICE SET VIEWS = VIEWS + 1 WHERE NOTICE_NUM = #{notice_num}
+	</update>
+
 </mapper>
