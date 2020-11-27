@@ -7,6 +7,7 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 
+
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	function execDaumPostcode() {
@@ -64,80 +65,13 @@
 				}).open();
 	}
 
-	function fn_overlapped() { //id 중복체크
-		var _id = $("#_member_id").val();
-		if (_id == '') {
-			alert("ID를 입력하세요");
-			return;
-		}
-		$.ajax({
-			type : "post",
-			async : false,
-			url : "${contextPath}/member/overlapped.do", //호출 후
-			dataType : "text", 
-			data : {id : _id}, 
-			success : function(data, textStatus) { //result로 true,false전달
-				if (data == 'false') {
-					alert("사용할 수 있는 ID입니다.");
-					$('#btnOverlapped').prop("disabled", true);
-					$('#_member_id').prop("disabled", true);
-					$('#member_id').val(_id);
-				} else {
-					alert("사용할 수 없는 ID입니다.");
-				}
-			},
-			error : function(data, textStatus) {
-				alert("에러가 발생했습니다.");
-				ㅣ
-			},
-			complete : function(data, textStatus) {
-				//alert("작업을완료 했습니다");
-			}
-		});
-	}
 	
-	function chkId(){//이메일 형식 체크하기	
-		var email = document.getElementById("email").value;
-		var exptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-				if(exptext.test(email)==false){
-					//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우			
-					alert("이 메일 형식이 올바르지 않습니다. \n 올바른 전자 메일 주소를 입력해주세요(알파벳+숫자@알파벳+숫자)");
-					document.addjoin.email.focus();
-					return false;
-				}else{
-					alert("사용이 가능합니다.");
-				}
-	}
-	
-	var compare_result = false;
-	
-	function fn_compare_pwd(){ //비밀번호 확인 체크폼
-		var pwd1 = $("#password_check1").val();
-		var pwd2 = $("#password_check2").val();
-		var s_result = $('#s_result');
-		/*<span style = "text-size:10px; color: blue;" id = "s_result" >동일한 비밀번호를 입력해주세요</span>  */
-		if(pwd1 == pwd2){
-			//alert(pwd1);
-			//alert(pwd2);
-			compare_result = true;
-			 $('#s_result').text("✔  비밀번호가 일치합니다.");
-			 $('#s_result').css('color','green')
-		}else{
-			compare_result = false;
-			 $('#s_result').text("✖ 비밀번호가 일치하지 않습니다.");
-			 $('#s_result').css('color','red')
-		}
-	}
 
-	function fn_join_member(){ //가입하기 누른 후 비밀번호 불일치 시에 
-		if(compare_result == true){
-			//회원 가입 요청
-			alert("회원 가입을 진행합니다.");
-		}else{
-			alert("비밀번호가 일치하지 않습니다.");
+	function fn_join_member(){ //가입하기 누른 후 비밀번호 불일치 시에 		
+			alert("회원 가입을 진행합니다.");		
 			return;
 		}
-	} 
+	
 </script>
 
 
@@ -188,48 +122,44 @@
 
 
 							<div class="form-label-group mb-3">
-								<input required placeholder="_member_id" id="_member_id"
-									name="_member_id" type="text" label="아이디"
-									class="form-control col-md-9"
-									style="margin-bottom: 0; display: inline-block"> <label
-									for="_member_id">아이디</label>
-									<input type = "hidden" name = "member_id" id ="member_id" />
-									 <a class="btn btn-primary" href="javascript:fn_overlapped()">중복확인</a>
+								<input required placeholder="member_id" id="member_id"
+											value="${memberInfo.member_id }" name="member_id"
+											type="hidden" class="form-control" readonly>
 							</div>
-
 
 							<div class="input-group-over">
 								<div class="form-label-group mb-3">
-									<input required placeholder="Password" name ="password" 
-											id="password_check1" type="password" class="form-control"> 
-									<label for="password">비밀번호(영문 숫자 6~15자 이내)</label>
+									<input required placeholder="Password" name="password"
+													id="password_check1" value="${memberInfo.password }"
+													type="hidden" class="form-control" readonly>
 								</div>
 								
 								<div class="input-group-over">
 									<div class="form-label-group mb-3">
-										<input required placeholder="Password_check" name = "Password_check"
-											id="password_check2" type="text" class="form-control" onKeyUp = "fn_compare_pwd()">
-										<label for="Password_check">비밀번호 확인</label>
-										
-										<span style = "text-size:10px; color: rgba(0, 0, 255, 0.411);" id = "s_result" >동일한 비밀번호를 입력해주세요</span>
-									</p>
+										<input required placeholder="Password_check"
+														name="Password_check" id="password_check2"
+														value="${memberInfo.password }" type="hidden"
+														class="form-control">
 									</div>
 									
+									<input required placeholder="member_status" id="member_status"
+											value="구글" name="member_status"
+											type="hidden" class="form-control" readonly>
 									
 									
 									<div class="form-label-group mb-3">
 										<input required placeholder="Member Name" id="member_name"
-											name="member_name" type="text" class="form-control">
-										<label for="member_name">이름</label>
+														value="${memberInfo.member_name }" name="member_name"
+														type="text" class="form-control" readonly> <label
+														for="member_name">이름</label>
 									</div>
 
 									<div class="form-label-group mb-3">
-										<input required placeholder="Email" id="email" name="email"
-											type="text" label="아이디" class="form-control col-md-9"
-											style="margin-bottom: 0; display: inline-block"> <label
-											for="email">이메일</label> 
-											<a class="btn btn-primary"
-											href="javascript:chkId()">중복확인</a>
+										<input required placeholder="Email" id="email"
+														value="${memberInfo.email }" name="email" type="text"
+														label="아이디" class="form-control"
+														style="margin-bottom: 0; display: inline-block" readonly>
+													<label for="email">이메일</label>
 									</div>
 
 									<div class="form-label-group mb-3">
@@ -308,5 +238,4 @@
 			</div>
 		</section>
 		<!-- /FORM -->
-
 

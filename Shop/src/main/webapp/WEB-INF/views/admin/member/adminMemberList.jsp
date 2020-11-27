@@ -71,6 +71,7 @@
 												title="search_type">
 												<option value="member_id" selected="">ID</option>
 												<option value="member_name">이름</option>
+												<option value="member_status">상태</option>
 											</select> <label for="search_type">검색옵션</label>
 										</div>
 									</div>
@@ -191,19 +192,21 @@
 															<td>
 															<c:choose>
 															<c:when test="${item.member_id=='admin' }">
-															<small class="badge badge-pink font-medium text-uppercase"> 관리자</small>														
+															<small id="grade" class="badge badge-indigo font-medium text-uppercase"> 관리자</small>														
 															</c:when>
-															<c:when test="${item.pre_score >10000}">															
-															<small class="badge badge-danger font-medium text-uppercase">우수회원</small>
+															<c:when test="${item.pre_score >1000000}">
+															<small id="grade" class="badge badge-warning font-medium text-uppercase"> 짱짱회원</small>														
+															</c:when>
+															<c:when test="${item.pre_score >100000}">															
+															<small id="grade" class="badge badge-danger font-medium text-uppercase">우수회원</small>
 															</c:when>
 															<c:otherwise>
-															<small class="badge badge-primary font-medium text-uppercase">일반회원</small>															
+															<small id="grade" class="badge badge-primary font-medium text-uppercase">일반회원</small>															
 															</c:otherwise>															
 															</c:choose>
 															</td>
 
-															<!-- 상태 -->
-															<td>일반</td>
+															<td>${item.member_status }</td>
 
 															<td>${item.member_date}</td>
 															
@@ -218,7 +221,29 @@
 
 								</div>
 
-
+<!-- 								<div>
+								<button class="btn btn-primary" onclick="change_grade_form()">회원등급</button>
+								<script>
+								function change_grade_form(){
+									
+								}
+								
+								function change_grade(){
+									var _grade = $("#grade").val();
+									$.ajax({
+										type: "post",
+										url: "${contextPath}/adminMember/changeGrade.do",
+										dataType: "json",
+										data : {
+											
+										}
+										success : function(){
+											
+										}
+									})
+								}
+								</script>
+								</div> -->
 
 								<!-- options and pagination -->
 								<div class="row text-center-xs">

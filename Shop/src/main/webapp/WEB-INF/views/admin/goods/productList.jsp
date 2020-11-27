@@ -3,7 +3,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath }"  />
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,11 +18,7 @@
 	}
 </style>
 </head>
-<body class="layout-admin aside-sticky header-sticky">
 
-	<div id="wrapper" class="d-flex align-items-stretch flex-column">
-
-		<div id="wrapper_content" class="d-flex flex-fill">
 
 			<div id="middle" class="flex-fill">
 
@@ -31,7 +27,7 @@
 						<i class="fas fa-plus"></i>
 						상품 추가 페이지 이동
 					</a>
-					
+					<br><br>
 					<table class="table table-align-middle border-bottom mb-6">
 						<thead>
 							<tr class="text-muted fs--13">
@@ -65,9 +61,9 @@
 											<td>${item.sales}</td>
 											<td>${item.reg_date}</td>
 											<td>
-											<a href="${contextPath}/admin/productUpdate.do?product_id=${item.product_id}"><i class="far fa-edit"></i>수정</a>
-											<a href="${contextPath}/admin/productDelete.do?product_id=${item.product_id}"><i class="fas fa-trash-alt"></i>삭제</a>
-											<a href="${contextPath}/admin/productOption.do?product_id=${item.product_id}"><i class="fi fi-plus"></i>옵션 관리</a>
+											<a href="${contextPath}/admin/productUpdate.do?product_id=${item.product_id}"><i class="far fa-edit"></i>수정 &nbsp</a>
+											<a href="${contextPath}/admin/productDelete.do?product_id=${item.product_id}"><i class="fas fa-trash-alt"></i>삭제 &nbsp</a>
+											<a href="${contextPath}/admin/productOption.do?product_id=${item.product_id}"><i class="fas fa-tasks"></i>옵션 관리</a>
 											</td>
 										</tr>
 									</c:forEach>
@@ -82,9 +78,4 @@
 
 			</div>
 
-		</div>
-
-	</div>
-
-</body>
-</html>
+		

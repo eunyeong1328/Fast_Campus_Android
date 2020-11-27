@@ -62,13 +62,15 @@
 <body class="layout-admin aside-sticky header-sticky">
 
 	<div id="wrapper" class="d-flex align-items-stretch flex-column">
-
-		<tiles:insertAttribute name="header" />
-
-		<tiles:insertAttribute name="body" />
-
-		<tiles:insertAttribute name="footer" />
-
+		<header>
+			<tiles:insertAttribute name="header" />
+		</header>
+		<article>
+			<tiles:insertAttribute name="body" />
+		</article>
+		<footer>
+			<tiles:insertAttribute name="footer" />
+		</footer>
 	</div>
 	
 	<div id="onload_modal_shop" class="hide js-onload js-ajax-modal" 

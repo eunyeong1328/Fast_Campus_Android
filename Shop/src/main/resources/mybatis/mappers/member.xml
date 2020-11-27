@@ -31,6 +31,13 @@
 			and password = #{password}
 		]]>
 	</select>
+	
+	<select id="SnsLogin" parameterType="memberVO" resultType="memberVO">
+		<![CDATA[
+			select * from member
+			where member_id = #{member_id}
+		]]>
+	</select>
 
 	<!-- cdata[ 사용이유 : 특수문자 사용하는데 제한을 푼다. -->
 	<insert id="insertNewMember" parameterType="memberVO">
@@ -44,7 +51,8 @@
 								load_address,
 								jibun_address,  
 								rest_address,
- 								birthday) values(
+ 								birthday,
+ 								member_status) values(
  								#{member_id},
  								 #{password}, 
  								 #{member_name},
@@ -54,16 +62,20 @@
 								#{load_address},
 								  #{jibun_address}, 
 								  #{rest_address},
-								   #{birthday}
+								   #{birthday},
+								   #{member_status}
 								   )
 								   ]]>
 		
 	</insert>
+	
 	
 	<select id="selectOverlappedID" parameterType="String" resultType="String">
 	   select decode(count(*),1, 'true', 0, 'false')
 	   from member
 	   where member_id = #{id}
 	</select>
+	
+	
 	
 </mapper>

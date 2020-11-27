@@ -21,6 +21,11 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public MemberVO SnsLogin(MemberVO user) throws Exception {
+		return memberDAO.SnsLogin(user);
+	}
+	
+	@Override
 	public void addMember(MemberVO memberVO) throws Exception{
 		memberDAO.insertNewMember(memberVO);
 	}
@@ -28,5 +33,6 @@ public class MemberServiceImpl implements MemberService{
 	public String overlapped(String id) throws Exception{
 		return memberDAO.selectOverlappedID(id);
 	}
+
 
 }
