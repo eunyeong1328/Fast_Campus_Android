@@ -77,7 +77,7 @@
 							판매량 <input class="form-control col-md-3" type="text" name="sales" readonly value="${one[0].sales}"><br><br>
 						</div>
 					</section>
-					<button type="submit" value="상품 추가" class="btn btn-primary"><i class="fi fi-check"></i>상품추가</button> <input type="reset" value="리셋" class="btn btn-primary">
+					<button type="submit" value="상품 추가" class="btn btn-primary"><i class="fi fi-check"></i>수정</button>
 				</form>
 
 			</div>

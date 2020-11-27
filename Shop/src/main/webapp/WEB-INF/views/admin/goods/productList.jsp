@@ -44,13 +44,13 @@
 						<tbody id="item_list">
 							<c:choose>
 								<c:when test="${empty list}">
-									<tr>
+									<tr class="text-muted fs--13">
 										<td colspan=8 class="fixed"><strong>조회된 상품이 없습니다.</strong></td>
 									</tr>
 								</c:when>
 								<c:otherwise>
 									<c:forEach var="item" items="${list}" varStatus="item_num">
-										<tr>
+										<tr class="text-muted fs--13">
 											<td>${item_num.count}</td>
 											<td>
 											<div><img class="mini" src="${contextPath}/resources/images/item_image/${item.product_image}" alt="...">${item.product_name}</div>
