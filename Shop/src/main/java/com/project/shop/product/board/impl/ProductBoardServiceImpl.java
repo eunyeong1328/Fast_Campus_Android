@@ -29,7 +29,11 @@ public class ProductBoardServiceImpl implements ProductBoardService{
 		List<ProductBoardQnaVO> productQnaList = productBoardDAO.selectProductQnaList(map);
 		return productQnaList;
 	}
-
+	@Override
+	public ProductBoardQnaVO getProductQna(int product_qna_num) throws Exception {
+		ProductBoardQnaVO productQna = productBoardDAO.selectProductQna(product_qna_num);
+		return productQna;
+	} 
 	@Override
 	public Paging pagingInfo(String product_id, String cPage) throws Exception {
 		int totalCount = getTotalCount(product_id);
@@ -63,7 +67,20 @@ public class ProductBoardServiceImpl implements ProductBoardService{
 
 	@Override
 	public void addBoardQna(Map map) throws Exception {
-		System.out.println("여기는 보드 서비드다 오버");
 		productBoardDAO.insertBoardQna(map);
 	}
+
+	@Override
+	public void editBoaardQna(Map map) throws Exception {
+		productBoardDAO.updateBoardQna(map);
+		
+	}
+
+	@Override
+	public void deleteBoardQna(int product_qna_num) throws Exception {
+		productBoardDAO.deleteBoardQna(product_qna_num);
+		
+	}
+
+	
 }

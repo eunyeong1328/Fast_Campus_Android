@@ -73,7 +73,6 @@ public class FileDownloadController{
 					HttpServletResponse response) throws Exception{
 		OutputStream out = response.getOutputStream();
 		String filePath="C:\\board\\"+imageFileName;
-		
 		File image=new File(filePath);
 		
 		if (image.exists()) { 
