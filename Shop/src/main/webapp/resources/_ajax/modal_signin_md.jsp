@@ -6,10 +6,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-<%
-	session.setAttribute("action", "productDetail");
-	session.setAttribute("product_id", request.getParameter("product_id"));
-%>
 
 	<jsp:include page="/WEB-INF/views/member/googleLogin.jsp" />
 
@@ -26,7 +22,7 @@
 
 
 				<!-- SIGN IN -->
-				<form class="collapse bs-validate show" novalidate method="post" action="${contextPath}/member/login.do" id="AccountSignIn">
+				<form class="collapse bs-validate show" novalidate method="post" action="${contextPath}/member/login.do">
 				
 					<h5 class="text-center pb-3">로그인하기</h5>
 
@@ -53,6 +49,8 @@
 						</a>
 
 					</div>
+					<input type="hidden" name="_action" value="productDetail">
+					<input type="hidden" name="product_id" value=${product_id }>
 
 
 					<!-- button -->

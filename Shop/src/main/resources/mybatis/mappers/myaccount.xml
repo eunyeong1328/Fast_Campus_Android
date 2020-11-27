@@ -51,6 +51,8 @@
 	 <![CDATA[
 			select * from product p , item i, mylist m 
 			where p.product_id=i.product_id and p.product_id=m.product_id and m.member_id=#{member_id}
+			order by m.mylist_date desc
+			
     	]]>
 	</select>
 	
@@ -71,7 +73,7 @@
 
 	<!-- 마이리스트 추가 -->
 	<insert id="addFavList" parameterType="java.util.HashMap">
-		insert into mylist values(#{member_id},#{product_id})
+		insert into mylist(member_id, product_id) values(#{member_id},#{product_id})
 	</insert>
 
 	<!-- 회원수정 -->
