@@ -37,7 +37,7 @@ public class AdminMemberDAO {
 	}
 	
 	public void deleteMember(String member_id) throws DataAccessException{
-		sqlSession.selectOne("mapper.admin.member.deleteMember",member_id);
+		sqlSession.delete("mapper.admin.member.deleteMember",member_id);
 	}
 	
 

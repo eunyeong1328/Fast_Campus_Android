@@ -225,13 +225,13 @@
 											data-ajax-confirm-mode="regular"
 											data-ajax-confirm-size="modal-md"
 											data-ajax-confirm-centered="false"
-											data-ajax-confirm-title="Please Confirm"
-											data-ajax-confirm-body="Are you sure? Remove from favourites?"
+											data-ajax-confirm-title="삭제 확인"
+											data-ajax-confirm-body="이 제품을 찜 리스트에서 삭제하시겠습니까?"
 											data-ajax-confirm-btn-yes-class="btn-sm btn-danger"
-											data-ajax-confirm-btn-yes-text="Yes, Remove"
+											data-ajax-confirm-btn-yes-text="네"
 											data-ajax-confirm-btn-yes-icon="fi fi-check"
 											data-ajax-confirm-btn-no-class="btn-sm btn-light"
-											data-ajax-confirm-btn-no-text="Cancel"
+											data-ajax-confirm-btn-no-text="아니오"
 											data-ajax-confirm-btn-no-icon="fi fi-close"
 											data-ajax-confirm-callback-function='function(){windWow.location.href = "${contextPath}/myaccount/account-favourites.do";}'
 											class="js-ajax-confirm btn btn-sm btn-light d-block-xs font-regular fs--14 w-100-xs d-block-xs">

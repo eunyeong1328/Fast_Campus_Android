@@ -11,5 +11,6 @@ public interface MyAccountService{
 	public MemberVO modifyMemberInfo(HashMap memberMap) throws Exception;
 	public MemberVO modifyAddressInfo(HashMap map) throws Exception;
 	public List<ProductVO> listFavList(String member_id) throws Exception;
+	public void deleteFav(HashMap ids) throws Exception;
 
 }

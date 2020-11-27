@@ -4,8 +4,8 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.myaccount">
 
-<resultMap id="productResult" type="productVO">
-		<result property="product_id" column="product_id" />  
+	<resultMap id="productResult" type="productVO">
+		<result property="product_id" column="product_id" />
 		<result property="product_name" column="product_name" />
 		<result property="product_detail" column="product_detail" />
 		<result property="sales_unit" column="sales_unit" />
@@ -13,15 +13,18 @@
 		<result property="packing_type" column="packing_type" />
 		<result property="product_image" column="product_image" />
 		<result property="supplier" column="supplier" />
-		<result property="product_detail_image" column="product-detail_image"/>
-		
-		<result property="product_category_num" column="product_category_num" />
-		<result property="product_category_name" column="product_category_name" />
-		
+		<result property="product_detail_image"
+			column="product-detail_image" />
+
+		<result property="product_category_num"
+			column="product_category_num" />
+		<result property="product_category_name"
+			column="product_category_name" />
+
 		<result property="option_name" column="option_name" />
 		<result property="option_price" column="option_price" />
 		<result property="option_quantity" column="option_quantity" />
-		
+
 		<result property="item_num" column="item_num" />
 		<result property="price" column="price" />
 		<result property="stock" column="stock" />
@@ -29,49 +32,58 @@
 		<result property="discount" column="discount" />
 		<result property="reg_date" column="reg_date" />
 		<result property="unit_price" column="unit_price" />
-		
-		
-	</resultMap>	
 
 
-<select id = "selectMyDetailInfo" resultType = "memberVO" parameterType="String">
+	</resultMap>
+
+
+	<select id="selectMyDetailInfo" resultType="memberVO"
+		parameterType="String">
 	 <![CDATA[
 			select * from member
 			where member_id=#{member_id}
     	]]>
 	</select>
 
-<select id = "listFavList" resultMap = "productResult" parameterType="String">
+	<!-- 마이리스트 조회 -->
+	<select id="listFavList" resultMap="productResult"
+		parameterType="String">
 	 <![CDATA[
-			select * from product p , item i, mylist m where p.product_id=i.product_id and p.product_id=m.product_id and m.member_id=#{member_id}
-
+			select * from product p , item i, mylist m 
+			where p.product_id=i.product_id and p.product_id=m.product_id and m.member_id=#{member_id}
     	]]>
-</select>
+	</select>
+
+	<!-- 마이리스트 삭제 -->
+	<delete id="deleteFavList" parameterType="String">
+		delete from mylist 
+		where member_id=#{member_id} and product_id=#{product_id}
+	</delete>
 
 	<!-- 회원수정 -->
 	<update id="modifyMemberInfo" parameterType="java.util.HashMap">
-	   update member 
-			   <set>
-			   password = #{password},
-			   member_name=#{member_name},
-			   email=#{email},
-			   phone=#{phone}
-			   </set>
-		where 
+		update member
+		<set>
+			password = #{password},
+			member_name=#{member_name},
+			email=#{email},
+			phone=#{phone}
+		</set>
+		where
 		member_id=#{member_id}
-	</update>	
-	
+	</update>
+
 	<!-- 배송지 수정 -->
 	<update id="modifyAddressInfo" parameterType="java.util.HashMap">
-	   UPDATE MEMBER 
-			   <set>
-			   zipNo=#{zipNo},
-			   load_address=#{load_address},
-			   jibun_address=#{jibun_address},
-			   rest_address=#{rest_address}		   
-			   </set>
-		WHERE 
+		UPDATE MEMBER
+		<set>
+			zipNo=#{zipNo},
+			load_address=#{load_address},
+			jibun_address=#{jibun_address},
+			rest_address=#{rest_address}
+		</set>
+		WHERE
 		member_id = #{member_id}
-	</update>	 
-	
+	</update>
+
 </mapper>

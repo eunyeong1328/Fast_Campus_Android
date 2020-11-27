@@ -36,4 +36,8 @@ public class MyAccountDAO {
 	      ArrayList<ProductVO> favList = (ArrayList)sqlSession.selectList("mappers.myaccount.listFavList",member_id);
 	      return favList;
 	   }
+	
+	public void deleteFav(HashMap ids) throws Exception{
+		sqlSession.delete("mappers.myaccount.deleteFavList",ids);
+	}
 }

@@ -46,4 +46,10 @@ public class MyAccountServiceImpl implements MyAccountService{
 	      return myAccountDAO.listFavList(member_id);
 	   }
 
+	@Override
+	public void deleteFav(HashMap ids) throws Exception {
+		myAccountDAO.deleteFav(ids);
+		
+	}
+
 }

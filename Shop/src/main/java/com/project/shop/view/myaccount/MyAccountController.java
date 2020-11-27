@@ -80,7 +80,10 @@ public class MyAccountController extends BaseController{
 	      String member_id = memberVO.getMember_id();
 	      System.out.println("member_id: "+member_id +", product_id: " + product_id );
 		  ModelAndView mav = new ModelAndView();
-//		  myAccountService.deleteFav(product_id, member_id);
+		  HashMap<String, String> ids = new HashMap<String, String>();
+		  ids.put("product_id", product_id);
+		  ids.put("member_id", member_id);
+		  myAccountService.deleteFav(ids);
 		  mav.setViewName("redirect:/myaccount/account-favourites.do");
 		  return mav;
 	  }
