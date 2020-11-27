@@ -10,11 +10,25 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>1.6</java-version>
-		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
+		<org.springframework-version>4.1.1.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+		<!-- 구글API -->
+      <!-- https://mvnrepository.com/artifact/com.google.http-client/google-http-client -->
+      <dependency>
+         <groupId>com.google.http-client</groupId>
+         <artifactId>google-http-client</artifactId>
+         <version>1.36.0</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
+      <dependency>
+         <groupId>com.google.api-client</groupId>
+         <artifactId>google-api-client</artifactId>
+         <version>1.30.10</version>
+      </dependency>
+	
 		<!-- 타일즈 관련 라이브러리 -->
 		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-core -->
 		<dependency>
@@ -36,14 +50,31 @@
 			<version>2.2.2</version>
 		</dependency>
 		<!-- ajax -->
-		<dependency> 
-			<groupId>org.codehaus.jackson</groupId> 
-			<artifactId>jackson-mapper-asl</artifactId> 
-			<version>1.9.13</version> 
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<!-- Jackson 라이브러리 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.8</version>
 		</dependency>
 
-
-
+		<!-- 구글API -->
+		<!-- https://mvnrepository.com/artifact/com.google.http-client/google-http-client -->
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client</artifactId>
+			<version>1.36.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client</artifactId>
+			<version>1.30.10</version>
+		</dependency>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -63,11 +94,11 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		<!-- 이게먼데 -->
-	<dependency>
-         <groupId>org.springframework</groupId>
-         <artifactId>spring-jdbc</artifactId>
-         <version>${org.springframework-version}</version>
-      </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -242,7 +273,13 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
-
+		
+		<!-- JSON(json기능 사용) 비동기 브라우저/서버 통신 (AJAX)을 위해, 넓게는 XML(AJAX가 사용)을 대체하는 주요 데이터 포맷 --> 
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.4</version>
+		</dependency>
 
 		<!-- AOP -->
 		<dependency>

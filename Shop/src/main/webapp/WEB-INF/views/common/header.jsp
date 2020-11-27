@@ -259,7 +259,7 @@
 								<!-- dropdown -->
 								<div aria-labelledby="dropdownAccountOptions" class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15">
 									<div class="dropdown-header">
-										${memberInfo.member_id }님
+										${memberInfo.member_name }님
 									</div>
 
 									<div class="dropdown-divider"></div>
@@ -272,7 +272,7 @@
 										찜 리스트 <small>(3)</small>
 									</a>
 
-									<a href="${contextPath}/myaccount/account-settings.do?member_id=${memberInfo.member_id }" title="Account Settings" class="dropdown-item text-truncate font-weight-light">
+									<a href="${contextPath}/myaccount/account-settings.do" title="Account Settings" class="dropdown-item text-truncate font-weight-light">
 										마이페이지 
 									</a>
 

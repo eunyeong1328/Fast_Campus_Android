@@ -173,7 +173,7 @@
 
 										</div>
 
-
+										
 										<div class="col-12 col-md-6">
 
 											<div class="form-label-group mt-3">
@@ -208,9 +208,9 @@
 										<div class="col-12 col-md-3">
 
 											<div class="form-label-group mt-3">
-												<input id="this_score" name="this_score" type="number"
-													value="${member_info.this_score }" class="form-control"
-													readonly> <label for="this_score">실적</label>
+												<input id="pre_score" name="pre_score" type="number"
+													value="${member_info.pre_score }" class="form-control"
+													> <label for="pre_score">전월 실적</label>
 											</div>
 
 										</div>
@@ -293,7 +293,7 @@
 						class="js-ajax-confirm btn btn-danger"
 						data-ajax-confirm-size="modal-md"
 						data-ajax-confirm-centered="false"
-						data-ajax-confirm-callback-function='function(){window.location.href = "${contextPath}/admin/member/memberList.do";}'
+						data-ajax-confirm-callback-function='function(){windWow.location.href = "${contextPath}/admin/member/memberList.do";}'
 						data-ajax-confirm-mode="json" data-ajax-confirm-method="GET"
 						data-ajax-confirm-title="Please Confirm"
 						data-ajax-confirm-body="Are you sure? Delete this item?"
@@ -310,110 +310,6 @@
 
 				</form>
 
-
-
-
-
-				<!-- PASSWORD RESET -->
-				<div class="row gutters-sm mb-3">
-
-					<div class="col-12 mb-3">
-
-
-						<!-- portlet -->
-						<div class="portlet">
-
-							<!-- portlet : body -->
-							<div class="portlet-body">
-
-								<a id="passwordResetToggler" href="#passwordForm"
-									data-toggle="collapse"
-									class="btn-toggle btn btn-light scroll-to" data-offset="-300"
-									data-speed="600" data-toggle-target="#passwordResetToggler"
-									data-toggle-container-class="hide"> <i class="fi fi-locked"></i>
-									비밀번호 변경
-								</a>
-
-								<div id="passwordForm" class="collapse">
-
-									<form novalidate class="bs-validate row" method="post"
-										action="#">
-
-										<div class="col-12 col-md-6 mb-3">
-
-											<!-- portlet : header -->
-											<div class="portlet-header pt-0 pb-5">
-												<span
-													class="d-block text-dark text-truncate font-weight-medium">
-													회원 비밀번호 </span>
-											</div>
-											<!-- /portlet : header -->
-
-											<div class="row gutters-sm">
-
-												<div class="col-12 col-xl-6 mb-3">
-
-													<!-- new password -->
-													<div class="input-group-over">
-														<div class="form-label-group mb-3">
-															<input required placeholder="New Password"
-																id="account_new_password"
-																name="account[current_password]" type="password"
-																class="form-control"> <label
-																for="account_new_password"> <span
-																class="text-danger">New</span> 비밀번호
-															</label>
-														</div>
-
-														<!-- Show Password -->
-														<a href="#" class="btn btn-password-type-toggle"
-															data-target="#account_new_password" tabindex="-1"> <span
-															class="group-icon"> <i class="fi fi-eye m-0"></i>
-																<i class="fi fi-close m-0"></i>
-														</span>
-														</a>
-													</div>
-													<!-- /new password -->
-
-												</div>
-
-											</div>
-
-
-											<button type="submit"
-												class="btn btn-warning mb-3 d-block-xs w-100-xs">
-												<i class="fi fi-check"></i> 비밀번호 변경하기
-											</button>
-
-
-											<a id="passwordResetCancel" href="#passwordForm"
-												data-toggle="collapse"
-												class="btn-toggle btn btn-light mb-3 d-block-xs w-100-xs"
-												data-toggle-temporized="10"
-												data-toggle-target="#passwordResetToggler"
-												data-toggle-container-class="hide active"> <i
-												class="fi fi-close"></i> 취소
-											</a>
-
-										</div>
-
-
-									</form>
-
-								</div>
-
-							</div>
-							<!-- /portlet : body -->
-
-						</div>
-						<!-- /portlet -->
-
-
-					</div>
-
-				</div>
-				<!-- /PASSWORD RESET -->
-
 			</div>
 			<!-- /MIDDLE -->
-
+	<script src="${contextPath}/resources/assets/js/core.js"></script>

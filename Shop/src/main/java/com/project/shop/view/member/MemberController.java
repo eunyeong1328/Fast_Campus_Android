@@ -1,7 +1,5 @@
 package com.project.shop.view.member;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +20,7 @@ import com.project.shop.common.base.BaseController;
 import com.project.shop.member.MemberService;
 import com.project.shop.member.MemberVO;
 
+
 @Controller
 @RequestMapping(value="/member")
 public class MemberController extends BaseController{
@@ -39,9 +38,6 @@ public class MemberController extends BaseController{
    public ModelAndView login(MemberVO user ,
                            HttpServletRequest request, 
                            HttpServletResponse response) throws Exception {
-      System.out.println(user.getMember_id());
-      System.out.println(user.getPassword());
-      System.out.println(memberVO);
       ModelAndView mav = new ModelAndView();
       memberVO = memberService.login(user);
       System.out.println("sql 실행");
@@ -50,7 +46,6 @@ public class MemberController extends BaseController{
          session = request.getSession();
          session.setAttribute("isLogOn", true);
          session.setAttribute("memberInfo",memberVO);
-         System.out.println("##session: " + session.getAttribute("isLogOn") + ", " + session.getAttribute("memberInfo"));
          
          String action=(String)session.getAttribute("action");
          if(action!=null && action.equals("/order/orderEachGoods.do")){
@@ -103,7 +98,7 @@ public class MemberController extends BaseController{
       return resEntity;
    }
    
-   @RequestMapping(value="/overlapped.do" ,method = RequestMethod.POST)//id 以묐났泥댄겕
+   @RequestMapping(value="/overlapped.do" ,method = RequestMethod.POST)//id 
    public ResponseEntity overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
       ResponseEntity resEntity = null;
       String result = memberService.overlapped(id);

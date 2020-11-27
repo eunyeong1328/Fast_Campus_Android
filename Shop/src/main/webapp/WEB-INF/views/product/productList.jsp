@@ -260,4 +260,4 @@
 
 
 
-<script src="${contextPath}/resources/assets/js/core.min.js"></script>
+<script src="${contextPath}/resources/assets/js/core.js"></script>
