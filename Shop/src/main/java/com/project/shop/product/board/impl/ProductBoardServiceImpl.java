@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.shop.product.board.ProductBoardService;
+import com.project.shop.product.board.ReviewVO;
 import com.project.shop.product.Paging;
 import com.project.shop.product.board.ProductBoardQnaVO;
 
@@ -18,8 +19,9 @@ public class ProductBoardServiceImpl implements ProductBoardService{
 	@Autowired
 	private ProductBoardDAO productBoardDAO;
 	
+	//============================ Q&A ==========================
 	@Override
-	public int getTotalCount(String product_id) throws Exception {
+	public int qnaTotalCount(String product_id) throws Exception {
 		int totalCount = productBoardDAO.selectTotalCountProductQna(product_id);
 		return totalCount;
 	}
@@ -35,11 +37,10 @@ public class ProductBoardServiceImpl implements ProductBoardService{
 		return productQna;
 	} 
 	@Override
-	public Paging pagingInfo(String product_id, String cPage) throws Exception {
-		int totalCount = getTotalCount(product_id);
+	public Paging pagingInfo(String product_id, String cPage, int totalCount) throws Exception {
 	
 		// 1. 전체 게시물의 수를 구하기
-		p.setTotalRecord(totalCount); // 전체 product 수 설정
+		p.setTotalRecord(totalCount); 
 		p.setTotalPage(); // 전체 페이지 갯수 구하기
 	
 		// 2. 현재 페이지 구하기
@@ -80,6 +81,22 @@ public class ProductBoardServiceImpl implements ProductBoardService{
 	public void deleteBoardQna(int product_qna_num) throws Exception {
 		productBoardDAO.deleteBoardQna(product_qna_num);
 		
+	}
+	// ======================= REVIEW ======================
+	@Override
+	public int reviewTotalCount(String product_id) throws Exception {
+		return productBoardDAO.selectReviewTotalCount(product_id);
+	}
+
+	@Override
+	public List<ReviewVO> getListReview(Map map) throws Exception {
+		List<ReviewVO> reviewList = productBoardDAO.selectReviewList(map);
+		return reviewList;
+	}
+
+	@Override
+	public void addReview(Map map) throws Exception {
+		productBoardDAO.insertReview(map);
 	}
 
 	

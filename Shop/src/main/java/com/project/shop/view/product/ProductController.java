@@ -28,6 +28,7 @@ import com.project.shop.product.ProductService;
 import com.project.shop.product.ProductVO;
 import com.project.shop.product.board.ProductBoardQnaVO;
 import com.project.shop.product.board.ProductBoardService;
+import com.project.shop.product.board.ReviewVO;
 
 @Controller
 @RequestMapping(value="/product")
@@ -107,12 +108,13 @@ public class ProductController extends BaseController{
 		List<ProductVO> optionList = productService.productOption(product_id);
 		mav.addObject("optionList", optionList);
 		
-		//페이징 처리
+		//Q&A 페이징 처리
 		String cPage = request.getParameter("cPage");
 		if(cPage == null) {
 			cPage="1";
 		}
-		p = productBoardService.pagingInfo(product_id, cPage);
+		int totalCount = productBoardService.qnaTotalCount(product_id);
+		p = productBoardService.pagingInfo(product_id, cPage, totalCount );
 		mav.addObject("pvo", p);
 		
 		
@@ -139,10 +141,29 @@ public class ProductController extends BaseController{
 		if(request.getParameter("msg") !=null) {
 			mav.addObject("msg", request.getParameter("msg"));
 		}
+		
+		
+		//REVIEW 페이징 처리
+		String nPage = request.getParameter("nPage");
+		if(nPage == null) {
+			nPage="1";
+		}
+		totalCount = productBoardService.reviewTotalCount(product_id);
+		p = productBoardService.pagingInfo(product_id, nPage, totalCount);
+		mav.addObject("rePvo", p);
+		
+		//REVIEW 글 가져오기
+		map = new HashMap();
+		map.put("product_id", product_id);
+		map.put("begin", p.getBegin());
+		map.put("end", p.getEnd());
+		
+		List<ReviewVO> reviewList = productBoardService.getListReview(map);
+		mav.addObject("reviewList", reviewList);
 		return mav;
 	}
 	
-	// ==========================  게시판 ==============================
+	// ========================== 상품 문의  ==============================
 	// 상품QNA 글쓰기 폼 요청
 	@RequestMapping(value="/insertQnaForm.do", method=RequestMethod.GET)
 	public ModelAndView boardQnaForm(@RequestParam(value="product_id") String product_id,
@@ -191,7 +212,8 @@ public class ProductController extends BaseController{
 			}
 		}
 		//파일타입 파라미터 얻어오기 
-		List<String> fileList = fileProcess(multipartRequest, product_id);//이미지 이름 리스트
+		String path = "C:\\users\\bitcamp\\git\\web-project\\Shop\\src\\main\\webapp\\resources\\images\\product_qna\\";
+		List<String> fileList = fileProcess(multipartRequest, product_id, path);//이미지 이름 리스트
 		
 		int i=1;
 		if(fileList !=null) {
@@ -239,12 +261,13 @@ public class ProductController extends BaseController{
 		}
 		return mav;
 	}
-	//게시글 수정하기
+	//상품QNA 수정하기
 	@RequestMapping(value="/updateQna.do")
 	public ModelAndView updateQna(@RequestParam Map<String, String> map,
 									@RequestParam("product_id") String product_id,
 								MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception{
-		List<String> imageList = fileProcess(multipartRequest, product_id);
+		String path = "C:\\users\\bitcamp\\git\\web-project\\Shop\\src\\main\\webapp\\resources\\images\\product_qna\\";
+		List<String> imageList = fileProcess(multipartRequest, product_id, path);
 		int i=1;
 		for(String image : imageList) {
 			System.out.println("image : "+image);
@@ -258,7 +281,7 @@ public class ProductController extends BaseController{
 		return mav;
 	}
 	
-	
+	//상품QNA 삭제하기
 	@RequestMapping(value="/deleteBoardQna.do")
 	public ModelAndView deleteBoardQna(@RequestParam("product_qna_num") String product_qna_num,
 										@RequestParam("product_id") String product_id,
@@ -290,18 +313,15 @@ public class ProductController extends BaseController{
 		return mav;
 	}
 	
-	
-	
 	//파일타입 파라미터 얻어오기 
-	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest, String product_id) throws Exception{
+	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest, String product_id, String path) throws Exception{
 		List<String> fileNameList = new ArrayList<String>();
 	   
-		List<MultipartFile> fileList = multipartRequest.getFiles("file");
+		List<MultipartFile> fileList = multipartRequest.getFiles("file[]");
 		//String path = "C:\\board\\";
 		HttpSession session = multipartRequest.getSession();
 		MemberVO memberInfo =(MemberVO)session.getAttribute("memberInfo");
-		int qnaNO = productBoardService.getTotalCount(product_id);
-		String path = "C:\\users\\bitcamp\\git\\web-project\\Shop\\src\\main\\webapp\\resources\\images\\product_qna\\"+qnaNO+"\\";
+		//String path = "C:\\users\\bitcamp\\git\\web-project\\Shop\\src\\main\\webapp\\resources\\images\\product_qna\\";
 		
 		if(fileList.isEmpty()) {
 			return null;
@@ -328,4 +348,70 @@ public class ProductController extends BaseController{
 		return fileNameList;
 	}
 	
+	//=========================== 상품 후기 ==========================
+	//상품후기 글목록 가져오기
+	
+	//상품후기 글쓰기 폼 요청
+	@RequestMapping("/insertReviewForm.do")
+	public ModelAndView reviewForm(@RequestParam("product_id") String product_id, 
+					HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		Boolean isLogOn = (Boolean)session.getAttribute("isLogOn");
+		MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
+		
+		if(isLogOn == true && memberInfo != null) {
+			mav.setViewName(viewName);
+			mav.addObject("memberInfo", memberInfo);
+			mav.addObject("product_id", product_id);
+		}else {
+			mav.setViewName("/member/loginForm");
+		}
+		
+		return mav;
+	}
+	//상품후기 글쓰기
+	@RequestMapping("/insertReview.do")
+	public ModelAndView insertReview(@RequestParam Map<String, String> info, 
+			MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception{
+		
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map map = new HashMap();
+		
+		//일반타입 파라미터 얻어오기
+		Enumeration enu = multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+			String value = multipartRequest.getParameter(name);
+			map.put(name, value);
+		}
+		
+		//파일타입 파라미터 얻어오기 
+		String product_id = multipartRequest.getParameter("product_id");
+		String path = "C:\\users\\bitcamp\\git\\web-project\\Shop\\src\\main\\webapp\\resources\\images\\review\\";
+		List<String> fileList = fileProcess(multipartRequest, product_id, path);//이미지 이름 리스트
+		
+		int i=1;
+		if(fileList !=null) {
+			for(String image : fileList) {
+				if(image != null) {
+					map.put("image"+i, image);
+					i++;
+				}
+			}
+		}
+		System.out.println("후기 컨트롤러 : "+  map.get("title"));
+		System.out.println("후기 컨트롤러 : "+  map.get("image1"));
+		productBoardService.addReview(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/product/productDetail.do?product_id="+product_id);
+		return mav;
+	}
+	//상품후기 수정 폼 요청
+		
+	//상품후기 수정하기
+		
+	//상품후기 삭제하기
 } 
