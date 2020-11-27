@@ -100,7 +100,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public int insertProduct(ProductVO vo,MultipartHttpServletRequest request) {
 		//파일 저장
-		System.out.println(vo);
+//		System.out.println(vo);
 		//이미지 파일 저장 경로
 		File dir = new File("C:"+File.separator+"Users"+File.separator+"bitcamp"+File.separator+"git"+File.separator+"web-project"+File.separator+"Shop"+File.separator+"src"
 				+File.separator+"main"+File.separator+"webapp"+File.separator+"resources"+File.separator+"images"+File.separator+"item_image"); 
@@ -129,7 +129,7 @@ public class ProductServiceImpl implements ProductService{
             }//if
             vo.setProduct_image(orgFileName);
         }//while
-        System.out.println(vo);
+//        System.out.println(vo);
 		
 		//DB에 상품 추가
 		return productDAO.insertProduct(vo);
@@ -154,7 +154,6 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void updateProduct(ProductVO vo, MultipartHttpServletRequest request) {
 		//파일 저장
-		System.out.println(vo);
 		//이미지 파일 저장 경로
 		File dir = new File("C:"+File.separator+"Users"+File.separator+"bitcamp"+File.separator+"git"+File.separator+"web-project"+File.separator+"Shop"+File.separator+"src"
 				+File.separator+"main"+File.separator+"webapp"+File.separator+"resources"+File.separator+"images"+File.separator+"item_image"); 
@@ -183,7 +182,7 @@ public class ProductServiceImpl implements ProductService{
 			}//if
 		}//while
 		vo.setProduct_image(orgFileName);
-		System.out.println(vo);
+//		System.out.println(vo);
 		        
 		productDAO.updateOne(vo);
 		

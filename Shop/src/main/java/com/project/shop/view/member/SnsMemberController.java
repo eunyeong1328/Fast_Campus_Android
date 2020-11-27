@@ -89,7 +89,7 @@ public class SnsMemberController extends BaseController{
 			}
 
 		}catch(Exception e) {
-			System.out.println(e);
+//			System.out.println(e);
 		}
 
 		return jsonMember;
