@@ -102,8 +102,8 @@
 	
 	<insert id="insertProduct" parameterType="productVO">
 		<![CDATA[
-			insert into product (product_id,product_name,product_detail,sales_unit,product_size,packing_type,product_image,supplier,product_category_num)
-			values(#{product_id},#{product_name},#{product_detail},#{sales_unit},#{product_size},#{packing_type},#{product_image},#{supplier},${product_category_num})
+			insert into product (product_id,product_name,product_detail,sales_unit,product_size,packing_type,product_image,supplier,product_category_num,product_detail_image)
+			values(#{product_id},#{product_name},#{product_detail},#{sales_unit},#{product_size},#{packing_type},#{product_image},#{supplier},#{product_category_num},#{product_detail_image})
 		]]>
 	</insert>
 	
@@ -182,7 +182,8 @@
 		packing_type=#{packing_type},
 		product_image=#{product_image},
 		supplier=#{supplier},
-		product_category_num=#{product_category_num}
+		product_category_num=#{product_category_num},
+		product_detail_image=#{product_detail_image}
 		
 		where product_id=#{product_id}
 	</update>
