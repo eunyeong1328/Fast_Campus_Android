@@ -27,4 +27,7 @@ public interface ProductService {
 	public void insertOption(ProductVO vo);
 	public String checkProduct(String id);
 	public String checkItem(String id);
+	public Paging pageList(String cPage) throws Exception;
+	public int getTotalCount() throws Exception;
+	public List<ProductVO> listProduct(int begin,int end);
 }

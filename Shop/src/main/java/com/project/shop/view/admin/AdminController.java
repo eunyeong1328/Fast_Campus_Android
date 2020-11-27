@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.shop.common.base.BaseController;
+import com.project.shop.product.Paging;
 import com.project.shop.product.ProductService;
 import com.project.shop.product.ProductVO;
 
@@ -24,6 +25,9 @@ import com.project.shop.product.ProductVO;
 public class AdminController extends BaseController {
 	@Autowired
 	ProductService service;
+	
+	@Autowired
+	private Paging p;
 	
 	@RequestMapping(value="noticeList.do")
 	public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -54,8 +58,12 @@ public class AdminController extends BaseController {
 	@RequestMapping(value = "/productList.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView productList(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		mav.addObject("list",service.allList());
 		mav.setViewName((String) request.getAttribute("viewName"));
+		//페이징 처리
+		p = service.pageList(request.getParameter("cPage"));
+		mav.addObject("pvo", p);
+		//상품리스트 가져오기
+		mav.addObject("list", service.listProduct(p.getBegin(),p.getEnd()));		
 		return mav;
 		
 	}

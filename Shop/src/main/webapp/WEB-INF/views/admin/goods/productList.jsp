@@ -73,7 +73,52 @@
 						</tbody>
 						
 					</table>
+					<!-- 페이징 -->
+					<nav aria-label="pagination" class="mt-5">
+					<ul
+						class="pagination pagination-pill justify-content-end justify-content-center justify-content-md-end">
 
+						<%--[이전으로] 사용불가 또는 안보이게 : 첫번째 블록인경우 --%>
+						<c:if test="${pvo.beginPage == 1}">
+							<li class="page-item disabled"><a class="page-link" href="#"
+								tabindex="-1" aria-disabled="true">Previous</a></li>
+						</c:if>
+						<c:if test="${pvo.beginPage != 1}">
+							<li class="page-item"><a class="page-link"
+								href="${contextPath}/admin/productList.do?cPage=${pvo.beginPage - 1 }">Previous</a>
+							</li>
+						</c:if>
+
+						<%-- 페이지 표시(시작페이지~끝페이지) --%>
+						<c:forEach var="pageNo" begin="${pvo.beginPage }"
+							end="${pvo.endPage }">
+							<c:if test="${pageNo == pvo.nowPage }">
+								<li class="page-item active"><a class="page-link" href="#">${pageNo }
+										<span class="sr-only"></span>
+								</a></li>
+							</c:if>
+							<c:if test="${pageNo != pvo.nowPage }">
+								<li class="page-item" aria-current="page"><a
+									class="page-link"
+									href="${contextPath}/admin/productList.do?cPage=${pageNo}">${pageNo }</a>
+								</li>
+							</c:if>
+						</c:forEach>
+
+						<%--[다음으로] 사용여부 처리 --%>
+						<c:if test="${pvo.endPage >= pvo.totalPage }">
+							<li class="page-item disabled"><a class="page-link">다음으로</a>
+							</li>
+						</c:if>
+
+						<c:if test="${pvo.endPage < pvo.totalPage }">
+							<li class="page-item"><a class="page-link"
+								href="${contextPath}/admin/productList.do?cPage=${pvo.endPage +1}">Next</a>
+							</li>
+						</c:if>
+					</ul>
+				</nav>
+				<!-- 페이징 -->
 				</section>
 
 			</div>

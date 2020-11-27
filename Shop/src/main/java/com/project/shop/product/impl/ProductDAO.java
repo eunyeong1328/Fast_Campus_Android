@@ -95,4 +95,10 @@ public class ProductDAO {
 	public String checkItem(String id) {
 		return sqlSession.selectOne("mappers.product.checkItem", id);
 	}
+	public int getTotalCount() {
+		return sqlSession.selectOne("mappers.product.totalList");
+	}
+	public List<ProductVO> listProduct(Map map) {
+		return sqlSession.selectList("mappers.product.listProduct",map );
+	}
 }
