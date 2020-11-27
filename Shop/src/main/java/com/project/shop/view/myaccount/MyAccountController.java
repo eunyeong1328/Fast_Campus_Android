@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,7 +75,7 @@ public class MyAccountController extends BaseController{
 	 }
 	  
 	  @RequestMapping(value="/deleteFav.do")
-	  public ModelAndView removeGoodsImage( @RequestParam("product_id") String product_id,
+	  public ModelAndView deleteFav( @RequestParam("product_id") String product_id,
               HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		  HttpSession session=request.getSession(); 
 	      MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
@@ -86,6 +88,27 @@ public class MyAccountController extends BaseController{
 		  myAccountService.deleteFav(ids);
 		  mav.setViewName("redirect:/myaccount/account-favourites.do");
 		  return mav;
+	  }
+	  @RequestMapping(value="/addFav.do")
+	  public void addFav(@RequestParam("product_id") String product_id,
+              HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+	    	  HttpSession session=request.getSession(); 
+		      MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		      if(memberVO == null) {
+      
+		      } else {
+		    	  String member_id = memberVO.getMember_id();
+		    	  System.out.println("member_id: "+member_id +", product_id: " + product_id );
+		    	  HashMap<String, String> ids = new HashMap<String, String>();
+		    	  ids.put("product_id", product_id);
+		    	  ids.put("member_id", member_id);
+//			  myAccountService.addFav(ids);
+		    	  
+		      }
+			  
+	          
+
 	  }
 	  
 		 

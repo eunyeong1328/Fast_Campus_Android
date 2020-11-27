@@ -313,12 +313,12 @@
 
                               <!-- ADD TO FAVOURITES BUTTON -->
                               <div class="w--60 mt-2 w-100-xs float-start float-none-xs mt-2">
-                                 <a href="#" class="btn-toggle btn btn-light h-100 d-flex justify-content-center align-items-center" 
+                                 <a href="#"
+                                	class="btn-toggle btn btn-light h-100 d-flex justify-content-center align-items-center" 
                                     data-toggle="tooltip" 
-                                    data-original-title="add to favourite" 
-
-                                    data-toggle-ajax-url-on="demo.files/php/demo.ajax_request.php?product_id=1&amp;action=add_to_favourite"
-                                    data-toast-success-message="Added to your favourite!"
+                                    data-original-title="찜 리스트에 담기" 
+									data-toggle-ajax-url-on="${contextPath}/myaccount/addFav.do?product_id=${vo.product_id}"
+                                    data-toast-success-message="찜 리스트에 담겼습니다."
                                     data-toast-success-position="bottom-center">
                                     
                                     <!-- heart icon -->
