@@ -124,9 +124,10 @@
 						<div class="col-6">
 							<!-- In the callback, you would hide the gSignInWrapper element on a successful sign in -->
 							<div id="gSignInWrapper">
-								<div id="customBtn" class="customGPlusSignIn">
-									<span class="icon"></span> <span class="buttonText">Google</span>
-								</div>
+								<a id="customBtn" class="btn btn-sm btn-block bg-googleplay transition-hover-top mt-1 text-white">
+									<i>G</i>
+										google
+								</a>
 							</div>
 							<div id="name"></div>
 							<script>

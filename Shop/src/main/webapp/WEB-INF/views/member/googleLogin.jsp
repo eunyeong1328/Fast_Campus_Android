@@ -30,7 +30,6 @@ var googleUser = {};
 		    		var xhr = new XMLHttpRequest();
 		    		xhr.onload = function(){
 		    			if(xhr.status ===200 || xhr.status ===201){
-		    				console.log("성공!!");
 		    				var memberInfo = JSON.parse(xhr.responseText);
 		    				console.log(memberInfo);		    				
 		    				/*member_date 값이 null일 경우 회원가입창으로 null이 아닐 경우 로그인으로  */
@@ -58,14 +57,16 @@ var googleUser = {};
 
 <style type="text/css">
 #customBtn {
-	display: inline-block;
+	/* display: inline-block;
 	background: white;
 	color: #444;
 	width: 190px;
 	border-radius: 5px;
 	border: thin solid #888;
 	box-shadow: 1px 1px 1px grey;
-	white-space: nowrap;
+	white-space: nowrap; */
+	background-color: #DD4B39 !important;
+	color: #fff;
 }
 
 #customBtn:hover {

@@ -56,13 +56,28 @@
 					<!-- button -->
 					<button type="submit" class="btn btn-primary btn-soft btn-block" id="btn_login">
 						로그인
-					</button>
+					</button>					
+
 
 					<div class="text-center mt-5">
-						<a href="${contextPath}/member/signupForm.do" class="d-block text-success text-decoration-none">
+						<a href="${contextPath}/member/signupForm.do" class="d-block text-success text-decoration-none"
+							style="margin-bottom: 20px">
 							아직 계정이 없으신가요?
 						</a>
 					</div>
+					
+						<!-- 구글로 로그인  -->
+							<!-- In the callback, you would hide the gSignInWrapper element on a successful sign in -->
+							<div id="gSignInWrapper">
+								<a id="customBtn" class="btn btn-sm btn-block transition-hover-top mt-1 text-white">
+									<i>G</i>
+										google
+								</a>
+							</div>
+							<div id="name"></div>
+							<script>
+								startApp();
+							</script>
 
 				</form>
 				<!-- /SIGN IN -->

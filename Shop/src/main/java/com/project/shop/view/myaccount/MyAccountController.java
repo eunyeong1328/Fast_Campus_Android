@@ -70,7 +70,7 @@ public class MyAccountController extends BaseController{
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 
 		if(isLogOn == null || isLogOn == false || memberVO ==null) {
-			mav.addObject("message", "세션이 만료되어 로그아웃되었습니다. 다시 로그인해주세요");
+			mav.addObject("message", "세션이 만료되었습니다. 다시 로그인해주세요");
 			mav.setViewName("/member/loginForm");
 		} else {
 			String member_id = memberVO.getMember_id();	    	  
@@ -91,7 +91,7 @@ public class MyAccountController extends BaseController{
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 
 		if(isLogOn == null || isLogOn == false || memberVO ==null) {
-			mav.addObject("message", "세션이 만료되어 로그아웃되었습니다. 다시 로그인해주세요");
+			mav.addObject("message", "세션이 만료되었습니다. 다시 로그인해주세요");
 			mav.setViewName("/member/loginForm");
 		} else {
 			String member_id = memberVO.getMember_id();
