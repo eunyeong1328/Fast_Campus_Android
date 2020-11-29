@@ -34,16 +34,5 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.selectOverlappedID(id);
 	}
 
-	@Override
-	public boolean memberEmailCheck(String member_id, String email) throws Exception {
-		MemberVO memberVO = memberDAO.findEmailInfo(member_id);
-		//정보가 없거나 id와 이메일이 일치하지 않는다면
-		if(memberVO != null && memberVO.getMember_id().equals(member_id) && memberVO.getEmail().equals(email)) {
-			return true;
-		}else {
-			return false;
-		}
-	}
-
 
 }

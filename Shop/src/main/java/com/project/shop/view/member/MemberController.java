@@ -1,9 +1,6 @@
 package com.project.shop.view.member;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,14 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.shop.common.base.BaseController;
-import com.project.shop.member.MailDto;
 import com.project.shop.member.MemberService;
 import com.project.shop.member.MemberVO;
-import com.project.shop.member.SendEmailService;
 
 
 @Controller
@@ -34,27 +28,11 @@ public class MemberController extends BaseController{
    private MemberService memberService;
    @Autowired
    private MemberVO memberVO;
-   @Autowired
-   private SendEmailService sendEmailService;
    
-   //이메일과 아이디(id)의 일치여부를 check하는 컨트롤러
-   @RequestMapping(value = "/signinCheck.do")
-   public @ResponseBody Map<String, Boolean> passwordfind(String member_id, String email) throws Exception {
-		Map<String, Boolean> json = new HashMap<String, Boolean>();
-		boolean pwFindCheck = memberService.memberEmailCheck(member_id, email);
-
-		System.out.println(pwFindCheck);
-		json.put("check", pwFindCheck);
-		return json;
-	}
-   
- //등록된 이메일로 임시비밀번호를 발송하고 발송된 임시비밀번호로 사용자의 pw를 변경하는 컨트롤러
-   @RequestMapping(value = "/findPwSendEmail.do")
-   public @ResponseBody void sendEmail(String member_id, String email){
-       MailDto dto = sendEmailService.createMailAndChangePassword(member_id, email);
-       sendEmailService.mailSend(dto);
-   }
-
+//   @RequestMapping(value = "/signin-password.do")
+//   public String signuppassword() throws Exception{
+//      return "/member/signup-Password";
+//   }
    
    @RequestMapping(value="/login.do" ,method = RequestMethod.POST)
    public ModelAndView login(MemberVO user ,

@@ -7,5 +7,4 @@ public interface MemberService {
 	MemberVO SnsLogin(MemberVO user) throws Exception;
 	public void addMember(MemberVO memberVO) throws Exception;
 	public String overlapped(String id) throws Exception;
-	boolean memberEmailCheck(String member_id,String email) throws Exception;
 }
