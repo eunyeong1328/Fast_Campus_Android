@@ -4,37 +4,38 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath }"  />
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 <%
   request.setCharacterEncoding("UTF-8");
 %>  
 
-<!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <script>
 	function checkEmail(){
-		let member_id = $("#member_id").val();
-		let email = $("#email").val();
+		var member_id = $("#member_id").val();
+		var email = $("#email").val();
 
 		$.ajax({
 			type:"GET",
 			url: "${contextPath}/member/signinCheck.do",
+			async : false,
 			data:{
 				"member_id":member_id,
 				"email":email
 			},
-			success:function(data){
+			success:function(data,textStatus){
 				if(data['check']){
 					alert("입력하신 이메일로 발송 완료");
 					$.ajax({
 						type:"POST",
 						url: "${contextPath}/member/findPwSendEmail.do",
+						async : false,
 						data: {
 							"member_id":member_id,
 							"email":email
 						}
 					})
-					//location.href="${contextPath}/member/login.do";		
+					location.href="${contextPath}/member/login.do";		
 					//window.location="${contextPath}/member/login";
 				}else{
 					alert("일치하는 정보가 없습니다.")
@@ -105,10 +106,6 @@
 								</div>
 
 							</form>
-							<!--??????????????? checkMsg ????????? -->
-								<hr>
-                   				 <div class="text-center small mt-2" id="checkMsg" style="color: red">
-                   				 </div>
 						</div>
 
 					</div>
@@ -249,7 +246,7 @@
 
 		</div><!-- /#wrapper -->
 
-		<script src="assets/js/core.min.js"></script>
+		<!-- <script src="assets/js/core.min.js"></script> -->
 		
 	</body>
 </html>

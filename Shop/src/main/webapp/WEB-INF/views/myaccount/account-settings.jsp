@@ -438,14 +438,14 @@
 									
 									<script >
 										function saveChanges() {
-											/*  const result = confirm("변경되었습니다");  */
-											/* swal("변경되었습니다","계정 수정 성공", "success");  */
+											const result = confirm("변경되었습니다");  
+											/* swal("변경되었습니다","계정 수정 성공", "success");  
 											swal({
 												title: "변경되었습니다!",
 												text: "계정 정보 수정 완료되었습니다.",
 												type: "success",
 												timer: 100000
-											});
+											}); */
 										}
 									</script>
 								</form>

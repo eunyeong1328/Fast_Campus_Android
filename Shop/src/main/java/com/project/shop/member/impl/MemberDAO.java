@@ -42,14 +42,17 @@ public class MemberDAO {
 		return member;
 	}
 	//비밀번호 수정
-	public void updateUserPassword(String id, String pw) throws DataAccessException{
-		sqlSession.selectOne("mappers.member.updateUserPassword",pw);
-	}
+//	public void updateUserPassword(String id, String pw) throws DataAccessException{
+//		sqlSession.selectOne("mappers.member.updateUserPassword",pw);
+//	}
+	
 	//비밀번호 수정
-//		public void updateUserPassword(HashMap map) throws DataAccessException{
-//			System.out.println("비밀번호 수정=====패스워드====== "+ map.get("password"));
-//			System.out.println("비밀번호 수정=====아이딘====== "+ map.get("member_id"));
-//			sqlSession.selectOne("mappers.member.updateUserPassword",map);
-//		}
+	public void updateUserPassword(HashMap<String,String> map) throws DataAccessException{
+			System.out.println("비밀번호 수정=====패스워드====== "+ map.get("password"));
+			System.out.println("비밀번호 수정=====아이딘====== "+ map.get("member_id"));
+			sqlSession.update("mappers.member.updateUserPassword", map);
+			System.out.println("비밀번호 수정  후 --------------====패스워드====== "+ map.get("password"));
+			System.out.println("비밀번호 수정 후 ----------------------------- "+ map.get("member_id"));
+	}
 
 }

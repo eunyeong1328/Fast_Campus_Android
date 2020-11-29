@@ -61,10 +61,9 @@ public class SendEmailService {
 	        HashMap<String,String> map = new HashMap<String, String>();
 	        map.put("password",password);
 	        map.put("member_id",member_id);	   
-	        System.out.println("여기까진 값이 잘 넘어감 밑에 있는 값이 잘 넘어가지 않는다");
 	        System.out.println("비밀번호 가 왜 mapper에 안 들어가는 거냐고!!=====패스워드====== "+ map.get("password"));
 			System.out.println("비밀번호가 왜 mapper에  안 들어가는 거냑ㅎ!!=====아이디====== "+ map.get("member_id"));
-	        //memberDAO.updateUserPassword(map);
+	        memberDAO.updateUserPassword(map);
 	        System.out.println("이제 수정 후에 값을 보여주기 <<아이디>>: " + map.get(member_id));
 	        System.out.println("이제 수정 후에 값을 보여주기 <<비밀번호>>: " + map.get(password));
 	 }
