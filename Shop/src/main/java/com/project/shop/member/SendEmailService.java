@@ -1,5 +1,7 @@
 package com.project.shop.member;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -29,7 +31,7 @@ public class SendEmailService {
 		dto.setTitle("[쩝쩝박사] 임시 비밀번호 안내 이메일 입니다.");
 		dto.setMessage(
 				"안녕하세요. [쩝쩝박사] 임시 비밀번호 안내 관련 이메일입니다.\n" + "아이디가 [" + member_id + "]" + "인 임시 비밀번호는 " + str + "입니다.");
-		//updatePassword(str, member_id);
+		updatePassword(str, member_id);
 		return dto;
 	}
 
@@ -45,11 +47,27 @@ public class SendEmailService {
 	}
 
 	// 비밀번호 수정
-	public void updatePassword(String str, String userEmail) {
-		String pw = str;
-		String id = memberDAO.findEmailInfo(userEmail).getMember_id();
-		memberDAO.updateUserPassword(id, pw);
-	}
+//	public void updatePassword(String str, String userEmail) {
+//		String pw = str;
+//		String id = memberDAO.findEmailInfo(userEmail).getMember_id();
+//		memberDAO.updateUserPassword(id, pw);
+//	}
+	
+	// 비밀번호 수정
+	 public void updatePassword(String str,String id){
+		 	System.out.println("이 비밀번호 수정 메세지가 확인이 안 되는 건가요??ㅠㅠ");
+	        String password = str;
+	        String member_id = memberDAO.findEmailInfo(id).getMember_id();
+	        HashMap<String,String> map = new HashMap<String, String>();
+	        map.put("password",password);
+	        map.put("member_id",member_id);	   
+	        System.out.println("여기까진 값이 잘 넘어감 밑에 있는 값이 잘 넘어가지 않는다");
+	        System.out.println("비밀번호 가 왜 mapper에 안 들어가는 거냐고!!=====패스워드====== "+ map.get("password"));
+			System.out.println("비밀번호가 왜 mapper에  안 들어가는 거냑ㅎ!!=====아이디====== "+ map.get("member_id"));
+	        //memberDAO.updateUserPassword(map);
+	        System.out.println("이제 수정 후에 값을 보여주기 <<아이디>>: " + map.get(member_id));
+	        System.out.println("이제 수정 후에 값을 보여주기 <<비밀번호>>: " + map.get(password));
+	 }
 
 	// 10자리의 랜덤난수를 생성하는 메소드
 	public String getTempPassword() {
@@ -66,15 +84,5 @@ public class SendEmailService {
 		return str;
 	}
 
-	// 비밀번호 수정
-//		 public void updatePassword(String str,String member_id){
-//		        String pw = str;
-//		        String id = memberDAO.findEmailInfo(member_id).getMember_id();
-//		        HashMap<String,String> map = new HashMap<String, String>();
-//		        map.put("password",pw);
-//		        map.put("member_id",id);	        
-//		        memberDAO.updateUserPassword(map);
-//		        System.out.println("이제 수정 후에 값을 보여주기 <<아이디>>: " + map.get(member_id));
-//		        System.out.println("이제 수정 후에 값을 보여주기 <<비밀번호>>: " + map.get(pw));
-//		 }
+
 }
