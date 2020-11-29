@@ -58,7 +58,6 @@ public class MyAccountController extends BaseController{
 	//	 }
 
 
-
 	@RequestMapping(value="/account-favourites.do")
 	public ModelAndView accountFavourites( HttpServletRequest request, HttpServletResponse response)
 			throws Exception {

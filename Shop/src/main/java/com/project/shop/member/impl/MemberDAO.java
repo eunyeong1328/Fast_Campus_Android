@@ -1,6 +1,7 @@
 package com.project.shop.member.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,10 +32,24 @@ public class MemberDAO {
 		sqlSession.insert("mappers.member.insertNewMember", memberVO);
 	}
 	
-	public String selectOverlappedID(String id) throws DataAccessException {
-		String result =  sqlSession.selectOne("mappers.member.selectOverlappedID",id);
+	public String selectOverlappedID(String member_id) throws DataAccessException {
+		String result =  sqlSession.selectOne("mappers.member.selectOverlappedID",member_id);
 		return result;
 	}
-	
+	//비밀번호 찾기
+	public MemberVO findEmailInfo(String member_id) throws DataAccessException{
+		MemberVO member = (MemberVO)sqlSession.selectOne("mappers.member.findEmailInfo",member_id);
+		return member;
+	}
+	//비밀번호 수정
+	public void updateUserPassword(String id, String pw) throws DataAccessException{
+		sqlSession.selectOne("mappers.member.updateUserPassword",pw);
+	}
+	//비밀번호 수정
+//		public void updateUserPassword(HashMap map) throws DataAccessException{
+//			System.out.println("비밀번호 수정=====패스워드====== "+ map.get("password"));
+//			System.out.println("비밀번호 수정=====아이딘====== "+ map.get("member_id"));
+//			sqlSession.selectOne("mappers.member.updateUserPassword",map);
+//		}
 
 }
