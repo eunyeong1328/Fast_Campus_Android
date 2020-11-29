@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -430,9 +435,17 @@
 											변경사항 저장
 										</button>
 									</div>
-									<script type="text/javascript">
+									
+									<script >
 										function saveChanges() {
-											const result = confirm("변경되었습니다");
+											/*  const result = confirm("변경되었습니다");  */
+											/* swal("변경되었습니다","계정 수정 성공", "success");  */
+											swal({
+												title: "변경되었습니다!",
+												text: "계정 정보 수정 완료되었습니다.",
+												type: "success",
+												timer: 100000
+											});
 										}
 									</script>
 								</form>
