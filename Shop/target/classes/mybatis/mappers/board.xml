@@ -132,7 +132,7 @@
 		(select order_num from member_qna where member_qna_num = #{member_qna_num}),  
 		#{member_id}, #{email}, #{phone}, SYSDATE, #{image2}, #{image3}, 
 		(select member_qna_num from member_qna where member_qna_num = #{member_qna_num}) 
-		);
+		)
 	</insert>
 	
 <!-- ****************************************** update ****************************************** -->
@@ -171,6 +171,17 @@
 		CONTENTS = #{contents}, 
 		QNA_CATEGORY_NUM = #{qna_category_num} 
 		WHERE FAQ_NUM = #{faq_num}
+	</update>
+	
+	<!-- 1:1문의 답변 update문 -->
+	<update id="memqAdminUpdate" parameterType="hashmap">
+		UPDATE member_qna 
+		SET TITLE = #{title}, 
+		CONTENTS = #{contents}, 
+		IMAGE1 = #{image1}, 
+		IMAGE2 = #{image2}, 
+		IMAGE3 = #{image3} 
+		WHERE member_qna_num = #{member_qna_num}
 	</update>
 
 <!-- ****************************************** 게시판 글 개수 조회 ****************************************** -->
@@ -211,6 +222,11 @@
 	<!-- FAQ delete문 -->
 	<delete id="faqDelete" parameterType="boardVO">
 		DELETE FROM FAQ WHERE FAQ_NUM = ${faq_num}
+	</delete>
+	
+	<!-- memberQna delete문 -->
+	<delete id="memqDelete" parameterType="boardVO">
+		DELETE FROM MEMBER_QNA WHERE MEMBER_QNA_NUM = ${member_qna_num}
 	</delete>
 	
 <!-- ****************************************** 조회수 ****************************************** -->

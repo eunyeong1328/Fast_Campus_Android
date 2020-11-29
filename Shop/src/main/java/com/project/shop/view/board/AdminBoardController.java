@@ -152,6 +152,7 @@ public class AdminBoardController {
 			
 			for (BoardVO mem : memQList) {
 				if (mem.getR_num() == vo.getR_num() || mem.getMember_qna_num() == vo.getMember_qna_num()) {
+					System.out.println("??????" + vo.getMember_qna_num());
 					BoardVO memQ = mem;
 					mav.addObject("memQ", memQ);
 				}
@@ -254,7 +255,7 @@ public class AdminBoardController {
 
 //	공지사항 글 수정
 	@RequestMapping(value = "/noticeUpdating.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView memQUpdate(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
+	public ModelAndView noticeUpdate(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String action = (String) multipartRequest.getParameter("action");
 		String notice_num = multipartRequest.getParameter("notice_num");
@@ -313,10 +314,19 @@ public class AdminBoardController {
 		mav.setViewName("redirect:/adminboard/faqList.do");
 		return mav;
 	}
-/*	
+	
+//	관리자 1:1 문의/답변 삭제
+	@RequestMapping(value = "/memqDelete.do")
+	public ModelAndView memqDelete(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		boardService.memqDelete(vo);
+		mav.setViewName("redirect:/adminboard/memberQnaList.do");
+		return mav;
+	}
+
 //	관리자 1:1 답변 등록 setViewName
-	@RequestMapping(value="/faqInsert.do")
-	public ModelAndView FAQInsertView(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value="/memqAdminInsert.do")
+	public ModelAndView FAQInsertView(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
 
@@ -325,6 +335,9 @@ public class AdminBoardController {
 		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
 
 		if (isLogOn == true && memberVO.getMember_id().equals("admin")) {
+			BoardVO memQ = boardService.getMemQ(vo);
+			mav.addObject("memQ", memQ);
+			mav.addObject("memberInfo", memberVO);
 			mav.setViewName(viewName);
 		} else {
 			String message = "관리자만 본 서비스를 이용하실 수 있습니다.";
@@ -335,20 +348,57 @@ public class AdminBoardController {
 	}
 	
 //	관리자 1:1 답변 등록
-	@RequestMapping(value="/faqAdd.do", method={RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value="/memqAdminAdd.do", method={RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView FAQInsert(MultipartHttpServletRequest multipartRequest, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String action = (String) request.getParameter("action");
 		
-		if (action != null && action.equals("faqAdd")) {
+		if (action != null && action.equals("memqAdminAdd")) {
 			map = filecon.fileUpload(multipartRequest, response);
-//			boardService.faqInsert(map);
-			mav.setViewName("/admin/faqList");
+			boardService.memqAdminInsert(map);
+			mav.setViewName("redirect:/adminboard/memberQnaList.do");
 		}
 		
 		return mav;
 	}
-*/	
+	
+//	관리자 답변 글 수정 setView
+	@RequestMapping(value = "/memqAdminUpdate.do")
+	public ModelAndView memQAdminUpdateView(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
+
+		if (isLogOn == true && memberVO.getMember_id().equals("admin")) {
+			BoardVO memQ = boardService.getMemQ(vo);
+			mav.addObject("memQ", memQ);
+			mav.setViewName(viewName);
+		} else {
+			String message = "로그인하셔야 본 서비스를 이용하실 수 있습니다.";
+			mav.addObject("message", message);
+			mav.setViewName("/member/loginForm");
+		}
+		return mav;
+	}
+
+//	공지사항 글 수정
+	@RequestMapping(value = "/memqAdminUpdating.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView memQUpdate(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String action = (String) multipartRequest.getParameter("action");
+		String member_qna_num = multipartRequest.getParameter("member_qna_num");
+		if (action != null && action.equals("memqAdminUpdating")) {
+			map = filecon.fileUpload(multipartRequest, response);
+			boardService.memqAdminUpdate(map);
+			mav.setViewName("redirect:/adminboard/memQ.do?member_qna_num=" + member_qna_num);
+		}
+
+		return mav;
+	}
+
 //	Paging
 	public void getPaging(HttpServletRequest request, HttpServletResponse response) {
 		

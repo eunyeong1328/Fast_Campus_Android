@@ -78,5 +78,17 @@ public class BoardDAO {
 	public void noticeViewUpdate(int notice_num) {
 		board.update("mapper.board.noticeViewUpdate", notice_num);
 	}
+
+	public void memqAdminInsert(HashMap<String, Object> map) {
+		board.insert("mapper.board.memqAdminInsert", map);
+	}
+
+	public void memqAdminUpdate(HashMap<String, Object> map) {
+		board.update("mapper.board.memqAdminUpdate", map);
+	}
+
+	public void memqDelete(BoardVO vo) {
+		board.delete("mapper.board.memqDelete", vo);
+	}
 	
 }

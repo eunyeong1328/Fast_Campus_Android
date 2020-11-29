@@ -16,7 +16,7 @@
 					-->
 	<div class="page-title bg-transparent b-0">
 
-		<h1 class="h4 mt-4 mb-0 px-3 font-weight-normal" style="padding-left: 1.5rem !important;">공지사항</h1>
+		<h1 class="h4 mt-4 mb-0 px-3 font-weight-normal" style="padding-left: 1.5rem !important;">1:1 문의</h1>
 
 	</div>
 	
@@ -74,22 +74,22 @@
 					
 					<c:if test="${memQ.parent_num == 0 }">
 						<button type="button" class="btn btn-primary btn-soft-static mb-1"
-							onclick="location.href='${contextPath }/adminboard/memberQnaList.do?&cPage=${paging.nowPage}'">
+							onclick="location.href='${contextPath}/adminboard/memqAdminInsert.do?cPage=${paging.nowPage}&member_qna_num=${memQ.member_qna_num }&member_id=${memQ.member_id }'">
 							답변하기
 						</button>
 					</c:if>
 					<button type="button" class="btn btn-secondary btn-soft-static mb-1" 
-						onclick="location.href='${contextPath }/adminboard/memberQnaList.do?&cPage=${paging.nowPage}'">
+						onclick="location.href='${contextPath }/adminboard/memberQnaList.do?cPage=${paging.nowPage}'">
 						목록
 					</button>
 					<c:if test="${memQ.parent_num != 0 }">
 						<button type="button" class="btn btn-primary btn-soft-static mb-1"
-							onclick="location.href='${contextPath }/adminboard/memberQnaList.do?&cPage=${paging.nowPage}'">
+							onclick="location.href='${contextPath}/adminboard/memqAdminUpdate.do?member_qna_num=${memQ.member_qna_num}&member_id=${memQ.member_id }'">
 							수정
 						</button>
 					</c:if>
 					<button type="button" class="btn btn-danger btn-soft-static mb-1"
-						onclick="location.href='${contextPath }/adminboard/memberQnaList.do?&cPage=${paging.nowPage}'">
+						onclick="location.href='${contextPath }/adminboard/memqDelete.do?member_qna_num=${memQ.member_qna_num}'">
 						삭제
 					</button>
 

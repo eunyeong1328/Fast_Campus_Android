@@ -65,7 +65,7 @@
 									</c:if>
 									<c:if test="${memQ.parent_num != 0 }">
 										<td><a href="memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}">
-										<span class="badge badge-soft badge-pill badge-purple">Purple</span>
+										<span class="badge badge-soft badge-pill badge-purple">RE</span>
 										${memQ.title } </a></td>
 									</c:if>
 									<td>${memQ.member_id}</td>

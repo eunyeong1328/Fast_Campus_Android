@@ -19,7 +19,7 @@
 					<div class="page-title bg-transparent b-0">
 
 						<h1 class="h4 mt-4 mb-0 px-3 font-weight-normal">
-							공지사항
+							1:1 문의
 						</h1>
 						
 					</div>
@@ -33,20 +33,20 @@
 						<!-- portlet -->
 						<div class="portlet">
 							
-							<!-- portlet : header -->
-							<div class="portlet-header border-bottom">
+<!-- 							portlet : header -->
+<!-- 							<div class="portlet-header border-bottom"> -->
 
-								<div class="float-end">
+<!-- 								<div class="float-end"> -->
 
-									<a href="#!" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
-										등록
-									</a>
+<%-- 									<a href="${contextPath}/adminboard/memqAdminInsert.do" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15"> --%>
+<!-- 										등록 -->
+<!-- 									</a> -->
 
-								</div>
+<!-- 								</div> -->
 
 
-							</div>
-							<!-- /portlet : header -->
+<!-- 							</div> -->
+<!-- 							/portlet : header -->
 
 
 							<!-- portlet : body -->
@@ -137,7 +137,7 @@
 														<c:if test="${memQ.parent_num != 0 }">
 															<a href="${contextPath}/adminboard/memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}" 
 																class="font-weight-medium text-muted mx-2 m-0-xs">
-															<span class="badge badge-soft badge-pill badge-purple">Purple</span>
+															<span class="badge badge-soft badge-pill badge-purple">RE</span>
 															${memQ.title } </a>
 														</c:if>
 

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.shop.board.BoardService;
 import com.project.shop.board.BoardVO;
-import com.project.shop.member.MemberVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
@@ -94,6 +93,21 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void noticeViewUpdate(int notice_num) {
 		boardDAO.noticeViewUpdate(notice_num);
+	}
+
+	@Override
+	public void memqAdminInsert(HashMap<String, Object> map) {
+		boardDAO.memqAdminInsert(map);
+	}
+
+	@Override
+	public void memqAdminUpdate(HashMap<String, Object> map) {
+		boardDAO.memqAdminUpdate(map);
+	}
+
+	@Override
+	public void memqDelete(BoardVO vo) {
+		boardDAO.memqDelete(vo);
 	}
 
 }

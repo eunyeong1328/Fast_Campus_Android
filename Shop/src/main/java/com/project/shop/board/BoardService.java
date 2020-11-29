@@ -43,4 +43,11 @@ public interface BoardService {
 //	조회수
 	void noticeViewUpdate(int notice_num);
 	
+//	1:1문의 답변 작성
+	void memqAdminInsert(HashMap<String, Object> map);
+//	답변 수정
+	void memqAdminUpdate(HashMap<String, Object> map);
+//	1:1문의/답변 삭제
+	void memqDelete(BoardVO vo);
+	
 }
