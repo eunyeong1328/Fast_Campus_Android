@@ -21,7 +21,7 @@ public interface ProductService {
 	public List<ProductVO> allList();
 	public void deleteProduct(String request);
 	public List<ProductVO> loadOne(String request);
-	public void updateProduct(ProductVO vo, MultipartHttpServletRequest request);
+	public void updateProduct(ProductVO vo, MultipartHttpServletRequest request) throws Exception;
 	public List<ProductVO> loadOption(String request);
 	public void deleteOption(String name);
 	public void insertOption(ProductVO vo);

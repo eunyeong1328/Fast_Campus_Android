@@ -55,8 +55,8 @@
 					<section>
 						<label>IMAGE</label><br>
 						<div>
-							상품 이미지 <input type="file" name="image"><br><br> 
-							<!-- 상품 상세 이미지 <input type="file" name="detail_image"><br><br> -->
+							상품 이미지 <input type="file" name="image" required="required"><br><br> 
+							상품 상세 이미지 <input type="file" name="detail_image" required="required"><br><br>
 						</div>
 					</section>
 					<section>
