@@ -45,7 +45,7 @@ public class AdminController extends BaseController {
 	}
 
 	@RequestMapping(value = "/add.do", method = RequestMethod.POST)
-	public String add(ModelAndView mav,ProductVO vo ,MultipartHttpServletRequest request) {
+	public String add(ModelAndView mav,ProductVO vo ,MultipartHttpServletRequest request) throws Exception {
 		if(vo != null && request != null) {
 			service.insertProduct(vo,request);
 		}
@@ -91,7 +91,7 @@ public class AdminController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/update.do", method = RequestMethod.POST)
-	public String update(ModelAndView mav,ProductVO vo ,MultipartHttpServletRequest request) {
+	public String update(ModelAndView mav,ProductVO vo ,MultipartHttpServletRequest request) throws Exception {
 		if(vo != null && request != null) {
 			service.updateProduct(vo,request);
 		}
