@@ -50,7 +50,7 @@
 								</c:when>
 								<c:otherwise>
 									<c:forEach var="item" items="${list}" varStatus="item_num">
-										<tr class="text-muted fs--13">
+										<tr class="text-muted">
 											<td>${item_num.count}</td>
 											<td>
 											<div><img class="mini" src="${contextPath}/resources/images/product/${item.product_id}/${item.product_image}">${item.product_name}</div>
