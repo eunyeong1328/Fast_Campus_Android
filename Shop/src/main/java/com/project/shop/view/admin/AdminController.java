@@ -45,14 +45,11 @@ public class AdminController extends BaseController {
 	}
 
 	@RequestMapping(value = "/add.do", method = RequestMethod.POST)
-	public ModelAndView add(ModelAndView mav,ProductVO vo ,MultipartHttpServletRequest request) {
+	public String add(ModelAndView mav,ProductVO vo ,MultipartHttpServletRequest request) {
 		if(vo != null && request != null) {
 			service.insertProduct(vo,request);
 		}
-		mav.addObject("list",service.allList());
-		mav.setViewName("/admin/productList");
-		return mav;
-				
+		return "redirect:productList.do";
 	}
 	
 	@RequestMapping(value = "/productList.do", method = { RequestMethod.POST, RequestMethod.GET })
@@ -65,19 +62,15 @@ public class AdminController extends BaseController {
 		//상품리스트 가져오기
 		mav.addObject("list", service.listProduct(p.getBegin(),p.getEnd()));		
 		return mav;
-		
 	}
 	
 	@RequestMapping(value = "/productDelete.do",method=RequestMethod.GET)
-	public ModelAndView productDelete(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
+	public String productDelete(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		if(request.getParameter("product_id") != null) {
 			service.deleteProduct(request.getParameter("product_id"));
 		}
-		mav.addObject("list",service.allList());
-		mav.setViewName("/admin/productList");
-		return mav;
-		
+		return "redirect:productList.do";
 	}
 	
 	@RequestMapping(value = "/productUpdate.do",method=RequestMethod.GET)
@@ -98,13 +91,11 @@ public class AdminController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/update.do", method = RequestMethod.POST)
-	public ModelAndView update(ModelAndView mav,ProductVO vo ,MultipartHttpServletRequest request) {
+	public String update(ModelAndView mav,ProductVO vo ,MultipartHttpServletRequest request) {
 		if(vo != null && request != null) {
 			service.updateProduct(vo,request);
 		}
-		mav.addObject("list",service.allList());
-		mav.setViewName("/admin/productList");
-		return mav;
+		return "redirect:productList.do";
 	}
 	
 	@RequestMapping(value = "/productOption.do",method=RequestMethod.GET)
@@ -120,7 +111,6 @@ public class AdminController extends BaseController {
 			mav.setViewName((String) request.getAttribute("viewName"));
 			return mav;
 		}
-		
 	}
 	
 	@RequestMapping(value = "/productOptionDelete.do",method=RequestMethod.GET)
