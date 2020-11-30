@@ -14,13 +14,19 @@
 			value="/WEB-INF/views/common/footer.jsp"/>
 	</definition>
 	
-	<!-- 쇼핑몰 메인 페이지 레이아웃 설정 -->
-	<definition name="/main/main" extends="baseLayout">
+		<!-- 쇼핑몰 카트 레이아웃 설정 -->
+	<definition name="/cart/myCartList" extends="baseLayout">
 		<put-attribute name="body"
-			value="/WEB-INF/views/main/main.jsp" />
+			value="/WEB-INF/views/cart/myCartList.jsp" />
+	</definition>
+	<definition name="/cart/removeCartProduct" extends="baseLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/cart/myCartList.jsp" />
+	</definition>
+	<definition name="/cart/deleteAllProduct" extends="baseLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/cart/myCartList.jsp" />
 	</definition>
 	
-	
 </tiles-definitions>
-
-
+	

@@ -6,6 +6,86 @@
 	
 <mapper namespace="mappers.cart">
 
+<resultMap id="productResult" type="productVO">
+	<result property="product_id" column="product_id" />  
+	<result property="product_name" column="product_name" />
+	<result property="sales_unit" column="sales_unit" />
+	<result property="product_size" column="product_size" />
+	<result property="packing_type" column="packing_type" />
+	<result property="product_image" column="product_image" />
+	<result property="supplier" column="supplier" />
+	<result property="product_detail_image" column="product-detail_image"/>
+	<result property="discount" column="discount" />
+	<result property="stock" column="stock" />
+	<result property="quantity" column="quantity" />
+	<result property="cart_id" column="cart_id" />
+</resultMap>		
+
+<resultMap id="cartResult" type="cartVO">
+	<result property="member_id" column="member_id" />
+	<result property="product_id" column="product_id" />
+	<result property="quantity" column="quantity" />
+	<result property="cart_id" column="cart_id" />
+</resultMap>
+
+<select id="selectCartList" resultMap="cartResult" parameterType="cartVO">
+<![CDATA[
+	select * from cart
+	where member_id = #{member_id}
+]]>
+</select>
+<!-- 내카트안에 모든 제품 삭제 -->
+<delete id="deleteAllProduct" parameterType="cartVO">
+<![CDATA[
+	delete from cart
+	where member_id = #{member_id}
+]]>
+</delete>
+<!-- 내카트안에 제품 삭제 -->
+<delete id="deleteProductInCart" parameterType="cartVO">
+<![CDATA[
+	delete from cart
+	where member_id =#{member_id}
+	and product_id = #{product_id}
+	and cart_id = #{cart_id}
+]]>
+</delete>
+<!-- 내카트안에 제품수량 증가 -->
+<update id="plusQuantity" parameterType="cartVO">
+<![CDATA[
+	update cart 
+	set quantity = quantity + 1
+	where product_id = #{product_id}
+	and member_id = #{member_id}
+]]>
+</update>
+<!-- 내카트안에 제품수량 감소 -->
+<update id="minusQuantity" parameterType="cartVO">
+<![CDATA[
+	update cart
+	set quantity = case when quantity - 1 < 1 then 1 else quantity - 1 end
+	where product_id = #{product_id}
+	and member_id = #{member_id}
+]]>
+</update>
+<!--내카트에 담긴 제품정보  -->		
+<select id="selectProductList" resultMap="productResult" parameterType="java.util.Map">
+		select p.*, i.price, i.discount, i.stock, c.cart_id, c.quantity
+		from product p, item i, cart c 
+		
+		where c.member_id = ANY
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+		#{item.member_id}
+		</foreach>
+		and p.product_id = c.product_id 
+		and p.product_id = i.product_id
+		and p.product_id in
+	
+	<foreach item="item" collection="list" open="(" separator="," close=")" >
+	#{item.product_id}
+</foreach>
+</select>
+
 <select id="selectCountInCart" resultType="String" parameterType="cartVO">
    <![CDATA[
 		    select decode(count(*), 0, 'false', 'true') from cart
@@ -13,10 +93,11 @@
 			  and member_id=#{member_id} 
     	]]>
 </select>
+<!--카트에 담기  -->
 <insert id="insertProductInCart" parameterType="cartVO">
 	<![CDATA[
-		INSERT INTO cart(member_id, product_id, quantity)
-		VALUES( #{member_id}, #{product_id}, #{quantity})
+		INSERT INTO cart(member_id, product_id, quantity, cart_id)
+		VALUES( #{member_id}, #{product_id}, #{quantity}, #{cart_id})
 	]]>
 </insert>
 
@@ -26,3 +107,4 @@
    	]]>
 </select>
 </mapper>
+

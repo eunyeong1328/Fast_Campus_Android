@@ -9,14 +9,17 @@
    request.setCharacterEncoding("UTF-8");
 %>
 <script type="text/javascript">
-var quantity="1";
+var quantity="0";
 function changeQuantity() {
+
 	var selectOpt =  document.getElementById("opt_quantity");
-	 quantity = selectOpt.options[selectOpt.selectedIndex].text;
-	
+	    quantity  = parseInt(selectOpt.options[selectOpt.selectedIndex].text);
 }
 function add_cart(product_id,quantity) {
-	
+	if(quantity==0){
+		alert("수량옵션을 선택해주세요");
+		return;
+	}
 	$.ajax({
 		type : "post",
 		async : false, //false인 경우 동기식으로 처리한다.
@@ -32,10 +35,10 @@ function add_cart(product_id,quantity) {
 			}else if(data.trim()=='already_existed'){
 				alert("이미 카트에 등록된 상품입니다.");	
 			}
-			
 		},
 		error : function(data, textStatus) {
-			alert("에러가 발생했습니다."+data);
+			alert("로그인을 먼저 해주세요.");
+			/* alert("에러가 발생했습니다."+data); */
 		},
 		complete : function(data, textStatus) {
 		}
@@ -296,7 +299,7 @@ function add_cart(product_id,quantity) {
                            <br>
                            <select id="opt_quantity" class="form-control bs-select" name="option_quantity" title="Please Select..." onChange="changeQuantity();" required>
                               <c:forEach var="i" begin="1" end="10" step="1">
-                                 <option value="i">${i }</option>
+                                 <option value="i">${i }개</option>
                               </c:forEach>
                            </select>
                            <!-- ADD TO CART -->
