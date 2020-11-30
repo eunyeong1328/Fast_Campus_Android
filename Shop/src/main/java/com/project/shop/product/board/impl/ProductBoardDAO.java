@@ -8,12 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.shop.product.board.ProductBoardQnaVO;
+import com.project.shop.product.board.ReviewVO;
 
 @Repository("productBoardDAO")
 public class ProductBoardDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+	//================================ Q&A 게시판 ==================================
 	public int selectTotalCountProductQna(String product_id) {
 		int totalCount = sqlSession.selectOne("mappers.product_qna.totalCount", product_id);
 		return totalCount;
@@ -36,9 +37,7 @@ public class ProductBoardDAO {
 		return productQna;
 	}
 	public int selectQnaNo() {
-		System.out.println("글번호 가져오기 전 ");
 		int qnaNo =sqlSession.selectOne("mappers.product_qna.selectQnaNo");
-		System.out.println("글번호 가져옴");
 		return qnaNo;
 	}
 	public void updateBoardQna(Map map) {
@@ -46,5 +45,22 @@ public class ProductBoardDAO {
 	}
 	public void deleteBoardQna(int product_qna_num) {
 		sqlSession.delete("mappers.product_qna.deleteBoardQna", product_qna_num);
+	}
+	//============================= REVIEW 게시판 ==============================
+	public int selectReviewTotalCount(String product_id) {
+		return sqlSession.selectOne("mappers.review.totalCount", product_id);
+	}
+	public List<ReviewVO> selectReviewList(Map map){
+		List<ReviewVO> reviewList = 
+				sqlSession.selectList("mappers.review.selectReviewList", map);
+		return reviewList;
+	}
+	public int selectReviewNo() {
+		int qnaNo =sqlSession.selectOne("mappers.review.selectReviewNo");
+		return qnaNo;
+	}
+	public void insertReview(Map map) {
+		map.put("review_num", selectReviewNo()+1);
+		sqlSession.insert("mappers.review.insertReview", map);
 	}
 }

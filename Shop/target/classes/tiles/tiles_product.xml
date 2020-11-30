@@ -36,4 +36,10 @@
 			value="/WEB-INF/views/product/updateQnaForm.jsp" />
 	</definition>
 	
+	
+	<!-- REVIEW 글쓰기 폼 -->
+	<definition name="/product/insertReviewForm" extends="baseLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/insertReviewForm.jsp" />
+	</definition>
 </tiles-definitions>
