@@ -28,7 +28,8 @@ public class FileController {
 	@RequestMapping("/fileDownload.do")
 	public void fileDownload(@RequestParam("image") String image, @RequestParam("action") String action, HttpServletResponse response) throws Exception {
 		OutputStream out = response.getOutputStream();
-		System.out.println("fileDownload action: " + action);
+		System.out.println("fileDownload action: ");
+		
 		String downFile = null;
 		if (action.equals("notice")) {
 			downFile = notice_file_path + image;
@@ -37,7 +38,7 @@ public class FileController {
 		} else if (action.equals("memA")) {
 			downFile = memA_file_path + image;
 		} 
-		
+
 		File file = new File(downFile);
 
 		response.setHeader("Cache-Control", "no-cache");
@@ -66,8 +67,15 @@ public class FileController {
 			String value = multipartRequest.getParameter(name);
 			map.put(name, value);
 		}
+		
 		List<String> fileList = fileProcess(multipartRequest);
-		map.put("images", fileList.toString());
+		
+		String image = fileList.toString();
+		image = image.replaceAll("\\[", "");
+		image = image.replaceAll("\\]", "");
+		System.out.println(image);
+		map.put("image", image);
+		
 		return map;
 	}
 
@@ -79,8 +87,10 @@ public class FileController {
 		System.out.println("멀티파트 액션 체크" + action);
 		
 		for (MultipartFile mfile : mFiles) {
+			
 			String originalFileName = mfile.getOriginalFilename();
 			fileList.add(originalFileName);
+			
 			if (action.equals("noticeAdd")) {
 				savePath = notice_file_path + originalFileName;
 			} else if (action.equals("memqAdd")) {
@@ -88,6 +98,7 @@ public class FileController {
 			} else if (action.equals("memqAdminAdd")) {
 				savePath = memA_file_path + originalFileName;
 			}
+			
 			File file = new File(savePath);
 			if (mfile.getSize() != 0) { // File Null Check
 				if (!file.exists()) { // 경로상에 파일이 존재하지 않을 경우

@@ -104,10 +104,8 @@
 	<insert id="noticeInsert" parameterType="hashmap">
 		INSERT INTO NOTICE VALUES 
 		((SELECT NVL(MAX(NOTICE_NUM),0) + 1 FROM NOTICE), 
-		#{title}, #{contents}, SYSDATE, 0,
-		<foreach collection="images" item="image" separator=",">
-        	#{image}
-        </foreach>
+		#{title}, #{contents}, SYSDATE, 0
+		, #{image}
 		)
 	</insert>
 	
@@ -119,44 +117,26 @@
 	</insert>
 
 	<insert id="memqInsert" parameterType="hashmap">
-		INSERT INTO MEMBER_QNA (
-		member_qna_num, title, contents, qna_category_num, order_num, member_id, 
-		email, phone, reg_date, parent_num
-		<if test="images != null">
-		, image
-		</if>
-		)
-		VALUES 
+		INSERT INTO MEMBER_QNA VALUES 
 		((SELECT NVL(MAX(MEMBER_QNA_NUM),0) + 1 FROM MEMBER_QNA), 
 		#{title}, #{contents}, 
 		#{qna_category_num}, #{order_num}, 
 		(SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_ID = #{member_id}), 
 		#{email}, #{phone}, SYSDATE, 0 
-		<if test="images != null">
-		, #{images}
-        </if>
+		, #{image}
 		)
 	</insert>
 	
 	<!-- 1:1 문의 답변 등록 -->
 	<insert id="memqAdminInsert" parameterType="hashmap">
-		INSERT INTO MEMBER_QNA (
-		member_qna_num, title, contents, qna_category_num, order_num, member_id, 
-		email, phone, reg_date, parent_num
-		<if test="images != null">
-		, image
-		</if>
-		)
-		values(
-		(select nvl(max(member_qna_num),0)+1 from member_qna), 
+		INSERT INTO MEMBER_QNA values
+		((select nvl(max(member_qna_num),0)+1 from member_qna), 
 		#{title}, #{contents}, 
 		(select qna_category_num from member_qna where member_qna_num = #{member_qna_num}), 
 		(select order_num from member_qna where member_qna_num = #{member_qna_num}),  
 		#{member_id}, #{email}, #{phone}, SYSDATE, 
 		(select member_qna_num from member_qna where member_qna_num = #{member_qna_num}) 
-		<if test="images != null">
-		, #{images}
-        </if>
+		, #{image}
 		)
 	</insert>
 	

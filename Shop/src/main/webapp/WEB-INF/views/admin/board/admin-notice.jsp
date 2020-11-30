@@ -45,23 +45,10 @@
 						<p class="lead">${notice.contents }</p>
 						
 						<p class="lead">
-							<c:if test="${not empty notice.image1 }">
-								<div class="detail-image">
-									<img
-										src="${contextPath }/board/fileDownload.do?image=${notice.image1}&action=notice">
-								</div>
-							</c:if>
-							<c:if test="${not empty notice.image2 }">
-								<div class="detail-image">
-									<img
-										src="${contextPath }/board/fileDownload.do?image=${notice.image2}&action=notice">
-								</div>
-							</c:if>
-							<c:if test="${not empty notice.image3 }">
-								<div class="detail-image">
-									<img
-										src="${contextPath }/board/fileDownload.do?image=${notice.image3}&action=notice">
-								</div>
+							<c:if test="${not empty notice.image}">
+								<c:forTokens var="image" items="${notice.image }" delims=", ">
+									<img src="${contextPath }/board/fileDownload.do?image=<c:out value="${image}"/>&action=notice">
+								</c:forTokens>
 							</c:if>
 						</p>
 

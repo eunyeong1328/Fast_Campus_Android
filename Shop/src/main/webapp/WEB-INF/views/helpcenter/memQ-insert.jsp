@@ -92,7 +92,7 @@
 										<label
 											class="btn btn-warning cursor-pointer position-relative">
 
-											<input name="file[]" multiple="multiple" type="file"
+											<input name="file" multiple="multiple" type="file"
 											data-file-ext="jpg,jpeg,png"
 											data-file-max-size-kb-per-file="3072"
 											data-file-max-size-kb-total="30720"

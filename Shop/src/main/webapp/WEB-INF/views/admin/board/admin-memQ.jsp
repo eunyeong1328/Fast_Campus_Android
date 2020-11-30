@@ -50,20 +50,15 @@
 						<p class="lead" style="height: 100px">${memQ.contents }</p>
 						
 						<p class="lead">
-							<c:if test="${not empty memQ.image1 }">
-								<div class="detail-image">
-									<img src="${contextPath }/board/fileDownload.do?image=${memQ.image1}">
-								</div>
+							<c:if test="${memQ.parent_num == 0 && not empty memQ.image}">
+								<c:forTokens var="image" items="${memQ.image }" delims=", ">
+									<img src="${contextPath }/board/fileDownload.do?image=<c:out value="${image}"/>&action=memQ">
+								</c:forTokens>
 							</c:if>
-							<c:if test="${not empty memQ.image2 }">
-								<div class="detail-image">
-									<img src="${contextPath }/board/fileDownload.do?image=${memQ.image2}">
-								</div>
-							</c:if>
-							<c:if test="${not empty memQ.image3 }">
-								<div class="detail-image">
-									<img src="${contextPath }/board/fileDownload.do?image=${memQ.image3}">
-								</div>
+							<c:if test="${memQ.parent_num != 0 && not empty memQ.image}">
+								<c:forTokens var="image" items="${memQ.image }" delims=", ">
+									<img src="${contextPath }/board/fileDownload.do?image=<c:out value="${image}"/>&action=memA">
+								</c:forTokens>
 							</c:if>
 						</p>
 
