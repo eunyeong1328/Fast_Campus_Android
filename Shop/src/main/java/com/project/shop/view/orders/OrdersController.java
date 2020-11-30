@@ -21,6 +21,17 @@ public class OrdersController extends BaseController {
 	@Autowired
 	private OrderService orderService;
 	
+	@RequestMapping(value="/checkout.do")
+	public ModelAndView checkout() {
+		//로그인이면 checkout-logged로, 로그인이 아니면 checkout으로.
+		
+		//checkout-logged일땐 member정보 연동
+		
+		//둘다 product정보 연동
+		return null;
+		
+	}
+	
 	@RequestMapping(value="/import.do")
 	public ModelAndView memberList(@ModelAttribute("OrderVO") OrderVO orderVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -45,7 +56,6 @@ public class OrdersController extends BaseController {
 		String member_id = memberInfo.getMember_id();
 		orderVO.setMember_id(member_id);
 		}
-		System.out.println("결제성공2: "+orderVO);		
 		orderService.addOrder(orderVO);
 		
 	}

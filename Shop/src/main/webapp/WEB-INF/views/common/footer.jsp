@@ -7,7 +7,6 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
 
 <!-- Footer -->
-			<footer id="footer" class="shadow-xs">
 				
 
 				<div class="border-top">
@@ -86,7 +85,6 @@
 					</div>
 				</div>
 
-			</footer>
 			<!-- /Footer -->
 
 

@@ -42,36 +42,43 @@
 							<form method="post" action="${contextPath }/orders/import.do" name="OrderVO">
 							<input type="hidden" name="totalPrice" type="number" value="10000">
 
-								<!-- NOT LOGGED IN -->
+
+								<!-- LOGGED IN -->
 								<div class="bg-light p-3 rounded mb-5">
 
-									<div class="fs--12 mb-2">
-										계정이 있으신가요?
-										<a href="#" class="js-ajax-modal"
-											data-href="_ajax/modal_signin_md.html"
-											data-ajax-modal-size="modal-md"
-											data-ajax-modal-centered="false"
-											data-ajax-modal-backdrop="static">
-											로그인하기
-										</a>
-									</div>
+									<div class="d-flex">
 
-									<div class="form-label-group mb-3">
-										<input required placeholder="Email Address" id="first_name" name="email" type="email" value="" class="form-control">
-										<label for="first_name">이메일</label>
+										<div>
+
+											<!--
+											<span class="bg-primary-soft h5 m-0 w--60 h--60 rounded-circle d-inline-flex justify-content-center align-items-center">
+												JD
+											</span>
+											-->
+
+											<span class="w--60 h--60 rounded-circle d-inline-block bg-cover" style="background-image:url('${contextPath }/resources/demo.files/images/unsplash/team/thumb_330/erik-mclean-06vpBIHmiYc-unsplash.jpg')"></span>
+										</div>
+
+										<div class="w-100 px-3 py-2">
+											<span class="d-block fs--14">John Doe (john.doe@gmail.com)</span>
+											<a href="shop-page-checkout.html" class="fs--14">
+												로그아웃
+											</a>
+										</div>
+
 									</div>
 
 									<div class="border-top pt-3 mt-2">
 
 										<label class="form-checkbox form-checkbox-primary d-block">
 											<input type="checkbox" name="checkbox" value="1">
-											<i></i> 쩝쩝박사 구독하기
+											<i></i> Keep me up to date on news and exclusive offers
 										</label>
 
 									</div>
 
 								</div>
-								<!-- /NOT LOGGED IN -->
+								<!-- /LOGGED IN -->
 
 
 
@@ -84,10 +91,30 @@
 									</span>
 								</h2>
 								<div class="p-4 shadow-xs border rounded mb-5">
+								
+								<select class="form-control bs-select" name="shipping_address_selected">
+										<option value="1">Road 741, No.44, New York / United States</option>
+										<option value="2">Road 221, No.12, New York / United States</option>
+									</select>
 
-									<div class="row">
+									<div class="pt-2">
+										<a href="#shipping_address_edit" data-toggle="collapse" class="text-decoration-none d-block py-1">
+											<span class="group-icon">
+												<i class="fi fi-pencil"></i>
+												<i class="fi fi-arrow-up"></i>
+											</span>
 
-										<div class="col-12 col-sm-6 col-lg-12">
+											<span class="d-inline-block pl-2 pr-2">
+												edit address
+											</span>
+										</a>
+									</div>
+									
+
+<div id="shipping_address_edit" class="collapse">
+										<div class="row mt-3">
+
+											<div class="col-12 col-sm-6 col-lg-6">
 
 											<div class="form-label-group mb-3">
 												<input required placeholder="First Name" id="shipping_first_name" name="member_name" type="text" class="form-control">
@@ -134,6 +161,7 @@
 										</div>
 
 
+									</div>
 
 									</div>
 
@@ -164,8 +192,8 @@
 
 									</div>
 									/paypal info
-
  -->
+
 									<label class="form-radio form-radio-primary d-block py-3 border-bottom">
 										<input type="radio" name="pg" value="html5_inicis" class="form-advanced-list-reveal" data-form-advanced-target="#payment_card_form">
 										<i></i> 신용카드
@@ -188,7 +216,7 @@
 									<div id="paypal_expand" class="form-advanced-list-reveal-item hide text-center">
 
 										<div class="my-5">
-											<img width="150" src="demo.files/svg/vendors/vendor_paypal.svg" alt="...">
+											<img width="150" src="${contextPath }/resources/demo.files/svg/vendors/vendor_paypal.svg" alt="...">
 										</div>
 
 										<p>
@@ -266,7 +294,7 @@
 									<div class="d-flex justify-content-center align-items-center border-bottom py-3">
 
 										<div class="w--100">
-											<img class="img-fluid max-h-80" src="demo.files/images/unsplash/products/thumb_330/barrett-ward-fYYUgvHYgpU-unsplash-min.jpg" alt="...">
+											<img class="img-fluid max-h-80" src="${contextPath }/resources/demo.files/images/unsplash/products/thumb_330/barrett-ward-fYYUgvHYgpU-unsplash-min.jpg" alt="...">
 										</div>
 
 										<div class="w-100 pl-3 pr-3">
@@ -366,6 +394,7 @@
 				</div>
 			</section>
 			<!-- /CHECKOUT -->
+			
 			<script src="${contextPath}/resources/assets/js/core.min.js"></script>			
 			<jsp:include page="/WEB-INF/views/common/daumZip.jsp" />
-			
+

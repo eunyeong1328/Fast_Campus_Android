@@ -49,9 +49,9 @@
 			<article>
 			 	<tiles:insertAttribute name="body" />
 			</article>
-		<footer>
-			<tiles:insertAttribute name="footer" />
-		</footer>
+			<footer id="footer" class="shadow-xs">
+				<tiles:insertAttribute name="footer" />
+			</footer>
 		</div>
 </body>
         
