@@ -90,7 +90,7 @@
 										<div class="col-12 col-sm-6 col-lg-12">
 
 											<div class="form-label-group mb-3">
-												<input required placeholder="First Name" id="shipping_first_name" name="name" type="text" class="form-control">
+												<input required placeholder="First Name" id="shipping_first_name" name="member_name" type="text" class="form-control">
 												<label for="shipping_first_name">주문자 성명</label>
 											</div>
 
@@ -168,7 +168,7 @@
 
 
 									<label class="form-radio form-radio-primary d-block py-3 border-bottom">
-										<input type="radio" name="payment_method" class="form-advanced-list-reveal" data-form-advanced-target="#payment_card_form">
+										<input type="radio" name="pg" value="html5_inicis" class="form-advanced-list-reveal" data-form-advanced-target="#payment_card_form">
 										<i></i> 신용카드
 
 										<span class="float-end mt--n3 ml--n10 mr--n10">
@@ -181,7 +181,7 @@
 
 
 									<label class="form-radio form-radio-primary d-block py-3 border-bottom">
-										<input type="radio" name="payment_method" class="form-advanced-list-reveal" data-form-advanced-target="#paypal_expand">
+										<input type="radio" name="pg" value="kakaopay" class="form-advanced-list-reveal" data-form-advanced-target="#paypal_expand">
 										<i></i> 카카오페이
 									</label>
 
@@ -214,7 +214,7 @@
 								</h2>
 
 								<div class="form-label-group mb-5">
-									<textarea placeholder="Leave us a note about this order (optional)" id="description" class="form-control" rows="3"></textarea>
+									<textarea name="delivery_request" placeholder="Leave us a note about this order (optional)" id="description" class="form-control" rows="3"></textarea>
 									<label for="description">배송 요청사항을 입력하세요 (옵션)</label>
 								</div>
 								<!-- /CUSTOMER NOTE -->

@@ -1,5 +1,7 @@
 package com.project.shop.orders;
 
+import java.sql.Date;
+
 import org.springframework.stereotype.Component;
 
 @Component("orderVO")
@@ -9,14 +11,16 @@ public class OrderVO {
 	 String apply_num; //카드사 승인번호
 	 String order_status; //결제상태
 	 String pg; //결제한 PG사 -html5_inicis(웹표준방식의 KG이니시스),kakaopay(카카오페이)
-	 int paid_at; //결제승인시각
-	 String name;
+	 Date paid_at; //결제승인시각
+	 String member_id;
+	 String member_name;
 	 String email;
 	 String phone;
 	 String load_address;
 	 String rest_address;
 	 String address;
 	 String zipNo;
+	 String delivery_request;
 	
 	public String getOrder_num() {
 		return order_num;
@@ -48,17 +52,11 @@ public class OrderVO {
 	public void setPg(String pg) {
 		this.pg = pg;
 	}
-	public int getPaid_at() {
+	public Date getPaid_at() {
 		return paid_at;
 	}
-	public void setPaid_at(int paid_at) {
-		this.paid_at = paid_at;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+	public void setPaid_at(long paid_at) {
+		this.paid_at = new Date((long)paid_at*1000);
 	}
 	public String getEmail() {
 		return email;
@@ -84,8 +82,18 @@ public class OrderVO {
 	public void setZipNo(String zipNo) {
 		this.zipNo = zipNo;
 	}
-	
-	
+	public String getMember_id() {
+		return member_id;
+	}
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+	public String getMember_name() {
+		return member_name;
+	}
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
 	public String getRest_address() {
 		return rest_address;
 	}
@@ -98,13 +106,22 @@ public class OrderVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
+	
+	public String getDelivery_request() {
+		return delivery_request;
+	}
+	public void setDelivery_request(String delivery_request) {
+		this.delivery_request = delivery_request;
+	}
 	@Override
 	public String toString() {
 		return "OrderVO [order_num=" + order_num + ", totalPrice=" + totalPrice + ", apply_num=" + apply_num
-				+ ", order_status=" + order_status + ", pg=" + pg + ", paid_at=" + paid_at + ", name=" + name
-				+ ", email=" + email + ", phone=" + phone + ", load_address=" + load_address + ", zipNo=" + zipNo + "]";
-	}
-	
+				+ ", order_status=" + order_status + ", pg=" + pg + ", paid_at=" + paid_at + ", member_id=" + member_id
+				+ ", member_name=" + member_name + ", email=" + email + ", phone=" + phone + ", load_address="
+				+ load_address + ", rest_address=" + rest_address + ", address=" + address + ", zipNo=" + zipNo
+				+ ", delivery_request=" + delivery_request + "]";
+	}	
 	
 
 }

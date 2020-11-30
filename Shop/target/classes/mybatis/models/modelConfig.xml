@@ -25,6 +25,8 @@
   	<typeAlias type="com.project.shop.board.BoardVO" alias="boardVO" />
   	<typeAlias type="com.project.shop.product.board.ProductBoardQnaVO" alias="product_qnaVO"/>
   	<typeAlias type="com.project.shop.product.board.ReviewVO" alias="reviewVO"/>
+  	<typeAlias type="com.project.shop.orders.OrderVO" alias="orderVO"/>
+  	
   </typeAliases>
   
  
