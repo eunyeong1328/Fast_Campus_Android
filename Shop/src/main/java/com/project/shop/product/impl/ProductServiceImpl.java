@@ -104,7 +104,7 @@ public class ProductServiceImpl implements ProductService{
 //		System.out.println(vo);
 		//이미지 파일 저장 경로
 		File dir = new File("C:"+File.separator+"Users"+File.separator+"bitcamp"+File.separator+"git"+File.separator+"web-project"+File.separator+"Shop"+File.separator+"src"
-				+File.separator+"main"+File.separator+"webapp"+File.separator+"resources"+File.separator+"images"+File.separator+"item_image"); 
+				+File.separator+"main"+File.separator+"webapp"+File.separator+"resources"+File.separator+"images"+File.separator+"product"+File.separator+vo.getProduct_id()); 
 		//업로드할 폴더 존재하지 않으면 생성
 		if(!dir.exists()) { 
             dir.mkdirs();
@@ -157,7 +157,7 @@ public class ProductServiceImpl implements ProductService{
 		//파일 저장
 		//이미지 파일 저장 경로
 		File dir = new File("C:"+File.separator+"Users"+File.separator+"bitcamp"+File.separator+"git"+File.separator+"web-project"+File.separator+"Shop"+File.separator+"src"
-				+File.separator+"main"+File.separator+"webapp"+File.separator+"resources"+File.separator+"images"+File.separator+"item_image"); 
+				+File.separator+"main"+File.separator+"webapp"+File.separator+"resources"+File.separator+"images"+File.separator+"product"+File.separator+vo.getProduct_id()); 
 		//업로드할 폴더 존재하지 않으면 생성
 		if(!dir.exists()) { 
 			dir.mkdirs();

@@ -53,7 +53,7 @@
 										<tr class="text-muted fs--13">
 											<td>${item_num.count}</td>
 											<td>
-											<div><img class="mini" src="${contextPath}/resources/images/item_image/${item.product_image}" alt="...">${item.product_name}</div>
+											<div><img class="mini" src="${contextPath}/resources/images/product/${item.product_id}/${item.product_image}">${item.product_name}</div>
 											</td>
 											<td>${item.price}</td>
 											<td>${item.product_category_name}</td>
