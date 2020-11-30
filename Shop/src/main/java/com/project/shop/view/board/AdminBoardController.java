@@ -384,7 +384,7 @@ public class AdminBoardController {
 		return mav;
 	}
 
-//	공지사항 글 수정
+//	관리자 답변 수정
 	@RequestMapping(value = "/memqAdminUpdating.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView memQUpdate(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();

@@ -41,7 +41,7 @@
     		(SELECT ROWNUM R_NUM, A.*, LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
             LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
      		FROM 
-    		    (SELECT member_qna_num, parent_num, title, contents, image1, image2, image3, qna_category_name, 
+    		    (SELECT member_qna_num, parent_num, title, contents, image, qna_category_name, 
 				order_num, member_id, email, phone, reg_date 
 				FROM MEMBER_QNA Q, QNA_CATEGORY C 
 				WHERE Q.qna_category_num = C.qna_category_num 
@@ -58,12 +58,13 @@
     		(SELECT ROWNUM R_NUM, A.*, LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
             LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
      		FROM 
-    		    (SELECT member_qna_num, parent_num, title, contents, image1, image2, image3, qna_category_name, 
+    		    (SELECT member_qna_num, parent_num, title, contents, image, qna_category_name, 
 				order_num, member_id, email, phone, reg_date 
 				FROM MEMBER_QNA Q, QNA_CATEGORY C 
 				WHERE Q.qna_category_num = C.qna_category_num 
 				AND Q.member_id = #{member_id}
 				OR Q.member_id = 'admin' 
+				AND Q.parent_num IN (SELECT member_qna_num from member_qna where member_id = #{member_id})
          		START WITH parent_num = 0 
       		    CONNECT BY PRIOR member_qna_num = parent_num 
      		    ORDER SIBLINGS BY member_qna_num DESC) A)
@@ -89,7 +90,7 @@
 	
 	<!-- 1:1 문의 선택한 글 불러오기 -->
 	<select id="getMemQ" parameterType="boardVO" resultType="boardVO">
-		SELECT q.member_qna_num, q.title, q.contents, q.image1, q.image2, q.image3, q.qna_category_num, c.qna_category_name, 
+		SELECT q.member_qna_num, q.title, q.contents, q.image, q.qna_category_num, c.qna_category_name, 
 			q.order_num, q.member_id, q.email, q.phone, q.reg_date 
 		FROM MEMBER_QNA Q, QNA_CATEGORY C 
 		WHERE Q.qna_category_num = C.qna_category_num 
@@ -103,7 +104,11 @@
 	<insert id="noticeInsert" parameterType="hashmap">
 		INSERT INTO NOTICE VALUES 
 		((SELECT NVL(MAX(NOTICE_NUM),0) + 1 FROM NOTICE), 
-		#{title}, #{contents}, SYSDATE, 0, #{image1}, #{image2}, #{image3})
+		#{title}, #{contents}, SYSDATE, 0,
+		<foreach collection="images" item="image" separator=",">
+        	#{image}
+        </foreach>
+		)
 	</insert>
 	
 	<!-- 관리자 FAQ -->
@@ -113,25 +118,45 @@
 		#{qna_category_num}, #{title}, #{contents})
 	</insert>
 
-	<!-- 1:1 문의 -->
 	<insert id="memqInsert" parameterType="hashmap">
-		INSERT INTO MEMBER_QNA VALUES 
+		INSERT INTO MEMBER_QNA (
+		member_qna_num, title, contents, qna_category_num, order_num, member_id, 
+		email, phone, reg_date, parent_num
+		<if test="images != null">
+		, image
+		</if>
+		)
+		VALUES 
 		((SELECT NVL(MAX(MEMBER_QNA_NUM),0) + 1 FROM MEMBER_QNA), 
 		#{title}, #{contents}, 
-		#{image1}, #{qna_category_num}, #{order_num}, 
+		#{qna_category_num}, #{order_num}, 
 		(SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_ID = #{member_id}), 
-		#{email}, #{phone}, SYSDATE, #{image2}, #{image3})
+		#{email}, #{phone}, SYSDATE, 0 
+		<if test="images != null">
+		, #{images}
+        </if>
+		)
 	</insert>
 	
 	<!-- 1:1 문의 답변 등록 -->
 	<insert id="memqAdminInsert" parameterType="hashmap">
-		INSERT INTO MEMBER_QNA values(
+		INSERT INTO MEMBER_QNA (
+		member_qna_num, title, contents, qna_category_num, order_num, member_id, 
+		email, phone, reg_date, parent_num
+		<if test="images != null">
+		, image
+		</if>
+		)
+		values(
 		(select nvl(max(member_qna_num),0)+1 from member_qna), 
-		#{title}, #{contents}, #{image1}, 
+		#{title}, #{contents}, 
 		(select qna_category_num from member_qna where member_qna_num = #{member_qna_num}), 
 		(select order_num from member_qna where member_qna_num = #{member_qna_num}),  
-		#{member_id}, #{email}, #{phone}, SYSDATE, #{image2}, #{image3}, 
+		#{member_id}, #{email}, #{phone}, SYSDATE, 
 		(select member_qna_num from member_qna where member_qna_num = #{member_qna_num}) 
+		<if test="images != null">
+		, #{images}
+        </if>
 		)
 	</insert>
 	
@@ -142,9 +167,7 @@
 		UPDATE MEMBER_QNA 
 		SET TITLE = #{title}, 
 		CONTENTS = #{contents}, 
-		IMAGE1 = #{image1}, 
-		IMAGE2 = #{image2}, 
-		IMAGE3 = #{image3}, 
+		IMAGE = #{image},
 		ORDER_NUM = #{order_num}, 
 		QNA_CATEGORY_NUM = #{qna_category_num}, 
 		REG_DATE = SYSDATE 
@@ -157,9 +180,7 @@
 		UPDATE NOTICE 
 		SET TITLE = #{title}, 
 		CONTENTS = #{contents}, 
-		IMAGE1 = #{image1}, 
-		IMAGE2 = #{image2}, 
-		IMAGE3 = #{image3}, 
+		IMAGE = #{image},
 		REG_DATE = SYSDATE 
 		WHERE NOTICE_NUM = #{notice_num}
 	</update>
@@ -178,9 +199,7 @@
 		UPDATE member_qna 
 		SET TITLE = #{title}, 
 		CONTENTS = #{contents}, 
-		IMAGE1 = #{image1}, 
-		IMAGE2 = #{image2}, 
-		IMAGE3 = #{image3} 
+		IMAGE = #{image}, 
 		WHERE member_qna_num = #{member_qna_num}
 	</update>
 
@@ -204,6 +223,7 @@
 		FROM MEMBER_QNA
 		WHERE MEMBER_ID = #{member_id}
 		OR MEMBER_ID = 'admin'
+		AND parent_num IN (SELECT member_qna_num from member_qna where member_id = #{member_id})
 	</select>
 	
 	<!-- 회원 1:1 문의 전체 -->

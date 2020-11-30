@@ -48,19 +48,19 @@
 							<c:if test="${not empty notice.image1 }">
 								<div class="detail-image">
 									<img
-										src="${contextPath }/board/fileDownload.do?image=${notice.image1}">
+										src="${contextPath }/board/fileDownload.do?image=${notice.image1}&action=notice">
 								</div>
 							</c:if>
 							<c:if test="${not empty notice.image2 }">
 								<div class="detail-image">
 									<img
-										src="${contextPath }/board/fileDownload.do?image=${notice.image2}">
+										src="${contextPath }/board/fileDownload.do?image=${notice.image2}&action=notice">
 								</div>
 							</c:if>
 							<c:if test="${not empty notice.image3 }">
 								<div class="detail-image">
 									<img
-										src="${contextPath }/board/fileDownload.do?image=${notice.image3}">
+										src="${contextPath }/board/fileDownload.do?image=${notice.image3}&action=notice">
 								</div>
 							</c:if>
 						</p>

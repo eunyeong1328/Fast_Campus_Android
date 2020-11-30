@@ -47,20 +47,39 @@
                                             ${memQ.contents}
                                         </p>
                                         <div class="image-box">
+	                						<c:if test="${memQ.parent_num == 0 }">
 	                                        <c:if test="${not empty memQ.image1 }">
 	                							<div class="detail-image">
-	                								<img src="${contextPath }/board/fileDownload.do?image=${memQ.image1}">
+	                								<img src="${contextPath }/board/fileDownload.do?image=${memQ.image1}&action=memQ">
 	                							</div>
 	                						</c:if>
 	                						<c:if test="${not empty memQ.image2 }">
 	                							<div class="detail-image">
-	                								<img src="${contextPath }/board/fileDownload.do?image=${memQ.image2}">
+	                								<img src="${contextPath }/board/fileDownload.do?image=${memQ.image2}&action=memQ">
 	                							</div>
 	                						</c:if>
 	                						<c:if test="${not empty memQ.image3 }">
 	                							<div class="detail-image">
-	                								<img src="${contextPath }/board/fileDownload.do?image=${memQ.image3}">
+	                								<img src="${contextPath }/board/fileDownload.do?image=${memQ.image3}&action=memQ">
 	                							</div>
+	                						</c:if>
+	                						</c:if>
+	                						<c:if test="${memQ.parent_num != 0 }">
+	                                        <c:if test="${not empty memQ.image1 }">
+	                							<div class="detail-image">
+	                								<img src="${contextPath }/board/fileDownload.do?image=${memQ.image1}&action=memA">
+	                							</div>
+	                						</c:if>
+	                						<c:if test="${not empty memQ.image2 }">
+	                							<div class="detail-image">
+	                								<img src="${contextPath }/board/fileDownload.do?image=${memQ.image2}&action=memA">
+	                							</div>
+	                						</c:if>
+	                						<c:if test="${not empty memQ.image3 }">
+	                							<div class="detail-image">
+	                								<img src="${contextPath }/board/fileDownload.do?image=${memQ.image3}&action=memA">
+	                							</div>
+	                						</c:if>
 	                						</c:if>
                                         </div>
                                     </div>
