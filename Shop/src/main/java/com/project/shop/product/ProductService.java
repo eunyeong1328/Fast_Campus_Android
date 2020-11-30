@@ -17,7 +17,7 @@ public interface ProductService {
 	//상연
 	public List<ProductVO> bestList();
 	public List<ProductVO> newList();
-	public int insertProduct(ProductVO vo,MultipartHttpServletRequest request);
+	public int insertProduct(ProductVO vo,MultipartHttpServletRequest request) throws Exception;
 	public List<ProductVO> allList();
 	public void deleteProduct(String request);
 	public List<ProductVO> loadOne(String request);

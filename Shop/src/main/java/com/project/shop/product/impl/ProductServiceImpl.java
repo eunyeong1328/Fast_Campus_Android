@@ -99,7 +99,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int insertProduct(ProductVO vo,MultipartHttpServletRequest request) {
+	public int insertProduct(ProductVO vo,MultipartHttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
 		//파일 저장
 //		System.out.println(vo);
 		//이미지 파일 저장 경로
@@ -109,26 +110,28 @@ public class ProductServiceImpl implements ProductService{
 		if(!dir.exists()) { 
             dir.mkdirs();
         }
-        
+		
 		Iterator<String> iterator = request.getFileNames();
 		String uploadFileName;
 		MultipartFile mFile = null;
-        String orgFileName = ""; //진짜 파일명
-        
+//        String orgFileName = ""; //진짜 파일명
+        int num = 0;
         while(iterator.hasNext()) {
-            uploadFileName = iterator.next();
+        	uploadFileName = iterator.next();
             mFile = request.getFile(uploadFileName);
             
-            orgFileName = mFile.getOriginalFilename();    
-            System.out.println(orgFileName);
-            if(orgFileName != null && orgFileName.length() != 0) { //sysFileName 생성
+//            orgFileName = mFile.getOriginalFilename();    
+//            System.out.println(orgFileName);
+            if(mFile != null) { //sysFileName 생성
                try {                    
-                    mFile.transferTo(new File(dir + File.separator + orgFileName)); // C:/Upload/sysFileName 파일 저장
+                    mFile.transferTo(new File(dir + File.separator + num+"_"+vo.getProduct_id()+".jpg")); // C:/Upload/sysFileName 파일 저장
+                    num++;
                 }catch(Exception e){
                     e.printStackTrace();
                 }
             }//if
-            vo.setProduct_image(orgFileName);
+            vo.setProduct_image("1_"+vo.getProduct_id()+".jpg");
+            vo.setProduct_detail_image("2_"+vo.getProduct_id()+".jpg");
         }//while
 //        System.out.println(vo);
 		
