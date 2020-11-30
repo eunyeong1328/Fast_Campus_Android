@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import net.coobird.thumbnailator.Thumbnails;
+
 @Controller
 @RequestMapping("/board")
 public class FileController {
-
+	
 	private String notice_file_path = "C:\\DRJJ\\notice\\";
 	private String memQ_file_path = "C:\\DRJJ\\member_q\\";
 	private String memA_file_path = "C:\\DRJJ\\member_a\\";
@@ -28,9 +30,9 @@ public class FileController {
 	@RequestMapping("/fileDownload.do")
 	public void fileDownload(@RequestParam("image") String image, @RequestParam("action") String action, HttpServletResponse response) throws Exception {
 		OutputStream out = response.getOutputStream();
-		System.out.println("fileDownload action: ");
 		
 		String downFile = null;
+		
 		if (action.equals("notice")) {
 			downFile = notice_file_path + image;
 		} else if (action.equals("memQ")) {
@@ -40,16 +42,24 @@ public class FileController {
 		} 
 
 		File file = new File(downFile);
-
+		
+//		if (file.exists()) { 
+//			Thumbnails.of(file).size(300,300).outputFormat("png").toOutputStream(out);
+//		}else {
+//			return;
+//		}
+//		
+//		byte[] buffer = new byte[1024 * 8];
+//		out.write(buffer);
+//		out.close();
+		
 		response.setHeader("Cache-Control", "no-cache");
 		response.addHeader("Content-disposition", "attachment; fileName=" + image);
-
 		FileInputStream in = new FileInputStream(file);
-
 		byte[] buffer = new byte[1024 * 8];
 		while (true) {
-			int count = in.read(buffer);
-			if (count == -1)
+			int count = in.read(buffer); // 버퍼에 읽어들인 문자개수
+			if (count == -1) // 버퍼의 마지막에 도달했는지 체크
 				break;
 			out.write(buffer, 0, count);
 		}

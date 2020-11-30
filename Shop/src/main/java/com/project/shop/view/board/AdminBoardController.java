@@ -106,6 +106,7 @@ public class AdminBoardController {
 
 		for (BoardVO noti : noticeList) {
 			if (noti.getR_num() == vo.getR_num() || noti.getNotice_num() == vo.getNotice_num()) {
+				boardService.noticeViewUpdate(vo.getNotice_num());
 				BoardVO notice = noti;
 				mav.addObject("notice", notice);
 			}
