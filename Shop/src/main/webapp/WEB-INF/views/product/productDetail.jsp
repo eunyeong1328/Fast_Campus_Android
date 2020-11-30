@@ -2,16 +2,58 @@
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+
 <%
    request.setCharacterEncoding("UTF-8");
 %>
+
 
 <c:if test="${not empty msg }">
 	<script>
 		alert("게시글 작성자가 아닙니다");
 	</script>
 </c:if>
+
+<script type="text/javascript">
+var quantity="0";
+function changeQuantity() {
+
+	var selectOpt =  document.getElementById("opt_quantity");
+	    quantity  = parseInt(selectOpt.options[selectOpt.selectedIndex].text);
+}
+function add_cart(product_id,quantity) {
+	if(quantity==0){
+		alert("수량옵션을 선택해주세요");
+		return;
+	}
+	$.ajax({
+		type : "post",
+		async : false, //false인 경우 동기식으로 처리한다.
+		url : "${contextPath}/cart/addProductInCart.do",
+		data : {
+			product_id:product_id,
+			quantity:quantity
+		},
+		success : function(data, textStatus) {
+		
+			if(data.trim()=='add_success'){
+				alert("카트에 등록되었습니다/.");
+			}else if(data.trim()=='already_existed'){
+				alert("이미 카트에 등록된 상품입니다.");	
+			}
+		},
+		error : function(data, textStatus) {
+			alert("로그인을 먼저 해주세요.");
+			/* alert("에러가 발생했습니다."+data); */
+		},
+		complete : function(data, textStatus) {
+		}
+	}); //end ajax	
+}
+</script>
+
 <!-- 여기서부터 -->
 <!-- PRODUCT -->
 <section class="pt-5">
@@ -240,27 +282,44 @@
 							</p>
 
 						</div>
-
-
-
-
-						<!--  상세 정보  -->
-						<table class="table">
-							<tbody>
-								<tr>
-									<th scope="row">판매단위</th>
-									<td>${vo.sales_unit }ea</td>
-								</tr>
-								<tr>
-									<th scope="row">상품용량</th>
-									<td>${vo.product_size }g</td>
-								</tr>
-								<tr>
-									<th scope="row">포장타입</th>
-									<td>${vo.packing_type }</td>
-								</tr>
-							</tbody>
-						</table>
+                           <!--  상세 정보  -->
+                           <table class="table">
+                              <tbody>
+                                 <tr>
+                                    <th scope="row">판매단위</th>
+                                    <td>${vo.sales_unit }ea</td>
+                                 </tr>
+                                 <tr>
+                                    <th scope="row">상품용량</th>
+                                    <td>${vo.product_size }g</td>
+                                 </tr>
+                                 <tr>
+                                    <th scope="row">포장타입</th>
+                                    <td>${vo.packing_type }</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                           
+                           <!-- 상품 옵션!! -->
+                           <!-- Basic -->
+                           <c:if test="${not empty optionList }" >
+                              <select class="form-control bs-select" name="option_name" title="Please Select..." required>
+                                 <c:forEach var="option" items="${optionList }">
+                                    <option value="${option.option_name }">${option.option_name } [<fmt:formatNumber type="number" value="${option.option_price }"/> 원]</option>
+                                 </c:forEach>
+                              </select>
+                           </c:if>
+                           <br>
+                           <select id="opt_quantity" class="form-control bs-select" name="option_quantity" title="Please Select..." onChange="changeQuantity();" required>
+                              <c:forEach var="i" begin="1" end="10" step="1">
+                                 <option value="i">${i }개</option>
+                              </c:forEach>
+                           </select>
+                           <!-- ADD TO CART -->
+                           <div class="clearfix d-flex d-block-xs">
+                              
+                              <!-- ADD TO CART BUTTON -->
+                              <div class="d-inline-flex w-100-xs float-start float-none-xs ml-0 mr-0 mt-2"> 
 
 						<!-- 상품 옵션!! -->
 						<!-- Basic -->
@@ -283,36 +342,16 @@
 							</c:forEach>
 						</select>
 
-
-						<!-- ADD TO CART -->
-						<div class="clearfix d-flex d-block-xs">
-
-							<!-- ADD TO CART BUTTON -->
-							<div
-								class="d-inline-flex w-100-xs float-start float-none-xs ml-0 mr-0 mt-2">
-
-								<!-- QUANTITY INPUT -->
-								<div>
-									<span
-										class="js-form-advanced-limit-info badge badge-warning hide animate-bouncein position-absolute absolute-top start-0 m-1 z-index-5">
-										please, order between 1 and 99. </span> <input required type="number"
-										name="qty" value="1" step="1" min="0" max="99"
-										class="form-control text-center js-form-advanced-limit w--80 h-100 m-0"
-										data-toggle="tooltip" data-original-title="quantity">
-								</div>
-
-								<div class="pl-2 pr-2 w-100-xs">
-									<button
-										class="btn btn-danger bg-gradient-danger text-white px-4 b-0 d-block-xs w-100-xs">
-										<span class="px-4 p-0-xs"> <i> <svg width="22px"
-													height="22px" x="0px" y="0px"
-													viewBox="0 10 459.529 500.529">
-                                                <path fill="#ffffff"
-														d="M17,55.231h48.733l69.417,251.033c1.983,7.367,8.783,12.467,16.433,12.467h213.35c6.8,0,12.75-3.967,15.583-10.2    l77.633-178.5c2.267-5.383,1.7-11.333-1.417-16.15c-3.117-4.817-8.5-7.65-14.167-7.65H206.833c-9.35,0-17,7.65-17,17    s7.65,17,17,17H416.5l-62.9,144.5H164.333L94.917,33.698c-1.983-7.367-8.783-12.467-16.433-12.467H17c-9.35,0-17,7.65-17,17    S7.65,55.231,17,55.231z"></path>
-                                                <path fill="#ffffff"
-														d="M135.433,438.298c21.25,0,38.533-17.283,38.533-38.533s-17.283-38.533-38.533-38.533S96.9,378.514,96.9,399.764    S114.183,438.298,135.433,438.298z"></path>
-                                                <path fill="#ffffff"
-														d="M376.267,438.298c0.85,0,1.983,0,2.833,0c10.2-0.85,19.55-5.383,26.35-13.317c6.8-7.65,9.917-17.567,9.35-28.05    c-1.417-20.967-19.833-37.117-41.083-35.7c-21.25,1.417-37.117,20.117-35.7,41.083    C339.433,422.431,356.15,438.298,376.267,438.298z"></path>
+                                 <div class="pl-2 pr-2 w-100-xs"> 
+                                    <button class="btn btn-danger bg-gradient-danger text-white px-4 b-0 d-block-xs w-100-xs"
+                   		 onclick="javascript:add_cart('${vo.product_id}',quantity)"> 
+                   		
+                                       <span class="px-4 p-0-xs">
+                                          <i>
+                                             <svg width="22px" height="22px" x="0px" y="0px" viewBox="0 10 459.529 500.529">
+                                                <path fill="#ffffff" d="M17,55.231h48.733l69.417,251.033c1.983,7.367,8.783,12.467,16.433,12.467h213.35c6.8,0,12.75-3.967,15.583-10.2    l77.633-178.5c2.267-5.383,1.7-11.333-1.417-16.15c-3.117-4.817-8.5-7.65-14.167-7.65H206.833c-9.35,0-17,7.65-17,17    s7.65,17,17,17H416.5l-62.9,144.5H164.333L94.917,33.698c-1.983-7.367-8.783-12.467-16.433-12.467H17c-9.35,0-17,7.65-17,17    S7.65,55.231,17,55.231z"></path>
+                                                <path fill="#ffffff" d="M135.433,438.298c21.25,0,38.533-17.283,38.533-38.533s-17.283-38.533-38.533-38.533S96.9,378.514,96.9,399.764    S114.183,438.298,135.433,438.298z"></path>
+                                                <path fill="#ffffff" d="M376.267,438.298c0.85,0,1.983,0,2.833,0c10.2-0.85,19.55-5.383,26.35-13.317c6.8-7.65,9.917-17.567,9.35-28.05    c-1.417-20.967-19.833-37.117-41.083-35.7c-21.25,1.417-37.117,20.117-35.7,41.083    C339.433,422.431,356.15,438.298,376.267,438.298z"></path>
                                              </svg>
 										</i> <span class="fs--18">Add to cart</span>
 										</span>
@@ -479,50 +518,7 @@
 							</h2>
 						</div>
 
-<<<<<<< HEAD
-		<div id="shadowCollapseTwo" class="collapse" aria-labelledby="cleanHeadingTwo" data-parent="#accordionShadow">
-			<div class="card-body">
-			
-				${qnaList[0].contents}
-				<p>
-					<c:if test="${not empty qnaList[0].image1 }">
-					<img src="${contextPath}/product/qnaDownload.do?qna_image=${qnaList[0].image1}">
-					 <img src="${contextPath}/resources/images/product_qna/${qnaList[0].image1}">
-					</c:if>
-					<c:if test="${not empty qnaList[0].image2 }">
-					<img src="${contextPath}/product/qnaDownload.do?qna_image=${qnaList[0].image2}">
-					</c:if>
-					<c:if test="${not empty qnaList[0].image3 }">
-					<img src="${contextPath}/product/qnaDownload.do?qna_image=${qnaList[0].image3}">
-					</c:if>
-				</p>
-				
-				<p>
-				   <c:choose>
-				   	<c:when test="${member_id=='admin' }">
-				   		<a href="${contextPath }/product/insertQnaForm.do?product_id=${vo.product_id}&product_qna_num=${qnaList[0].product_qna_num}">
-				   			<button style="float: right;"type="button" class="btn btn-purple btn-soft mb-1">
-			               		답변
-			            	</button>
-			            </a>
-			           
-				   	</c:when>
-				   	<c:otherwise>
-						  <button style="float: right;"type="submit" class="btn btn-purple btn-soft mb-1">
-			               	수정
-			            	</button>
-	         		
-		         		<a href="${contextPath }/product/deleteBoardQna.do?product_id=${vo.product_id}&product_qna_num=${qnaList[0].product_qna_num}">
-			            	<button style="float: right;"type="button" class="btn btn-purple btn-soft mb-1">
-			               	삭제
-			            	</button>
-		         		</a>    	
-				   	
-				   	</c:otherwise>
-				   </c:choose>
-		        </p>	
-		        
-=======
+
 						<div id="shadowCollapseTwo" class="collapse"
 							aria-labelledby="cleanHeadingTwo" data-parent="#accordionShadow">
 							<div class="card-body">
@@ -778,7 +774,7 @@
 						class="btn btn-purple btn-soft mb-1">상품문의</button>
 				</a> <br>
 				<br>
->>>>>>> branch 'memberMain' of https://github.com/bitcamp170/web-project.git
+
 			</div>
 			<!-- 글쓰기 -->
 
