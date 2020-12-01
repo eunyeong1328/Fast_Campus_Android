@@ -49,10 +49,10 @@
 			<article>
 			 	<tiles:insertAttribute name="body" />
 			</article>
-			<footer id="footer" class="shadow-xs">
+<%-- 			<footer id="footer" class="shadow-xs">
 				<tiles:insertAttribute name="footer" />
 			</footer>
-		</div>
+ --%>		</div>
 </body>
         
 		<script src="${contextPath}/resources/assets/js/core.js"></script>

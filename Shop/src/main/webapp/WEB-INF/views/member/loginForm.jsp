@@ -15,6 +15,12 @@
 	</script>
 </c:if>
 
+<c:if test='${not empty messagePw}'>
+	<script>
+		alert('${messagePw}');
+	</script>
+</c:if>
+
 	<!-- PAGE TITLE -->
 	<section class="bg-light p-0">
 		<div class="container py-5">
