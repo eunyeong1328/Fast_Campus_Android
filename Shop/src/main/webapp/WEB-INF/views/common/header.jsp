@@ -390,7 +390,7 @@
 							              <!-- 고객센터 -->
 							<li class="list-inline-item mx-1 dropdown d-none d-sm-block">
 	<!--board/notice-tab.do  -->
-								<a href="${contextPath}/cart/myCartList.do" aria-label="signup" class="d-inline-block text-center text-dark">
+								<a href="${contextPath}/board/notice-tab.do" aria-label="signup" class="d-inline-block text-center text-dark">
 									<i class="fi fi-support-headphones fs--20"></i>
 									<span class="d-block font-weight-light fs--14">고객센터</span>
 								</a>
