@@ -43,8 +43,7 @@
 						<!-- insert form -->
 						<div id="memq-insert">
 
-							<form action="memqAdd.do" method="post"
-								enctype="multipart/form-data">
+							<form action="memqAdd.do" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="action" value="memqAdd"> <input
 									type="hidden" name="member_id" value="${memberInfo.member_id }">
 								<div class="memq-title">
@@ -89,8 +88,7 @@
 									<p>이미지</p>
 									<div class="clearfix bg-light p-2 mb-2 rounded">
 
-										<label
-											class="btn btn-warning cursor-pointer position-relative">
+										<label class="btn btn-warning cursor-pointer position-relative">
 
 											<input name="file" multiple="multiple" type="file"
 											data-file-ext="jpg,jpeg,png"
@@ -141,7 +139,7 @@
 								</div>
 								<div class="memq-submit">
 									<input type="submit" value="등록"> <a
-										href="memberQ-tab.do" class="list">목록</a>
+										href="memberQ-tab.do?cPage=${paging.nowPage}" class="list">목록</a>
 								</div>
 							</form>
 

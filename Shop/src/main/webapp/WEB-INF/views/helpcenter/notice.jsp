@@ -46,31 +46,10 @@
 						</p>
 						<div class="image-box">
 							<c:if test="${not empty notice.image}">
-								<c:forTokens var="image" items="${notice.image }" delims=", ">
+								<c:forTokens var="image" items="${notice.image }" delims=",">
 									<img src="${contextPath }/board/fileDownload.do?image=<c:out value="${image}"/>&action=notice" width="20%" height="20%" onclick="imgPop(this.src)">
 								</c:forTokens>
 							</c:if>
-							<script type="text/javascript">
-								function imgPop(url) {
-									var img = new Image();
-									img.src = url;
-									var img_width = img.width;
-									var win_width = img.width + 25;
-									var img_height = img.height;
-									var win = img.height + 30;
-									var OpenWindow = window
-											.open(
-													'',
-													'_blank',
-													'width='
-															+ img_width
-															+ ', height='
-															+ img_height
-															+ ', menubars=no, scrollbars=auto');
-									OpenWindow.document
-											.write("<style>body{margin:0px;}</style><img src='"+url+"' width='"+win_width+"'>");
-								}
-							</script>
 						</div>
 					</div>
 					<div class="prev-next-list">

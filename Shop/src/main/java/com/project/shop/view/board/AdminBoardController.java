@@ -419,6 +419,7 @@ public class AdminBoardController {
 
 //		현재 페이지 구하기
 		String cPage = request.getParameter("cPage");
+		System.out.println("adsfsadf"+cPage);
 		if (cPage != null) {
 			paging.setNowPage(Integer.parseInt(cPage));
 		} else {

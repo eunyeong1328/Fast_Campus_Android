@@ -43,16 +43,6 @@ public class FileController {
 
 		File file = new File(downFile);
 		
-//		if (file.exists()) { 
-//			Thumbnails.of(file).size(300,300).outputFormat("png").toOutputStream(out);
-//		}else {
-//			return;
-//		}
-//		
-//		byte[] buffer = new byte[1024 * 8];
-//		out.write(buffer);
-//		out.close();
-		
 		response.setHeader("Cache-Control", "no-cache");
 		response.addHeader("Content-disposition", "attachment; fileName=" + image);
 		FileInputStream in = new FileInputStream(file);
@@ -67,8 +57,7 @@ public class FileController {
 		out.close();
 	}
 
-	public HashMap<String, Object> fileUpload(MultipartHttpServletRequest multipartRequest,
-			HttpServletResponse response) throws Exception {
+	public HashMap<String, Object> fileUpload(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		Enumeration enu = multipartRequest.getParameterNames();
@@ -83,6 +72,7 @@ public class FileController {
 		String image = fileList.toString();
 		image = image.replaceAll("\\[", "");
 		image = image.replaceAll("\\]", "");
+		image = image.replaceAll(" ", "");
 		System.out.println(image);
 		map.put("image", image);
 		
@@ -99,13 +89,14 @@ public class FileController {
 		for (MultipartFile mfile : mFiles) {
 			
 			String originalFileName = mfile.getOriginalFilename();
+			originalFileName = originalFileName.replaceAll(" ", "");
 			fileList.add(originalFileName);
 			
-			if (action.equals("noticeAdd")) {
+			if (action.equals("noticeAdd") || action.equals("noticeUpdating")) {
 				savePath = notice_file_path + originalFileName;
-			} else if (action.equals("memqAdd")) {
+			} else if (action.equals("memqAdd") || action.equals("memqUpdate")) {
 				savePath = memQ_file_path + originalFileName;
-			} else if (action.equals("memqAdminAdd")) {
+			} else if (action.equals("memqAdminAdd") || action.equals("memqAdminUpdating")) {
 				savePath = memA_file_path + originalFileName;
 			}
 			
