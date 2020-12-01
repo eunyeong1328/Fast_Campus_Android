@@ -51,10 +51,15 @@
 									<div class="category-select">
 										<select name="qna_category_num">
 											<option selected>선택해주세요.</option>
-											<option value="1">배송</option>
-											<option value="2">반품</option>
-											<option value="3">상품</option>
-										</select> <input type="text" name="title">
+											<option value="1">배송지연/불만</option>
+											<option value="2">반품문의</option>
+											<option value="4">환불문의</option>
+											<option value="5">주문결제문의</option>
+											<option value="6">회원정보문의</option>
+											<option value="7">교환문의</option>
+											<option value="8">기타문의</option>
+										</select> 
+										<input type="text" name="title">
 									</div>
 								</div>
 								<div class="memq-order-num">

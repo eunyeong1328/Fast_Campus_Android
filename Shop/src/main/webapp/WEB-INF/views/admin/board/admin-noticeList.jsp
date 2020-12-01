@@ -111,16 +111,17 @@
 												</tbody>
 											</c:if>
 											
+											<tbody id="item_list">
 											<c:if test="${not empty NoticeList}">
 											<c:forEach var="notice" items="${NoticeList}">
-											<tbody id="item_list">
+											
 
 												<!-- item -->
 												<tr id="message_id_2" class="text-muted">
 
 													<td class="hidden-lg-down">
 														<label class="form-checkbox form-checkbox-secondary float-start">
-															<input type="checkbox" name="item_id[]" value="2">
+															<input type="checkbox" name="item_id[]" value="${notice.notice_num}">
 															<i></i>
 														</label>
 													</td>
@@ -133,9 +134,9 @@
 
 														<!-- MOBILE ONLY -->
 														<div class="fs--13 d-block d-xl-none">
-															<span class="d-block text-muted">Visits: 0</span>
+															<span class="d-block text-muted">Visits: ${notice.notice_num}</span>
 															<span class="badge badge-success font-weight-medium fs--12">Active</span>
-															<span class="badge badge-danger font-weight-medium fs--12">Inactive</span>
+<!-- 															<span class="badge badge-danger font-weight-medium fs--12">Inactive</span> -->
 														</div>
 														<!-- /MOBILE ONLY -->
 
@@ -207,9 +208,10 @@
 												</tr>
 												<!-- /item -->
 
-											</tbody>
+											
 											</c:forEach>
 											</c:if>
+											</tbody>
 
 											<tfoot>
 												<tr class="text-muted fs--13">
@@ -292,18 +294,18 @@
 														data-js-form-advanced-bulk-hidden-action-value="delete" 
 														data-js-form-advanced-bulk-container-items="#item_list" 
 														data-js-form-advanced-bulk-required-selected="true" 
-														data-js-form-advanced-bulk-required-txt-error="No Items Selected!" 
+														data-js-form-advanced-bulk-required-txt-error="게시글이 선택되지 않았습니다." 
 														data-js-form-advanced-bulk-required-txt-position="top-center" 
 														data-js-form-advanced-bulk-required-custom-modal="" 
 														data-js-form-advanced-bulk-required-custom-modal-content-ajax="" 
 														data-js-form-advanced-bulk-required-modal-type="danger" 
 														data-js-form-advanced-bulk-required-modal-size="modal-md" 
-														data-js-form-advanced-bulk-required-modal-txt-title="Please Confirm" 
+														data-js-form-advanced-bulk-required-modal-txt-title="확인해주세요!" 
 														data-js-form-advanced-bulk-required-modal-txt-subtitle="Selected Items: {{no_selected}}" 
-														data-js-form-advanced-bulk-required-modal-txt-body-txt="Are you sure? Delete {{no_selected}} selected items?" 
-														data-js-form-advanced-bulk-required-modal-txt-body-info="Please note: this is a permanent action!" 
-														data-js-form-advanced-bulk-required-modal-btn-text-yes="Delete" 
-														data-js-form-advanced-bulk-required-modal-btn-text-no="Cancel" 
+														data-js-form-advanced-bulk-required-modal-txt-body-txt="{{no_selected}}개의 게시글을 선택했습니다. 정말 삭제하시겠습니까?" 
+														data-js-form-advanced-bulk-required-modal-txt-body-info="삭제하면 복구되지 않습니다." 
+														data-js-form-advanced-bulk-required-modal-btn-text-yes="삭제" 
+														data-js-form-advanced-bulk-required-modal-btn-text-no="취소" 
 														data-js-form-advanced-bulk-submit-without-confirmation="false" 
 														data-js-form-advanced-form-id="#form_id">
 														<i class="fi fi-thrash text-danger"></i>
