@@ -13,39 +13,59 @@ public class ProductBoardQnaVO {
 	private String member_id;// 회원 아이디
 	private String title;// 제목
 	private String contents; // 내용
-	private String image; // 이미지
+	private String image1; // 이미지
 	private int qna_category_num; // 질문 카테고리 번호
 	private Date reg_date;// 등록 날짜
 	private int views; // 조회수
 	private int parent_num; // 부모글 번호
 	private int rowNum;
+	private String image2; // 이미지
+	private String image3; // 이미지
 	
 	public ProductBoardQnaVO() {
 
 	}
-
-	
-	
-	
 	public ProductBoardQnaVO(int product_qna_num, String product_id, String member_id, String title, String contents,
-			String image, int qna_category_num, Date reg_date, int views, int parent_num, int rowNum) {
-		super();
+			String image1, int qna_category_num, Date reg_date, int views, int parent_num, int rowNum, String image2,
+			String image3) {
 		this.product_qna_num = product_qna_num;
 		this.product_id = product_id;
 		this.member_id = member_id;
 		this.title = title;
 		this.contents = contents;
-		this.image = image;
+		this.image1 = image1;
 		this.qna_category_num = qna_category_num;
 		this.reg_date = reg_date;
 		this.views = views;
 		this.parent_num = parent_num;
 		this.rowNum = rowNum;
+		this.image2 = image2;
+		this.image3 = image3;
 	}
 
 
 
 
+
+
+	public String getImage1() {
+		return image1;
+	}
+	public void setImage1(String image1) {
+		this.image1 = image1;
+	}
+	public String getImage2() {
+		return image2;
+	}
+	public void setImage2(String image2) {
+		this.image2 = image2;
+	}
+	public String getImage3() {
+		return image3;
+	}
+	public void setImage3(String image3) {
+		this.image3 = image3;
+	}
 	public int getRowNum() {
 		return rowNum;
 	}
@@ -94,14 +114,7 @@ public class ProductBoardQnaVO {
 		this.contents = contents;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
+	
 	public int getqna_category_num() {
 		return qna_category_num;
 	}

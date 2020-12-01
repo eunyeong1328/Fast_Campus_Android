@@ -320,7 +320,7 @@
 
 							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
 
-								<a href="shop-page-product-2.html" class="d-block text-decoration-none">
+								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[0].product_id}" class="d-block text-decoration-none">
 
 									<!-- 
 										
@@ -388,30 +388,8 @@
 
 							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
 
-								<a href="shop-page-product-2.html" class="d-block text-decoration-none">
+								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[1].product_id}" class="d-block text-decoration-none">
 
-									<!-- 
-										
-										3 ways to set the image
-
-									-->
-
-									<!-- 1. without .bg-suprime - use image as it is -->
-									<!--
-									<figure class="m-0 text-center rounded-top overflow-hidden">
-										<img class="img-fluid" src="image.jpg" alt="..."> 
-									</figure>
-									-->
-
-
-									<!-- 2. squared, as background -->
-									<!--
-									<figure class="m-0 text-center rounded-top overflow-hidden bg-cover" style="background-image:url('image.jpg')">
-										<img class="w-100" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="..."> 
-									</figure>
-									-->
-
-									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
 										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[1].product_image}" alt="...">
 									</figure>
@@ -469,30 +447,8 @@
 
 							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
 
-								<a href="shop-page-product-2.html" class="d-block text-decoration-none">
+								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[2].product_id}" class="d-block text-decoration-none">
 
-									<!-- 
-										
-										3 ways to set the image
-
-									-->
-
-									<!-- 1. without .bg-suprime - use image as it is -->
-									<!--
-									<figure class="m-0 text-center rounded-top overflow-hidden">
-										<img class="img-fluid" src="image.jpg" alt="..."> 
-									</figure>
-									-->
-
-
-									<!-- 2. squared, as background -->
-									<!--
-									<figure class="m-0 text-center rounded-top overflow-hidden bg-cover" style="background-image:url('image.jpg')">
-										<img class="w-100" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="..."> 
-									</figure>
-									-->
-
-									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
 										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[2].product_image}" alt="...">
 									</figure>
@@ -537,30 +493,8 @@
 
 							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
 
-								<a href="shop-page-product-2.html" class="d-block text-decoration-none">
+								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[3].product_id}" class="d-block text-decoration-none">
 
-									<!-- 
-										
-										3 ways to set the image
-
-									-->
-
-									<!-- 1. without .bg-suprime - use image as it is -->
-									<!--
-									<figure class="m-0 text-center rounded-top overflow-hidden">
-										<img class="img-fluid" src="image.jpg" alt="..."> 
-									</figure>
-									-->
-
-
-									<!-- 2. squared, as background -->
-									<!--
-									<figure class="m-0 text-center rounded-top overflow-hidden bg-cover" style="background-image:url('image.jpg')">
-										<img class="w-100" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="..."> 
-									</figure>
-									-->
-
-									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
 										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[3].product_image}" alt="..."> 
 									</figure>
@@ -605,30 +539,9 @@
 
 							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
 
-								<a href="shop-page-product-2.html" class="d-block text-decoration-none">
+								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[4].product_id}" class="d-block text-decoration-none">
 
-									<!-- 
-										
-										3 ways to set the image
-
-									-->
-
-									<!-- 1. without .bg-suprime - use image as it is -->
-									<!--
-									<figure class="m-0 text-center rounded-top overflow-hidden">
-										<img class="img-fluid" src="image.jpg" alt="..."> 
-									</figure>
-									-->
-
-
-									<!-- 2. squared, as background -->
-									<!--
-									<figure class="m-0 text-center rounded-top overflow-hidden bg-cover" style="background-image:url('image.jpg')">
-										<img class="w-100" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="..."> 
-									</figure>
-									-->
-
-									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
+									
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
 										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[4].product_image}" alt="...">
 									</figure>
@@ -673,30 +586,8 @@
 
 							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
 
-								<a href="shop-page-product-2.html" class="d-block text-decoration-none">
+								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[5].product_id}" class="d-block text-decoration-none">
 
-									<!-- 
-										
-										3 ways to set the image
-
-									-->
-
-									<!-- 1. without .bg-suprime - use image as it is -->
-									<!--
-									<figure class="m-0 text-center rounded-top overflow-hidden">
-										<img class="img-fluid" src="image.jpg" alt="..."> 
-									</figure>
-									-->
-
-
-									<!-- 2. squared, as background -->
-									<!--
-									<figure class="m-0 text-center rounded-top overflow-hidden bg-cover" style="background-image:url('image.jpg')">
-										<img class="w-100" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="..."> 
-									</figure>
-									-->
-
-									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
 										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[5].product_image}" alt="..."> 
 									</figure>
@@ -824,7 +715,7 @@
 
 							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
 
-								<a href="shop-page-product-2.html" class="d-block text-decoration-none">
+								<a href="${contextPath}/product/productDetail.do?product_id=${newlist.product_id}" class="d-block text-decoration-none">
 
 									<!-- 
 										

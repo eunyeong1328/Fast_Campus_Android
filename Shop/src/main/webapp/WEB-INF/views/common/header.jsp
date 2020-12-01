@@ -259,20 +259,20 @@
 								<!-- dropdown -->
 								<div aria-labelledby="dropdownAccountOptions" class="prefix-link-icon prefix-icon-dot dropdown-menu dropdown-menu-clean dropdown-menu-invert dropdown-click-ignore p-0 mt--18 fs--15">
 									<div class="dropdown-header">
-										${memberInfo.member_id }님
+										${memberInfo.member_name }님
 									</div>
 
 									<div class="dropdown-divider"></div>
 
 									<a href="${contextPath}/myaccount/account-orders.do" title="My Orders" class="dropdown-item text-truncate font-weight-light">
-										내 주문 <small>(2)</small>
+										내 주문
 									</a>
 
 									<a href="${contextPath}/myaccount/account-favourites.do" title="My Favourites" class="dropdown-item text-truncate font-weight-light">
-										찜 리스트 <small>(3)</small>
+										찜 리스트
 									</a>
 
-									<a href="${contextPath}/myaccount/account-settings.do?member_id=${memberInfo.member_id }" title="Account Settings" class="dropdown-item text-truncate font-weight-light">
+									<a href="${contextPath}/myaccount/account-settings.do" title="Account Settings" class="dropdown-item text-truncate font-weight-light">
 										마이페이지 
 									</a>
 
@@ -302,7 +302,7 @@
 			
 
 
-							<!-- 장바구니 -->
+								<!-- cart -->
 							<li class="list-inline-item mx-1 dropdown">
 								
 								<a href="#" aria-label="My Cart" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="d-inline-block text-center text-dark">
@@ -313,7 +313,7 @@
 
 								<!-- dropdown -->
 								<div aria-labelledby="dropdownAccount" id="dropdownAccount" class="dropdown-menu dropdown-menu-clean dropdown-menu-invert dropdown-click-ignore mt--18 w--300 p-0"> 
-									<div class="p-3">장바구니</div> 
+									<div class="p-3">Cart Products</div> 
 
 									<!--
 									<div class="pt-5 pb-5 text-center bg-light">
@@ -329,7 +329,7 @@
 										<div class="clearfix d-block px-3 py-3 border-top">
 
 											<div class="h--50 overflow-hidden float-start mt-1"> 
-												<img width="40" src="${contextPath}/resources/demo.files/images/unsplash/products/thumb_330/barrett-ward-fYYUgvHYgpU-unsplash-min.jpg" alt="...">
+												<img width="40" src="demo.files/images/unsplash/products/thumb_330/barrett-ward-fYYUgvHYgpU-unsplash-min.jpg" alt="...">
 											</div> 
 
 											<a href="#!" class="fs--15 d-block position-relative">
@@ -347,7 +347,7 @@
 										<div class="clearfix d-block px-3 py-3 border-top">
 
 											<div class="h--50 overflow-hidden float-start mt-1"> 
-												<img width="40" src="${contextPath}/resources/demo.files/images/unsplash/products/thumb_330/hardik-sharma-CrPAvN29Nhs-unsplash-min.jpg" alt="...">
+												<img width="40" src="demo.files/images/unsplash/products/thumb_330/hardik-sharma-CrPAvN29Nhs-unsplash-min.jpg" alt="...">
 											</div> 
 
 											<a href="#!" class="fs--15 d-block position-relative">
@@ -367,15 +367,15 @@
 
 									<!-- subtotal -->
 									<div class="fs--14 text-align-start border-top px-3 py-2">
-										합계: <span class="float-end">$196.00</span>
+										Subtotal: <span class="float-end">$196.00</span>
 									</div>
 
 
 									<!-- go to cart button -->
 									<div class="clearfix border-top p-3">
 										
-										<a href="#!" class="btn btn-primary btn-sm btn-block">
-											<span>장바구니로 가기</span>
+										<a href="${contextPath}/cart/myCartList.do" class="btn btn-primary btn-sm btn-block">
+											<span>Go to Cart</span>
 											<i class="fi fi-arrow-end fs--12"></i>
 										</a>
 
@@ -389,7 +389,7 @@
 							
 							              <!-- 고객센터 -->
 							<li class="list-inline-item mx-1 dropdown d-none d-sm-block">
-
+	<!--board/notice-tab.do  -->
 								<a href="${contextPath}/board/notice-tab.do" aria-label="signup" class="d-inline-block text-center text-dark">
 									<i class="fi fi-support-headphones fs--20"></i>
 									<span class="d-block font-weight-light fs--14">고객센터</span>

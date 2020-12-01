@@ -58,7 +58,6 @@ public class ProductDAO {
 	
 	public int insertProduct (ProductVO vo) {
 		sqlSession.insert("mappers.product.insertProduct",vo);
-		sqlSession.insert("mappers.product.insertProductOption",vo);
 		return sqlSession.insert("mappers.product.insertItem",vo);
 	}
 	
@@ -77,7 +76,9 @@ public class ProductDAO {
 	}
 	public void updateOne(ProductVO vo) {
 		sqlSession.update("mappers.product.updateItem", vo);
+		sqlSession.update("mappers.product.updateItem", vo);
 		sqlSession.update("mappers.product.updateProduct", vo);
+		
 	}
 	public List<ProductVO> loadOption(String rq) {
 		return sqlSession.selectList("mappers.product.loadOption", rq);
@@ -87,5 +88,17 @@ public class ProductDAO {
 	}
 	public void insertOption(ProductVO vo) {
 		sqlSession.insert("mappers.product.insertProductOption",vo);
+	}
+	public String checkProduct(String id) {
+		return sqlSession.selectOne("mappers.product.checkProduct", id);
+	}
+	public String checkItem(String id) {
+		return sqlSession.selectOne("mappers.product.checkItem", id);
+	}
+	public int getTotalCount() {
+		return sqlSession.selectOne("mappers.product.totalList");
+	}
+	public List<ProductVO> listProduct(Map map) {
+		return sqlSession.selectList("mappers.product.listProduct",map );
 	}
 }

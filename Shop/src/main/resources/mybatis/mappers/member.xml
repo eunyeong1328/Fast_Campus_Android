@@ -31,6 +31,13 @@
 			and password = #{password}
 		]]>
 	</select>
+	
+	<select id="SnsLogin" parameterType="memberVO" resultType="memberVO">
+		<![CDATA[
+			select * from member
+			where member_id = #{member_id}
+		]]>
+	</select>
 
 	<!-- cdata[ 사용이유 : 특수문자 사용하는데 제한을 푼다. -->
 	<insert id="insertNewMember" parameterType="memberVO">
@@ -44,7 +51,8 @@
 								load_address,
 								jibun_address,  
 								rest_address,
- 								birthday) values(
+ 								birthday,
+ 								member_status) values(
  								#{member_id},
  								 #{password}, 
  								 #{member_name},
@@ -54,16 +62,37 @@
 								#{load_address},
 								  #{jibun_address}, 
 								  #{rest_address},
-								   #{birthday}
+								   #{birthday},
+								   #{member_status}
 								   )
 								   ]]>
 		
 	</insert>
+	
 	
 	<select id="selectOverlappedID" parameterType="String" resultType="String">
 	   select decode(count(*),1, 'true', 0, 'false')
 	   from member
 	   where member_id = #{id}
 	</select>
+	
+	<select id="findEmailInfo" parameterType="String" resultType="memberVO">
+			select * from member
+			where member_id = #{member_id}
+	</select>
+	
+	<!-- 이메일로 받은 패스워드 수정 -->
+	<update id="updateUserPassword" parameterType="java.util.HashMap">
+		update member set password = #{password}
+		where member_id = #{member_id}
+	</update>
+	
+	<!-- 비밀번호 찾기에서 패스워드 수정 -->
+	<update id="modifyPassword" parameterType="java.util.HashMap">
+		update member set password = #{password}
+		where member_id = #{member_id}
+	</update>
+	
+	
 	
 </mapper>

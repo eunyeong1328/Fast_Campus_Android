@@ -11,21 +11,35 @@
 		<put-attribute name="title" value="쩝쩝박사 :: 너도 할 수 있어, 쩝쩝박사" />
 		<put-attribute name="header"
 			value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
 	
+	<!-- 상품 카테고리  -->
 	<definition name="/product/productList" extends="baseLayout">
 		<put-attribute name="body"
 			value="/WEB-INF/views/product/productList.jsp" />
 	</definition>
-	
+	<!-- 상품 상세 -->
 	<definition name="/product/productDetail" extends="baseLayout">
 		<put-attribute name="body"
 			value="/WEB-INF/views/product/productDetail.jsp" />
 	</definition>
-	
-	<definition name="/product/productBoardQnaForm" extends="baseLayout">
+	<!-- 상품문의 글쓰기 폼 -->
+	<definition name="/product/insertQnaForm" extends="baseLayout">
 		<put-attribute name="body"
-			value="/WEB-INF/views/product/productBoardQnaForm.jsp" />
+			value="/WEB-INF/views/product/insertQnaForm.jsp" />
+	</definition>
+	<!-- 상품문의 글수정 폼 -->
+	<definition name="/product/updateQnaForm" extends="baseLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/updateQnaForm.jsp" />
 	</definition>
 	
+	
+	<!-- REVIEW 글쓰기 폼 -->
+	<definition name="/product/insertReviewForm" extends="baseLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/product/insertReviewForm.jsp" />
+	</definition>
 </tiles-definitions>

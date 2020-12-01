@@ -38,12 +38,100 @@ public class ProductVO {
 	
 	private int sale_price;
 	
+	//cart
+	private int quantity;
+	private int cart_id;
 	
+	public int getCart_id() {
+		return cart_id;
+	}
+
+
+	public ProductVO(String product_id, String product_name, String product_detail, int sales_unit, int product_size,
+			String packing_type, String product_image, String supplier, String product_detail_image,
+			int product_category_num, String product_category_name, String option_name, int option_price,
+			int option_quantity, int item_num, int price, int stock, int sales, int discount, Date reg_date,
+			int unit_price, int sale_price, int quantity, int cart_id) {
+		super();
+		this.product_id = product_id;
+		this.product_name = product_name;
+		this.product_detail = product_detail;
+		this.sales_unit = sales_unit;
+		this.product_size = product_size;
+		this.packing_type = packing_type;
+		this.product_image = product_image;
+		this.supplier = supplier;
+		this.product_detail_image = product_detail_image;
+		this.product_category_num = product_category_num;
+		this.product_category_name = product_category_name;
+		this.option_name = option_name;
+		this.option_price = option_price;
+		this.option_quantity = option_quantity;
+		this.item_num = item_num;
+		this.price = price;
+		this.stock = stock;
+		this.sales = sales;
+		this.discount = discount;
+		this.reg_date = reg_date;
+		this.unit_price = unit_price;
+		this.sale_price = sale_price;
+		this.quantity = quantity;
+		this.cart_id = cart_id;
+	}
+
+
+	public void setCart_id(int cart_id) {
+		this.cart_id = cart_id;
+	}
+
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+	public ProductVO(String product_id, String product_name, String product_detail, int sales_unit, int product_size,
+			String packing_type, String product_image, String supplier, String product_detail_image,
+			int product_category_num, String product_category_name, String option_name, int option_price,
+			int option_quantity, int item_num, int price, int stock, int sales, int discount, Date reg_date,
+			int unit_price, int sale_price, int quantity) {
+		super();
+		this.product_id = product_id;
+		this.product_name = product_name;
+		this.product_detail = product_detail;
+		this.sales_unit = sales_unit;
+		this.product_size = product_size;
+		this.packing_type = packing_type;
+		this.product_image = product_image;
+		this.supplier = supplier;
+		this.product_detail_image = product_detail_image;
+		this.product_category_num = product_category_num;
+		this.product_category_name = product_category_name;
+		this.option_name = option_name;
+		this.option_price = option_price;
+		this.option_quantity = option_quantity;
+		this.item_num = item_num;
+		this.price = price;
+		this.stock = stock;
+		this.sales = sales;
+		this.discount = discount;
+		this.reg_date = reg_date;
+		this.unit_price = unit_price;
+		this.sale_price = sale_price;
+		this.quantity = quantity;
+	}
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+
 	public ProductVO() {
 		
 	}
-	
-	
+
+
 	public ProductVO(String product_id, String product_name, String product_detail, int sales_unit, int product_size,
 			String packing_type, String product_image, String supplier, String product_detail_image,
 			int product_category_num, String product_category_name, String option_name, int option_price,
@@ -72,7 +160,6 @@ public class ProductVO {
 		this.unit_price = unit_price;
 		this.sale_price = sale_price;
 	}
-
 
 	public String getProduct_detail_image() {
 		return product_detail_image;
@@ -255,10 +342,12 @@ public class ProductVO {
 		return "ProductVO [product_id=" + product_id + ", product_name=" + product_name + ", product_detail="
 				+ product_detail + ", sales_unit=" + sales_unit + ", product_size=" + product_size + ", packing_type="
 				+ packing_type + ", product_image=" + product_image + ", supplier=" + supplier
-				+ ", product_category_num=" + product_category_num + ", product_category_name=" + product_category_name
-				+ ", option_name=" + option_name + ", option_price=" + option_price + ", option_quantity="
-				+ option_quantity + ", item_num=" + item_num + ", price=" + price + ", stock=" + stock + ", sales="
-				+ sales + ", discount=" + discount + ", reg_date=" + reg_date + ", unit_price=" + unit_price + "]";
+				+ ", product_detail_image=" + product_detail_image + ", product_category_num=" + product_category_num
+				+ ", product_category_name=" + product_category_name + ", option_name=" + option_name
+				+ ", option_price=" + option_price + ", option_quantity=" + option_quantity + ", item_num=" + item_num
+				+ ", price=" + price + ", stock=" + stock + ", sales=" + sales + ", discount=" + discount
+				+ ", reg_date=" + reg_date + ", unit_price=" + unit_price + ", sale_price=" + sale_price + ", quantity="
+				+ quantity + ", cart_id=" + cart_id + "]";
 	}
 	
 }

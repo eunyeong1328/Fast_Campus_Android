@@ -1,6 +1,7 @@
 package com.project.shop.product.impl;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -94,42 +95,45 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public List<ProductVO> newList() {
-		return productDAO.bestList();
+		return productDAO.newList();
 	}
 
 	@Override
-	public int insertProduct(ProductVO vo,MultipartHttpServletRequest request) {
+	public int insertProduct(ProductVO vo,MultipartHttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
 		//파일 저장
-		System.out.println(vo);
+//		System.out.println(vo);
 		//이미지 파일 저장 경로
 		File dir = new File("C:"+File.separator+"Users"+File.separator+"bitcamp"+File.separator+"git"+File.separator+"web-project"+File.separator+"Shop"+File.separator+"src"
-				+File.separator+"main"+File.separator+"webapp"+File.separator+"resources"+File.separator+"images"+File.separator+"item_image"); 
+				+File.separator+"main"+File.separator+"webapp"+File.separator+"resources"+File.separator+"images"+File.separator+"product"+File.separator+vo.getProduct_id()); 
 		//업로드할 폴더 존재하지 않으면 생성
 		if(!dir.exists()) { 
             dir.mkdirs();
         }
-        
+		
 		Iterator<String> iterator = request.getFileNames();
 		String uploadFileName;
 		MultipartFile mFile = null;
-        String orgFileName = ""; //진짜 파일명
-               
+//        String orgFileName = ""; //진짜 파일명
+        int num = 0;
         while(iterator.hasNext()) {
-            uploadFileName = iterator.next();
+        	uploadFileName = iterator.next();
             mFile = request.getFile(uploadFileName);
             
-            orgFileName = mFile.getOriginalFilename();    
-            
-            if(orgFileName != null && orgFileName.length() != 0) { //sysFileName 생성
+//            orgFileName = mFile.getOriginalFilename();    
+//            System.out.println(orgFileName);
+            if(mFile != null) { //sysFileName 생성
                try {                    
-                    mFile.transferTo(new File(dir + File.separator + orgFileName)); // C:/Upload/sysFileName 파일 저장
+                    mFile.transferTo(new File(dir + File.separator + num+"_"+vo.getProduct_id()+".jpg")); // C:/Upload/sysFileName 파일 저장
+                    num++;
                 }catch(Exception e){
                     e.printStackTrace();
                 }
             }//if
+            vo.setProduct_image("1_"+vo.getProduct_id()+".jpg");
+            vo.setProduct_detail_image("2_"+vo.getProduct_id()+".jpg");
         }//while
-        vo.setProduct_image(orgFileName);
-        System.out.println(vo);
+//        System.out.println(vo);
 		
 		//DB에 상품 추가
 		return productDAO.insertProduct(vo);
@@ -152,38 +156,40 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public void updateProduct(ProductVO vo, MultipartHttpServletRequest request) {
+	public void updateProduct(ProductVO vo, MultipartHttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
 		//파일 저장
-		System.out.println(vo);
+//		System.out.println(vo);
 		//이미지 파일 저장 경로
 		File dir = new File("C:"+File.separator+"Users"+File.separator+"bitcamp"+File.separator+"git"+File.separator+"web-project"+File.separator+"Shop"+File.separator+"src"
-				+File.separator+"main"+File.separator+"webapp"+File.separator+"resources"+File.separator+"images"+File.separator+"item_image"); 
+				+File.separator+"main"+File.separator+"webapp"+File.separator+"resources"+File.separator+"images"+File.separator+"product"+File.separator+vo.getProduct_id()); 
 		//업로드할 폴더 존재하지 않으면 생성
 		if(!dir.exists()) { 
-			dir.mkdirs();
-		  }
-		        
+            dir.mkdirs();
+        }
+		
 		Iterator<String> iterator = request.getFileNames();
 		String uploadFileName;
 		MultipartFile mFile = null;
-		String orgFileName = ""; //진짜 파일명
-		               
-		while(iterator.hasNext()) {
-			uploadFileName = iterator.next();
-			mFile = request.getFile(uploadFileName);
-		            
-			orgFileName = mFile.getOriginalFilename();    
-		            
-			if(orgFileName != null && orgFileName.length() != 0) { //sysFileName 생성
-		    try {                    
-		    	mFile.transferTo(new File(dir + File.separator + orgFileName)); // C:/Upload/sysFileName 파일 저장
-		    	}catch(Exception e){
-		        e.printStackTrace();
-		        }
-			}//if
-		}//while
-		vo.setProduct_image(orgFileName);
-		System.out.println(vo);
+//        String orgFileName = ""; //진짜 파일명
+        int num = 0;
+        while(iterator.hasNext()) {
+        	uploadFileName = iterator.next();
+            mFile = request.getFile(uploadFileName);
+            
+//            orgFileName = mFile.getOriginalFilename();    
+//            System.out.println(orgFileName);
+            if(mFile != null) { //sysFileName 생성
+               try {                    
+                    mFile.transferTo(new File(dir + File.separator + num+"_"+vo.getProduct_id()+".jpg")); // C:/Upload/sysFileName 파일 저장
+                    num++;
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }//if
+            vo.setProduct_image("1_"+vo.getProduct_id()+".jpg");
+            vo.setProduct_detail_image("2_"+vo.getProduct_id()+".jpg");
+        }//while
 		        
 		productDAO.updateOne(vo);
 		
@@ -202,6 +208,63 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void insertOption(ProductVO vo ) {
 		productDAO.insertOption(vo);
+	}
+
+	@Override
+	public String checkProduct(String id) {
+		return productDAO.checkProduct(id);
+	}
+
+	@Override
+	public String checkItem(String id) {
+		return productDAO.checkItem(id);
+	}
+	
+	@Override
+	public Paging pageList(String cPage) throws Exception {
+		if(cPage == null) {
+			cPage="1";
+		}
+		// 1. 전체 게시물의 수를 구하기
+		p.setTotalRecord(getTotalCount()); // 전체 product 수 설정
+		p.setTotalPage(); // 전체 페이지 갯수 구하기
+
+		// 2. 현재 페이지 구하기
+		if (cPage != null) {
+			p.setNowPage(Integer.parseInt(cPage));
+		}
+
+		// 3. 현재 페이지에 표시할 게시글 시작번호(begin), 끝번호(end) 구하기
+		p.setEnd(p.getNowPage() * p.getNumPerPage());
+		p.setBegin(p.getEnd() - p.getNumPerPage() + 1);
+
+		// 4. 블록(block) 계산하기(블록의 시작, 끝페이지 구하기)
+		int nowPage = p.getNowPage();
+		int currentBlock = (nowPage - 1) / p.getPagePerBlock() + 1;
+		p.setEndPage(currentBlock * p.getPagePerBlock());
+		p.setBeginPage(p.getEndPage() - p.getPagePerBlock() + 1);
+
+		// 5. 끝페이지(endPage)가 전체 페이지 수(totalPage) 보다 크면
+		// 끝페이지 값을 전체페이지수로 변경처리
+		if (p.getEndPage() > p.getTotalPage()) {
+			p.setEndPage(p.getTotalPage());
+		}
+		return p;
+	}
+
+	@Override
+	public int getTotalCount() throws Exception {
+		return productDAO.getTotalCount();
+	}
+
+	@Override
+	public List<ProductVO> listProduct(int begin,int end) {
+		Map map = new HashMap();
+		map.put("begin", begin);
+		map.put("end", end);
+		
+		return productDAO.listProduct(map);
+	
 	}
 
 }

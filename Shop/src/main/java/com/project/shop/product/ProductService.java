@@ -17,12 +17,17 @@ public interface ProductService {
 	//상연
 	public List<ProductVO> bestList();
 	public List<ProductVO> newList();
-	public int insertProduct(ProductVO vo,MultipartHttpServletRequest request);
+	public int insertProduct(ProductVO vo,MultipartHttpServletRequest request) throws Exception;
 	public List<ProductVO> allList();
 	public void deleteProduct(String request);
 	public List<ProductVO> loadOne(String request);
-	public void updateProduct(ProductVO vo, MultipartHttpServletRequest request);
+	public void updateProduct(ProductVO vo, MultipartHttpServletRequest request) throws Exception;
 	public List<ProductVO> loadOption(String request);
 	public void deleteOption(String name);
 	public void insertOption(ProductVO vo);
+	public String checkProduct(String id);
+	public String checkItem(String id);
+	public Paging pageList(String cPage) throws Exception;
+	public int getTotalCount() throws Exception;
+	public List<ProductVO> listProduct(int begin,int end);
 }

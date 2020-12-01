@@ -68,5 +68,18 @@ public class FileDownloadController{
 		in.close();
 		out.close();
 	}
-	
+	@RequestMapping("/product/qnaDownload.do")
+	public void qnaDownload(@RequestParam("qna_image") String imageFileName,
+					HttpServletResponse response) throws Exception{
+		OutputStream out = response.getOutputStream();
+		String filePath="C:\\board\\"+imageFileName;
+		File image=new File(filePath);
+		
+		if (image.exists()) { 
+			Thumbnails.of(image).size(200,200).outputFormat("png").toOutputStream(out);
+		}
+		byte[] buffer = new byte[1024 * 8];
+		out.write(buffer);
+		out.close();
+	}
 }

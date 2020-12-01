@@ -29,16 +29,17 @@
         <link rel="stylesheet" href="${contextPath}/resources/assets/css/vendor_bundle.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
 
-		<!-- favicon -->
-		<link rel="shortcut icon" href="${contextPath}/resources/images/fvc.svg">
-		<link rel="apple-touch-icon" href="${contextPath}/resources/images/fvc.svg">
+      	<!-- favicon -->
+      	<link rel="shortcut icon" href="${contextPath}/resources/images/fvc.svg">
+      	<link rel="apple-touch-icon" href="${contextPath}/resources/images/fvc.svg">
 
 		<link rel="manifest" href="${contextPath}/resources/assets/images/manifest/manifest.json">
 		<meta name="theme-color" content="#377dff">
 		
 		<!-- 구글 로그인 api -->
   		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-  		<script src="https://apis.google.com/js/api:client.js"></script>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<script src="https://apis.google.com/js/api:client.js"></script>
   		<script src="http://code.jquery.com/jquery-latest.js"></script>
 
 		<!--font-->
@@ -52,7 +53,7 @@
 			
 			<tiles:insertAttribute name="body" />
 	
-			<tiles:insertAttribute name="footer" ignore="true" />
+			<tiles:insertAttribute name="footer" />
 			
 		</div><!-- /#wrapper -->
 
@@ -71,7 +72,7 @@
 			data-ajax-modal-backdrop=""></div>
 
 
-		<script src="${contextPath}/resources/assets/js/core.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/core.js"></script>
 		
 	</body>
 </html>

@@ -110,7 +110,7 @@
 
 		<tiles:insertAttribute name="body" />
 
-		<tiles:insertAttribute name="footer" ignore="true" />
+		<tiles:insertAttribute name="footer" />
 
 	</div>
 	
