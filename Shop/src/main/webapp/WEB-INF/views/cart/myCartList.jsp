@@ -253,23 +253,24 @@
 			<!-- /CART -->
 		</c:when>
 		<c:otherwise>
-			<!-- PAGE TITLE -->
-			<section class="bg-light p-0">
-				<div class="container py-5">
+    <!-- PAGE TITLE -->
+         <section class="bg-light p-0">
+            <div class="container py-5">
 
-					<h1 class="h3">장바구니</h1>
+               <h1 class="h3">
+                  장바구니
+               </h1>
 
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb fs--14">
-							<li class="breadcrumb-item"><a href="#!">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">My
-								Cart</li>
-						</ol>
-					</nav>
+               <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb fs--14">
+                     <li class="breadcrumb-item"><a href="#!">Home</a></li>
+                     <li class="breadcrumb-item active" aria-current="page">My Cart</li>
+                  </ol>
+               </nav>
 
-				</div>
-			</section>
-			<!-- /PAGE TITLE -->
+            </div>
+         </section>
+         <!-- /PAGE TITLE -->
 
 			<!-- CART -->
 			<section>
@@ -280,7 +281,7 @@
 						<div class="col-12 col-md-8 col-lg-9 order-md-1 mb-5">
 
 							<form method="post" action="#" name="form">
-
+							
 
 								<!-- ITEM -->
 								<div class="cart-item shadow-xs p-3 mb-4 rounded border">
@@ -587,7 +588,7 @@
 
 					<div class="pl--10 pr--20 fs--50 line-height-1 pt--6">
 						<img width="60" height="60"
-							src="demo.files/svg/ecommerce/money_bag.svg" alt="...">
+							src="${contextPath}/resources/demo.files/svg/ecommerce/money_bag.svg" alt="...">
 					</div>
 
 					<div class="my-2">
@@ -606,7 +607,7 @@
 
 					<div class="pl--10 pr--20 fs--50 line-height-1 pt--6">
 						<img width="60" height="60"
-							src="demo.files/svg/ecommerce/free-delivery-truck.svg" alt="...">
+							src="${contextPath}/resources/demo.files/svg/ecommerce/free-delivery-truck.svg" alt="...">
 					</div>
 
 					<div class="my-2">
@@ -625,7 +626,7 @@
 
 					<div class="pl--10 pr--20 fs--50 line-height-1 pt--6">
 						<img width="60" height="60"
-							src="demo.files/svg/ecommerce/24-hours-phone-service.svg"
+							src="${contextPath}/resources/demo.files/svg/ecommerce/24-hours-phone-service.svg"
 							alt="...">
 					</div>
 
@@ -645,7 +646,7 @@
 
 					<div class="pl--10 pr--20 fs--50 line-height-1 pt--6">
 						<img width="60" height="60"
-							src="demo.files/svg/ecommerce/handshake.svg" alt="...">
+							src="${contextPath}/resources/demo.files/svg/ecommerce/handshake.svg" alt="...">
 					</div>
 
 					<div class="my-2">
