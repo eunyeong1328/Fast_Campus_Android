@@ -7,7 +7,9 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-
+<script>
+	글씨 파랗게 만들기 (.active)
+</script>
 	
 			<!-- PAGE TITLE -->
 			<section class="bg-light p-0">
@@ -32,70 +34,7 @@
 
 					<div class="row">
 
-						<div class="col-12 col-sm-12 col-md-12 col-lg-3 mb--60">
-
-							<nav class="sticky-kit nav-deep nav-deep-light">
-
-								<!-- mobile only -->
-								<button
-									class="clearfix btn btn-toggle btn-sm btn-block text-align-left shadow-md border rounded mb-1 d-block d-lg-none"
-									data-target="#nav_responsive"
-									data-toggle-container-class="d-none d-sm-block bg-white shadow-md border animate-fadein rounded p-3">
-									<span class="group-icon px-2 py-2 float-start"> <i
-										class="fi fi-bars-2"></i> <i class="fi fi-close"></i>
-									</span> <span class="h5 py-2 m-0 float-start"> 계정 메뉴</span>
-								</button>
-
-								<!-- desktop only -->
-								<h5 class="pt-3 pb-3 m-0 d-none d-lg-block">계정 메뉴</h5>
-
-
-								<!-- navigation -->
-								<ul id="nav_responsive"
-									class="nav flex-column d-none d-lg-block">
-
-									<li class="nav-item active"><a class="nav-link px-0"
-										href="${contextPath}/myaccount/account-orders.do"> <i
-											class="fi fi-arrow-end m-0 fs--12"></i> <span
-											class="px-2 d-inline-block"> 내 주문 </span>
-									</a></li>
-
-									<li class="nav-item"><a class="nav-link px-0"
-										href="${contextPath}/myaccount/account-favourites.do"> <i
-											class="fi fi-arrow-end m-0 fs--12"></i> <span
-											class="px-2 d-inline-block"> 찜 리스트 </span>
-									</a></li>
-
-									<li class="nav-item"><a class="nav-link px-0"
-										href="${contextPath}/myaccount/account-settings.do"> <i
-											class="fi fi-arrow-end m-0 fs--12"></i> <span
-											class="px-2 d-inline-block"> 마이 페이지 </span>
-									</a></li>
-
-									<li class="nav-item"><a class="nav-link px-0" href="#">
-											<span class="group-icon"> <i class="fi fi-arrow-end"></i>
-												<i class="fi fi-arrow-down"></i>
-										</span> <span class="px-2 d-inline-block"> Multi level </span>
-									</a>
-
-										<ul class="nav flex-column px-3">
-											<li class="nav-item"><a class="nav-link" href="#">
-													Option 1 </a></li>
-											<li class="nav-item"><a class="nav-link" href="#">
-													Option 2 </a></li>
-											<li class="nav-item"><a class="nav-link" href="#">
-													Option 3 </a></li>
-										</ul></li>
-
-									<li class="nav-item"><a class="nav-link px-0" href="${contextPath}/member/logout.do">
-											<i class="fi fi-power"></i> 로그아웃
-									</a></li>
-
-								</ul>
-
-							</nav>
-
-						</div>
+				<jsp:include page="/WEB-INF/views/myaccount/account-navi.jsp" />
 
 
 						<div class="col-12 col-sm-12 col-md-12 col-lg-9">
@@ -133,17 +72,16 @@
 								class="clearfix p-3 shadow-xs shadow-md-hover mb-3 rounded bg-white">
 
 								<h2 class="fs--18">
-									<a href="account-order-detail.html" class="float-end fs--12">
-										ORDER DETAIL </a> <a href="account-order-detail.html"
-										class="text-dark"> Order #1487 </a>
+									<a href="${contextPath }/orders/account-order-detail.do?" class="float-end fs--12">
+										주문 상세보기 </a> <a href="${contextPath }/orders/account-order-detail.do?"
+										class="text-dark"> 주문 #1487 </a>
 								</h2>
 
 								<p class="mb-0 fs--14">Date: November 23, 2019, 11:38 |
 									Total: $2796.45</p>
 
 								<p class="mb-0 fs--14">
-									Status:&nbsp; <span class="text-warning font-weight-normal">Pending
-										/ New</span>
+									Status:&nbsp; <span class="text-warning font-weight-normal">결제완료</span>
 								</p>
 
 							</div>

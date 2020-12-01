@@ -88,6 +88,21 @@ public class OrdersController extends BaseController {
 		
 	}
 	
+
+	@RequestMapping(value="/paySuccess.do")
+	public ModelAndView paySuccess(@ModelAttribute("order_num") String order_num,HttpServletRequest request,HttpServletResponse response) throws Exception {
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO)session.getAttribute("memberInfo");
+		String member_id = memberVO.getMember_id();
+		cartVO.setMember_id(member_id);
+		cartService.deleteAllProduct(cartVO);
+		
+		return mav;
+	}
+	
 	
 
 }
