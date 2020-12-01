@@ -55,7 +55,7 @@ public class MemberController extends BaseController{
        sendEmailService.mailSend(dto);
    }
    
- //db안에 있는 비밀번호 확인 (시간 있을 때 확인할 것!!)
+ //이메일 인증 비밀번호
    @RequestMapping(value = "/PwCheck.do")
    public @ResponseBody Map<String, Boolean> PwCheck(String member_id, String password) throws Exception {
  		Map<String, Boolean> json = new HashMap<String, Boolean>();
