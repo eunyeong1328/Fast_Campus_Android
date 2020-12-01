@@ -31,8 +31,6 @@
 								member_name,
 								email,
 								phone,
-								load_address,
-								rest_address,
 								address,
 								zipNo,
 								delivery_request) values(
@@ -46,8 +44,6 @@
 								#{member_name},
 								#{email},
 								#{phone},
-								#{load_address},
-								#{rest_address},
 								#{address},  
 								#{zipNo},
 								#{delivery_request})

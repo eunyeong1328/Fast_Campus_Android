@@ -37,7 +37,7 @@
                         apply_num : rsp.apply_num,
                         order_status : rsp.status,
                         pg: rsp.pg_provider,
-/*                         paid_at : rsp.paid_at, */
+                        paid_at : rsp.paid_at, 
                         member_name: rsp.buyer_name,
                         email: rsp.buyer_email,
                         phone : rsp.buyer_tel,
@@ -63,7 +63,7 @@
                     }
                 });
                 //성공시 이동할 페이지
-                location.href='${contextPath}/orders/paySuccess.do';
+                location.href='${contextPath}/orders/paySuccess.do?order_num='+rsp.imp_uid;
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;

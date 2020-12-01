@@ -66,6 +66,7 @@
 
 							<div class="w-100 px-3 py-2">
 								<span class="d-block "> ${memberInfo.member_name }(${memberInfo.email })</span>
+								<input name="email" type="hidden" value="${memberInfo.email }">
 								<a href="${contextPath}/member/logout.do" class="fs--14">
 									로그아웃 </a>
 							</div>
