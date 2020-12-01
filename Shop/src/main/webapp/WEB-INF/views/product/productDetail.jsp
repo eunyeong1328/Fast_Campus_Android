@@ -58,11 +58,11 @@ function add_cart(product_name,quantity,opt_name) {
 				alert("카트에 등록되었습니다/.");
 			}else if(data.trim()=='already_existed'){
 				alert("이미 카트에 등록된 상품입니다.");	
+			}else if(data.trim()=='logingo'){
+				alert("로그인을 먼저 해주세요.");
 			}
 		},
 		error : function(data, textStatus) {
-			alert("로그인을 먼저 해주세요."+data);
-			/* alert("에러가 발생했습니다."+data); */
 		},
 		complete : function(data, textStatus) {
 		}

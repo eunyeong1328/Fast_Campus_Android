@@ -58,13 +58,15 @@ public class CartControllerImpl extends BaseController implements CartController
 															   HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO)session.getAttribute("memberInfo");
+		if(memberVO!= null && memberVO.getMember_name()!=null){
 		String member_id = memberVO.getMember_id();
 		cartVO.setMember_id(member_id);
-		//cartVO.setProduct_id(product_id);
 		cartVO.setQuantity(quantity);
 		cartVO.setOption_name(option_name);
 		cartVO.setProduct_name(product_name);
-		
+		}else {
+			return "logingo";
+		}
 		boolean isAreadyExisted = cartService.findCartProduct(cartVO);
 		if(isAreadyExisted==true) {
 			return "already_existed";
@@ -73,6 +75,7 @@ public class CartControllerImpl extends BaseController implements CartController
 			return "add_success";
 	 }
 	}
+		
 	@Override
 	@RequestMapping(value="plusQuantity.do", method=RequestMethod.POST, produces="application/text; charset=utf8")
 	public String plusQuantity(@RequestParam("product_name") String product_name,
