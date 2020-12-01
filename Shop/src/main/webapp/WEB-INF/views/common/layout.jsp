@@ -44,7 +44,7 @@
          <title><tiles:insertAttribute name="title" /></title>      <!-- tiles.xml의 <definition>의 하위 태그인 <put-attribute>태그의 name이 title인 값(value)을 표시합니다. -->
    </head>
 <body>
-		<div id="wrapper">
+	 	<div id="wrapper">
 				<tiles:insertAttribute name="header" /> <!-- tiles.xml의 <definition>의 하위 태그인 <put-attribute>태그의 name이 header인 JSP를 표시합니다. -->
 			<article>
 			 	<tiles:insertAttribute name="body" />

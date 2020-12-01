@@ -3,6 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<c:set var="myCartList" value="${cartMap.myCartList}" />
+<c:set var="myProductList" value="${cartMap.myProductList}" />
+<c:set var="total_price" value="0" />
+<c:set var="shipping" value="3500" />
+<c:set var="total_discount" value="0" />
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -31,17 +36,15 @@
 
 
 
-<!-- CHECKOUT -->
-<section>
-	<div class="container">
+<form method="post" action="${contextPath }/orders/import.do"
+	name="OrderVO">
+	<!-- CHECKOUT -->
+	<section>
+		<div class="container">
 
-		<div class="row">
+			<div class="row">
 
-			<div class="col-12 col-lg-7 col-xl-6 order-2 order-lg-1">
-
-				<form method="post" action="${contextPath }/orders/import.do"
-					name="OrderVO">
-					<input type="hidden" name="totalPrice" type="number" value="10000">
+				<div class="col-12 col-lg-7 col-xl-6 order-2 order-lg-1">
 
 
 					<!-- LOGGED IN -->
@@ -63,7 +66,9 @@
 
 							<div class="w-100 px-3 py-2">
 								<span class="d-block "> ${memberInfo.member_name }(${memberInfo.email })</span>
-								<a href="${contextPath}/member/logout.do" class="fs--14"> 로그아웃 </a>
+								<input name="email" type="hidden" value="${memberInfo.email }">
+								<a href="${contextPath}/member/logout.do" class="fs--14">
+									로그아웃 </a>
 							</div>
 
 						</div>
@@ -106,9 +111,9 @@
 
 									<div class="form-label-group mb-3">
 										<input required placeholder="First Name"
-											id="shipping_first_name" name="member_name" type="text" value="${memberInfo.member_name}"
-											class="form-control"> <label
-											for="shipping_first_name">주문자 성명</label>
+											id="shipping_first_name" name="member_name" type="text"
+											value="${memberInfo.member_name}" class="form-control">
+										<label for="shipping_first_name">주문자 성명</label>
 									</div>
 
 								</div>
@@ -118,9 +123,9 @@
 								<div class="col-12 col-sm-6 col-lg-12 mb--20">
 
 									<div class="form-label-group mb-3">
-										<input placeholder="Phone Number" id="shipping_phone" value="${memberInfo.phone}"
-											name="phone" type="text" class="form-control"> <label
-											for="shipping_phone">휴대전화</label>
+										<input placeholder="Phone Number" id="shipping_phone"
+											value="${memberInfo.phone}" name="phone" type="text"
+											class="form-control"> <label for="shipping_phone">휴대전화</label>
 									</div>
 
 								</div>
@@ -129,25 +134,27 @@
 								<div class="col-12 col-sm-12 col-lg-12 mb--10">
 
 									<div class="form-label-group mb-3">
-										<input required placeholder="Address" id="zipNo" name="zipNo" value="${memberInfo.zipNo}"
-											type="number" class="form-control"> <label
-											for="zipNo">우편번호</label> <a
-											href="javascript:execDaumPostcode()">우편번호검색</a>
+										<input required placeholder="Address" id="zipNo" name="zipNo"
+											value="${memberInfo.zipNo}" type="number"
+											class="form-control"> <label for="zipNo">우편번호</label>
+										<a href="javascript:execDaumPostcode()">우편번호검색</a>
 									</div>
 
 
 									<div class="form-label-group mb-3">
-										<input required placeholder="Address" id="load_address" value="${memberInfo.load_address}"
-											name="load_address" type="text" class="form-control">
-										<label for="load_address">도로명 주소</label>
+										<input required placeholder="Address" id="load_address"
+											value="${memberInfo.load_address}" name="load_address"
+											type="text" class="form-control"> <label
+											for="load_address">도로명 주소</label>
 
 									</div>
 
 
 									<div class="form-label-group mb-3">
-										<input required placeholder="Address" id="rest_address" value="${memberInfo.rest_address}"
-											name="rest_address" type="text" class="form-control">
-										<label for="rest_address">나머지 주소</label>
+										<input required placeholder="Address" id="rest_address"
+											value="${memberInfo.rest_address}" name="rest_address"
+											type="text" class="form-control"> <label
+											for="rest_address">나머지 주소</label>
 									</div>
 								</div>
 
@@ -259,7 +266,7 @@
 						</div>
 
 						<div class="pt-4 mb-4">
-							<a href="shop-page-cart-1.html"
+							<a href="${contextPath }/cart/myCartList.do"
 								class="fs--15 text-decoration-none"> <i
 								class="fi fi-arrow-start-slim"></i> 장바구니로 돌아가기
 							</a>
@@ -269,111 +276,138 @@
 					<!-- /COMPLETE ORDER -->
 
 
-				</form>
-			</div>
 
-
-
-			<!-- SUMMARY COLUMN -->
-			<div class="col-12 col-lg-5 col-xl-6 order-1 order-lg-2">
-
-				<div class="sticky-kit">
-					<div class="shadow-xs border rounded p-4 mb-5">
-
-
-						<!-- item -->
-						<div
-							class="d-flex justify-content-center align-items-center border-bottom py-3">
-
-							<div class="w--100">
-								<img class="img-fluid max-h-80"
-									src="${contextPath }/resources/demo.files/images/unsplash/products/thumb_330/barrett-ward-fYYUgvHYgpU-unsplash-min.jpg"
-									alt="...">
-							</div>
-
-							<div class="w-100 pl-3 pr-3">
-
-								<div class="float-end">
-									<p class="fs--13 text-weight-muted mb-0">
-										<del>$189.95</del>
-									</p>
-									<p class="fs--16 font-weight-medium mb-0">$158.95</p>
-								</div>
-
-								<h6>Product title here x 1</h6>
-
-							</div>
-						</div>
-						<!-- /item -->
-
-
-
-						<!-- summary -->
-						<div class="border-bottom pb-3 mb-3 mt-3 px-3">
-
-							<div class="clearfix">
-								가격: <span class="float-end font-weight-medium"> $158.95 </span>
-							</div>
-
-							<div class="clearfix">
-								할인: <span class="float-end"> $0 </span>
-							</div>
-
-
-							<div class="clearfix">
-								배송비: <span class="float-end text-align-end"> <a href="#!"
-									class="fs--14">calculate</a>
-								</span>
-							</div>
-
-						</div>
-						<!-- /summary -->
-
-
-
-						<!-- total -->
-						<div class="clearfix mb-3">
-							<h3 class="h4-xs float-start">총합:</h3>
-							<h3 class="h4-xs float-end">$158.95</h3>
-						</div>
-						<!-- /total -->
-
-
-					</div>
 				</div>
 
+
+
+				<!-- SUMMARY COLUMN -->
+				<div class="col-12 col-lg-5 col-xl-6 order-1 order-lg-2">
+
+					<div class="sticky-kit">
+						<div class="shadow-xs border rounded p-4 mb-5">
+
+							<!-- PRODUCT -->
+							<c:forEach var="item" items="${myProductList}" varStatus="cnt">
+								<c:set var="cart_product_qty"
+									value="${myProductList[cnt.count-1].quantity}" />
+								<c:set var="cart_id"
+									value="${myProductList[cnt.count-1].cart_id}" />
+								<c:set var="product_price"
+									value="${myProductList[cnt.count-1].option_price}" />
+								<c:set var="product_discount"
+									value="${myProductList[cnt.count-1].discount}" />
+								<c:set var="product_image"
+									value="${myProductList[cnt.count-1].product_image}" />
+								<c:set var="product_index" value="${cnt.index}" />
+								<c:set var="product_stock"
+									value="${myProductList[cnt.count-1].stock}" />
+								<c:set var="total_price"
+									value="${total_price+((product_price-product_discount)*cart_product_qty)}" />
+								<c:set var="total_discount"
+									value="${total_discount+(cart_product_qty*product_discount)}" />
+
+
+
+
+								<!-- item -->
+								<div
+									class="d-flex justify-content-center align-items-center border-bottom py-3">
+
+									<div class="w--100">
+										<img class="img-fluid max-h-80"
+											src="${contextPath}/resources/images/item_image/${product_image}"
+											alt="...">
+									</div>
+
+									<div class="w-100 pl-3 pr-3">
+
+										<div class="float-end">
+											<p class="fs--13 text-weight-muted mb-0">
+												<del>${item.option_price*cart_product_qty} 원</del>
+											</p>
+											<p class="fs--16 font-weight-medium mb-0">${(item.option_price-product_discount)*cart_product_qty}
+												원</p>
+										</div>
+
+										<h6>${item.product_name } ${item.option_name } x
+											${cart_product_qty}</h6>
+
+									</div>
+								</div>
+								<!-- /item -->
+							</c:forEach>
+
+
+							<!-- summary -->
+							<div class="border-bottom pb-3 mb-3 mt-3 px-3">
+
+								<div class="clearfix">
+									가격: <span class="float-end font-weight-medium">
+										${total_price} 원 </span>
+								</div>
+
+								<div class="clearfix">
+									할인: <span class="float-end"> ${total_discount} 원 </span>
+								</div>
+
+
+								<div class="clearfix">
+									배송비: <span class="float-end text-align-end"> ${shipping}
+										원 </span>
+								</div>
+
+							</div>
+							<!-- /summary -->
+
+
+
+							<!-- total -->
+							<div class="clearfix mb-3">
+								<h3 class="h4-xs float-start">총합:</h3>
+								<h3 class="h4-xs float-end">${total_price+shipping}원</h3>
+								<input type="hidden" name="totalPrice" type="number"
+									value="${total_price+shipping}">
+							</div>
+							<!-- /total -->
+
+						</div>
+					</div>
+
+				</div>
+				<!-- /SUMMARY COLUMN -->
+
 			</div>
-			<!-- /SUMMARY COLUMN -->
+
+
+
+
+
+
+
+
+			<!-- ADDITIONAL LINKS -->
+			<div class="border-top mt--100 pt-2">
+				<ol class="breadcrumb bg-transparent px-0 m-0 fs--13">
+
+					<li class="breadcrumb-item"><a href="#" target="_blank">Refund
+							Policy</a></li>
+
+					<li class="breadcrumb-item"><a href="#" target="_blank">Privacy
+							Policy</a></li>
+
+					<li class="breadcrumb-item"><a href="#" target="_blank">Terms
+							of Service</a></li>
+
+				</ol>
+			</div>
+			<!-- /ADDITIONAL LINKS -->
+
 
 		</div>
-
-
-
-
-
-
-
-		<!-- ADDITIONAL LINKS -->
-		<div class="border-top mt--100 pt-2">
-			<ol class="breadcrumb bg-transparent px-0 m-0 fs--13">
-
-				<li class="breadcrumb-item"><a href="#" target="_blank">Refund
-						Policy</a></li>
-
-				<li class="breadcrumb-item"><a href="#" target="_blank">Privacy
-						Policy</a></li>
-
-				<li class="breadcrumb-item"><a href="#" target="_blank">Terms
-						of Service</a></li>
-
-			</ol>
-		</div>
-		<!-- /ADDITIONAL LINKS -->
-
-
-	</div>
-</section>
-<!-- /CHECKOUT -->
+	</section>
+	<!-- /CHECKOUT -->
+</form>
 
 <script src="${contextPath}/resources/assets/js/core.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/daumZip.jsp" />
