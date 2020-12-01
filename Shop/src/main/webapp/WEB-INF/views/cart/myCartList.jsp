@@ -521,7 +521,7 @@
 
 										<div class="border-bottom pb-3 mb-2">
 
-											<a href="shop-page-checkout.html"
+											<a href="${contextPath }/orders/checkout.do"
 												class="btn btn-primary btn-block fs--14"> <span>주문하기</span>
 												<i class="fi fi-arrow-end fs--12"></i>
 											</a>
