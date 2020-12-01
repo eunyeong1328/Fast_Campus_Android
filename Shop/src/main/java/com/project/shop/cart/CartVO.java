@@ -8,13 +8,27 @@ public class CartVO {
  private String member_id;
  private String product_id;
  private int quantity;
+ private String option_name;
+ private String product_name;
 @Override
 public String toString() {
 	return "CartVO [cart_id=" + cart_id + ", member_id=" + member_id + ", product_id=" + product_id + ", quantity="
-			+ quantity + "]";
+			+ quantity + ", option_name=" + option_name + ", product_name=" + product_name + "]";
+}
+public String getProduct_name() {
+	return product_name;
+}
+public void setProduct_name(String product_name) {
+	this.product_name = product_name;
 }
 public String getMember_id() {
 	return member_id;
+}
+public String getOption_name() {
+	return option_name;
+}
+public void setOption_name(String option_name) {
+	this.option_name = option_name;
 }
 public void setMember_id(String member_id) {
 	this.member_id = member_id;

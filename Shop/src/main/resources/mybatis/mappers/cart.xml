@@ -27,7 +27,7 @@
 	<result property="quantity" column="quantity" />
 	<result property="cart_id" column="cart_id" />
 </resultMap>
-
+<!-- 로그인한id와 동일한 카트리스트출력 -->
 <select id="selectCartList" resultMap="cartResult" parameterType="cartVO">
 <![CDATA[
 	select * from cart
@@ -46,7 +46,7 @@
 <![CDATA[
 	delete from cart
 	where member_id =#{member_id}
-	and product_id = #{product_id}
+	and product_name = #{product_name}
 	and cart_id = #{cart_id}
 ]]>
 </delete>
@@ -55,8 +55,9 @@
 <![CDATA[
 	update cart 
 	set quantity = quantity + 1
-	where product_id = #{product_id}
+	where product_name = #{product_name}
 	and member_id = #{member_id}
+	and cart_id = #{cart_id}
 ]]>
 </update>
 <!-- 내카트안에 제품수량 감소 -->
@@ -64,47 +65,50 @@
 <![CDATA[
 	update cart
 	set quantity = case when quantity - 1 < 1 then 1 else quantity - 1 end
-	where product_id = #{product_id}
+	where product_name = #{product_name}
 	and member_id = #{member_id}
+	and cart_id = #{cart_id}
 ]]>
 </update>
 <!--내카트에 담긴 제품정보  -->		
 <select id="selectProductList" resultMap="productResult" parameterType="java.util.Map">
-		select p.*, i.price, i.discount, i.stock, c.cart_id, c.quantity
+select x.*, o.option_name, o.option_price
+from  product_option o,	(select p.*, i.price, i.discount, i.stock, c.cart_id, c.quantity, c.option_name
 		from product p, item i, cart c 
-		
 		where c.member_id = ANY
 		<foreach item="item" collection="list" open="(" separator="," close=")">
 		#{item.member_id}
 		</foreach>
-		and p.product_id = c.product_id 
+		and p.product_name = c.product_name
 		and p.product_id = i.product_id
-		and p.product_id in
-	
-	<foreach item="item" collection="list" open="(" separator="," close=")" >
-	#{item.product_id}
-</foreach>
-</select>
+		and c.option_name in
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+	#{item.option_name}	
+</foreach> ) x
+where o.option_name= x.option_name
 
+</select>
+<!-- 카트에 같은제품이있는지 체크 -->
 <select id="selectCountInCart" resultType="String" parameterType="cartVO">
    <![CDATA[
 		    select decode(count(*), 0, 'false', 'true') from cart
-			where product_id=#{product_id}
+			where option_name=#{option_name}
 			  and member_id=#{member_id} 
     	]]>
 </select>
 <!--카트에 담기  -->
 <insert id="insertProductInCart" parameterType="cartVO">
 	<![CDATA[
-		INSERT INTO cart(member_id, product_id, quantity, cart_id)
-		VALUES( #{member_id}, #{product_id}, #{quantity}, #{cart_id})
+		INSERT INTO cart(member_id, quantity, cart_id, option_name, product_name)
+		VALUES( #{member_id}, #{quantity}, #{cart_id}, #{option_name}, #{product_name})
 	]]>
 </insert>
-
+<!-- cart_id +1 -->
 <select id="selectMaxCartId" resultType="int">
     <![CDATA[
 		select nvl(max(cart_id), 0) + 1 from cart
    	]]>
 </select>
+
 </mapper>
 

@@ -264,8 +264,8 @@
 
 									<div class="dropdown-divider"></div>
 
-
-									<a href="${contextPath}/myaccount/account-orders.do" title="My Orders" class="dropdown-item text-truncate font-weight-light">
+													<!--/myaccount/account-orders.do"  -->
+									<a href="${contextPath}/cart/myCartList.do" title="My Orders" class="dropdown-item text-truncate font-weight-light">
 										내 주문
 									</a>
 

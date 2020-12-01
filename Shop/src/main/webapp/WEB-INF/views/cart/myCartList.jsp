@@ -18,26 +18,7 @@ var discount;
 var total_price;
 var total_discount;
 var shipping = 3500;
-window.onload = function() {
-    init();
-}
-/* 
-    function init () {
-	   amount = document.form.amount.value;
-	   sell_price = document.form.sell_price.value;
-	   discount = document.form.discount.value;
-	   change();
-   }  */
-
-   /* function change () {
-	   var currentIndex = parseInt(index);
-	   hm = document.form["amount"][currentIndex].value;
-	   total_price = document.getElementById("total_price").value;
-		   if (hm.value < 0) {
-			   hm.value = 0;
-		   }
-   }    */
-   function add(product_id,index) {
+   function add(product_name,cart_id,index) {
 	   var currentIndex = parseInt(index);
 	   total_price = parseInt(document.getElementById("total_price").innerText);
 	   total_discount = parseInt(document.getElementById("total_discount").innerText);
@@ -51,19 +32,13 @@ window.onload = function() {
 	   sell_price = parseInt(document.form["sell_price"][currentIndex].value);
 	   discount = parseInt(document.form["discount"][currentIndex].value);
    }
-	  /*  if(amount > 10){
-		alert("현재 재고량보다 많이 선택하셨습니다.");
-		 var text =document.getElementsByName("stock")[currentIndex].innerText;
-	     var stock = text.replace(/[^0-9]/g,"");
-		console.log(stock);
-		return;
-	}  */
 		$.ajax({
 			type : "post",
 			async : false,
 			url :"${contextPath}/cart/plusQuantity.do",
 			data : {
-				product_id:product_id
+				cart_id:cart_id,
+				product_name:product_name
 			},
 			success : function(data, textStatus) {
 				if(data.trim()=='add_success'){
@@ -85,7 +60,7 @@ window.onload = function() {
 			}
 		}); //end ajax
    }
-   function del (product_id,index) {
+   function del (product_name,cart_id,index) {
 	   var currentIndex = parseInt(index);
 	   total_price = parseInt(document.getElementById("total_price").innerText);
 	   total_discount = parseInt(document.getElementById("total_discount").innerText);
@@ -96,7 +71,6 @@ window.onload = function() {
 		   sell_price = parseInt(document.form.sell_price.value);
 		   discount = parseInt(document.form.discount.value);
 		   document.form.amount.value = amount+1;
-		  
 	   }else{
 	    amount = parseInt(document.form["amount"][currentIndex].value)-1;
 		if(amount < 1){amount = 1; return;}
@@ -104,53 +78,45 @@ window.onload = function() {
 		discount = parseInt(document.form["discount"][currentIndex].value);
 		document.getElementsByName("amount")[currentIndex].value = parseInt(amount);
 	   }
-			   $.ajax({
-					type : "post",
-					async : false,
-					url :"${contextPath}/cart/minusQuantity.do",
-					data : {
-						product_id:product_id
-					},
-					success : function(data, textStatus) {
-						if(data.trim()=='add_success1'){
-							document.getElementsByName("product_pri")[currentIndex].innerHTML = "<del>"+parseInt(amount*sell_price)+" 원"+"</del>";
-							document.getElementsByName("cash")[currentIndex].innerHTML = parseInt(amount*(sell_price-discount))+" 원";
-							document.getElementsByName("discountTest")[currentIndex].innerHTML = "할인 금액 :"+"<br>"+parseInt(amount*discount)+" 원";
-							
-							
-							document.getElementById("total_price").innerHTML =parseInt(total_price-(sell_price-discount))+" 원";
-							document.getElementById("total_discount").innerHTML =parseInt(total_discount-discount)+" 원";
-							document.getElementById("total-price").innerHTML =parseInt(total_price-(sell_price-discount)+shipping)+" 원";
-						}
-					},
-					error : function(data, testStatus) {
-						alert("에러발생 ㅠ" +data);
-					},
-					complete : function(data, textStatus) {
+		   $.ajax({
+				type : "post",
+				async : false,
+				url :"${contextPath}/cart/minusQuantity.do",
+				data : {
+					cart_id:cart_id,
+					product_name:product_name
+				},
+				success : function(data, textStatus) {
+					if(data.trim()=='add_success1'){
+						document.getElementsByName("product_pri")[currentIndex].innerHTML = "<del>"+parseInt(amount*sell_price)+" 원"+"</del>";
+						document.getElementsByName("cash")[currentIndex].innerHTML = parseInt(amount*(sell_price-discount))+" 원";
+						document.getElementsByName("discountTest")[currentIndex].innerHTML = "할인 금액 :"+"<br>"+parseInt(amount*discount)+" 원";
+						
+						document.getElementById("total_price").innerHTML =parseInt(total_price-(sell_price-discount))+" 원";
+						document.getElementById("total_discount").innerHTML =parseInt(total_discount-discount)+" 원";
+						document.getElementById("total-price").innerHTML =parseInt(total_price-(sell_price-discount)+shipping)+" 원";
 					}
-				}); //end ajax
-				   hm = document.form.amount;
-				   if (hm.value > 1) {
-					   hm.value --; 
-     }
+				},
+				error : function(data, testStatus) {
+					alert("에러발생 ㅠ" +data);
+				},
+				complete : function(data, textStatus) {
+				}
+			}); //end ajax
    }
-   function refreshMemList(){
-		location.reload();
-	}
-  
    function deleteAllProduct() {
 	var delconfirm = confirm("장바구니 항목 전체를 삭제하시겠습니까?");
 		if(delconfirm){
 			location.href="${contextPath}/cart/deleteAllProduct.do";
 		}
    }
-   function deleteProduct(product_id,cart_id) {
+   function deleteProduct(product_name,cart_id) {
 	   $.ajax({
 		   type : "post",
 		   async : false,
 		   url : "${contextPath}/cart/removeCartProduct.do",
 		   data : {
-			   product_id:product_id,
+			   product_name:product_name,
 			   cart_id:cart_id
 		   },
 		   success : function(data, textStatus){
@@ -163,6 +129,9 @@ window.onload = function() {
 		   }
 	   }); //end ajax
    }
+   function refreshMemList(){
+		location.reload();
+	}
 
 </script>
 
@@ -235,7 +204,7 @@ window.onload = function() {
 									<c:forEach var = "item" items="${myProductList}" varStatus="cnt">
 									<c:set var = "cart_product_qty" value="${myProductList[cnt.count-1].quantity}"/>
 									<c:set var = "cart_id" 			value="${myProductList[cnt.count-1].cart_id}" />
-									<c:set var = "product_price"    value="${myProductList[cnt.count-1].price}"/>
+									<c:set var = "product_price"    value="${myProductList[cnt.count-1].option_price}"/>
 									<c:set var = "product_discount" value="${myProductList[cnt.count-1].discount}"/>
 									<c:set var = "product_image"    value="${myProductList[cnt.count-1].product_image}"/>
 									<c:set var = "product_index"    value="${cnt.index}"/>
@@ -259,24 +228,24 @@ window.onload = function() {
 
 													<div class="clearfix my-2 d-block">
 														<a class="fs--18 text-dark font-weight-medium" href="${contextPath}/product/productDetail.do?product_id=${item.product_id}">
-															${item.product_name}
+															${item.option_name}
 														</a>
 
 														<span class="d-block text-muted fs--12">
-														${item.price}원
+														${item.option_price} 원
 														</span>
 
 														<ul class="list-inline">
 															<li class="list-inline-item">
 																<a class="js-ajax-confirm fs--13" href="#"
-																	data-href="javascript:deleteProduct('${item.product_id}',${cart_id});"
+																	data-href="javascript:deleteProduct('${item.product_name}',${cart_id});"
 																	
 																	data-ajax-confirm-mode="regular" 
 																	data-ajax-confirm-size="modal-md" 
 																	data-ajax-confirm-centered="true" 
 
 																	data-ajax-confirm-title="한번더 확인!!" 
-																	data-ajax-confirm-body="${item.product_name} 아이템을 제거하시겠습니까?" 
+																	data-ajax-confirm-body="${item.option_name} 아이템을 제거하시겠습니까?" 
 
 																	data-ajax-confirm-btn-yes-class="btn-sm btn-danger" 
 																	data-ajax-confirm-btn-yes-text="네 지워주세요!" 
@@ -323,11 +292,11 @@ window.onload = function() {
 												<input type="button" value=" - " onclick="del();"><br> -->
 												<!-- button 의 타입 명시해주기 안해주면 스크립트가 실행안됨(button은 기본적으로 submit형태로 동작하는데 submit없기때문)
 													onclick="add();return:false;"> 요런식으로 추가해도가능 -->
-										<button type="button" class="btn minus" onclick="del('${item.product_id}','${cnt.index}');">감소</button>
-										<input type=hidden name="sell_price" value="${item.price}">
+										<button type="button" class="btn minus" onclick="del('${item.product_name}','${item.cart_id}','${cnt.index}');">감소</button>
+										<input type=hidden name="sell_price" value="${item.option_price}">
 										<input type=hidden name="discount" value="${product_discount}">
-										<input type="text" class="num" name="amount" value="${cart_product_qty}" size="3">
-										<button type="button" class="btn plus" onclick="add('${item.product_id}','${cnt.index}');">증가</button>
+										<input type="text" class="num" name="amount" value="${cart_product_qty}" size="3" readonly>
+										<button type="button" class="btn plus" onclick="add('${item.product_name}','${item.cart_id}','${cnt.index}');">증가</button>
 								
 									</div>
 													<span class="d-block text-muted fs--11 mt-1" name="stock">
@@ -340,16 +309,16 @@ window.onload = function() {
 												<div class="col-6 col-sm-6 col-md-3 col-lg-3 text-align-end">
 
 													<p class="fs--13 text-weight-muted mb-0" id="price" name="product_pri" >
-														<del>${item.price*cart_product_qty}원</del>
+														<del>${item.option_price*cart_product_qty} 원</del>
 													</p>
 													<!-- 수량버튼클릭시 변경되는부분 -->
 													<p class="fs--16 font-weight-medium mb-0" id="money" name="cash"> 
-															${(item.price-product_discount)*cart_product_qty}원
+															${(item.option_price-product_discount)*cart_product_qty} 원
 													</p>
 													
 													<span class="text-success d-block fs--12 mb-2" id="discount" name="discountTest">
-														할인 금액:<br>
-															${cart_product_qty*product_discount}원
+														할인 금액 :<br>
+															${cart_product_qty*product_discount} 원
 													</span>
 
 												</div>
@@ -435,14 +404,14 @@ window.onload = function() {
 											<div class="clearfix">
 												상품금액:
 												<span class="float-end font-weight-medium" id="total_price">
-												     ${total_price}원
+												     ${total_price} 원
 												</span>
 											</div>
 
 											<div class="clearfix">
-												상품할인금액:
+												상품할인금액 :
 												<span class="float-end" id="total_discount">
-												${total_discount}원
+												${total_discount} 원
 												</span>
 											</div>
 
@@ -450,7 +419,7 @@ window.onload = function() {
 											<div class="clearfix">
 												배송비:
 												<span class="float-end text-align-end">
-													${shipping}원
+													${shipping} 원
 												<!-- 	<a href="#!" class="fs--14">calculate</a> -->
 												</span>
 											</div>
@@ -460,7 +429,7 @@ window.onload = function() {
 										<div class="clearfix mb-3">
 											<h4 class="float-start fs--20">Total:</h4>
 											<h4 class="float-end fs--20 " id="total-price">
-												${total_price+shipping}원
+												${total_price+shipping} 원
 											</h4>
 										</div>
 

@@ -18,23 +18,39 @@
 
 <script type="text/javascript">
 var quantity="0";
+var opt_name;
+
+function changeOption() {
+	var selectOpt = document.getElementById("opt");
+	var tmp = selectOpt.options[selectOpt.selectedIndex].text;
+	var tmp1 = tmp.lastIndexOf("원");
+	var num = tmp.indexOf("[");
+	var str = tmp.substring(0,num);
+	opt_name = str.trim();
+}
 function changeQuantity() {
 
 	var selectOpt =  document.getElementById("opt_quantity");
 	    quantity  = parseInt(selectOpt.options[selectOpt.selectedIndex].text);
 }
-function add_cart(product_id,quantity) {
+function add_cart(product_name,quantity,opt_name) {
+	if(!opt_name){
+		alert("옵션을 선택해주세요");
+		return;
+	}
 	if(quantity==0){
 		alert("수량옵션을 선택해주세요");
 		return;
 	}
+	console.log("opt_name:"+opt_name);
 	$.ajax({
 		type : "post",
 		async : false, //false인 경우 동기식으로 처리한다.
 		url : "${contextPath}/cart/addProductInCart.do",
 		data : {
-			product_id:product_id,
-			quantity:quantity
+			product_name:product_name,
+			quantity:quantity,
+			option_name:opt_name
 		},
 		success : function(data, textStatus) {
 		
@@ -45,7 +61,7 @@ function add_cart(product_id,quantity) {
 			}
 		},
 		error : function(data, textStatus) {
-			alert("로그인을 먼저 해주세요.");
+			alert("로그인을 먼저 해주세요."+data);
 			/* alert("에러가 발생했습니다."+data); */
 		},
 		complete : function(data, textStatus) {
@@ -303,7 +319,7 @@ function add_cart(product_id,quantity) {
                            <!-- 상품 옵션!! -->
                            <!-- Basic -->
                            <c:if test="${not empty optionList }" >
-                              <select class="form-control bs-select" name="option_name" title="Please Select..." required>
+                              <select id="opt" class="form-control bs-select" name="option_name" title="Please Select..." onChange="changeOption();" required>
                                  <c:forEach var="option" items="${optionList }">
                                     <option value="${option.option_name }">${option.option_name } [<fmt:formatNumber type="number" value="${option.option_price }"/> 원]</option>
                                  </c:forEach>
@@ -321,30 +337,11 @@ function add_cart(product_id,quantity) {
                               <!-- ADD TO CART BUTTON -->
                               <div class="d-inline-flex w-100-xs float-start float-none-xs ml-0 mr-0 mt-2"> 
 
-						<!-- 상품 옵션!! -->
-						<!-- Basic -->
-						<c:if test="${not empty optionList }">
-							<select class="form-control bs-select" name="option_name"
-								title="Please Select..." required>
-								<c:forEach var="option" items="${optionList }">
-									<option value="${option.option_name }">
-										${option.option_name } [
-										<fmt:formatNumber type="number"
-											value="${option.option_price }" /> 원]
-									</option>
-								</c:forEach>
-							</select>
-						</c:if>
-						<br> <select class="form-control bs-select"
-							name="option_quantity" title="Please Select..." required>
-							<c:forEach var="i" begin="1" end="10" step="1">
-								<option value="i">${i }개</option>
-							</c:forEach>
-						</select>
-
+					
+						<!-- 상품 담기 -->
                                  <div class="pl-2 pr-2 w-100-xs"> 
                                     <button class="btn btn-danger bg-gradient-danger text-white px-4 b-0 d-block-xs w-100-xs"
-                   		 onclick="javascript:add_cart('${vo.product_id}',quantity)"> 
+                   		 onclick="javascript:add_cart('${vo.product_name}',quantity,opt_name)"> 
                    		
                                        <span class="px-4 p-0-xs">
                                           <i>

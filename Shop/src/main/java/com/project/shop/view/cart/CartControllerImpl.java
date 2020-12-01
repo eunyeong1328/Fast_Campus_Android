@@ -51,20 +51,21 @@ public class CartControllerImpl extends BaseController implements CartController
 
 	@Override
 	@RequestMapping(value="/addProductInCart.do", method= RequestMethod.POST, produces="application/text; charset=utf8")
-	public String addProductInCart(@RequestParam("product_id") String product_id,
+	public String addProductInCart(@RequestParam("product_name") String product_name,
 								   @RequestParam("quantity")   int quantity,
+								   @RequestParam("option_name") String option_name,
 															   HttpServletRequest request, 
 															   HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO)session.getAttribute("memberInfo");
 		String member_id = memberVO.getMember_id();
 		cartVO.setMember_id(member_id);
-		cartVO.setProduct_id(product_id);
+		//cartVO.setProduct_id(product_id);
 		cartVO.setQuantity(quantity);
+		cartVO.setOption_name(option_name);
+		cartVO.setProduct_name(product_name);
+		
 		boolean isAreadyExisted = cartService.findCartProduct(cartVO);
-		if(member_id==null) {
-			return "logingo";
-		}
 		if(isAreadyExisted==true) {
 			return "already_existed";
 		}else {
@@ -72,59 +73,52 @@ public class CartControllerImpl extends BaseController implements CartController
 			return "add_success";
 	 }
 	}
-
-	@Override
-	public String modifyCartQty(String product_id, int quantity, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	@RequestMapping(value="plusQuantity.do", method=RequestMethod.POST, produces="application/text; charset=utf8")
-	public String plusQuantity(@RequestParam("product_id")String product_id,
+	public String plusQuantity(@RequestParam("product_name") String product_name,
+							   @RequestParam("cart_id") int cart_id,
 														HttpServletRequest request, 
 														HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO)session.getAttribute("memberInfo");
 		String member_id = memberVO.getMember_id();
 		cartVO.setMember_id(member_id);
-		cartVO.setProduct_id(product_id);
+		cartVO.setCart_id(cart_id);
+		cartVO.setProduct_name(product_name);
 		cartService.plusQuantity(cartVO);
 		
 		return "add_success";
 	}
-
+	@Override
+	@RequestMapping(value="minusQuantity.do", method=RequestMethod.POST, produces="application/text; charset=utf8")
+	public String minusQuantity(@RequestParam("product_name") String product_name, 
+								@RequestParam("cart_id") int cart_id,
+								 HttpServletRequest request,HttpServletResponse response)throws Exception {
+		HttpSession session = request.getSession();
+		memberVO = (MemberVO)session.getAttribute("memberInfo");
+		String member_id = memberVO.getMember_id();
+		cartVO.setMember_id(member_id);
+		cartVO.setCart_id(cart_id);
+		cartVO.setProduct_name(product_name);
+		cartService.minusQuantity(cartVO);
+		
+		return "add_success1";
+	}
 	@Override
 	@RequestMapping(value="/removeCartProduct.do", method=RequestMethod.POST, produces="application/text; charset=utf8")
 	public String removeCartProduct(@RequestParam("cart_id") int cart_id,
-										  @RequestParam("product_id") String product_id,
-										  HttpServletRequest request, 
-										  HttpServletResponse response)throws Exception {
+									@RequestParam("product_name") String product_name,
+										   HttpServletRequest request,HttpServletResponse response)throws Exception {
 		
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO)session.getAttribute("memberInfo");
 		String member_id = memberVO.getMember_id();
 		cartVO.setMember_id(member_id);
 		cartVO.setCart_id(cart_id);
-		cartVO.setProduct_id(product_id);
+		cartVO.setProduct_name(product_name);
 		cartService.deleteProductInCart(cartVO);
 		
 		return "add_success";
-	}
-	@Override
-	@RequestMapping(value="minusQuantity.do", method=RequestMethod.POST, produces="application/text; charset=utf8")
-	public String minusQuantity(@RequestParam("product_id")String product_id, 
-														   HttpServletRequest request, 
-														   HttpServletResponse response)throws Exception {
-		HttpSession session = request.getSession();
-		memberVO = (MemberVO)session.getAttribute("memberInfo");
-		String member_id = memberVO.getMember_id();
-		cartVO.setMember_id(member_id);
-		cartVO.setProduct_id(product_id);
-		cartService.minusQuantity(cartVO);
-		
-		return "add_success1";
 	}
 
 	@Override
