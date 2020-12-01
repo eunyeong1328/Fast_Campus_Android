@@ -8,176 +8,164 @@
 %>
 
 
-			<!-- PAGE TITLE -->
-			<section class="bg-light p-0">
-				<div class="container py-5">
+<!-- PAGE TITLE -->
+<section class="bg-light p-0">
+	<div class="container py-5">
 
-					<h1 class="h3">
-						주문하기
-					</h1>
+		<h1 class="h3">주문하기</h1>
 
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb fs--14">
-							<li class="breadcrumb-item"><a href="shop-page-checkout.html"><b>NOT LOGGED</b></a></li>
-							<li class="breadcrumb-item"><a href="shop-page-checkout-logged.html">LOGGED</a></li>
-						</ol>
-					</nav>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb fs--14">
+				<li class="breadcrumb-item"><a href="shop-page-checkout.html"><b>NOT
+							LOGGED</b></a></li>
+				<li class="breadcrumb-item"><a
+					href="shop-page-checkout-logged.html">LOGGED</a></li>
+			</ol>
+		</nav>
 
-				</div>
-			</section>
-			<!-- /PAGE TITLE -->
-
-
+	</div>
+</section>
+<!-- /PAGE TITLE -->
 
 
 
-			<!-- CHECKOUT -->
-			<section>
-				<div class="container">
-
-					<div class="row">
-
-						<div class="col-12 col-lg-7 col-xl-6 order-2 order-lg-1">
-
-							<form method="post" action="${contextPath }/orders/import.do" name="OrderVO">
-							<input type="hidden" name="totalPrice" type="number" value="10000">
 
 
-								<!-- LOGGED IN -->
-								<div class="bg-light p-3 rounded mb-5">
+<!-- CHECKOUT -->
+<section>
+	<div class="container">
 
-									<div class="d-flex">
+		<div class="row">
 
-										<div>
+			<div class="col-12 col-lg-7 col-xl-6 order-2 order-lg-1">
 
-											<!--
+				<form method="post" action="${contextPath }/orders/import.do"
+					name="OrderVO">
+					<input type="hidden" name="totalPrice" type="number" value="10000">
+
+
+					<!-- LOGGED IN -->
+					<div class="bg-light p-3 rounded mb-5">
+
+						<div class="d-flex">
+
+							<div>
+
+								<!--
 											<span class="bg-primary-soft h5 m-0 w--60 h--60 rounded-circle d-inline-flex justify-content-center align-items-center">
 												JD
 											</span>
 											-->
 
-											<span class="w--60 h--60 rounded-circle d-inline-block bg-cover" style="background-image:url('${contextPath }/resources/demo.files/images/unsplash/team/thumb_330/erik-mclean-06vpBIHmiYc-unsplash.jpg')"></span>
-										</div>
+								<span class="w--60 h--60 rounded-circle d-inline-block bg-cover"
+									style="background-image:url('${contextPath}/resources/images/fvc.svg')"></span>
+							</div>
 
-										<div class="w-100 px-3 py-2">
-											<span class="d-block fs--14">John Doe (john.doe@gmail.com)</span>
-											<a href="shop-page-checkout.html" class="fs--14">
-												로그아웃
-											</a>
-										</div>
+							<div class="w-100 px-3 py-2">
+								<span class="d-block "> ${memberInfo.member_name }(${memberInfo.email })</span>
+								<a href="${contextPath}/member/logout.do" class="fs--14"> 로그아웃 </a>
+							</div>
 
-									</div>
+						</div>
 
-									<div class="border-top pt-3 mt-2">
+						<div class="border-top pt-3 mt-2"></div>
 
-										<label class="form-checkbox form-checkbox-primary d-block">
-											<input type="checkbox" name="checkbox" value="1">
-											<i></i> Keep me up to date on news and exclusive offers
-										</label>
-
-									</div>
-
-								</div>
-								<!-- /LOGGED IN -->
+					</div>
+					<!-- /LOGGED IN -->
 
 
 
 
-								<!-- SHIPPING ADDRESS -->
-								<h2 class="h5 mb-4">
-									배송정보
-									<span class="d-block fs--14 text-success font-weight-normal">
-										상품을 보내실 장소의 주소를 기입해주세요
-									</span>
-								</h2>
-								<div class="p-4 shadow-xs border rounded mb-5">
-								
-								<select class="form-control bs-select" name="shipping_address_selected">
-										<option value="1">Road 741, No.44, New York / United States</option>
-										<option value="2">Road 221, No.12, New York / United States</option>
-									</select>
+					<!-- SHIPPING ADDRESS -->
+					<h2 class="h5 mb-4">
+						배송정보 <span class="d-block fs--14 text-success font-weight-normal">
+							상품을 보내실 장소의 주소를 기입해주세요 </span>
+					</h2>
+					<div class="p-4 shadow-xs border rounded mb-5">
 
-									<div class="pt-2">
-										<a href="#shipping_address_edit" data-toggle="collapse" class="text-decoration-none d-block py-1">
-											<span class="group-icon">
-												<i class="fi fi-pencil"></i>
-												<i class="fi fi-arrow-up"></i>
-											</span>
+						<select class="form-control bs-select"
+							name="shipping_address_selected">
+							<option value="1">${memberInfo.load_address }/
+								${memberInfo.rest_address }</option>
+						</select>
 
-											<span class="d-inline-block pl-2 pr-2">
-												edit address
-											</span>
-										</a>
-									</div>
-									
-
-<div id="shipping_address_edit" class="collapse">
-										<div class="row mt-3">
-
-											<div class="col-12 col-sm-6 col-lg-6">
-
-											<div class="form-label-group mb-3">
-												<input required placeholder="First Name" id="shipping_first_name" name="member_name" type="text" class="form-control">
-												<label for="shipping_first_name">주문자 성명</label>
-											</div>
-
-										</div>
-										
+						<div class="pt-2">
+							<a href="#shipping_address_edit" data-toggle="collapse"
+								class="text-decoration-none d-block py-1"> <span
+								class="group-icon"> <i class="fi fi-pencil"></i> <i
+									class="fi fi-arrow-up"></i>
+							</span> <span class="d-inline-block pl-2 pr-2"> 배송정보 수정하기 </span>
+							</a>
+						</div>
 
 
-										<div class="col-12 col-sm-6 col-lg-12 mb--20">
+						<div id="shipping_address_edit" class="collapse">
+							<div class="row mt-3">
 
-											<div class="form-label-group mb-3">
-												<input placeholder="Phone Number" id="shipping_phone" name="phone" type="text" class="form-control">
-												<label for="shipping_phone">휴대전화</label>
-											</div>
+								<div class="col-12 col-sm-6 col-lg-6">
 
-										</div>
-
-
-										<div class="col-12 col-sm-12 col-lg-12 mb--10">
-
-											<div class="form-label-group mb-3">
-												<input required placeholder="Address" id="zipNo"
-													name="zipNo" type="number" class="form-control"> <label
-													for="zipNo">우편번호</label>
-												<a href="javascript:execDaumPostcode()">우편번호검색</a>
-											</div>
-
-		
-											<div class="form-label-group mb-3">
-												<input required placeholder="Address" id="load_address"
-													name="load_address" type="text" class="form-control"> <label
-													for="load_address">도로명 주소</label>
-		
-											</div>
-		
-			
-											<div class="form-label-group mb-3">
-												<input required placeholder="Address" id="rest_address"
-													name="rest_address" type="text" class="form-control"> <label
-													for="rest_address">나머지 주소</label>
-											</div>
-										</div>
-
-
-									</div>
-
+									<div class="form-label-group mb-3">
+										<input required placeholder="First Name"
+											id="shipping_first_name" name="member_name" type="text" value="${memberInfo.member_name}"
+											class="form-control"> <label
+											for="shipping_first_name">주문자 성명</label>
 									</div>
 
 								</div>
-								<!-- /SHIPPING ADDRESS -->
 
 
-								<!-- PAYMENT METHOD -->
-								<h2 class="h5 mb-4">
-									결제수단
-									
-								</h2>
 
-								<div class="form-advanced-list p-4 shadow-xs border rounded mb-5">
+								<div class="col-12 col-sm-6 col-lg-12 mb--20">
 
-<!-- 
+									<div class="form-label-group mb-3">
+										<input placeholder="Phone Number" id="shipping_phone" value="${memberInfo.phone}"
+											name="phone" type="text" class="form-control"> <label
+											for="shipping_phone">휴대전화</label>
+									</div>
+
+								</div>
+
+
+								<div class="col-12 col-sm-12 col-lg-12 mb--10">
+
+									<div class="form-label-group mb-3">
+										<input required placeholder="Address" id="zipNo" name="zipNo" value="${memberInfo.zipNo}"
+											type="number" class="form-control"> <label
+											for="zipNo">우편번호</label> <a
+											href="javascript:execDaumPostcode()">우편번호검색</a>
+									</div>
+
+
+									<div class="form-label-group mb-3">
+										<input required placeholder="Address" id="load_address" value="${memberInfo.load_address}"
+											name="load_address" type="text" class="form-control">
+										<label for="load_address">도로명 주소</label>
+
+									</div>
+
+
+									<div class="form-label-group mb-3">
+										<input required placeholder="Address" id="rest_address" value="${memberInfo.rest_address}"
+											name="rest_address" type="text" class="form-control">
+										<label for="rest_address">나머지 주소</label>
+									</div>
+								</div>
+
+
+							</div>
+
+						</div>
+
+					</div>
+					<!-- /SHIPPING ADDRESS -->
+
+
+					<!-- PAYMENT METHOD -->
+					<h2 class="h5 mb-4">결제수단</h2>
+
+					<div class="form-advanced-list p-4 shadow-xs border rounded mb-5">
+
+						<!-- 
 									<label class="form-radio form-radio-primary d-block py-3 border-bottom">
 										<input type="radio" name="payment_method" class="form-advanced-list-reveal" data-form-advanced-target="#bankdeposit_expand">
 										<i></i> 무통장 입금
@@ -194,207 +182,199 @@
 									/paypal info
  -->
 
-									<label class="form-radio form-radio-primary d-block py-3 border-bottom">
-										<input type="radio" name="pg" value="html5_inicis" class="form-advanced-list-reveal" data-form-advanced-target="#payment_card_form">
-										<i></i> 신용카드
+						<label
+							class="form-radio form-radio-primary d-block py-3 border-bottom">
+							<input type="radio" name="pg" value="html5_inicis"
+							class="form-advanced-list-reveal"
+							data-form-advanced-target="#payment_card_form"> <i></i>
+							신용카드 <span class="float-end mt--n3 ml--n10 mr--n10"> <img
+								src="${contextPath}/resources/assets/images/credit_card/visa.svg"
+								width="38" height="24" alt="cc"> <img
+								src="${contextPath}/resources/assets/images/credit_card/mastercard.svg"
+								width="38" height="24" alt="cc"> <span
+								class="fs--11 d-block text-align-end">and more...</span>
+						</span>
 
-										<span class="float-end mt--n3 ml--n10 mr--n10">
-											<img src="${contextPath}/resources/assets/images/credit_card/visa.svg" width="38" height="24" alt="cc">
-											<img src="${contextPath}/resources/assets/images/credit_card/mastercard.svg" width="38" height="24" alt="cc">
-											<span class="fs--11 d-block text-align-end">and more...</span>
-										</span>
+						</label> <label
+							class="form-radio form-radio-primary d-block py-3 border-bottom">
+							<input type="radio" name="pg" value="kakaopay"
+							class="form-advanced-list-reveal"
+							data-form-advanced-target="#paypal_expand"> <i></i> 카카오페이
+						</label>
 
-									</label>
+						<!-- paypal info -->
+						<div id="paypal_expand"
+							class="form-advanced-list-reveal-item hide text-center">
 
+							<div class="my-5">
+								<img width="150"
+									src="${contextPath }/resources/demo.files/svg/vendors/vendor_paypal.svg"
+									alt="...">
+							</div>
 
-									<label class="form-radio form-radio-primary d-block py-3 border-bottom">
-										<input type="radio" name="pg" value="kakaopay" class="form-advanced-list-reveal" data-form-advanced-target="#paypal_expand">
-										<i></i> 카카오페이
-									</label>
+							<p>After clicking "Complete Order", you will be redirected to
+								complete your purchase securely.</p>
 
-									<!-- paypal info -->
-									<div id="paypal_expand" class="form-advanced-list-reveal-item hide text-center">
+						</div>
+						<!-- /paypal info -->
 
-										<div class="my-5">
-											<img width="150" src="${contextPath }/resources/demo.files/svg/vendors/vendor_paypal.svg" alt="...">
-										</div>
-
-										<p>
-											After clicking "Complete Order", you will be redirected to complete your purchase securely.
-										</p>
-
-									</div>
-									<!-- /paypal info -->
-
-								</div>
-								<!-- /PAYMENT METHOD -->
-
-
-
-
-								<!-- CUSTOMER NOTE -->
-								<h2 class="h5 mb-4">
-									요청사항
-									<span class="d-block fs--14 text-muted font-weight-normal">
-										배송 시 요청사항을 입력해주세요
-									</span>
-								</h2>
-
-								<div class="form-label-group mb-5">
-									<textarea name="delivery_request" placeholder="Leave us a note about this order (optional)" id="description" class="form-control" rows="3"></textarea>
-									<label for="description">배송 요청사항을 입력하세요 (옵션)</label>
-								</div>
-								<!-- /CUSTOMER NOTE -->
+					</div>
+					<!-- /PAYMENT METHOD -->
 
 
 
-								<!-- AGREE TERMS -->
-								<label class="form-checkbox form-checkbox-primary d-block">
-									<input required type="checkbox" name="checkbox">
-									<i></i> <a href="#!" target="_blank">약관</a>에 동의합니다.
-								</label>
+
+					<!-- CUSTOMER NOTE -->
+					<h2 class="h5 mb-4">
+						요청사항 <span class="d-block fs--14 text-muted font-weight-normal">
+							배송 시 요청사항을 입력해주세요 </span>
+					</h2>
+
+					<div class="form-label-group mb-5">
+						<textarea name="delivery_request"
+							placeholder="Leave us a note about this order (optional)"
+							id="description" class="form-control" rows="3"></textarea>
+						<label for="description">배송 요청사항을 입력하세요 (옵션)</label>
+					</div>
+					<!-- /CUSTOMER NOTE -->
 
 
-								<!-- COMPLETE ORDER -->
-								<div class="clearfix text-center-xs mt--60">
 
-									<div class="float-end ml-0 mr-0 float-none-xs mb-4">
-										<button type="submit" class="btn btn-primary btn-shadow btn-lg block-xs fs--16 py-3 pl--15 pr--15 ">
-											<span>
-												<i class="fi fi-check"></i>
-											</span>&nbsp;
-											결제하기
-										</button>
-									</div>
-
-									<div class="pt-4 mb-4">
-										<a href="shop-page-cart-1.html" class="fs--15 text-decoration-none">
-											<i class="fi fi-arrow-start-slim"></i>
-											장바구니로 돌아가기
-										</a>
-									</div>
-
-								</div>
-								<!-- /COMPLETE ORDER -->
+					<!-- AGREE TERMS -->
+					<label class="form-checkbox form-checkbox-primary d-block">
+						<input required type="checkbox" name="checkbox"> <i></i> <a
+						href="#!" target="_blank">약관</a>에 동의합니다.
+					</label>
 
 
-							</form>
+					<!-- COMPLETE ORDER -->
+					<div class="clearfix text-center-xs mt--60">
+
+						<div class="float-end ml-0 mr-0 float-none-xs mb-4">
+							<button type="submit"
+								class="btn btn-primary btn-shadow btn-lg block-xs fs--16 py-3 pl--15 pr--15 ">
+								<span> <i class="fi fi-check"></i>
+								</span>&nbsp; 결제하기
+							</button>
 						</div>
 
+						<div class="pt-4 mb-4">
+							<a href="shop-page-cart-1.html"
+								class="fs--15 text-decoration-none"> <i
+								class="fi fi-arrow-start-slim"></i> 장바구니로 돌아가기
+							</a>
+						</div>
+
+					</div>
+					<!-- /COMPLETE ORDER -->
 
 
-						<!-- SUMMARY COLUMN -->
-						<div class="col-12 col-lg-5 col-xl-6 order-1 order-lg-2">
-
-							<div class="sticky-kit">
-								<div class="shadow-xs border rounded p-4 mb-5">
-
-
-									<!-- item -->
-									<div class="d-flex justify-content-center align-items-center border-bottom py-3">
-
-										<div class="w--100">
-											<img class="img-fluid max-h-80" src="${contextPath }/resources/demo.files/images/unsplash/products/thumb_330/barrett-ward-fYYUgvHYgpU-unsplash-min.jpg" alt="...">
-										</div>
-
-										<div class="w-100 pl-3 pr-3">
-											
-											<div class="float-end">
-												<p class="fs--13 text-weight-muted mb-0">
-													<del>$189.95</del>
-												</p>
-												<p class="fs--16 font-weight-medium mb-0"> 
-													$158.95
-												</p>
-											</div>
-
-											<h6>Product title here x 1</h6>
-
-										</div>
-									</div>
-									<!-- /item -->
+				</form>
+			</div>
 
 
 
-									<!-- summary -->
-									<div class="border-bottom pb-3 mb-3 mt-3 px-3">
-										
-										<div class="clearfix">
-											가격:
-											<span class="float-end font-weight-medium">
-												$158.95
-											</span>
-										</div>
+			<!-- SUMMARY COLUMN -->
+			<div class="col-12 col-lg-5 col-xl-6 order-1 order-lg-2">
 
-										<div class="clearfix">
-											할인:
-											<span class="float-end">
-											 $0
-											</span>
-										</div>
+				<div class="sticky-kit">
+					<div class="shadow-xs border rounded p-4 mb-5">
 
 
-										<div class="clearfix">
-											배송비:
-											<span class="float-end text-align-end">
-												<a href="#!" class="fs--14">calculate</a>
-											</span>
-										</div>
+						<!-- item -->
+						<div
+							class="d-flex justify-content-center align-items-center border-bottom py-3">
 
-									</div>
-									<!-- /summary -->
+							<div class="w--100">
+								<img class="img-fluid max-h-80"
+									src="${contextPath }/resources/demo.files/images/unsplash/products/thumb_330/barrett-ward-fYYUgvHYgpU-unsplash-min.jpg"
+									alt="...">
+							</div>
 
+							<div class="w-100 pl-3 pr-3">
 
-
-									<!-- total -->
-									<div class="clearfix mb-3">
-										<h3 class="h4-xs float-start">총합:</h3>
-										<h3 class="h4-xs float-end">
-											$158.95
-										</h3>
-									</div>
-									<!-- /total -->
-
-
+								<div class="float-end">
+									<p class="fs--13 text-weight-muted mb-0">
+										<del>$189.95</del>
+									</p>
+									<p class="fs--16 font-weight-medium mb-0">$158.95</p>
 								</div>
+
+								<h6>Product title here x 1</h6>
+
+							</div>
+						</div>
+						<!-- /item -->
+
+
+
+						<!-- summary -->
+						<div class="border-bottom pb-3 mb-3 mt-3 px-3">
+
+							<div class="clearfix">
+								가격: <span class="float-end font-weight-medium"> $158.95 </span>
+							</div>
+
+							<div class="clearfix">
+								할인: <span class="float-end"> $0 </span>
+							</div>
+
+
+							<div class="clearfix">
+								배송비: <span class="float-end text-align-end"> <a href="#!"
+									class="fs--14">calculate</a>
+								</span>
 							</div>
 
 						</div>
-						<!-- /SUMMARY COLUMN -->
+						<!-- /summary -->
+
+
+
+						<!-- total -->
+						<div class="clearfix mb-3">
+							<h3 class="h4-xs float-start">총합:</h3>
+							<h3 class="h4-xs float-end">$158.95</h3>
+						</div>
+						<!-- /total -->
+
 
 					</div>
-
-
-
-
-
-
-
-					<!-- ADDITIONAL LINKS -->
-					<div class="border-top mt--100 pt-2">
-						<ol class="breadcrumb bg-transparent px-0 m-0 fs--13">
-
-							<li class="breadcrumb-item">
-								<a href="#" target="_blank">Refund Policy</a>
-							</li>
-
-							<li class="breadcrumb-item">
-								<a href="#" target="_blank">Privacy Policy</a>
-							</li>
-
-							<li class="breadcrumb-item">
-								<a href="#" target="_blank">Terms of Service</a>
-							</li>
-
-						</ol>
-					</div>
-					<!-- /ADDITIONAL LINKS -->
-
-
 				</div>
-			</section>
-			<!-- /CHECKOUT -->
-			
-			<script src="${contextPath}/resources/assets/js/core.min.js"></script>			
-			<jsp:include page="/WEB-INF/views/common/daumZip.jsp" />
+
+			</div>
+			<!-- /SUMMARY COLUMN -->
+
+		</div>
+
+
+
+
+
+
+
+		<!-- ADDITIONAL LINKS -->
+		<div class="border-top mt--100 pt-2">
+			<ol class="breadcrumb bg-transparent px-0 m-0 fs--13">
+
+				<li class="breadcrumb-item"><a href="#" target="_blank">Refund
+						Policy</a></li>
+
+				<li class="breadcrumb-item"><a href="#" target="_blank">Privacy
+						Policy</a></li>
+
+				<li class="breadcrumb-item"><a href="#" target="_blank">Terms
+						of Service</a></li>
+
+			</ol>
+		</div>
+		<!-- /ADDITIONAL LINKS -->
+
+
+	</div>
+</section>
+<!-- /CHECKOUT -->
+
+<script src="${contextPath}/resources/assets/js/core.min.js"></script>
+<jsp:include page="/WEB-INF/views/common/daumZip.jsp" />
 

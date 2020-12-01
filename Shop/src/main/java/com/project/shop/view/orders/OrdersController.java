@@ -22,13 +22,22 @@ public class OrdersController extends BaseController {
 	private OrderService orderService;
 	
 	@RequestMapping(value="/checkout.do")
-	public ModelAndView checkout() {
+	public ModelAndView checkout(HttpServletRequest request) {
 		//로그인이면 checkout-logged로, 로그인이 아니면 checkout으로.
-		
-		//checkout-logged일땐 member정보 연동
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView (viewName);
+		HttpSession session = request.getSession();
+		Boolean isLogOn = (Boolean)session.getAttribute("isLogOn");
+		MemberVO memberVo = (MemberVO)session.getAttribute("memberInfo");
+
+		if(isLogOn !=null && isLogOn.equals(true) && memberVo !=null) {
+			//checkout-logged일땐 member정보 연동
+			mav.addObject("memberInfo", memberVo);
+			mav.setViewName("/orders/checkout-logged");			
+		}
 		
 		//둘다 product정보 연동
-		return null;
+		return mav;
 		
 	}
 	
