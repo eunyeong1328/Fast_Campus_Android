@@ -2,20 +2,35 @@ package com.project.shop.view.orders;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.shop.common.base.BaseController;
+import com.project.shop.member.MemberVO;
+import com.project.shop.orders.OrderService;
 import com.project.shop.orders.OrderVO;
 
 @Controller
 @RequestMapping(value="/orders")
 public class OrdersController extends BaseController {
-//	@Autowired
-//	private OrderService orderService;
+	@Autowired
+	private OrderService orderService;
+	
+	@RequestMapping(value="/checkout.do")
+	public ModelAndView checkout() {
+		//로그인이면 checkout-logged로, 로그인이 아니면 checkout으로.
+		
+		//checkout-logged일땐 member정보 연동
+		
+		//둘다 product정보 연동
+		return null;
+		
+	}
 	
 	@RequestMapping(value="/import.do")
 	public ModelAndView memberList(@ModelAttribute("OrderVO") OrderVO orderVO,
@@ -32,9 +47,17 @@ public class OrdersController extends BaseController {
 	
 	}
 	
-	@RequestMapping(value="/complete.do")
-	public void orderComplete(@ModelAttribute("OrderVO") OrderVO orderVO) {
+	@RequestMapping(value="/addOrder.do")
+	public void orderComplete(@ModelAttribute("OrderVO") OrderVO orderVO,HttpServletRequest request) throws Exception {
 		System.out.println("결제성공: "+orderVO);
+		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
+		if(memberInfo!=null) {
+		String member_id = memberInfo.getMember_id();
+		orderVO.setMember_id(member_id);
+		}
+		orderService.addOrder(orderVO);
+		
 	}
 	
 	

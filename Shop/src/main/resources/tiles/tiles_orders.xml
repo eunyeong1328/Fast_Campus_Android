@@ -17,10 +17,17 @@
 			value="/WEB-INF/views/orders/checkout.jsp" />
 	</definition>
 	
+	<definition name="/orders/checkout-logged" extends="baseLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/orders/checkout-logged.jsp" />
+	</definition>
+	
 		<definition name="/orders/paySuccess" extends="baseLayout">
 		<put-attribute name="body"
 			value="/WEB-INF/views/orders/paySuccess.jsp" />
 	</definition>
+	
+
 	
 
   

@@ -7,9 +7,6 @@
 <title>결제성공</title>
 </head>
 <body>
-<script>
-alert('${msg }');
-</script>
 결제성공
 </body>
 </html>

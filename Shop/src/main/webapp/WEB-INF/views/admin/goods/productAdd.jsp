@@ -104,53 +104,53 @@ function checkItem(){
 						<br>
 						<div>
 							<label>상품 아이디</label>
-							<input class="form-control col-md-3" type="text" id="product_id" name="product_id" required="required" placeholder="product_id" oninput="checkProduct()">
+							<input class="form-control col-md-3" type="text" id="product_id" name="product_id" required="required" oninput="checkProduct()">
 							<label id="_product_id"></label>
 						</div>
 						<div> 
-							상품명 <input class="form-control col-md-3" type="text" name="product_name" required="required" placeholder="product_name">
+							상품명 <input class="form-control col-md-3" type="text" name="product_name" required="required">
 						</div>
 						<br><br>
 						<div>
 							상품 설명
 							<textarea name="product_detail"
-								class="summernote-editor w-100 h--350" data-placeholder="상품 설명"
+								class="summernote-editor w-100 h--350" 
 								data-min-height="350" data-max-height="2800" data-focus="false"
 								data-lang="UTF-8">
 							</textarea>
 						</div><br><br>
 						<div>
-							판매 단위 <input class="form-control col-md-3" type="text" name="sales_unit" required="required" placeholder="sales_unit"><br><br>
-							상품 용량 <input class="form-control col-md-3" type="text" name="product_size" required="required" placeholder="product_size"><br><br>
-							포장 타입 <input class="form-control col-md-3" type="text" name="packing_type" required="required"	placeholder="packing_type"><br><br>
-							거래처 <input class="form-control col-md-3" type="text" name="supplier" required="required"	placeholder="supplier"><br><br>
+							판매 단위 <input class="form-control col-md-3" type="text" name="sales_unit" required="required" ><br><br>
+							상품 용량 <input class="form-control col-md-3" type="text" name="product_size" required="required" ><br><br>
+							포장 타입 <input class="form-control col-md-3" type="text" name="packing_type" required="required"	><br><br>
+							거래처 <input class="form-control col-md-3" type="text" name="supplier" required="required"><br><br>
 						</div>
 					</section>
 					<section>
 						<label>IMAGE</label>
 						<br>
 						<div>
-							상품 이미지 <input type="file" name="image" multiple="multiple" required="required"><br><br> 
-							<!-- 상품 상세 이미지 <input type="file" name="detail_image"><br><br> -->
+							상품 이미지 <input type="file" name="image" required="required"><br><br> 
+							상품 상세 이미지 <input type="file" name="detail_image" required="required"><br><br>
 						</div>
 					</section>
 					<section>
 						<label>ITEM</label>
 						<br>
 						<div>
-							제품 번호 <input class="form-control col-md-3" type="text" id="item_num" name="item_num" required="required" placeholder="item_num" oninput="checkItem()">
+							제품 번호 <input class="form-control col-md-3" type="text" id="item_num" name="item_num" required="required" oninput="checkItem()">
 							<label id="_item_num"></label>
 							<br><br>
 							
-							등록 날짜 <input class="form-control col-md-3" type="date" name="reg_date" required="required" placeholder="reg_date"><br><br>
+							등록 날짜 <input class="form-control col-md-3" type="date" name="reg_date" required="required" ><br><br>
 
-							재고 <input class="form-control col-md-3" type="text" name="stock" required="required" placeholder="stock"><br><br>
+							재고 <input class="form-control col-md-3" type="text" name="stock" required="required" ><br><br>
 							
-							단위 가격 <input class="form-control col-md-3" type="text" name="unit_price" required="required" placeholder="unit_price"><br><br>
+							단위 가격 <input class="form-control col-md-3" type="text" name="unit_price" required="required" ><br><br>
 
-							가격 <input class="form-control col-md-3" type="text" name="price" required="required" placeholder="price"><br><br> 
+							가격 <input class="form-control col-md-3" type="text" name="price" required="required" ><br><br> 
 							
-							할인율 <input class="form-control col-md-3" type="text" name="discount" required="required" placeholder="discount"><br><br>
+							할인율 <input class="form-control col-md-3" type="text" name="discount" required="required" ><br><br>
 
 							판매량 <input class="form-control col-md-3" type="text" name="sales" readonly value="0"><br><br>
 						</div>
