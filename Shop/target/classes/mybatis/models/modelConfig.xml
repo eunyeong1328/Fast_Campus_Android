@@ -25,6 +25,12 @@
   	<typeAlias type="com.project.shop.board.BoardVO" alias="boardVO" />
   	<typeAlias type="com.project.shop.product.board.ProductBoardQnaVO" alias="product_qnaVO"/>
   	<typeAlias type="com.project.shop.product.board.ReviewVO" alias="reviewVO"/>
+<<<<<<< HEAD
+    <typeAlias type="com.project.shop.cart.CartVO" alias="cartVO"/>
+=======
+  	<typeAlias type="com.project.shop.orders.OrderVO" alias="orderVO"/>
+  	
+>>>>>>> refs/remotes/origin/memberMain
   </typeAliases>
   
  

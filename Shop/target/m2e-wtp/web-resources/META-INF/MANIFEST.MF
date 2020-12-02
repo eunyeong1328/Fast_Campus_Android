@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
+Built-By: ￪ﾹﾀ￫ﾏﾙ￭ﾘﾄ
+=======
 Built-By: bitcamp
+>>>>>>> refs/remotes/origin/memberMain
 Build-Jdk: 10.0.2
 Created-By: Maven Integration for Eclipse
 

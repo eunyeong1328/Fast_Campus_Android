@@ -76,6 +76,16 @@
 	   where member_id = #{id}
 	</select>
 	
+	<select id="findEmailInfo" parameterType="String" resultType="memberVO">
+			select * from member
+			where member_id = #{member_id}
+	</select>
+	
+	<!-- 패스워드 수정 -->
+	<update id="updateUserPassword" parameterType="java.util.HashMap">
+		update member set password = #{password}
+		where member_id = #{member_id}
+	</update>
 	
 	
 </mapper>
