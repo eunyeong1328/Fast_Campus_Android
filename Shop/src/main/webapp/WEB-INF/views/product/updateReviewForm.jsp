@@ -23,10 +23,10 @@
 					-->
 					<div class="page-title bg-transparent b-0">
 
-						<h1 class="h4 mt-4 mb-0 px-3 font-weight-normal">PRODUCT Q&A</h1>
+						<h1 class="h4 mt-4 mb-0 px-3 font-weight-normal">PRODUCT REVIEW</h1>
 						<br>
 						<p>
-							&nbsp;&nbsp;&nbsp;&nbsp;상품에 대한 문의를 남기는 공간입니다.<br>&nbsp;&nbsp;&nbsp;&nbsp;배송,
+							&nbsp;&nbsp;&nbsp;&nbsp;상품에 대한 후기를 남기는 공간입니다.<br>&nbsp;&nbsp;&nbsp;&nbsp;배송,
 							주문(취소/교환/환불)관련 문의 및 요청사항은 1:1 문의에 남겨주세요.
 					</div>
 
@@ -34,16 +34,17 @@
 				  	<form novalidate class="bs-validate" method="post" action="${contextPath }/product/addBoardQna.do" enctype="multipart/form-data">
 -->
 					<form class="bs-validate" method="post"
-						action="${contextPath }/product/insertQna.do"
+						action="${contextPath }/product/updateReview.do"
 						enctype="multipart/form-data">
 
+						
 						<section>
 
 							<div class="row gutters-sm">
 
 								<div class="col-12 col-lg-12 col-xl-8 mb-5">
 
-
+									
 									<div class="form-label-group mb-3">
 										<table style="color: gray;" class="table">
 											<tbody>
@@ -59,21 +60,34 @@
 													<th scope="row">핸드폰</th>
 													<td>${memberInfo.phone }</td>
 												</tr>
+												<tr>
+													<th scope="row">별점</th>
+													<td>
+														<div class="w--150 w-100-xs float-start float-none-xs mb-1">
+															<select class="form-control bs-select" name="rated">
+																<option value="5" data-icon="fi fi-star-full text-warning float-start">5 점</option>
+																<option value="4" data-icon="fi fi-star-full text-warning float-start">4 점</option>
+																<option value="3" data-icon="fi fi-star-full text-warning float-start">3 점</option>
+																<option value="2" data-icon="fi fi-star-full text-warning float-start">2 점</option>
+																<option value="1" data-icon="fi fi-star-full text-warning float-start">1 점</option>
+															</select>
+														</div>
+													</td>
+												</tr>
 											</tbody>
 										</table>
 
 									</div>
-									<input type="hidden" name="member_id"value="${memberInfo.member_id }" /> 
+									<input type="hidden" name="member_id" value="${memberInfo.member_id }" /> 
 									<input type="hidden" name="product_id" value="${product_id }" /> 
-									<input type="hidden" name="qna_category_num" value="3" /> 
-									<input type="hidden" name="parent_num" value="${parent_num }" />
+									<input type="hidden" name="review_num" value="${review.review_num }"/>
 									<input id="product_title" name="title" required type="text"
-										placeholder="제목을 입력해주세요" class="form-control"> 
-									<label	for="product_title"></label>
+										value="${review.title }" class="form-control"> <label
+										for="product_title"></label>
+
 
 									<textarea name="contents"
-										class="summernote-editor w-100 h--350"
-										data-placeholder="문의사항을 적어주세요" data-min-height="350"
+										class="summernote-editor w-100 h--350" data-min-height="350"
 										data-max-height="2800" data-focus="false" data-lang="en-US"
 										data-ajax-url="_ajax/demo.summernote.php"
 										data-ajax-params="['action','editor:image:upload']"
@@ -85,30 +99,19 @@
 												["para", ["ul", "ol", "paragraph"]],
 												["table", ["table"]],
 												["help", ["help"]]
-									]'></textarea>
-
+											]'>${review.contents }</textarea>
 									<br>
-									<br> 
-									<c:choose>
-										<c:when test="${parent_num==0 }">
-											<input type="submit"
-											class="btn btn-purple btn-soft mb-1" value="문의등록">
-											
-										</c:when>
-										<c:otherwise>
-											<input type="submit" class="btn btn-purple btn-soft mb-1" value="답변등록">
-										</c:otherwise>
-									</c:choose>
 									
+										<button type="submit" class="btn btn-purple btn-soft mb-1"
+											value="edit">수정</button>
+									
+									<a
+										href="${contextPath }/product/productDetail.do?product_id=${vo.product_id}">
+										<button type="button" class="btn btn-purple btn-soft mb-1">
+											이전으로</button>
+									</a>
 
 
-									<!--  
-											<a href="${contextPath }/product/productBoardQnaForm.do?product_id=${vo.product_id}">
-												<button type="button" class="btn btn-purple btn-soft mb-1">
-													이전으로
-												</button>
-											</a> 
-										-->
 								</div>
 
 

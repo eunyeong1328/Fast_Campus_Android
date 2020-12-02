@@ -57,8 +57,41 @@
 			)
 		]]>
 	</insert>
-	
-	
-	
-	
+	<!-- Review 글 가져오기 -->
+	<select id="selectReview" parameterType="int" resultType="reviewVO">
+		<![CDATA[
+			SELECT * FROM REVIEW
+			WHERE REVIEW_NUM = #{REVIEW_NUM}
+		]]>
+	</select>
+	<!--  Review 업데이트 -->
+	<update id="updateReview" parameterType="java.util.HashMap">
+		
+		UPDATE REVIEW
+		SET 
+		TITLE = #{title}, CONTENTS= #{contents}, 
+		 reg_date= sysdate, rated=#{rated}
+		<choose>
+			<when test="image1 != null">
+				, image1 = #{image1}
+			</when>
+		</choose>
+		<choose>
+			<when test="image2 != null">
+				, image2 = #{image2}
+			</when>
+		</choose>
+		<choose>
+			<when test="image3 != null">
+				, image3 = #{image3}
+			</when>
+		</choose>
+		WHERE REVIEW_NUM = #{review_num}
+		
+	</update>
+	<!-- Reveiw 삭세 -->
+	<delete id="deleteReview" parameterType="int">
+		DELETE FROM REVIEW
+		WHERE review_num = #{review_num}
+	</delete>
 </mapper>
