@@ -101,5 +101,10 @@
 		WHERE
 		member_id = #{member_id}
 	</update>
+	
+	<!-- 회원 삭제  -->
+	<delete id= "deleteAccount" parameterType="String">
+		delete from member where member_id = #{member_id}
+	</delete>
 
 </mapper>

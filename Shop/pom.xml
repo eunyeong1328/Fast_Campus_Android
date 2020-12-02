@@ -16,7 +16,7 @@
 	</properties>
 	<dependencies>
 	<!-- 이메일(자바 웹을 다루는 기술)에 나온 라이브러리 -->
-	<dependency>
+		 <dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>

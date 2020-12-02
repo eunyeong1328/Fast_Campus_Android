@@ -65,4 +65,8 @@ public class MyAccountDAO {
 		return productList;
 		
 	}
+	
+	public void deleteAccount(String member_id) throws Exception{
+		sqlSession.delete("mappers.myaccount.deleteAccount",member_id);
+	}
 }

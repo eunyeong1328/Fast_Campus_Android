@@ -36,8 +36,7 @@ public class SendEmailService {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<html><body>");
  		sb.append("<meta http-equiv='Content-Type' content='text/html; charset=euc-kr'>");
- 		sb.append("<img src='${contextPath}/resources/images/drjjlogo.svg' >");
- 		sb.append("<h1 style=\"margin-left: 150px;\">"+"쩝쩝박사"+"<h1><br>");
+ 		sb.append("<a href='https://ifh.cc/v-nQFY3g' target='_blank'><img src='https://ifh.cc/g/nQFY3g.png' border='0'></a>");
  		sb.append("<h3 style=\"text-align: center;\">"+""+"<h3><br>");
  		sb.append("</body></html>");
  		

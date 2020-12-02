@@ -84,4 +84,9 @@ public class MyAccountServiceImpl implements MyAccountService{
 		
 	}
 
+	@Override
+	public void deleteAccount(String member_id) throws Exception {
+		myAccountDAO.deleteAccount(member_id);
+	}
+
 }

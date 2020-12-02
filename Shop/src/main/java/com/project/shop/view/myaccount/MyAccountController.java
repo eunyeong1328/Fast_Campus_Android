@@ -45,14 +45,38 @@ public class MyAccountController extends BaseController{
 		return mav;
 	}
 
-	//	 @RequestMapping(value="/modifyMyInfo.do", method = RequestMethod.POST)
-	//	public ResponseEntity modifyInfo(@RequestParam("attribute") String attribute, // 수정할 회원 정보 속성을 저장한다.
-	//								@RequestParam("value") String value, //회원 정보의 속성 값을 저장한다.
-	//								HttpServletRequest request, HttpServletResponse response
-	//			) throws Exception{
-	//		return null;
-	//		 
-	//	 }
+	//계정 정보 삭제
+	@RequestMapping(value ="/deleteAccount.do") 
+	public ModelAndView deleteAccount(
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//session에서 획득한  memberInfo 정보
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session=request.getSession(); 
+		memberVO = (MemberVO) session.getAttribute("memberInfo");
+		String sessionMember_id = memberVO.getMember_id();
+		String sessionPass = memberVO.getPassword();
+		String voPassword = request.getParameter("current_password");
+		
+		System.out.println("세션 아이디" + sessionMember_id);
+		System.out.println("세션 비번" + sessionPass);
+		System.out.println("내가 입력한 비번" + voPassword);
+
+		
+		if(!(sessionPass.equals(voPassword))){
+			String message="비밀번호를 잘못 입력하였습니다."; 
+	        mav.addObject("message", message);
+			mav.setViewName("/myaccount/account-settings");
+			return mav;
+		}else {
+			myAccountService.deleteAccount(sessionMember_id);
+			session.invalidate();
+			String message="회원이 탈퇴되었습니다."; 
+	        mav.addObject("message", message);
+			mav.setViewName("/main/main");
+			return mav;
+		}
+	}
 
 //찜 리스트
 	@RequestMapping(value="/account-favourites.do")

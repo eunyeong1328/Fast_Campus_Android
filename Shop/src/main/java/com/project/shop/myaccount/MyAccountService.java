@@ -17,5 +17,6 @@ public interface MyAccountService{
 	public void addFav(HashMap ids) throws Exception;
 	public List<OrderVO> listOrderList(String member_id) throws Exception;
 	public Map<String,Object> listOrderDetail(String order_num) throws Exception;
+	public void deleteAccount(String member_id) throws Exception;
 
 }
