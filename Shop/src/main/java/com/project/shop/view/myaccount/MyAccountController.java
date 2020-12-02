@@ -135,6 +135,29 @@ public class MyAccountController extends BaseController{
 		}
 		return mav;
 	}
+	
+	@RequestMapping(value="/account-order-detail.do")
+	public ModelAndView listOrderDetail( @RequestParam("product_id") String product_id,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav =  new ModelAndView(viewName);
+
+		HttpSession session=request.getSession(); 
+		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+
+		if(isLogOn == null || isLogOn == false || memberVO ==null) {
+			mav.addObject("message", "세션이 만료되었습니다. 다시 로그인해주세요");
+			mav.setViewName("/member/loginForm");
+		} else {
+			/*
+			 * String member_id = memberVO.getMember_id(); List<OrderVO> order =
+			 * myAccountService.listOrderDetail(member_id); mav.addObject("order", order);
+			 */	  
+		}
+		return mav;
+	}
 
 
 

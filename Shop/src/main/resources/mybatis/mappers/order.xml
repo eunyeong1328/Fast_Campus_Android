@@ -32,7 +32,6 @@
 								order_status,
 								pg,
 								paid_at,
-								order_date,
 								member_id,
 								member_name,
 								email,
@@ -46,7 +45,6 @@
 								#{order_status},
 								#{pg},
 								#{paid_at},
-								#{order_date},
 								#{member_id},
 								#{member_name},
 								#{email},
@@ -56,6 +54,16 @@
 								#{delivery_request})
 								   ]]>
 		
+	</insert>
+	
+	<insert id="insertOrderDetail" parameterType="list">
+		
+		<foreach collection="list" item="item" index="index"
+		open="INSERT ALL " separator=" " close="SELECT * FROM DUAL ">
+		 INTO orders_detail(order_num,product_id, price, order_quantity)
+		 VALUES (#{item.order_num},#{item.product_id},#{item.price},#{item.quantity})
+		</foreach>
+	
 	</insert>
 	
 	<!-- 내 주문 조회 -->
@@ -68,6 +76,8 @@
 			
     	]]>
 	</select>
+	
+	
 	
 	
 </mapper>

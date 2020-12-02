@@ -84,7 +84,8 @@ public class OrdersController extends BaseController {
 		String member_id = memberInfo.getMember_id();
 		orderVO.setMember_id(member_id);
 		}
-		orderService.addOrder(orderVO);
+		Map<String,List> cartMap = (Map)session.getAttribute("cartMap");
+		orderService.addOrder(orderVO, cartMap);
 		
 	}
 	

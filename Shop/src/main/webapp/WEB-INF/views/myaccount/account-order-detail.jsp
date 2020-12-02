@@ -14,14 +14,14 @@
 				<div class="container py-5">
 
 					<h1 class="h3">
-						내 주문
+						주문 상세
 					</h1>
 
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb fs--14">
-							<li class="breadcrumb-item"><a href="#!">Home</a></li>
-							<li class="breadcrumb-item"><a href="#!">Account</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Orders</li>
+							<li class="breadcrumb-item"><a href="${contextPath }/main/main.do">Home</a></li>
+							<li class="breadcrumb-item"><a href="${contextPath }/myaccount/account-orders.do">내 주문</a></li>
+							<li class="breadcrumb-item active" aria-current="page">주문 상세</li>
 						</ol>
 					</nav>
 

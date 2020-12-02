@@ -42,9 +42,22 @@ public class ProductVO {
 	private int quantity;
 	private int cart_id;
 	
+	//order
+	private String order_num;
+	
+	
 	public int getCart_id() {
 		return cart_id;
 	}
+
+	public String getOrder_num() {
+		return order_num;
+	}
+	public void setOrder_num(String order_num) {
+		this.order_num = order_num;
+	}
+
+
 
 
 	public ProductVO(String product_id, String product_name, String product_detail, String sales_unit, String product_size,
