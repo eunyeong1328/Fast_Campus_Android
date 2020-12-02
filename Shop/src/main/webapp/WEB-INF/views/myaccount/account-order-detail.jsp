@@ -57,14 +57,14 @@
 										</h2>
 
 										<p>
-											November 23, 2018, 11:38
+											${order.order_date }
 										</p>
 
 										<p class="mb-0">
-											Status:
+											상태 :
 
 											<span class="text-warning">
-												Pending / New
+												${order.order_status }
 											</span>
 										</p>
 
@@ -121,22 +121,20 @@
 
 											<label class="text-dark d-block m-0">주문자 이름</label>
 											<p>
-												John Doe
-												<span class="d-block fs--13 text-muted">(+01) 555-5555</span>
+												${order.member_name }
+												<span class="d-block fs--13 text-muted">(${order.phone })</span>
 											</p>
 
 											
 											<label class="text-dark d-block m-0">주소</label>
 											<p>
-												Road 741, No.44 <br>
-												United States <br>
-												New York <br>
-												500096<br>
+												${order.zipNo } <br>
+												${order.address }
 											</p>
 
 											<label class="text-dark d-block m-0">이메일</label>
 											<p>
-												Smarty Inc.
+												${order.email }
 											</p>
 
 										</div>
@@ -161,17 +159,17 @@
 
 											<div class="mt-3">
 												<label class="text-dark d-block m-0">카드사 승인번호:</label>
-												<span class="text-muted">000</span>
+												<span class="text-muted">${order.apply_num }</span>
 											</div>
 
 											<div class="mt-3">
 												<label class="text-dark d-block m-0">결제 승인시각:</label>
-												<span class="text-muted">00</span>
+												<span class="text-muted">${order.paid_at }</span>
 											</div>
 
 											<div class="mt-3">
 												<label class="text-dark d-block m-0">결제방법:</label>
-												<span class="text-muted">카카오페이</span>
+												<span class="text-muted">${order.pg} </span>
 											</div>
 
 
@@ -185,7 +183,7 @@
 								<div class="text-muted mt-4">
 									<span class="font-weight-medium">요청사항:</span>
 
-									– –
+									${order.delivery_request }
 
 								</div>
 								<!-- customer detail -->
@@ -206,7 +204,7 @@
 									<div class="col-3 col-sm-2 col-md-2 col-lg-2 text-center">
 										
 										<a class="d-block clearfix" href="#!">
-											<img class="img-fluid" src="demo.files/images/unsplash/products/thumb_330/imani-clovis-LxVxPA1LOVM-unsplash-min.jpg" alt="...">
+											<img class="img-fluid" src="${contextPath}/resources/images/item_image/${item.product_image}" alt="...">
 										</a>
 
 									</div>
@@ -220,16 +218,26 @@
 													${item.product_name }
 												</a>
 
-												<span class="d-block text-muted fs--13">SKU-NIKEY</span>
+												<span class="d-block text-muted fs--13">${item.option_name } x ${item.quantity }</span>
 
 											</div>
-
-											<div class="col-12 col-md-4 text-align-end text-start-xs">
-												$548.50 
+											
+											<div class="col-12 col-md-3 text-align-end text-start-xs">
+												${item.price - item.sale_price } 원  
 
 												<del class="text-muted d-block fs--14">
-													$992.5
+													${item.price } 원
 												</del>
+											</div>
+											
+											<div class="col-12 col-md-2 text-align-end text-start-xs">
+												 x ${item.quantity }
+												
+											</div>
+
+											<div class="col-12 col-md-3 text-align-end text-start-xs">
+												 ${(item.price-item.sale_price)*item.quantity }원
+												
 											</div>
 
 										</div>
@@ -249,9 +257,9 @@
 									<div class="offset-sm-6 offset-md-6 offset-lg-7 col-12 col-sm-6 col-md-6 col-lg-5">
 
 										<div class="clearfix">
-											Shipping:
+											배송비:
 											<span class="float-end text-align-end">
-												$120.00
+												3500 원
 											</span>
 										</div>
 
@@ -259,10 +267,10 @@
 
 										<div class="clearfix">
 											<h5 class="float-start">
-												Total:
+												총합:
 											</h5>
 											<h5 class="float-end">
-												$2916.45 
+												${order.totalPrice }원
 											</h5>
 										</div>
 
@@ -270,17 +278,6 @@
 								</div>
 
 
-								<hr>
-
-
-								<div class="text-success text-align-end text-center-xs px-3">
-
-									Congratulations John, you saved: <b>$697.00</b> 
-
-									<!-- show percent on saved more than 10% -->
-									<span class="font-light">(20%)</span>
-
-								</div>
 
 
 							</div>

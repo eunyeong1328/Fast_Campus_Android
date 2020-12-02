@@ -8,7 +8,7 @@
 
 	<resultMap id="orderResult" type="orderVO"> 
 		<result property="order_num" column="order_num" />
-		<result property="totalPrice" column="total_Price" />
+		<result property="totalPrice" column="totalPrice" />
 		<result property="apply_num" column="apply_num" />
 		<result property="order_status" column="order_status" />
 		<result property="pg" column="pg" />
@@ -28,7 +28,7 @@
 	<insert id="insertNewOrder" parameterType="orderVO">
 		<![CDATA[
 			insert into orders(order_num,
-								total_Price,
+								totalPrice,
 								apply_num,
 								order_status,
 								pg,
@@ -61,7 +61,7 @@
 		
 		<foreach collection="list" item="item" index="index"
 		open="INSERT ALL " separator=" " close="SELECT * FROM DUAL ">
-		 INTO orders_detail(order_num,product_id, price, order_quantity, sale_price, option_name)
+		 INTO orders_detail(order_num,product_id, price, quantity, sale_price, option_name)
 		 VALUES (#{item.order_num},#{item.product_id},#{item.price},#{item.quantity},#{item.sale_price}, #{item.option_name})
 		</foreach>
 	
@@ -98,7 +98,7 @@
 		 <![CDATA[
 		select x.*, o.option_name, o.option_price
 			from  product_option o,	
-				(select p.*, d.order_num, d.order_quantity, d.option_name, d.price, d.sale_price
+				(select p.*, d.order_num, d.quantity, d.option_name, d.price, d.sale_price
 						from product p, orders_detail d 
 						where p.product_id = d.product_id
             				and d.order_num=#{order_num} ) x
