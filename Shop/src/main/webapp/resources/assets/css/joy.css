@@ -88,8 +88,15 @@ html body:not(.aside-compact).layout-admin #footer {padding-left: 0;}
     text-decoration: none;
 }
 
-.joy-paging li a.insert {
+.tab-content a.insert {
     float: right;
+    background-color: #600080;
+    color:#fff;
+    display: inline-block;
+    padding: 0 14px;
+    margin-bottom:10px;
+    font-size:14px;
+    font-weight: normal;
 }
 
 .joy-paging li.active {
@@ -114,11 +121,15 @@ body.layout-admin #footer a { color: #121212; }
 #header .navbar { margin-bottom: 0; }
 
 /* page-detail.html */
-.joy-notice-detail .joy-table-detail {
-    width: 100%;
-    border-top: 2px solid #600080;
+
+div.joy-board-detail {
     color: #333;
     font-size: 14px;
+}
+
+.joy-board-detail .joy-table-detail {
+    width: 100%;
+    border-top: 2px solid #600080;
 }
 
 .joy-table-detail tr {
@@ -140,39 +151,35 @@ body.layout-admin #footer a { color: #121212; }
     border-bottom: 2px solid #600080;
 }
 
-.detail-contents p {
+.detail-contents p.contents {
     margin: 0;
     padding: 20px;
     color: #333;
-    font-size: 14px;
 }
 
 .prev-next-list {
     margin-right: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
 }
 
 .prev-next-list a {
     display: inline-block;
-    padding: 10px;
+    padding: 5px 10px;
     background-color: #600080;
-    box-sizing: border-box;
     color: #fff;
     margin: 10px 0;
     margin-left: 10px;
-    border-radius: 5px;
 }
 
 .prev-next-list p.disabled {
 	display: inline-block;
-	padding: 10px;
+	padding: 5px 10px;
 	background-color: none;
-	box-sizing: border-box;
     color: #eee;
     margin: 10px 0;
 	border: 1px solid #eee;
 	margin: 10px 0;
-    margin-left: 10px;
-    border-radius: 5px;
 }
 
 .list {
@@ -185,16 +192,20 @@ body.layout-admin #footer a { color: #121212; }
 }
 
 /* insert form css */
-#container div.memq-title {
-}
-
-#container div.memq-title p {
-    display: inline-block;
-}
-
-#container div.memq-title div.category-select {
-    display: inline-block;
-}
 
 
+#memq-insert {border-top: 2px solid #600080; font-size: 14px; }
+#memq-insert form>div {margin:15px 0;}
+#memq-insert form>div p {display: inline-block; width:20%; color:#4c4c4c; font-weight: bold;}
+#memq-insert form>div div {display: inline-block;} 
+#memq-insert form>div select {height: 30px; border:1px solid #ddd; font-size:14px; -webkit-appearance: auto; -moz-appearance: auto; appearance: auto;}
+#memq-insert form>div input {height: 30px; border:1px solid #ddd;}
+#memq-insert form>div input[type="button"] {background-color: #600080; color:#fff; font-weight: normal; font-size:14px; vertical-align: top;}
 
+#memq-insert form .memq-image input[type="file"] {height: auto; border:none; font-size: 14px;}
+#memq-insert form .memq-contents {overflow:hidden;}
+#memq-insert form .memq-contents p {width:20%; display:inline-block; float:left;}
+#memq-insert form .memq-contents div {width: 80%; display: inline-block; float:left; font-size:14px;}
+#memq-insert form .memq-contents textarea {width:80%; resize: none; float:right;margin-top:20px;}
+#memq-insert form .memq-submit input {background-color: #600080; color:#fff; font-size:14px; height:46px; display: inline-block; padding:0 20px;}
+#memq-insert form .memq-submit a {background-color: #600080; color:#fff; font-size:14px; height:40px; display: inline-block; line-height:40px; padding:0 20px;}

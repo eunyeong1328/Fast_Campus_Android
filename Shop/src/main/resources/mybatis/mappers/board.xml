@@ -5,110 +5,233 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.board">
-
-	<!-- 공지사항 전체 목록 불러오기 -->
+<!-- **************************************************** 전체 목록 **************************************************** -->
+	
+	<!-- 공지사항 -->
 	<select id="getNoticeList" parameterType="hashmap" resultType="boardVO">
-		SELECT *
-		FROM (SELECT ROWNUM R_NUM, N.*
-      		  FROM (SELECT *
-            		FROM NOTICE
-            		ORDER BY NOTICE_NUM DESC
-             	    ) N
-     		 )
+		SELECT * 
+		FROM (SELECT ROWNUM R_NUM, N.*, 
+					 LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
+					 LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
+			  FROM (SELECT * 
+			  		FROM NOTICE 
+			  		ORDER BY NOTICE_NUM DESC 
+			  		) N 
+			  ) 
 		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
 
-	<!-- 공지사항 선택한 글 상세 불러오기 -->
+	<!-- FAQ -->
+	<select id="getFAQList" parameterType="hashmap" resultType="boardVO">
+		SELECT * 
+		FROM (SELECT ROWNUM R_NUM, A.*, 
+					 LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
+					 LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
+			  FROM (SELECT F.FAQ_NUM, Q.QNA_CATEGORY_NAME, F.TITLE, F.CONTENTS  
+			  		FROM FAQ F, QNA_CATEGORY Q 
+					WHERE f.qna_category_num = q.qna_category_num 
+					ORDER BY f.faq_num DESC) A) 
+		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
+	</select>
+	
+	<!-- 1:1 문의(관리자용) 전체 -->
+	<select id="getMemQListAll" parameterType="hashmap" resultType="boardVO">
+		SELECT * 
+		FROM 
+    		(SELECT ROWNUM R_NUM, A.*, LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
+            LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
+     		FROM 
+    		    (SELECT member_qna_num, parent_num, title, contents, image, qna_category_name, 
+				order_num, member_id, email, phone, reg_date 
+				FROM MEMBER_QNA Q, QNA_CATEGORY C 
+				WHERE Q.qna_category_num = C.qna_category_num 
+         		START WITH parent_num = 0 
+      		    CONNECT BY PRIOR member_qna_num = parent_num 
+     		    ORDER SIBLINGS BY member_qna_num DESC) A)
+		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
+	</select>
+	
+	<!-- 1:1 문의 로그인회원 -->
+	<select id="getMemQList" parameterType="hashmap" resultType="boardVO">
+		SELECT * 
+		FROM 
+    		(SELECT ROWNUM R_NUM, A.*, LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
+            LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
+     		FROM 
+    		    (SELECT member_qna_num, parent_num, title, contents, image, qna_category_name, 
+				order_num, member_id, email, phone, reg_date 
+				FROM MEMBER_QNA Q, QNA_CATEGORY C 
+				WHERE Q.qna_category_num = C.qna_category_num 
+				AND Q.member_id = #{member_id}
+				OR Q.member_id = 'admin' 
+				AND Q.parent_num IN (SELECT member_qna_num from member_qna where member_id = #{member_id})
+         		START WITH parent_num = 0 
+      		    CONNECT BY PRIOR member_qna_num = parent_num 
+     		    ORDER SIBLINGS BY member_qna_num DESC) A)
+		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
+	</select>
+
+<!-- ****************************************** 선택한 글 상세 보기 ****************************************** -->
+
+	<!-- 공지사항 선택한 글 불러오기 -->
 	<select id="getNotice" parameterType="boardVO" resultType="boardVO">
 		SELECT *
 		FROM NOTICE
 		WHERE NOTICE_NUM = #{notice_num}
 	</select>
-
-	<!-- FAQ 전체 목록 불러오기 -->
-	<select id="getFAQList" parameterType="hashmap" resultType="boardVO">
-		SELECT * 
-		FROM (SELECT ROWNUM R_NUM, A.*
-			  FROM (SELECT F.FAQ_NUM, Q.QNA_CATEGORY_NAME, F.TITLE, F.CONTENTS  
-			  		FROM FAQ F, QNA_CATEGORY Q 
-					WHERE f.qna_category_num = q.qna_category_num 
-					ORDER BY f.faq_num) A)
-		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
-	</select>
 	
-	<!-- FAQ 선택한 글 상세 불러오기 -->
+	<!-- FAQ 선택한 글 불러오기 -->
 	<select id="getFAQ" parameterType="boardVO" resultType="boardVO">
-		SELECT F.FAQ_NUM , Q.QNA_CATEGORY_NAME , F.TITLE, F.CONTENTS
+		SELECT F.FAQ_NUM , q.qna_category_num, Q.QNA_CATEGORY_NAME , F.TITLE, F.CONTENTS
 		FROM FAQ F, QNA_CATEGORY Q
 		WHERE f.qna_category_num = q.qna_category_num
 		AND f.faq_num = #{faq_num}
 	</select>
 	
-	<!-- 1:1 문의 전체 목록 불러오기 -->
-	<select id="getMemQList" parameterType="hashmap" resultType="boardVO">
-		SELECT * FROM 
-			(SELECT ROWNUM R_NUM, A.* FROM 
-			(SELECT member_qna_num, title, contents, image, qna_category_name, 
-			order_num, member_id, email, phone, reg_date 
-			FROM MEMBER_QNA Q, QNA_CATEGORY C 
-			WHERE Q.qna_category_num = C.qna_category_num 
-			AND q.member_id = #{member_id}
-			ORDER BY Q.member_qna_num DESC) A)
-		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
-	</select>
-	
-<!-- 1:1 문의 선택한 글 상세 불러오기 -->
+	<!-- 1:1 문의 선택한 글 불러오기 -->
 	<select id="getMemQ" parameterType="boardVO" resultType="boardVO">
-		SELECT member_qna_num, title, contents, image, qna_category_name, 
-			order_num, member_id, email, phone, reg_date 
+		SELECT q.member_qna_num, q.title, q.contents, q.image, q.qna_category_num, c.qna_category_name, 
+			q.order_num, q.member_id, q.email, q.phone, q.reg_date 
 		FROM MEMBER_QNA Q, QNA_CATEGORY C 
 		WHERE Q.qna_category_num = C.qna_category_num 
 		and Q.member_qna_num = #{member_qna_num}
 		and Q.member_id = #{member_id}
 	</select>
+	
+<!-- ****************************************** insert ****************************************** -->
 
-	<!-- 1:1 문의 insert문 -->
-	<insert id="memqInsert" parameterType="boardVO">
+	<!-- 관리자 공지사항 -->
+	<insert id="noticeInsert" parameterType="hashmap">
+		INSERT INTO NOTICE VALUES 
+		((SELECT NVL(MAX(NOTICE_NUM),0) + 1 FROM NOTICE), 
+		#{title}, #{contents}, SYSDATE, 0
+		, #{image}
+		)
+	</insert>
+	
+	<!-- 관리자 FAQ -->
+	<insert id="faqInsert" parameterType="boardVO">
+		INSERT INTO FAQ VALUES 
+		((SELECT NVL(MAX(FAQ_NUM),0) + 1 FROM FAQ), 
+		#{qna_category_num}, #{title}, #{contents})
+	</insert>
+
+	<insert id="memqInsert" parameterType="hashmap">
 		INSERT INTO MEMBER_QNA VALUES 
 		((SELECT NVL(MAX(MEMBER_QNA_NUM),0) + 1 FROM MEMBER_QNA), 
 		#{title}, #{contents}, 
-		#{image}, #{qna_category_num}, #{order_num}, 
+		#{qna_category_num}, #{order_num}, 
 		(SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_ID = #{member_id}), 
-		#{email}, #{phone}, SYSDATE)
+		#{email}, #{phone}, SYSDATE, 0 
+		, #{image}
+		)
 	</insert>
 	
+	<!-- 1:1 문의 답변 등록 -->
+	<insert id="memqAdminInsert" parameterType="hashmap">
+		INSERT INTO MEMBER_QNA values
+		((select nvl(max(member_qna_num),0)+1 from member_qna), 
+		#{title}, #{contents}, 
+		(select qna_category_num from member_qna where member_qna_num = #{member_qna_num}), 
+		(select order_num from member_qna where member_qna_num = #{member_qna_num}),  
+		#{member_id}, #{email}, #{phone}, SYSDATE, 
+		(select member_qna_num from member_qna where member_qna_num = #{member_qna_num}) 
+		, #{image}
+		)
+	</insert>
+	
+<!-- ****************************************** update ****************************************** -->
+	
 	<!-- 1:1 문의 update문 -->
-	<update id="memqUpdate" parameterType="boardVO">
+	<update id="memqUpdate" parameterType="hashmap">
 		UPDATE MEMBER_QNA 
 		SET TITLE = #{title}, 
 		CONTENTS = #{contents}, 
-		IMAGE = #{image}, 
-		QNA_CATEGORY_NUM = #{qna_category_num}, 
+		IMAGE = #{image},
 		ORDER_NUM = #{order_num}, 
-		EMAIL = #{email}, 
-		PHONE = #{phone}, 
+		QNA_CATEGORY_NUM = #{qna_category_num}, 
 		REG_DATE = SYSDATE 
 		WHERE MEMBER_QNA_NUM = #{member_qna_num}
 		AND MEMBER_ID = #{member_id}
 	</update>
+	
+	<!-- 공지사항 update문 -->
+	<update id="noticeUpdate" parameterType="hashmap">
+		UPDATE NOTICE 
+		SET TITLE = #{title}, 
+		CONTENTS = #{contents}, 
+		IMAGE = #{image},
+		REG_DATE = SYSDATE 
+		WHERE NOTICE_NUM = #{notice_num}
+	</update>
+	
+	<!-- FAQ update문 -->
+	<update id="faqUpdate" parameterType="hashmap">
+		UPDATE FAQ 
+		SET TITLE = #{title}, 
+		CONTENTS = #{contents}, 
+		QNA_CATEGORY_NUM = #{qna_category_num} 
+		WHERE FAQ_NUM = #{faq_num}
+	</update>
+	
+	<!-- 1:1문의 답변 update문 -->
+	<update id="memqAdminUpdate" parameterType="hashmap">
+		UPDATE member_qna 
+		SET TITLE = #{title}, 
+		CONTENTS = #{contents}, 
+		IMAGE = #{image}, 
+		WHERE member_qna_num = #{member_qna_num}
+	</update>
 
-	<!-- 공지사항 게시글 갯수 조회 -->
+<!-- ****************************************** 게시판 글 개수 조회 ****************************************** -->
+
+	<!-- 공지사항 -->
 	<select id="getNoticeCount" resultType="int">
 		SELECT COUNT(*) 
 		FROM NOTICE
 	</select>
 	
-	<!-- FAQ 게시글 갯수 조회 -->
+	<!-- FAQ -->
 	<select id="getFAQCount" resultType="int">
 		SELECT COUNT(*) 
 		FROM FAQ
 	</select>
 	
-	<!-- 회원 1:1 문의 (member_qna) 게시글 갯수 조회 -->
+	<!-- 회원 1:1 로그인회원  -->
 	<select id="getMemQCount" parameterType="memberVO" resultType="int">
 		SELECT COUNT(*) 
 		FROM MEMBER_QNA
 		WHERE MEMBER_ID = #{member_id}
+		OR MEMBER_ID = 'admin'
+		AND parent_num IN (SELECT member_qna_num from member_qna where member_id = #{member_id})
 	</select>
+	
+	<!-- 회원 1:1 문의 전체 -->
+	<select id="getMemQCountAll" resultType="int">
+		SELECT COUNT(*)
+		FROM MEMBER_QNA
+	</select>
+	
+<!-- ****************************************** delete ****************************************** -->
+	
+	<!-- 공지사항 delete문 -->
+	<delete id="noticeDelete" parameterType="boardVO">
+		DELETE FROM NOTICE WHERE NOTICE_NUM = ${notice_num}
+	</delete>
+	
+	<!-- FAQ delete문 -->
+	<delete id="faqDelete" parameterType="boardVO">
+		DELETE FROM FAQ WHERE FAQ_NUM = ${faq_num}
+	</delete>
+	
+	<!-- memberQna delete문 -->
+	<delete id="memqDelete" parameterType="boardVO">
+		DELETE FROM MEMBER_QNA WHERE MEMBER_QNA_NUM = ${member_qna_num}
+	</delete>
+	
+<!-- ****************************************** 조회수 ****************************************** -->
+	<update id="noticeViewUpdate" parameterType="int"> 
+	UPDATE NOTICE SET VIEWS = VIEWS + 1 WHERE NOTICE_NUM = #{notice_num}
+	</update>
 
 </mapper>

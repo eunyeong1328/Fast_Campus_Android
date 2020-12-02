@@ -1,4 +1,4 @@
-package com.project.shop.board.paging;
+package com.project.shop.paging;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,10 @@ public class PagingDAO {
 
 	public int getMemQCount(MemberVO memberVO) {
 		return board.selectOne("mapper.board.getMemQCount", memberVO);
+	}
+
+	public int getMemQCountAll() {
+		return board.selectOne("mapper.board.getMemQCountAll");
 	}
 	
 }

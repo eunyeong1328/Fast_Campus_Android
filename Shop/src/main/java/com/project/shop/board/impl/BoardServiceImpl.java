@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.project.shop.board.BoardService;
 import com.project.shop.board.BoardVO;
-import com.project.shop.member.MemberVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
@@ -42,8 +41,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void memQInsert(BoardVO vo) {
-		boardDAO.memQInsert(vo);
+	public void memQInsert(HashMap<String, Object> map) {
+		boardDAO.memQInsert(map);
 	}
 
 	@Override
@@ -52,8 +51,63 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void memQUpdate(BoardVO vo) {
-		boardDAO.memQUpdate(vo);
+	public void memQUpdate(HashMap<String, Object> map) {
+		boardDAO.memQUpdate(map);
+	}
+
+	@Override
+	public List<BoardVO> getMemQListAll(HashMap<String, Object> map) {
+		return boardDAO.getMemQListAll(map);
+	}
+
+	@Override
+	public void noticeInsert(HashMap<String, Object> map) {
+		boardDAO.noticeInsert(map);
+	}
+
+	@Override
+	public void faqInsert(BoardVO vo) {
+		boardDAO.faqInsert(vo);
+	}
+
+	@Override
+	public void noticeUpdate(HashMap<String, Object> map) {
+		boardDAO.noticeUpdate(map);
+	}
+
+	@Override
+	public void faqUpdate(BoardVO vo) {
+		boardDAO.faqUpdate(vo);
+	}
+
+	@Override
+	public void noticeDelete(BoardVO vo) {
+		boardDAO.noticeDelete(vo);
+	}
+
+	@Override
+	public void faqDelete(BoardVO vo) {
+		boardDAO.faqDelete(vo);
+	}
+
+	@Override
+	public void noticeViewUpdate(int notice_num) {
+		boardDAO.noticeViewUpdate(notice_num);
+	}
+
+	@Override
+	public void memqAdminInsert(HashMap<String, Object> map) {
+		boardDAO.memqAdminInsert(map);
+	}
+
+	@Override
+	public void memqAdminUpdate(HashMap<String, Object> map) {
+		boardDAO.memqAdminUpdate(map);
+	}
+
+	@Override
+	public void memqDelete(BoardVO vo) {
+		boardDAO.memqDelete(vo);
 	}
 
 }

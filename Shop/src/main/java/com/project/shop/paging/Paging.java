@@ -1,16 +1,6 @@
-package com.project.shop.board.paging;
+package com.project.shop.paging;
 
 public class Paging {
-
-	private String nowTab;
-	
-	public String getNowTab() {
-		return nowTab;
-	}
-
-	public void setNowTab(String nowTab) {
-		this.nowTab = nowTab;
-	}
 
 	private int nowPage = 1; // 현재페이지
 	private int nowBlock = 1; // 현재 블록(페이지 담는 단위)
@@ -36,6 +26,14 @@ public class Paging {
 		return listBeginNum;
 	}
 
+	@Override
+	public String toString() {
+		return "Paging [nowPage=" + nowPage + ", nowBlock=" + nowBlock + ", numPerPage=" + numPerPage
+				+ ", pagePerBlock=" + pagePerBlock + ", totalRecord=" + totalRecord + ", totalPage=" + totalPage
+				+ ", totalBlock=" + totalBlock + ", begin=" + begin + ", end=" + end + ", beginPage=" + beginPage
+				+ ", endPage=" + endPage + ", listBeginNum=" + listBeginNum + ", listEndNum=" + listEndNum + "]";
+	}
+
 	public void setListBeginNum(int listBeginNum) {
 		this.listBeginNum = listBeginNum;
 	}
@@ -44,8 +42,8 @@ public class Paging {
 		return listEndNum;
 	}
 
-	public void setListEndNum(int listEndNum) {
-		this.listEndNum = listEndNum;
+	public void setListEndNum(int totalRecord) {
+		this.totalRecord = listEndNum;
 	}
 
 //	전체 페이지 갯수 구하기

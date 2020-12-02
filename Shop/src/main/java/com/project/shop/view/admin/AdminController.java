@@ -28,14 +28,6 @@ public class AdminController extends BaseController {
 	
 	@Autowired
 	private Paging p;
-	
-	@RequestMapping(value="noticeList.do")
-	public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName=(String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		System.out.println(viewName);
-		return mav;
-	}
 
 	@RequestMapping(value = "/productAdd.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView productAdd(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
