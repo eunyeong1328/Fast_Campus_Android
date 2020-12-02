@@ -7,9 +7,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-<script>
-	글씨 파랗게 만들기 (.active)
-</script>
 	
 			<!-- PAGE TITLE -->
 			<section class="bg-light p-0">
@@ -68,23 +65,25 @@
 							</div>
 
 							<!-- order -->
+							<c:forEach var="orderList" items="${orderList }" begin="0">
 							<div
 								class="clearfix p-3 shadow-xs shadow-md-hover mb-3 rounded bg-white">
 
 								<h2 class="fs--18">
-									<a href="${contextPath }/orders/account-order-detail.do?" class="float-end fs--12">
-										주문 상세보기 </a> <a href="${contextPath }/orders/account-order-detail.do?"
-										class="text-dark"> 주문 #1487 </a>
+									<a href="${contextPath }/myaccount/account-order-detail.do" class="float-end fs--12">
+										주문 상세보기 </a> <a href="${contextPath }/myaccount/account-order-detail.do"
+										class="text-dark"> 주문 # ${orderList.order_num } </a>
 								</h2>
 
-								<p class="mb-0 fs--14">Date: November 23, 2019, 11:38 |
-									Total: $2796.45</p>
+								<p class="mb-0 fs--14">주문일: ${orderList.order_date } |
+									결제금액: ${orderList.totalPrice} </p>
 
 								<p class="mb-0 fs--14">
-									Status:&nbsp; <span class="text-warning font-weight-normal">결제완료</span>
+									상태:&nbsp; <span class="text-warning font-weight-normal">${orderList.order_status }</span>
 								</p>
 
 							</div>
+							</c:forEach>
 							<!-- /order -->
 
 

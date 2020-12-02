@@ -6,17 +6,22 @@
 
 <mapper namespace="mappers.order">
 
-	<!-- <resultMap id="orderResult" type="orderVO"> 
-		<result property="MEMBER_ID" column="MEMBER_ID" /> 
-		<result property="MEMBER_NAME" column="MEMBER_NAME" />
-		<result property="EMAIL" column="EMAIL" />
-		<result property="PHONE" column="PHONE" />
-		<result property="ZIPNO" column="ZIPNO" />
-		<result property="load_address" column="load_address" />
-		<result property="jibun_address" column="address" />
-		<result property="rest_address" column="rest_address" />
-		<result property="member_date" column="member_date" />
-	</resultMap>	 -->
+	<resultMap id="orderResult" type="orderVO"> 
+		<result property="order_num" column="order_num" />
+		<result property="totalPrice" column="total_Price" />
+		<result property="apply_num" column="apply_num" />
+		<result property="order_status" column="order_status" />
+		<result property="pg" column="pg" />
+		<result property="paid_at" column="paid_at" />
+		<result property="member_id" column="member_id" /> 
+		<result property="member_name" column="member_name" />
+		<result property="email" column="email" />
+		<result property="phone" column="phone" />
+		<result property="address" column="address" />
+		<result property="zipNo" column="zipNo" />
+		<result property="order_date" column="order_date" />
+		<result property="delivery_request" column="delivery_request" />
+	</resultMap>	
 	
 
 	<insert id="insertNewOrder" parameterType="orderVO">
@@ -27,6 +32,7 @@
 								order_status,
 								pg,
 								paid_at,
+								order_date,
 								member_id,
 								member_name,
 								email,
@@ -40,6 +46,7 @@
 								#{order_status},
 								#{pg},
 								#{paid_at},
+								#{order_date},
 								#{member_id},
 								#{member_name},
 								#{email},
@@ -51,6 +58,16 @@
 		
 	</insert>
 	
+	<!-- 내 주문 조회 -->
+	<select id="listOrderList" resultMap="orderResult"
+		parameterType="String">
+	 <![CDATA[
+		select * from orders
+			where member_id = #{member_id}
+			order by order_date desc
+			
+    	]]>
+	</select>
 	
 	
 </mapper>

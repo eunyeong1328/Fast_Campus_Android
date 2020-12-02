@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.project.shop.member.MemberVO;
+import com.project.shop.orders.OrderVO;
 import com.project.shop.product.ProductVO;
 
 public interface MyAccountService{
@@ -13,5 +14,6 @@ public interface MyAccountService{
 	public List<ProductVO> listFavList(String member_id) throws Exception;
 	public void deleteFav(HashMap ids) throws Exception;
 	public void addFav(HashMap ids) throws Exception;
+	public List<OrderVO> listOrderList(String member_id) throws Exception;
 
 }

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.shop.member.MemberVO;
 import com.project.shop.myaccount.MyAccountService;
+import com.project.shop.orders.OrderVO;
 import com.project.shop.product.ProductVO;
 
 
@@ -62,6 +63,12 @@ public class MyAccountServiceImpl implements MyAccountService{
 			myAccountDAO.deleteFav(ids);
 			myAccountDAO.addFav(ids);
 		}
+	}
+
+	@Override
+	public List<OrderVO> listOrderList(String member_id) throws Exception {
+		return myAccountDAO.listOrderList(member_id);
+		
 	}
 
 }

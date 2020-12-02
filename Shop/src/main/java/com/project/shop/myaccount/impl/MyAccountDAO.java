@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.project.shop.member.MemberVO;
+import com.project.shop.orders.OrderVO;
 import com.project.shop.product.ProductVO;
 
 @Repository("myAccountDAO")
@@ -48,4 +49,9 @@ public class MyAccountDAO {
 	public void addFav(HashMap ids) throws Exception{
 		sqlSession.insert("mappers.myaccount.addFavList",ids);
 	}
+	
+	public List<OrderVO> listOrderList(String member_id) throws Exception {      
+	      ArrayList<OrderVO> orderList = (ArrayList)sqlSession.selectList("mappers.order.listOrderList",member_id);
+	      return orderList;
+	   }
 }
