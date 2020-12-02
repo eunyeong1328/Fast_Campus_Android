@@ -29,7 +29,7 @@ public class BoardVO {
 		this.r_num = r_num;
 	}
 
-	//	공지사항
+//	공지사항
 	private int notice_num;
 	private int next_no;
 	private int pre_no;
@@ -51,7 +51,7 @@ public class BoardVO {
 
 //	1:1 문의
 	private int member_qna_num;
-	private int order_num;
+	private String order_num;
 	private String email;
 	private String phone;
 	
@@ -163,11 +163,11 @@ public class BoardVO {
 		this.member_qna_num = member_qna_num;
 	}
 
-	public int getOrder_num() {
+	public String getOrder_num() {
 		return order_num;
 	}
 
-	public void setOrder_num(int order_num) {
+	public void setOrder_num(String order_num) {
 		this.order_num = order_num;
 	}
 

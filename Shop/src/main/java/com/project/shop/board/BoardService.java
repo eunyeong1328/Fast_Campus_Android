@@ -3,6 +3,8 @@ package com.project.shop.board;
 import java.util.HashMap;
 import java.util.List;
 
+import com.project.shop.orders.OrderVO;
+
 public interface BoardService {
 
 //	Notice List
@@ -49,5 +51,8 @@ public interface BoardService {
 	void memqAdminUpdate(HashMap<String, Object> map);
 //	1:1문의/답변 삭제
 	void memqDelete(BoardVO vo);
+	
+//	로그인회원의 주문내역
+	List<OrderVO> getMemberOrderList(String member_id);
 	
 }

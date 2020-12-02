@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.shop.board.BoardService;
 import com.project.shop.board.BoardVO;
 import com.project.shop.member.MemberVO;
+import com.project.shop.orders.OrderVO;
 import com.project.shop.paging.Paging;
 import com.project.shop.paging.PagingService;
 
@@ -237,6 +238,16 @@ public class BoardController {
 			mav.setViewName("/member/loginForm");
 		}
 		
+		return mav;
+	}
+	
+	@RequestMapping("/member_order_list.do")
+	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		String member_id = request.getParameter("member_id");
+		List<OrderVO> orderList = boardService.getMemberOrderList(member_id);
+		mav.addObject("orderList", orderList);
 		return mav;
 	}
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.shop.board.BoardVO;
+import com.project.shop.orders.OrderVO;
 
 @Repository
 public class BoardDAO {
@@ -89,6 +90,10 @@ public class BoardDAO {
 
 	public void memqDelete(BoardVO vo) {
 		board.delete("mapper.board.memqDelete", vo);
+	}
+
+	public List<OrderVO> getMemberOrderList(String member_id) {
+		return board.selectList("mapper.board.member_order_list", member_id);
 	}
 	
 }

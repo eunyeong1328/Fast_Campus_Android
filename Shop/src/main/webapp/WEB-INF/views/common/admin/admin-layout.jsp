@@ -43,7 +43,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style>
 .mini{
 		width: 80px;
@@ -71,6 +71,7 @@ function imgPop(url) {
 	OpenWindow.document
 			.write("<style>body{margin:0px;}</style><img src='"+url+"'>");
 }
+
 </script>
 </head>
 	

@@ -5,7 +5,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <%
-  request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
+
+	String pOrderNum = request.getParameter("pOrderNum");
+	if (pOrderNum == null) {
+		pOrderNum = "주문 번호를 선택해주세요.";
+	}
 %>
 
 <div class="d-flex flex-fill container">
@@ -64,8 +69,8 @@
 								</div>
 								<div class="memq-order-num">
 									<p>주문번호</p>
-									<input type="number" name="order_num"> <input
-										type="button" value="주문조회">
+									<input type="text" name="order_num" value="<%=pOrderNum %>" id="pOrderNum" readonly>
+									<input type="button" value="주문조회" onclick="orderList_open('${memberInfo.member_id }')">
 								</div>
 								<div class="memq-email">
 									<p>이메일</p>

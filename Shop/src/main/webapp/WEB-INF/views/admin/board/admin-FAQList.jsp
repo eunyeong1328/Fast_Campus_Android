@@ -97,7 +97,6 @@
 															제목
 														</span>
 													</th>
-													<th class="w--200 hidden-lg-down">게시여부</th>
 													<th class="w--60">&nbsp;</th>
 												</tr>
 											</thead>
@@ -134,17 +133,8 @@
 														<!-- MOBILE ONLY -->
 														<div class="fs--13 d-block d-xl-none">
 															<span class="d-block text-muted">Visits: 0</span>
-															<span class="badge badge-success font-weight-medium fs--12">Active</span>
-															<span class="badge badge-danger font-weight-medium fs--12">Inactive</span>
 														</div>
 														<!-- /MOBILE ONLY -->
-
-													</td>
-
-													<td class="hidden-lg-down">
-
-														<small class="badge badge-success font-medium text-uppercase">active</small>
-														<!-- <small class="badge badge-danger font-medium text-uppercase">inactive</small> -->
 
 													</td>
 
@@ -161,16 +151,6 @@
 
 
 															<div class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-220">
-
-																<a class="dropdown-item text-truncate" href="#!">
-																	<i class="fi fi-check"></i>
-																	Set Active
-																</a>
-
-																<a class="dropdown-item text-truncate" href="#!">
-																	<i class="fi fi-close"></i>
-																	Set Inactive
-																</a>
 
 																<a	 href="#!" 
 																	class="dropdown-item text-truncate js-ajax-confirm" 
@@ -222,7 +202,6 @@
 															제목
 														</span>
 													</th>
-													<th class="w--200 hidden-lg-down">게시여부</th>
 													<th class="w--60">&nbsp;</th>
 												</tr>
 											</tfoot>
@@ -230,8 +209,6 @@
 										</table>
 
 									</div>
-
-
 
 									<!-- options and pagination -->
 									<div class="row text-center-xs">
@@ -250,36 +227,6 @@
 												</a>
 
 												<div class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-250">
-
-													<a	 href="#!" 
-														class="dropdown-item text-truncate js-form-advanced-bulk" 
-														data-js-form-advanced-bulk-hidden-action-id="#action" 
-														data-js-form-advanced-bulk-hidden-action-value="myactionhere3" 
-														data-js-form-advanced-bulk-container-items="#item_list" 
-														data-js-form-advanced-bulk-required-selected="true" 
-														data-js-form-advanced-bulk-required-txt-error="No Items Selected!" 
-														data-js-form-advanced-bulk-required-txt-position="top-center" 
-														data-js-form-advanced-bulk-submit-without-confirmation="true" 
-														data-js-form-advanced-form-id="#form_id">
-														<i class="fi fi-check"></i>
-														Set Active
-													</a>
-
-
-													<a	 href="#!" 
-														class="dropdown-item text-truncate js-form-advanced-bulk" 
-														data-js-form-advanced-bulk-hidden-action-id="#action" 
-														data-js-form-advanced-bulk-hidden-action-value="myactionhere3" 
-														data-js-form-advanced-bulk-container-items="#item_list" 
-														data-js-form-advanced-bulk-required-selected="true" 
-														data-js-form-advanced-bulk-required-txt-error="No Items Selected!" 
-														data-js-form-advanced-bulk-required-txt-position="top-center" 
-														data-js-form-advanced-bulk-submit-without-confirmation="true" 
-														data-js-form-advanced-form-id="#form_id">
-														<i class="fi fi-close"></i>
-														Set Inactive
-													</a>
-
 
 													<a	 href="#!" 
 														class="dropdown-item text-truncate js-form-advanced-bulk" 

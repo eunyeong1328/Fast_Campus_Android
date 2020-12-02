@@ -19,20 +19,24 @@
       
       <definition name="/member/signupForm" extends="baseLayout">
          <put-attribute name="body" value="/WEB-INF/views/member/signupForm.jsp" />
+         <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
       </definition>
       
       <definition name="/member/snsSignupForm" extends="baseLayout">
          <put-attribute name="body" value="/WEB-INF/views/member/snsSignupForm.jsp" />
+         <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
       </definition>      
           
       <!-- 비밀번호 찾기 -->
        <definition name="/member/signin-password" extends="baseLayout">
          <put-attribute name="body" value="/WEB-INF/views/member/signin-password.jsp" />
+         <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
       </definition>
       
       <!-- 비밀번호 수정 -->
        <definition name="/member/signin-passwordUpdate" extends="baseLayout">
          <put-attribute name="body" value="/WEB-INF/views/member/signin-passwordUpdate.jsp" />
+         <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
       </definition>
   
 </tiles-definitions>
