@@ -84,7 +84,7 @@
 						</button>
 					</c:if>
 					<button type="button" class="btn btn-danger btn-soft-static mb-1"
-						onclick="location.href='${contextPath }/adminboard/memqDelete.do?member_qna_num=${memQ.member_qna_num}'">
+						onclick="location.href='${contextPath }/adminboard/memqDelete.do?member_qna_num=${memQ.member_qna_num}&cPage=${paging.nowPage}'">
 						삭제
 					</button>
 

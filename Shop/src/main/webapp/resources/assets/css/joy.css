@@ -56,6 +56,12 @@ html body:not(.aside-compact).layout-admin #footer {padding-left: 0;}
 .joy-table tbody tr {border-bottom:1px solid #eee; cursor: pointer;}
 .joy-table tbody td {padding:20px 0; text-align:center; font-size:14px;}
 
+.joy-table .joy-title-text-left {
+	padding:20px; 
+	font-size:14px;
+	text-align: left;
+}
+
 .joy-paging {
 	padding: 0;
 	list-style: none;
@@ -169,16 +175,14 @@ div.joy-board-detail {
     background-color: #600080;
     color: #fff;
     margin: 10px 0;
-    margin-left: 10px;
+    border: 1px solid #600080;
 }
 
 .prev-next-list p.disabled {
 	display: inline-block;
 	padding: 5px 10px;
-	background-color: none;
-    color: #eee;
-    margin: 10px 0;
-	border: 1px solid #eee;
+    color: #795b8f;
+	border: 1px solid #795b8f;
 	margin: 10px 0;
 }
 

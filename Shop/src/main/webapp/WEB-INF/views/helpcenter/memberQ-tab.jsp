@@ -41,7 +41,7 @@
 						<tr>
 							<th>번호</th>
 							<th>카테고리</th>
-							<th>제목</th>
+							<th class="joy-title-text-left">제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
 						</tr>
@@ -61,12 +61,17 @@
 									<td>${memQ.r_num}</td>
 									<td>${memQ.qna_category_name}</td>
 									<c:if test="${memQ.parent_num == 0 }">
-										<td><a href="memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}">${memQ.title } </a></td>
+										<td class="joy-title-text-left">
+											<a href="memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}">${memQ.title }</a>
+										</td>
 									</c:if>
 									<c:if test="${memQ.parent_num != 0 }">
-										<td><a href="memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}">
-										<span class="badge badge-soft badge-pill badge-purple">RE</span>
-										${memQ.title } </a></td>
+										<td class="joy-title-text-left">
+											<a href="memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}">
+												<span class="badge badge-soft badge-pill badge-purple">RE</span>
+												${memQ.title }
+											</a>
+										</td>
 									</c:if>
 									<td>${memQ.member_id}</td>
 									<td>${memQ.reg_date}</td>

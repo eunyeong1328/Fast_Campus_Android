@@ -90,12 +90,12 @@
 			var img_width = img.width;
 			var win_width = img.width + 25;
 			var img_height = img.height;
-			var win = img.height + 30;
+			var win_height = img.height;
 			var OpenWindow = window.open('', '_blank', 'width=' + img_width
 					+ ', height=' + img_height
 					+ ', menubars=no, scrollbars=auto');
 			OpenWindow.document
-					.write("<style>body{margin:0px;}</style><img src='"+url+"' width='"+win_width+"'>");
+					.write("<style>body{margin:0px;}</style><img src='"+url+"'>");
 		}
 		
 	</script>

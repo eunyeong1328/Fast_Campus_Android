@@ -303,7 +303,8 @@ public class AdminBoardController {
 	public ModelAndView noticeDelete(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		boardService.noticeDelete(vo);
-		mav.setViewName("redirect:/adminboard/noticeList.do");
+		String cPage = request.getParameter("cPage");
+		mav.setViewName("redirect:/adminboard/noticeList.do?cPage=" + cPage);
 		return mav;
 	}
 	
