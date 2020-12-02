@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.project.shop.orders.OrderVO;
+import com.project.shop.product.ProductVO;
 
 public interface BoardService {
 
@@ -55,4 +56,9 @@ public interface BoardService {
 //	로그인회원의 주문내역
 	List<OrderVO> getMemberOrderList(String member_id);
 	
+//	category
+	List<ProductVO> getCategoryList();
+	void categoryInsert(String product_category_name);
+	void categoryUpdate(ProductVO productVO);
+	void categoryDelete(int product_category_num);
 }

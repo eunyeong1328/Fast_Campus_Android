@@ -242,6 +242,27 @@
 	<select id="member_order_list" parameterType="string" resultType="orderVO">
 	SELECT * FROM ORDERS WHERE MEMBER_ID = #{member_id}
 	</select>
+	
+	 	
+ 	<!-- joy 상품카테고리 crud -->
+ 	<insert id="proCategoryInsert" parameterType="string">
+ 		INSERT INTO PRODUCT_CATEGORY VALUES ((SELECT NVL(MAX(PRODUCT_CATEGORY_NUM),0) + 1 FROM product_category), #{product_category_name})
+ 	</insert>
+ 	
+ 	<select id="productCategoryList" resultType="productVO">
+        SELECT * 
+		FROM PRODUCT_CATEGORY
+ 	</select>
+ 	
+ 	<update id="proCategoryUpdate" parameterType="productVO">
+ 		UPDATE PRODUCT_CATEGORY 
+		SET PRODUCT_CATEGORY_NAME = #{product_category_name} 
+		WHERE PRODUCT_CATEGORY_NUM = #{product_category_num} 
+ 	</update>
+	
+	<delete id="proCategoryDelete" parameterType="int">
+		DELETE FROM PRODUCT_CATEGORY WHERE product_category_num = ${product_category_num}
+	</delete>
 
 </mapper>
 
