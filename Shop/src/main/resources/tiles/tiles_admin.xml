@@ -119,25 +119,25 @@
 		<put-attribute name="body" value="/WEB-INF/views/admin/board/admin-memQ.jsp" />
       </definition>
       
-      <!-- 상연 - 상품 CRUD -->
-      <definition name="/admin/productAdd" extends="adminLayout">
-      	<put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-boardTag.jsp"/>
-      	<put-attribute name="body" value="/WEB-INF/views/admin/goods/productAdd.jsp"/>
+      <!-- joy.관리자 상품카테고리 crud -->
+      <definition name="/adminboard/proCategoryInsert" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/proCategoryInsert.jsp" />
       </definition>
       
-      <definition name="/admin/productList" extends="adminLayout">
-      	<put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-boardTag.jsp"/>
-      	<put-attribute name="body" value="/WEB-INF/views/admin/goods/productList.jsp"/>
+      <definition name="/adminboard/productCategoryList" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/productCategoryList.jsp" />
       </definition>
       
-      <definition name="/admin/productUpdate" extends="adminLayout">
-      	<put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-boardTag.jsp"/>
-      	<put-attribute name="body" value="/WEB-INF/views/admin/goods/productUpdate.jsp"/>
+      <definition name="/adminboard/proCategoryUpdate" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/proCategoryUpdate.jsp" />
       </definition>
       
-      <definition name="/admin/productOption" extends="adminLayout">
-      	<put-attribute name="tag" value="/WEB-INF/views/common/admin/admin-boardTag.jsp"/>
-      	<put-attribute name="body" value="/WEB-INF/views/admin/goods/productOption.jsp"/>
+      <definition name="/adminboard/proCategoryDelete" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/proCategoryDelete.jsp" />
       </definition>
       
 </tiles-definitions>

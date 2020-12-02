@@ -139,7 +139,7 @@
 		, #{image}
 		)
 	</insert>
-	
+
 <!-- ****************************************** update ****************************************** -->
 	
 	<!-- 1:1 문의 update문 -->
@@ -203,7 +203,7 @@
 		FROM MEMBER_QNA
 		WHERE MEMBER_ID = #{member_id}
 		OR MEMBER_ID = 'admin'
-		AND parent_num IN (SELECT member_qna_num from member_qna where member_id = #{member_id})
+		AND PARENT_NUM IN (SELECT member_qna_num from member_qna where member_id = #{member_id})
 	</select>
 	
 	<!-- 회원 1:1 문의 전체 -->
@@ -226,12 +226,37 @@
 	
 	<!-- memberQna delete문 -->
 	<delete id="memqDelete" parameterType="boardVO">
-		DELETE FROM MEMBER_QNA WHERE MEMBER_QNA_NUM = ${member_qna_num}
+		DELETE FROM MEMBER_QNA 
+		WHERE MEMBER_QNA_NUM = ${member_qna_num}
+		OR PARENT_NUM = ${member_qna_num}
 	</delete>
 	
 <!-- ****************************************** 조회수 ****************************************** -->
+
 	<update id="noticeViewUpdate" parameterType="int"> 
 	UPDATE NOTICE SET VIEWS = VIEWS + 1 WHERE NOTICE_NUM = #{notice_num}
 	</update>
+	
+<!-- ****************************************** 주문내역 ****************************************** -->
+
+	<select id="member_order_list" parameterType="string" resultType="orderVO">
+	SELECT * FROM ORDERS WHERE MEMBER_ID = #{member_id}
+	</select>
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

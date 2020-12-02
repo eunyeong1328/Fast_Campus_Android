@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.shop.board.BoardService;
 import com.project.shop.board.BoardVO;
+import com.project.shop.orders.OrderVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
@@ -108,6 +109,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void memqDelete(BoardVO vo) {
 		boardDAO.memqDelete(vo);
+	}
+
+	@Override
+	public List<OrderVO> getMemberOrderList(String member_id) {
+		return boardDAO.getMemberOrderList(member_id);
 	}
 
 }

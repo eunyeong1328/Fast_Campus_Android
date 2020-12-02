@@ -400,6 +400,32 @@ public class AdminBoardController {
 
 		return mav;
 	}
+	
+	/*냐아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ*/
+	@RequestMapping(value="proCategoryInsert.do")
+	public ModelAndView proCategoryInsert(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		return mav;
+	}
+	@RequestMapping(value="productCategoryList.do")
+	public ModelAndView productCategoryList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		return mav;
+	}
+	@RequestMapping(value="proCategoryUpdate.do")
+	public ModelAndView proCategoryUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		return mav;
+	}
+	@RequestMapping(value="proCategoryDelete.do")
+	public ModelAndView proCategoryDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		return mav;
+	}
 
 //	Paging
 	public void getPaging(HttpServletRequest request, HttpServletResponse response) {

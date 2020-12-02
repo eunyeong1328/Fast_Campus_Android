@@ -104,7 +104,7 @@
 											</li>
 
 											<li class="nav-item">
-												<a class="nav-link js-ajax" href="util-font.html">
+												<a class="nav-link js-ajax" href="${contextPath}/adminboard/productCategoryList.do">
 													상품 카테고리
 												</a>
 											</li>											

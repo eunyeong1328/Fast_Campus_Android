@@ -94,8 +94,16 @@
 			var OpenWindow = window.open('', '_blank', 'width=' + img_width
 					+ ', height=' + img_height
 					+ ', menubars=no, scrollbars=auto');
-			OpenWindow.document
-					.write("<style>body{margin:0px;}</style><img src='"+url+"'>");
+			OpenWindow.document.write("<style>body{margin:0px;}</style><img src='"+url+"'>");
+		}
+		
+		var openOrderList;
+		
+		function orderList_open(member_id) {
+			window.name = "parentForm";
+			var paramMemberId = "?member_id=" + member_id;
+			var url = "${contextPath}/board/member_order_list.do" + paramMemberId;
+			openOrderList = window.open(url, "childForm", "width=570, height=350, resizable=no, scrollbars=no");
 		}
 		
 	</script>
