@@ -72,6 +72,14 @@ function imgPop(url) {
 			.write("<style>body{margin:0px;}</style><img src='"+url+"'>");
 }
 
+function categoryDelete_confirm(product_category_num) {
+	result = confirm('정말 삭제 하시겠습니까?');
+	if (result == true) {
+		location.href = "${contextPath }/adminboard/proCategoryDelete.do?product_category_num=" + product_category_num;
+	} else {
+		return false;
+	}
+}
 </script>
 </head>
 	

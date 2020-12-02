@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.shop.board.BoardVO;
 import com.project.shop.orders.OrderVO;
+import com.project.shop.product.ProductVO;
 
 @Repository
 public class BoardDAO {
@@ -94,6 +95,22 @@ public class BoardDAO {
 
 	public List<OrderVO> getMemberOrderList(String member_id) {
 		return board.selectList("mapper.board.member_order_list", member_id);
+	}
+
+	public List<ProductVO> getCategoryList() {
+		return board.selectList("mapper.board.productCategoryList");
+	}
+
+	public void categoryInsert(String product_category_name) {
+		board.insert("mapper.board.proCategoryInsert", product_category_name);
+	}
+
+	public void categoryUpdate(ProductVO productVO) {
+		board.update("mapper.board.proCategoryUpdate", productVO);
+	}
+
+	public void categoryDelete(int product_category_num) {
+		board.delete("mapper.board.proCategoryDelete", product_category_num);
 	}
 	
 }

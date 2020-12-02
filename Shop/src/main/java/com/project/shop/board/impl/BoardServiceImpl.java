@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.project.shop.board.BoardService;
 import com.project.shop.board.BoardVO;
 import com.project.shop.orders.OrderVO;
+import com.project.shop.product.ProductVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
@@ -114,6 +115,26 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<OrderVO> getMemberOrderList(String member_id) {
 		return boardDAO.getMemberOrderList(member_id);
+	}
+
+	@Override
+	public List<ProductVO> getCategoryList() {
+		return boardDAO.getCategoryList();
+	}
+
+	@Override
+	public void categoryInsert(String product_category_name) {
+		boardDAO.categoryInsert(product_category_name);
+	}
+
+	@Override
+	public void categoryUpdate(ProductVO productVO) {
+		boardDAO.categoryUpdate(productVO);
+	}
+
+	@Override
+	public void categoryDelete(int product_category_num) {
+		boardDAO.categoryDelete(product_category_num);
 	}
 
 }
