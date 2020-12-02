@@ -2,6 +2,7 @@ package com.project.shop.myaccount.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.shop.member.MemberVO;
 import com.project.shop.myaccount.MyAccountService;
+import com.project.shop.orders.OrderVO;
 import com.project.shop.product.ProductVO;
 
 
@@ -62,6 +64,24 @@ public class MyAccountServiceImpl implements MyAccountService{
 			myAccountDAO.deleteFav(ids);
 			myAccountDAO.addFav(ids);
 		}
+	}
+
+	@Override
+	public List<OrderVO> listOrderList(String member_id) throws Exception {
+		return myAccountDAO.listOrderList(member_id);
+		
+	}
+
+	@Override
+	public Map<String, Object> listOrderDetail(String order_num) throws Exception {
+		Map<String, Object> orderMap = new HashMap<String,Object>();
+		OrderVO orderDetail = myAccountDAO.selectOrderDetail(order_num);
+		List<ProductVO> productList = myAccountDAO.selectOrderDetailProduct(order_num);
+		orderMap.put("order", orderDetail);
+		orderMap.put("product", productList);
+		return orderMap;
+		
+		
 	}
 
 }

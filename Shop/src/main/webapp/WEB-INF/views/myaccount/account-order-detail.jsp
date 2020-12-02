@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<c:set var="order" value="${orderMap.order}" />
+<c:set var="product" value="${orderMap.product}" />
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -14,14 +16,14 @@
 				<div class="container py-5">
 
 					<h1 class="h3">
-						내 주문
+						주문 상세
 					</h1>
 
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb fs--14">
-							<li class="breadcrumb-item"><a href="#!">Home</a></li>
-							<li class="breadcrumb-item"><a href="#!">Account</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Orders</li>
+							<li class="breadcrumb-item"><a href="${contextPath }/main/main.do">Home</a></li>
+							<li class="breadcrumb-item"><a href="${contextPath }/myaccount/account-orders.do">내 주문</a></li>
+							<li class="breadcrumb-item active" aria-current="page">주문 상세</li>
 						</ol>
 					</nav>
 
@@ -51,7 +53,7 @@
 									<div class="col-12 col-sm-6 col-md-6 col-lg-6">
 
 										<h2 class="fs--18 mb-0">
-											주문 #imp_526324180397
+											주문 # ${order.order_num }
 										</h2>
 
 										<p>
@@ -192,10 +194,11 @@
 							<!-- /ORDER PERSONAL DETAIL -->
 
 
-
+	
 							<!-- ITEMS -->
 							<div class="p-4 shadow-xs rounded mb-4">
 
+							<c:forEach var="item" items="${product}" varStatus="cnt">
 
 								<!-- item -->
 								<div class="row">
@@ -214,7 +217,7 @@
 											<div class="col">
 
 												<a class="d-block clearfix" href="#!">
-													Product title here
+													${item.product_name }
 												</a>
 
 												<span class="d-block text-muted fs--13">SKU-NIKEY</span>
@@ -234,6 +237,7 @@
 									</div>
 								</div>
 								<!-- /item -->
+								</c:forEach>
 
 
 								<hr>

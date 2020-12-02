@@ -1,7 +1,7 @@
 package com.project.shop.view.myaccount;
 
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,18 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.shop.common.base.BaseController;
 import com.project.shop.member.MemberVO;
 import com.project.shop.myaccount.MyAccountService;
+import com.project.shop.orders.OrderVO;
 import com.project.shop.product.ProductVO;
 
 @Controller
@@ -57,7 +54,7 @@ public class MyAccountController extends BaseController{
 	//		 
 	//	 }
 
-
+//찜 리스트
 	@RequestMapping(value="/account-favourites.do")
 	public ModelAndView accountFavourites( HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -117,6 +114,41 @@ public class MyAccountController extends BaseController{
 		ids.put("member_id", member_id);
 		myAccountService.addFav(ids);		    	  
 
+	}
+// 내 주문
+	@RequestMapping(value="/account-orders.do")
+	public ModelAndView listOrders( HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav =  new ModelAndView(viewName);
+
+		HttpSession session=request.getSession(); 
+		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
+
+		if(isLogOn == null || isLogOn == false || memberVO ==null) {
+			mav.addObject("message", "세션이 만료되었습니다. 다시 로그인해주세요");
+			mav.setViewName("/member/loginForm");
+		} else {
+			String member_id = memberVO.getMember_id();	    	  
+			List<OrderVO> orderList = myAccountService.listOrderList(member_id);
+			mav.addObject("orderList", orderList);    	  
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value="/account-order-detail.do")
+	public ModelAndView listOrderDetail( @RequestParam("order_num") String order_num,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String viewName=(String)request.getAttribute("viewName");
+		ModelAndView mav =  new ModelAndView(viewName);
+
+			
+			  Map<String, Object> orderMap =myAccountService.listOrderDetail(order_num);
+			  mav.addObject("orderMap", orderMap);
+
+		return mav;
 	}
 
 

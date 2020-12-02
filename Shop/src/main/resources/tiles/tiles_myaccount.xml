@@ -16,6 +16,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/myaccount/account-orders.jsp" />
 	</definition>
+	
+	<definition name="/myaccount/account-order-detail" extends="baseLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/myaccount/account-order-detail.jsp" />
+	</definition>
+	
 
 	<definition name="/myaccount/account-favourites" extends="baseLayout">
 		<put-attribute name="body"
