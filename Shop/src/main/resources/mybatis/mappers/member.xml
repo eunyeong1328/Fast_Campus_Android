@@ -51,8 +51,7 @@
 								load_address,
 								jibun_address,  
 								rest_address,
- 								birthday,
- 								member_status) values(
+ 								birthday) values(
  								#{member_id},
  								 #{password}, 
  								 #{member_name},
@@ -62,8 +61,7 @@
 								#{load_address},
 								  #{jibun_address}, 
 								  #{rest_address},
-								   #{birthday},
-								   #{member_status}
+								   #{birthday}
 								   )
 								   ]]>
 		

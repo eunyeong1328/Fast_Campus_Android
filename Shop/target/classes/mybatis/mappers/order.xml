@@ -67,11 +67,11 @@
 	
 	</insert>
 	
-	<!-- 구입한 만큼 재고 내리기 -->
+	<!-- 구입한 만큼 재고 내리고 판매량 증가 -->
 	<update id="downStock" parameterType="list">
 	<foreach collection="list" item="item" index="index"
 	separator=";" open="DECLARE BEGIN" close="; END;" >
-		update item set stock = stock-#{item.quantity} where product_id = #{item.product_id}
+		update item set stock = stock-#{item.quantity}, sales = sales+#{item.quantity} where product_id = #{item.product_id}
 	</foreach>
 	</update>
 	

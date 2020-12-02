@@ -172,23 +172,6 @@
 
 					<div class="form-advanced-list p-4 shadow-xs border rounded mb-5">
 
-						<!-- 
-									<label class="form-radio form-radio-primary d-block py-3 border-bottom">
-										<input type="radio" name="payment_method" class="form-advanced-list-reveal" data-form-advanced-target="#bankdeposit_expand">
-										<i></i> 무통장 입금
-									</label>
-
-									paypal info
-									<div id="bankdeposit_expand" class="form-advanced-list-reveal-item hide p-4 rounded mt--n10 bg-light bt-0">
-
-										은행명: 쩝쩝뱅크 <br>
-										예금주: 쩝쩝이 <br>
-										계좌 번호: 123-1234-123456
-
-									</div>
-									/paypal info
- -->
-
 						<label
 							class="form-radio form-radio-primary d-block py-3 border-bottom">
 							<input type="radio" name="pg" value="html5_inicis"
@@ -213,14 +196,8 @@
 						<div id="paypal_expand"
 							class="form-advanced-list-reveal-item hide text-center">
 
-							<div class="my-5">
-								<img width="150"
-									src="${contextPath }/resources/demo.files/svg/vendors/vendor_paypal.svg"
-									alt="...">
-							</div>
 
-							<p>After clicking "Complete Order", you will be redirected to
-								complete your purchase securely.</p>
+							<p>※ 카카오페이 결제는 결제 시 결제하신 수단으로만 환불되는 점 양해부탁드립니다.</p>
 
 						</div>
 						<!-- /paypal info -->
