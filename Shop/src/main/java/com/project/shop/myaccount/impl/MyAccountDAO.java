@@ -3,6 +3,7 @@ package com.project.shop.myaccount.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,4 +55,14 @@ public class MyAccountDAO {
 	      ArrayList<OrderVO> orderList = (ArrayList)sqlSession.selectList("mappers.order.listOrderList",member_id);
 	      return orderList;
 	   }
+	public OrderVO selectOrderDetail(String order_num) throws Exception{
+		OrderVO orderVO = (OrderVO)sqlSession.selectOne("mappers.order.selectOrderDetail",order_num);
+		return orderVO;
+	}
+	
+	public List<ProductVO> selectOrderDetailProduct(String order_num) throws Exception{
+		List<ProductVO> productList = (List)sqlSession.selectList("mappers.order.selectOrderDetailProduct", order_num);
+		return productList;
+		
+	}
 }

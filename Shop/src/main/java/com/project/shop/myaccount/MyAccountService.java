@@ -2,6 +2,7 @@ package com.project.shop.myaccount;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.project.shop.member.MemberVO;
 import com.project.shop.orders.OrderVO;
@@ -15,5 +16,6 @@ public interface MyAccountService{
 	public void deleteFav(HashMap ids) throws Exception;
 	public void addFav(HashMap ids) throws Exception;
 	public List<OrderVO> listOrderList(String member_id) throws Exception;
+	public Map<String,Object> listOrderDetail(String order_num) throws Exception;
 
 }
