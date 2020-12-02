@@ -137,7 +137,7 @@ public class MyAccountController extends BaseController{
 	}
 	
 	@RequestMapping(value="/account-order-detail.do")
-	public ModelAndView listOrderDetail( @RequestParam("product_id") String product_id,
+	public ModelAndView listOrderDetail( @RequestParam("order_num") String order_num,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String viewName=(String)request.getAttribute("viewName");

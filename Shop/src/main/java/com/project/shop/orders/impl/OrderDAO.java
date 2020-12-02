@@ -22,6 +22,7 @@ public class OrderDAO {
 	
 	public void insertOrderDetail(List<ProductVO> item) throws DataAccessException{
 		sqlSession.insert("mappers.order.insertOrderDetail", item);
+		sqlSession.update("mappers.order.downStock",item);
 		
 	}
 }

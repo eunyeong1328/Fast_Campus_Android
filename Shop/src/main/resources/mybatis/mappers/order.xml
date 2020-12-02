@@ -24,6 +24,7 @@
 	</resultMap>	
 	
 
+<!-- 주문 입력 -->
 	<insert id="insertNewOrder" parameterType="orderVO">
 		<![CDATA[
 			insert into orders(order_num,
@@ -60,11 +61,19 @@
 		
 		<foreach collection="list" item="item" index="index"
 		open="INSERT ALL " separator=" " close="SELECT * FROM DUAL ">
-		 INTO orders_detail(order_num,product_id, price, order_quantity)
-		 VALUES (#{item.order_num},#{item.product_id},#{item.price},#{item.quantity})
+		 INTO orders_detail(order_num,product_id, price, order_quantity, sale_price, option_name)
+		 VALUES (#{item.order_num},#{item.product_id},#{item.price},#{item.quantity},#{item.sale_price}, #{item.option_name})
 		</foreach>
 	
 	</insert>
+	
+	<!-- 구입한 만큼 재고 내리기 -->
+	<update id="downStock" parameterType="list">
+	<foreach collection="list" item="item" index="index"
+	separator=";" open="DECLARE BEGIN" close="; END;" >
+		update item set stock = stock-#{item.quantity} where product_id = #{item.product_id}
+	</foreach>
+	</update>
 	
 	<!-- 내 주문 조회 -->
 	<select id="listOrderList" resultMap="orderResult"
@@ -77,7 +86,20 @@
     	]]>
 	</select>
 	
+	<!-- 주문상세 조회 -->
+	<select id="selectOrderDetail" resultType="orderVO" parameterType="String">
+	 <![CDATA[
+	 select * from orders
+	 	where order_num = #{order_num}
+	 ]]>
+	</select>
 	
+	<select id="selectOrderDetailProduct" resultMap="mappers.cart.productResult" parameterType="String">
+		 <![CDATA[
+		select * from orders_detail
+		  where order_num = #{order_num}
+	 ]]>
+	</select>
 	
 	
 </mapper>

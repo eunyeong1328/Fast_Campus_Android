@@ -23,7 +23,7 @@ public class OrderServiceImpl  implements OrderService {
 	@Override
 	public void addOrder(OrderVO orderVO, Map<String, List> cartMap) throws Exception {		
 		//orders 테이블에 정보추가
-		orderDAO.insertNewOrder(orderVO); //주문번호
+		orderDAO.insertNewOrder(orderVO);
 		
 		//orders_detail 테이블에 정보 추가		
 		List<ProductVO> myProductList= cartMap.get("myProductList");	
@@ -31,10 +31,10 @@ public class OrderServiceImpl  implements OrderService {
 		
 		for(ProductVO vo : myProductList) {
 			vo.setOrder_num(order_num);
-			System.out.println("서비스임플: " + vo.getProduct_id() +"가격"+vo.getPrice()+"원 * " + vo.getQuantity());
 		}
 
 		orderDAO.insertOrderDetail(myProductList);
+		
 				
 		
 	}
