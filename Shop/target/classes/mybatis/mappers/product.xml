@@ -219,25 +219,6 @@
 		c)
 		WHERE R_NUM BETWEEN #{begin} and #{end}
  	</select>
- 	
- 	<!-- joy 상품카테고리 crud -->
- 	<insert id="proCategoryInsert" parameterType="string">
- 		INSERT INTO PRODUCT_CATEGORY VALUES ((SELECT NVL(MAX(product_category_name),0) + 1 FROM product_category), #{product_category_name})
- 	</insert>
- 	
- 	<select id="productCategoryList" resultType="productVO">
-        SELECT * 
-		FROM PRODUCT_CATEGORY
- 	</select>
- 	
- 	<update id="proCategoryUpdate" parameterType="productVO">
- 		UPDATE PRODUCT_CATEGORY 
-		SET QNA_CATEGORY_NAME = #{qna_category_name} 
-		WHERE QNA_CATEGORY_NUM = #{qna_category_num} 
- 	</update>
-	
-	<delete id="proCategoryDelete" parameterType="productVO">
-		DELETE FROM PRODUCT_CATEGORY WHERE qna_category_num = ${qna_category_num}
-	</delete>
+
 	
 </mapper>

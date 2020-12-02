@@ -19,6 +19,7 @@ import com.project.shop.board.BoardVO;
 import com.project.shop.member.MemberVO;
 import com.project.shop.paging.Paging;
 import com.project.shop.paging.PagingService;
+import com.project.shop.product.ProductVO;
 
 @Controller("adminBoardController")
 @RequestMapping(value = "/adminboard")
@@ -402,28 +403,35 @@ public class AdminBoardController {
 	}
 	
 	/*냐아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ*/
-	@RequestMapping(value="proCategoryInsert.do")
-	public ModelAndView proCategoryInsert(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		return mav;
-	}
 	@RequestMapping(value="productCategoryList.do")
 	public ModelAndView productCategoryList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		List<ProductVO> categoryList = boardService.getCategoryList();
+		mav.addObject("categoryList", categoryList);
+		return mav;
+	}
+	@RequestMapping(value="proCategoryInsert.do")
+	public ModelAndView proCategoryInsert(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String product_category_name = request.getParameter("product_category_name");
+		boardService.categoryInsert(product_category_name);
+		mav.setViewName("redirect:/adminboard/productCategoryList.do");
 		return mav;
 	}
 	@RequestMapping(value="proCategoryUpdate.do")
-	public ModelAndView proCategoryUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
+	public ModelAndView proCategoryUpdate(ProductVO productVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		boardService.categoryUpdate(productVO);
+		mav.setViewName("redirect:/adminboard/productCategoryList.do");
 		return mav;
 	}
 	@RequestMapping(value="proCategoryDelete.do")
 	public ModelAndView proCategoryDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView();
+		int product_category_num = Integer.parseInt(request.getParameter("product_category_num"));
+		boardService.categoryDelete(product_category_num);
+		mav.setViewName("redirect:/adminboard/productCategoryList.do");
 		return mav;
 	}
 
