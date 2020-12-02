@@ -1,4 +1,4 @@
-package com.project.shop.board.paging;
+package com.project.shop.paging;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +24,11 @@ public class PagingServiceImpl implements PagingService {
 	@Override
 	public int getMemQCount(MemberVO memberVO) {
 		return pagingDAO.getMemQCount(memberVO);
+	}
+
+	@Override
+	public int getMemQCountAll() {
+		return pagingDAO.getMemQCountAll();
 	}
 
 }
