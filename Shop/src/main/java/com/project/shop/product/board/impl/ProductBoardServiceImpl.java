@@ -99,5 +99,21 @@ public class ProductBoardServiceImpl implements ProductBoardService{
 		productBoardDAO.insertReview(map);
 	}
 
+	@Override
+	public ReviewVO getReview(int review_num) throws Exception {
+		return productBoardDAO.selectReview(review_num);
+	}
+
+	@Override
+	public void editReview(Map map) throws Exception {
+		productBoardDAO.updateReview(map);
+		
+	}
+
+	@Override
+	public void deleteReview(int review_num) throws Exception {
+		productBoardDAO.deleteReview(review_num);
+	}
+
 	
 }

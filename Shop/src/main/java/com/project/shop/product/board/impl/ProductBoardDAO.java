@@ -63,4 +63,13 @@ public class ProductBoardDAO {
 		map.put("review_num", selectReviewNo()+1);
 		sqlSession.insert("mappers.review.insertReview", map);
 	}
+	public ReviewVO selectReview(int review_num) {
+		return sqlSession.selectOne("mappers.review.selectReview", review_num);
+	}
+	public void updateReview(Map map) {
+		sqlSession.update("mappers.review.updateReview", map);
+	}
+	public void deleteReview(int review_num) {
+		sqlSession.delete("mappers.review.deleteReview", review_num);
+	}
 }
