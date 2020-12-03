@@ -30,6 +30,8 @@ public class MyAccountController extends BaseController{
 	private OrderService orderService;
 	@Autowired
 	private MemberVO memberVO;
+	@Autowired
+	private MyAccountShippingVO myAcccountShipping;
 
 	//계정 정보 확인
 	@RequestMapping(value ="/account-settings.do") 
@@ -45,6 +47,9 @@ public class MyAccountController extends BaseController{
 		System.out.println(member_id);
 		MemberVO memberInfo = myAccountService.accountSettingsInfo(member_id);
 		mav.addObject("memberinfo", memberInfo);
+		List<MyAccountShippingVO> shippList = myAccountService.listshippList(member_id);
+		System.out.println(shippList);
+		mav.addObject("shippList",shippList);
 		return mav;
 	}
 
@@ -67,14 +72,14 @@ public class MyAccountController extends BaseController{
 
 		
 		if(!(sessionPass.equals(voPassword))){
-			String message="비밀번호를 잘못 입력하였습니다."; 
+			String message="비밀번호를 잘 못 입력하였습니다."; 
 	        mav.addObject("message", message);
 			mav.setViewName("/myaccount/account-settings");
 			return mav;
 		}else {
 			myAccountService.deleteAccount(sessionMember_id);
 			session.invalidate();
-			String message="회원이 탈퇴되었습니다."; 
+			String message="정상적으로 회원탈퇴처리가 승인되었습니다. \\n 그동안 이용해 주셔서 진심으로 감사합니다."; 
 	        mav.addObject("message", message);
 			mav.setViewName("/main/main");
 			return mav;
@@ -202,9 +207,6 @@ public class MyAccountController extends BaseController{
 	}
 	
 
-
-
-
 	//계정 수정
 	@RequestMapping(value="/modifyMemberInfo.do")
 	public ModelAndView modifyMemberInfo(
@@ -228,6 +230,34 @@ public class MyAccountController extends BaseController{
 
 
 	//새 배송지 추가
+	@RequestMapping(value="/insertAddressInfo.do")
+	public ModelAndView addShipping(@RequestParam HashMap<String, String> memberMap,
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		HttpSession session=request.getSession(); 
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");		      
+		String member_id = memberVO.getMember_id();
+		
+		String zipNo = memberMap.get("zipNo");
+		String load_address = memberMap.get("load_address");
+		String jibun_address = memberMap.get("jibun_address");
+		String rest_address = memberMap.get("rest_address");
+				
+		HashMap<String,String> map = new HashMap<String, String>();
+		map.put("member_id",member_id);
+		map.put("zipNo",zipNo);
+		map.put("load_address",load_address);
+		map.put("jibun_address",jibun_address);
+		map.put("rest_address",rest_address);
+		myAccountService.addAddress(map);
+		System.out.println("배송지 추가 완료!!");
+		
+//		List<MyAccountShippingVO> shippList = myAccountService.listshippList(member_id);
+//		System.out.println(shippList);
+//		mav.addObject("shippList",shippList);
+		mav.setViewName("/myaccount/account-settings");
+		return mav;
+	}
 
 	//배송지 수정
 	@RequestMapping(value="/modifyAddressInfo.do")

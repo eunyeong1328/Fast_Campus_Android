@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.shop.member.MemberVO;
 import com.project.shop.myaccount.MyAccountService;
+import com.project.shop.myaccount.MyAccountShippingVO;
 import com.project.shop.orders.OrderVO;
 import com.project.shop.product.ProductVO;
 import com.project.shop.product.impl.ProductDAO;
@@ -97,14 +98,24 @@ public class MyAccountServiceImpl implements MyAccountService{
 		List<ProductVO> productList = myAccountDAO.selectOrderDetailProduct(order_num);
 		orderMap.put("order", orderDetail);
 		orderMap.put("product", productList);
-		return orderMap;
-		
-		
+		return orderMap;		
 	}
 
 	@Override
 	public void deleteAccount(String member_id) throws Exception {
 		myAccountDAO.deleteAccount(member_id);
+	}
+	
+	@Override
+	public void addAddress(HashMap map) throws Exception {
+		myAccountDAO.addAddress(map);
+	}
+	
+	@Override
+	public List<MyAccountShippingVO> listshippList(String member_id) throws Exception {
+		System.out.println("===================================");
+		System.out.println("listshippList 아이디 확인" + member_id );
+		return myAccountDAO.listshippList(member_id);
 	}
 
 }

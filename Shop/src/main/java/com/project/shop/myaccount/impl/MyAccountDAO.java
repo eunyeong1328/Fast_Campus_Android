@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.project.shop.member.MemberVO;
+import com.project.shop.myaccount.MyAccountShippingVO;
 import com.project.shop.orders.OrderVO;
 import com.project.shop.product.ProductVO;
 
@@ -68,5 +69,16 @@ public class MyAccountDAO {
 	
 	public void deleteAccount(String member_id) throws Exception{
 		sqlSession.delete("mappers.myaccount.deleteAccount",member_id);
+	}
+	
+	public void addAddress(HashMap map) throws DataAccessException{
+		sqlSession.insert("mappers.myaccount.addAddress", map);
+	}
+	
+	public List<MyAccountShippingVO> listshippList(String member_id) throws Exception {
+		System.out.println("===================================");
+		System.out.println("myAccountDAO // listshippList 아이디 확인" + member_id );
+		ArrayList<MyAccountShippingVO> listshippList = (ArrayList)sqlSession.selectList("mappers.myaccount.listshippList",member_id);
+	    return listshippList;
 	}
 }
