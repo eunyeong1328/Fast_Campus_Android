@@ -74,17 +74,17 @@
 									<div class="col-12 col-sm-6 col-md-6 col-lg-6">
 
 										<a href="#" 
-											data-href="#?action=cancel&amp;order_id=1009" 
+											data-href="?action=cancel&amp;order_num=${order.order_num }"
 											data-ajax-confirm-mode="regular" 
 											data-ajax-confirm-size="modal-md" 
 											data-ajax-confirm-centered="false" 
 											data-ajax-confirm-title="Please Confirm" 
-											data-ajax-confirm-body="Are you sure you want to cancel this order?" 
+											data-ajax-confirm-body="정말로 주문을 취소하시겠습니까??" 
 											data-ajax-confirm-btn-yes-class="btn-sm btn-danger" 
-											data-ajax-confirm-btn-yes-text="Yes, Cancel" 
+											data-ajax-confirm-btn-yes-text="네" 
 											data-ajax-confirm-btn-yes-icon="fi fi-check" 
 											data-ajax-confirm-btn-no-class="btn-sm btn-light" 
-											data-ajax-confirm-btn-no-text="No" 
+											data-ajax-confirm-btn-no-text="아니오" 
 											data-ajax-confirm-btn-no-icon="fi fi-close" 
 											class="js-ajax-confirm float-end float-none-xs m-0 btn btn-sm btn-light fs--14 mb-0 mt-2">
 
@@ -204,7 +204,7 @@
 									<div class="col-3 col-sm-2 col-md-2 col-lg-2 text-center">
 										
 										<a class="d-block clearfix" href="${contextPath}/product/productDetail.do?product_id=${item.product_id}">
-											<img class="img-fluid" src="${contextPath}/resources/images/${item.product_id }/${item.product_image}" alt="...">
+											<img class="img-fluid" src="${contextPath}/resources/images/product/${item.product_id }/${item.product_image}" alt="...">
 										</a>
 
 									</div>

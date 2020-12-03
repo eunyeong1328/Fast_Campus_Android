@@ -104,6 +104,36 @@
 			order by order_date desc			
 	</select>
 	
+	<!-- 관리자용 주문 조회 -->
+		<select id="selectAdminOrderList" resultMap="orderResult"
+		parameterType="java.util.HashMap">
+	 <![CDATA[
+		select * from orders
+		]]>
+		<where>
+			<choose>
+			<when test="period==1">
+			AND ORDER_DATE >= TO_CHAR(SYSDATE-7,'YYYYMMDD')			
+			</when>
+			<when test="period==2">
+			AND ORDER_DATE >= TO_CHAR(SYSDATE-30, 'YYYYMMDD')
+			</when>			
+			</choose>
+			<choose>
+			<when test ="status==1">
+			AND ORDER_STATUS = '결제완료'			
+			</when>
+			<when test ="status==2">
+			AND ORDER_STATUS = '배송완료'			
+			</when>
+			<when test ="status==3">
+			AND ORDER_STATUS = '주문취소'			
+			</when>			
+			</choose>		
+			</where>
+			order by order_date desc			
+	</select>
+	
 	<!-- 주문상세 조회 -->
 	<select id="selectOrderDetail" resultType="orderVO" parameterType="String">
 	 <![CDATA[

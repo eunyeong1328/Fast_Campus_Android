@@ -76,7 +76,18 @@
 									결제금액: ${orderList.totalPrice} </p>
 
 								<p class="mb-0 fs--14">
-									상태:&nbsp; <span class="text-warning font-weight-normal">${orderList.order_status }</span>
+									상태:&nbsp; 
+									<c:choose>
+										<c:when test="${orderList.order_status == '결제완료' }">
+									<span class="text-warning font-weight-normal">${orderList.order_status }</span>										
+										</c:when>
+										<c:when test="${orderList.order_status == '배송완료' }">
+									<span class="text-success font-weight-normal">${orderList.order_status }</span>										
+										</c:when>
+										<c:when test="${orderList.order_status == '주문취소' }">
+									<span class="text-danger font-weight-normal">${orderList.order_status }</span>										
+										</c:when>
+									</c:choose>
 								</p>
 
 							</div>
