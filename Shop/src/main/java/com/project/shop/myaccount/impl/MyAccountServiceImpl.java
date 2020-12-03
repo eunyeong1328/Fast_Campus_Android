@@ -14,6 +14,7 @@ import com.project.shop.myaccount.MyAccountService;
 import com.project.shop.myaccount.MyAccountShippingVO;
 import com.project.shop.orders.OrderVO;
 import com.project.shop.product.ProductVO;
+import com.project.shop.product.impl.ProductDAO;
 
 
 @Service("myAccountService")
@@ -22,6 +23,9 @@ public class MyAccountServiceImpl implements MyAccountService{
 
 	@Autowired
 	private MyAccountDAO myAccountDAO;
+	
+	@Autowired
+	private ProductDAO productDAO;
 	
 	@Override
 	public MemberVO accountSettingsInfo(String member_id) throws Exception {
@@ -45,8 +49,22 @@ public class MyAccountServiceImpl implements MyAccountService{
 	}
 	
 	@Override
-	   public List<ProductVO> listFavList(String member_id) throws Exception {      
-	      return myAccountDAO.listFavList(member_id);
+	   public HashMap<String, Object> selectFavList(String member_id) throws Exception {
+		List<ProductVO> favList = myAccountDAO.selectFavList(member_id);
+		HashMap<String, List<ProductVO>> optionMap = new HashMap<>();
+		
+		
+		for(ProductVO vo : favList) {
+			System.out.println(vo);
+			optionMap.put(vo.getProduct_id(), productDAO.selectOption(vo.getProduct_id()));			
+		}
+		
+		HashMap<String, Object> favMap = new HashMap<>();
+		favMap.put("favList", favList);
+		favMap.put("optionMap", optionMap);	
+		 
+		
+	      return favMap;
 	   }
 
 	@Override
@@ -58,7 +76,7 @@ public class MyAccountServiceImpl implements MyAccountService{
 	@Override
 	public void addFav(HashMap ids) throws Exception {
 		String product_id = (String)ids.get("product_id");
-		String _product_id = (String)myAccountDAO.listFavItem(ids);
+		String _product_id = (String)myAccountDAO.selectFavItem(ids);
 		if(!(product_id.equals(_product_id))) {			
 			myAccountDAO.addFav(ids);
 		} else {
@@ -68,13 +86,13 @@ public class MyAccountServiceImpl implements MyAccountService{
 	}
 
 	@Override
-	public List<OrderVO> listOrderList(String member_id) throws Exception {
-		return myAccountDAO.listOrderList(member_id);
+	public List<OrderVO> selectOrderList(HashMap orderHash) throws Exception {
+		return myAccountDAO.selectOrderList(orderHash);
 		
 	}
 
 	@Override
-	public Map<String, Object> listOrderDetail(String order_num) throws Exception {
+	public Map<String, Object> selectOrderDetail(String order_num) throws Exception {
 		Map<String, Object> orderMap = new HashMap<String,Object>();
 		OrderVO orderDetail = myAccountDAO.selectOrderDetail(order_num);
 		List<ProductVO> productList = myAccountDAO.selectOrderDetailProduct(order_num);

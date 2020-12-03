@@ -52,7 +52,7 @@
 	</select>
 
 	<!-- 마이리스트 조회 -->
-	<select id="listFavList" resultMap="productResult"
+	<select id="selectFavList" resultMap="productResult"
 		parameterType="String">
 	 <![CDATA[
 			select * from product p , item i, mylist m 
@@ -62,7 +62,7 @@
     	]]>
 	</select>
 	
-		<select id="listFavitem" resultType="String"
+		<select id="selectFavitem" resultType="String"
 		parameterType="java.util.HashMap">
 	 <![CDATA[
 			select p.product_id from product p , item i, mylist m 

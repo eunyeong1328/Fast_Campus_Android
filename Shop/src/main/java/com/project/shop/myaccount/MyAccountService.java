@@ -12,11 +12,11 @@ public interface MyAccountService{
 	public MemberVO accountSettingsInfo(String member_id) throws Exception;
 	public MemberVO modifyMemberInfo(HashMap memberMap) throws Exception;
 	public MemberVO modifyAddressInfo(HashMap map) throws Exception;
-	public List<ProductVO> listFavList(String member_id) throws Exception;
+	public HashMap<String, Object> selectFavList(String member_id) throws Exception;
 	public void deleteFav(HashMap ids) throws Exception;
 	public void addFav(HashMap ids) throws Exception;
-	public List<OrderVO> listOrderList(String member_id) throws Exception;
-	public Map<String,Object> listOrderDetail(String order_num) throws Exception;
+	public List<OrderVO> selectOrderList(HashMap orderHash) throws Exception;
+	public Map<String,Object> selectOrderDetail(String order_num) throws Exception;
 	public void deleteAccount(String member_id) throws Exception;
 	public void addAddress(HashMap map) throws Exception;
 	public List<MyAccountShippingVO> listshippList(String member_id) throws Exception;;

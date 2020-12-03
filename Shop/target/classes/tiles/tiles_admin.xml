@@ -34,22 +34,27 @@
       <!-- 상연 상품 -->
       <definition name="/admin/productAdd" extends="adminLayout">
       	<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
-         <put-attribute name="body" value="/WEB-INF/views/admin/goods/productAdd.jsp"/>
+      	<put-attribute name="body" value="/WEB-INF/views/admin/goods/productAdd.jsp"/>
       </definition>
       
       <definition name="/admin/productList" extends="adminLayout">
-      	 <put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
-         <put-attribute name="body" value="/WEB-INF/views/admin/goods/productList.jsp"/>
+      	<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+      	<put-attribute name="body" value="/WEB-INF/views/admin/goods/productList.jsp"/>
       </definition>
       
       <definition name="/admin/productUpdate" extends="adminLayout">
       	<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
-         <put-attribute name="body" value="/WEB-INF/views/admin/goods/productUpdate.jsp"/>
+      	<put-attribute name="body" value="/WEB-INF/views/admin/goods/productUpdate.jsp"/>
       </definition>
       
       <definition name="/admin/productOption" extends="adminLayout">
       	<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
-         <put-attribute name="body" value="/WEB-INF/views/admin/goods/productOption.jsp"/>
+      	<put-attribute name="body" value="/WEB-INF/views/admin/goods/productOption.jsp"/>
+      </definition>
+      
+      <definition name="/admin/search" extends="adminLayout">
+      	<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+      	<put-attribute name="body" value="/WEB-INF/views/admin/goods/search.jsp"/>
       </definition>  
       
       <!-- joy.관리자 게시판 -->
@@ -124,6 +129,17 @@
       <definition name="/adminboard/productCategoryList" extends="adminLayout">
 		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/admin/board/productCategoryList.jsp" />
+      </definition>
+      
+      <!-- 관리자 주문목록 -->
+            <definition name="/admin/order/orders" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/orders/admin-orders.jsp" />
+      </definition>
+      
+            <definition name="/admin/order/detail" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/orders/admin-order-detail.jsp" />
       </definition>
       
 </tiles-definitions>

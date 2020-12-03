@@ -293,7 +293,7 @@
 
 									<div class="w--100">
 										<img class="img-fluid max-h-80"
-											src="${contextPath}/resources/images/item_image/${product_image}"
+										src="${contextPath}/resources/images/product/${product_id }/${product_image}"
 											alt="...">
 									</div>
 

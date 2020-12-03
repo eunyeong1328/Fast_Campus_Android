@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.shop.common.base.BaseController;
 import com.project.shop.member.MemberVO;
 import com.project.shop.myaccount.MyAccountService;
-import com.project.shop.myaccount.MyAccountShippingVO;
+import com.project.shop.orders.OrderService;
 import com.project.shop.orders.OrderVO;
 import com.project.shop.product.ProductVO;
 
@@ -26,6 +26,8 @@ import com.project.shop.product.ProductVO;
 public class MyAccountController extends BaseController{
 	@Autowired
 	private MyAccountService myAccountService;
+	@Autowired
+	private OrderService orderService;
 	@Autowired
 	private MemberVO memberVO;
 	@Autowired
@@ -100,8 +102,12 @@ public class MyAccountController extends BaseController{
 			mav.setViewName("/member/loginForm");
 		} else {
 			String member_id = memberVO.getMember_id();	    	  
-			List<ProductVO> favList = myAccountService.listFavList(member_id);
+			HashMap<String, Object> favMap = myAccountService.selectFavList(member_id);			
+			List<ProductVO> favList = (List)favMap.get("favList");
+			HashMap<String, List<ProductVO>> optionMap = (HashMap)favMap.get("optionMap");
 			mav.addObject("favList", favList);    	  
+			mav.addObject("optionMap", optionMap);
+			
 		}
 		return mav;
 	}
@@ -147,10 +153,15 @@ public class MyAccountController extends BaseController{
 	}
 // 내 주문
 	@RequestMapping(value="/account-orders.do")
-	public ModelAndView listOrders( HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView selectOrders( HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav =  new ModelAndView(viewName);
+		HashMap<String, String> orderHash = new HashMap<>();
+		String period = request.getParameter("filter_order_period");
+		String status = request.getParameter("filter_order_status");
+		System.out.println("period: " + period);
+		System.out.println("status: " + status);
 
 		HttpSession session=request.getSession(); 
 		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
@@ -161,25 +172,40 @@ public class MyAccountController extends BaseController{
 			mav.setViewName("/member/loginForm");
 		} else {
 			String member_id = memberVO.getMember_id();	    	  
-			List<OrderVO> orderList = myAccountService.listOrderList(member_id);
+			orderHash.put("period",period);
+			orderHash.put("status",status);
+			orderHash.put("member_id",member_id);
+			List<OrderVO> orderList = myAccountService.selectOrderList(orderHash);
 			mav.addObject("orderList", orderList);    	  
 		}
 		return mav;
 	}
 	
 	@RequestMapping(value="/account-order-detail.do")
-	public ModelAndView listOrderDetail( @RequestParam("order_num") String order_num,
+	public ModelAndView selectOrderDetail( @RequestParam("order_num") String order_num,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav =  new ModelAndView(viewName);
 
 			
-			  Map<String, Object> orderMap =myAccountService.listOrderDetail(order_num);
+			  Map<String, Object> orderMap =myAccountService.selectOrderDetail(order_num);
 			  mav.addObject("orderMap", orderMap);
+			  
+				//변경
+				String order_status = request.getParameter("order_status");
+				System.out.println("order_status: " + order_status);
+				System.out.println("order_num: " + order_num);
+				if(order_status!=null) {
+					HashMap<String, String> statusHash = new HashMap<>();
+					statusHash.put("order_status",order_status);
+					statusHash.put("order_num",order_num);
+					orderService.changeOrderStatus(statusHash);
 
-		return mav;
+				}
+				return mav;
 	}
+	
 
 	//계정 수정
 	@RequestMapping(value="/modifyMemberInfo.do")

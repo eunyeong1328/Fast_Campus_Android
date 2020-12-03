@@ -181,7 +181,7 @@
 									href="${contextPath}/product/productDetail.do?product_id=${item.product_id}"
 									class="d-block text-decoration-none"> <!--  상품 이미지  --> <img
 									class="img-fluid"
-									src="${contextPath}/resources/images/item_image/${item.product_image}"
+									src="${contextPath}/resources/images/product/${item.product_id}/${item.product_image}"
 									alt="상품이미지"> <span
 									class="d-block fs--16 max-h-50 overflow-hidden">
 										${item.product_name} </span> <!-- price --> <span
