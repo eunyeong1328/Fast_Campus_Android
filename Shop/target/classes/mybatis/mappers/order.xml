@@ -154,5 +154,12 @@
 	 ]]>
 	</select>
 	
+	<!-- 주문상태 변경 -->
+	<update id="changeOrderStatus" parameterType="java.util.HashMap">
+	<![CDATA[
+		UPDATE ORDERS SET ORDER_STATUS=#{order_status} WHERE ORDER_NUM = #{order_num}		
+	]]>
+	</update>
+	
 	
 </mapper>

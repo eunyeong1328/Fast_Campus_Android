@@ -26,19 +26,38 @@ public class OrderServiceImpl  implements OrderService {
 		if(order_status.equals("paid")) orderVO.setOrder_status("결제완료");
 		//orders 테이블에 정보추가
 		orderDAO.insertNewOrder(orderVO);
-		
+
 		//orders_detail 테이블에 정보 추가		
 		List<ProductVO> myProductList= cartMap.get("myProductList");	
 		String order_num = orderVO.getOrder_num();
-		
+
 		for(ProductVO vo : myProductList) {
 			vo.setOrder_num(order_num);
 		}
 
 		orderDAO.insertOrderDetail(myProductList);
-		
-				
-		
+
 	}
+
+	@Override
+	public List<OrderVO> selectAdminOrderList(HashMap orderHash) throws Exception {
+		return orderDAO.selectAdminOrderList(orderHash);
+	}
+
+	@Override public Map<String, Object> selectAdminOrderDetail(String order_num) throws Exception {
+		Map<String, Object> orderMap = new  HashMap<String,Object>();
+		OrderVO orderDetail =  orderDAO.selectOrderDetail(order_num);
+		List<ProductVO> productList =  orderDAO.selectOrderDetailProduct(order_num);
+		orderMap.put("order", orderDetail); 
+		orderMap.put("product", productList);
+		return orderMap; 
+	}
+
+	@Override
+	public void changeOrderStatus(HashMap orderHash) throws Exception {
+		orderDAO.changeOrderStatus(orderHash);
+
+	}
+
 
 }
