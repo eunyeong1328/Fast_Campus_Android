@@ -57,7 +57,7 @@
 
 								<img class="img-fluid max-w-350" src="${contextPath}/resources/demo.files/svg/ecommerce/undraw_empty_cart_co35.svg" alt="..." style="margin-bottom:50px">
 								<br>
-								<a href="#!" class="badge badge-pill badge-purple badge-soft font-weight-normal p-2">
+								<a href="${contextPath }/main/bestProduct.do" class="badge badge-pill badge-purple badge-soft font-weight-normal p-2">
 									쇼핑하러 가기
 								</a>
 

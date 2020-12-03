@@ -9,7 +9,7 @@
 %>
 	
 			<!-- PAGE TITLE -->
-			<section class="bg-light p-0">
+			<section class="bg-light p-0" >
 				<div class="container py-5">
 
 					<h1 class="h3">내 주문</h1>
@@ -24,6 +24,37 @@
 				</div>
 			</section>
 			<!-- /PAGE TITLE -->
+			
+			<c:choose>
+				<c:when test="${empty favList }">
+				
+					<div class="container" style="margin-top: 50px">
+
+					<div class="row">
+									<jsp:include page="/WEB-INF/views/myaccount/account-navi.jsp" />
+
+						<div class="col-12 col-md-8 col-lg-9 order-md-1 mb-5" >
+
+							<div class="text-center mb-5">
+	
+								<h1 class="mb--80">
+									주문내역이 존재하지 않습니다.
+								</h1>
+
+								<img class="img-fluid max-w-350" src="${contextPath}/resources/demo.files/svg/ecommerce/undraw_empty_cart_co35.svg" alt="..." style="margin-bottom:50px">
+								<br>
+								<a href="${contextPath }/main/bestProduct.do" class="badge badge-pill badge-purple badge-soft font-weight-normal p-2">
+									쇼핑하러 가기
+								</a>
+
+							</div>
+
+						</div>
+						</div>
+						</div>
+				
+				</c:when>
+				<c:otherwise>
 
 			<!-- -->
 			<section>
@@ -104,7 +135,8 @@
 
 				</div>
 			</section>
-		
+		</c:otherwise>
+		</c:choose>
 		
 
 	<script src="${contextPath}/resources/assets/js/core.min.js"></script>
