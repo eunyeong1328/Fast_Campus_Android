@@ -83,11 +83,12 @@
 
 								<h2 class="fs--18">
 									<a
-										href="${contextPath }/myaccount/account-order-detail.do?order_num=${orderList.order_num }"
+										href="${contextPath }/admin/order/detail.do?order_num=${orderList.order_num }"
 										class="float-end fs--12"> 주문 상세보기 </a> <a
-										href="${contextPath }/myaccount/account-order-detail.do?order_num=${orderList.order_num }"
-										class="text-dark"> ${orderList.order_num } </a>
+										href="${contextPath }/admin/order/detail.do?order_num=${orderList.order_num }"
+										class="text-dark">  ${orderList.order_num }    </a>
 								</h2>
+								<h2 class="fs--16">주문자: ${orderList.member_name }</h2>
 
 								<p class="mb-0 fs--14">주문일: ${orderList.order_date } | 결제금액:
 									${orderList.totalPrice}</p>
