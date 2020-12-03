@@ -17,6 +17,7 @@ public interface ProductService {
 	//상연
 	public List<ProductVO> bestList();
 	public List<ProductVO> newList();
+	public void saveImage(ProductVO vo,MultipartHttpServletRequest request) throws Exception;
 	public int insertProduct(ProductVO vo,MultipartHttpServletRequest request) throws Exception;
 	public List<ProductVO> allList();
 	public void deleteProduct(String request);
@@ -30,4 +31,8 @@ public interface ProductService {
 	public Paging pageList(String cPage) throws Exception;
 	public int getTotalCount() throws Exception;
 	public List<ProductVO> listProduct(int begin,int end);
+	public List<ProductVO> searchProduct(int begin, int end, String word);
+	public List<ProductVO> searchProduct(int begin, int end, String type, String word);
+	public Paging searchList(String cPage,String type, String word) throws Exception;
+	public Paging searchList(String cPage, String word);
 }

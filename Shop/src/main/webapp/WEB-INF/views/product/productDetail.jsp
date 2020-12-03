@@ -98,7 +98,7 @@ function add_cart(product_name,quantity,opt_name) {
 					<!-- SECONDARY SWIPER : THUMBS -->
 					<div class="col-12 order-2">
 						 
-						<img src="${contextPath}/resources/images/item_image/${vo.product_image}">
+						<img src="${contextPath}/resources/images/product/${vo.product_id}/${vo.product_image}">
 						
 						
 					</div>
@@ -300,7 +300,8 @@ function add_cart(product_name,quantity,opt_name) {
 <!-- SPECIFICATIONS -->
 <section class="border-top">
 	<div class="container">
-		<img src="${contextPath}/resources/images/item_image/${vo.product_detail_image}" />
+		<img src="${contextPath}/resources/images/product/${vo.product_id}/${vo.product_detail_image}" />
+		
 	</div>
 </section>
 <!-- /SPECIFICATIONS -->

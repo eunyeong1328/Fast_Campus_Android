@@ -5,11 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:if test='${not empty message }'>
-	<script>
-		alert('${message}');
-	</script>
-</c:if>
+
 
 <c:set var="contextPath"  value="${pageContext.request.contextPath }"  />
 <%
@@ -349,7 +345,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[0].product_image}" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[0].product_id}/${bestlist[0].product_image}" alt="..."> 
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -395,7 +391,7 @@
 								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[1].product_id}" class="d-block text-decoration-none">
 
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[1].product_image}" alt="...">
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[1].product_id}/${bestlist[1].product_image}" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -454,7 +450,7 @@
 								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[2].product_id}" class="d-block text-decoration-none">
 
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[2].product_image}" alt="...">
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[2].product_id}/${bestlist[2].product_image}" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -500,7 +496,7 @@
 								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[3].product_id}" class="d-block text-decoration-none">
 
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[3].product_image}" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[3].product_id}/${bestlist[3].product_image}" alt="..."> 
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -547,7 +543,7 @@
 
 									
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[4].product_image}" alt="...">
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[4].product_id}/${bestlist[4].product_image}" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -593,7 +589,7 @@
 								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[5].product_id}" class="d-block text-decoration-none">
 
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${bestlist[5].product_image}" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[5].product_id}/${bestlist[5].product_image}" alt="..."> 
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -744,7 +740,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/item_image/${newlist.product_image}" alt="...">
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${newlist.product_id}/${newlist.product_image}" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
