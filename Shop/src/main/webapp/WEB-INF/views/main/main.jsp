@@ -60,7 +60,7 @@
 							<div class="position-absolute container z-index-10 text-white text-center" data-aos="fade-in" data-aos-delay="150" data-aos-offset="0">
 
 								<h1 class="display-3 h1-xs mb-4 font-weight-medium" data-swiper-parallax="-300">
-									<span class="text-danger">점심시간</span> 언제 돼...
+									간단한 <span class="text-danger">브런치</span> 어때요?
 								</h1>
 
 								<div data-swiper-parallax="-100"><!-- parallax directly on button will cancel hover fade -->
@@ -225,7 +225,8 @@
 
 							<div class="bg-white shadow-md shadow-danger-lg-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
 
-								<a href="#!" class="card position-relative h-100 b-0 rounded text-decoration-none overflow-hidden bg-cover text-white overlay-dark overlay-opacity-0" 
+								<a  href="${contextPath}/product/productDetail.do?product_id=${bestlist[0].product_id}" 
+									class="card position-relative h-100 b-0 rounded text-decoration-none overflow-hidden bg-cover text-white overlay-dark overlay-opacity-0" 
 									style="background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('${contextPath}/resources/images/product/${bestlist[0].product_id}/${bestlist[0].product_image}');">
 									<!-- style="background-image:url('${contextPath}/resources/demo.files/images/unsplash/products/sneakers/joshua-hanson-FCcNHcylc9o-unsplash.jpg')"> -->
 
@@ -247,7 +248,7 @@
 
 
 										<h2 class="d-block">
-											"${bestlist[0].product_name}"
+											${bestlist[0].product_name}
 										</h2>
 
 										<hr class="border-light opacity-2">

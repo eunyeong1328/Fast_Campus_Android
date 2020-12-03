@@ -42,24 +42,22 @@
 								<select
 									class="form-control b-0 bg-light bs-select w--250 w-100-xs float-start float-none-xs mb-2"
 									data-style="bg-light select-form-control" title="주문 기간"
-									data-header="Order Period"
 									onchange="window.location=this.value">
-									<option value="#">All (12)</option>
-									<option value="?filter_order_period=1">Last 3 months</option>
-									<option value="?filter_order_period=2">Last 6 months</option>
-									<option value="?filter_order_period=2019">Year 2019</option>
+									<option value="#">전체</option>
+									<option value="?filter_order_period=1">최근 3개월 이내</option>
+									<option value="?filter_order_period=2">최근 6개월 이내</option>
+									<option value="?filter_order_period=2019">최근 1년 이내</option>
 								</select>
 
 								<!-- Order Status -->
 								<select
 									class="form-control b-0 bg-light bs-select w--250 w-100-xs float-start float-none-xs mb-2"
 									data-style="bg-light select-form-control" title="주문 상태"
-									data-header="Order Status"
 									onchange="window.location=this.value">
-									<option value="#">Any</option>
-									<option value="?filter_order_status=1">Completed</option>
-									<option value="?filter_order_status=2">Canceled</option>
-									<option value="?filter_order_status=3">Refunded</option>
+									<option value="#">전체</option>
+									<option value="?filter_order_status=1">결제완료</option>
+									<option value="?filter_order_status=2">배송완료</option>
+									<option value="?filter_order_status=3">주문취소</option>
 								</select>
 
 							</div>
