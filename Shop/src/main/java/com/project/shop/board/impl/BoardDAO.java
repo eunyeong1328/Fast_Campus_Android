@@ -113,7 +113,7 @@ public class BoardDAO {
 		board.delete("mapper.board.proCategoryDelete", product_category_num);
 	}
 	
-	public List<BoardVO> getSerchNoticeList(HashMap<String, Object> map) {
+	public List<BoardVO> getSearchNoticeList(HashMap<String, Object> map) {
 		return board.selectList("mapper.board.getSerchNoticeList", map);
 	}
 	

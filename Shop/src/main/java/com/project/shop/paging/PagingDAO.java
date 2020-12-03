@@ -1,5 +1,7 @@
 package com.project.shop.paging;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,8 +15,8 @@ public class PagingDAO {
 	private SqlSessionTemplate board;
 	
 //	공지사항 전체 건수 조회
-	public int getNoticeCount() {
-		return board.selectOne("mapper.board.getNoticeCount");
+	public int getNoticeCount(HashMap<String, Object> map) {
+		return board.selectOne("mapper.board.getNoticeCount", map);
 	}
 	
 //	FAQ 전체 건수 조회
@@ -29,5 +31,9 @@ public class PagingDAO {
 	public int getMemQCountAll() {
 		return board.selectOne("mapper.board.getMemQCountAll");
 	}
-	
+
+	public int getSearchNoticeCount(HashMap<String, Object> map) {
+		return board.selectOne("mapper.board.getSearchNoticeCount", map);
+	}
+
 }

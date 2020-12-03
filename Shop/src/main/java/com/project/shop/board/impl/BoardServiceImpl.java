@@ -138,8 +138,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getSerchNoticeList(HashMap<String, Object> map) {
-		return boardDAO.getSerchNoticeList(map);
+	public List<BoardVO> getSearchNoticeList(HashMap<String, Object> map) {
+		return boardDAO.getSearchNoticeList(map);
 	}
 
 }

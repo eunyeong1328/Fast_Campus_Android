@@ -45,14 +45,14 @@
 								
 								<!-- 검색창 -->
 								<form action="${contextPath}/adminboard/getSearchNoticeList.do" method="post">
-								
+									
 									<div style="float:right;margin:13px 5px;">
 										<button type="submit" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
 											검색
 										</button>
 									</div>
 									
-									<input autocomplete="off" type="text" name="searchDate" class="form-control rangepicker" 
+									<input autocomplete="off" type="text" name="search_daterange" class="form-control rangepicker" 
 														data-ranges="true" 
 														data-date-format="YY/MM/DD" 
 														data-quick-locale='{
@@ -75,7 +75,7 @@
 										style="float:right;width:25%;overflow:hidden;padding:0.3rem 0.5rem;height:38px;margin:10px 0 !important;font-size:16px;">
 										
 									<select name="searchCondition" id="select_options2" class="form-control" style="border-color:#6dbb30;float:right;width:10%;padding:0.3rem 0.5rem;height:38px;margin:10px 0;font-size:16px;margin-right:5px;">
-										<option value="title">제목</option>
+										<option value="title" selected>제목</option>
 										<option value="contents">내용</option>
 									</select>
 									
@@ -92,32 +92,11 @@
 
 								<form novalidate class="bs-validate" id="form_id" method="post" action="#!">
 
-
-									<!-- 
-
-										IMPORTANT
-										The "action" hidden input is updated by javascript according to button params/action:
-											data-js-form-advanced-hidden-action-id="#action"
-											data-js-form-advanced-hidden-action-value="delete"
-
-										In your backend, should process data like this (PHP example):
-
-											if($_POST['action'] === 'delete') {
-
-												foreach($_POST['item_id'] as $item_id) {
-													// ... delete $item_id from database
-												}
-
-											}
-
-									-->
 									<input type="hidden" id="action" name="action" value=""><!-- value populated by js -->
-
-
 
 									<div class="table-responsive">
 
-										<table class="table table-align-middle border-bottom mb-6">
+										<table class="table table-align-middle border-bottom mb-6" style="margin-bottom:10px !important;">
 
 											<thead>
 												<tr class="text-muted fs--13">
@@ -232,31 +211,9 @@
 											</c:if>
 											</tbody>
 
-											<tfoot>
-												<tr class="text-muted fs--13">
-													<th class="w--30 hidden-lg-down">
-														<label class="form-checkbox form-checkbox-primary float-start">
-															<input class="checkall" data-checkall-container="#item_list" type="checkbox" name="checkbox">
-															<i></i>
-														</label>
-													</th>
-													<th>번호</th>
-													<th>
-														<span class="px-2 p-0-xs">
-															제목
-														</span>
-													</th>
-													<th class="w--200 hidden-lg-down">조회수</th>
-													<th>작성날짜</th>
-													<th class="w--60">&nbsp;</th>
-												</tr>
-											</tfoot>
-
 										</table>
 
 									</div>
-
-
 
 									<!-- options and pagination -->
 									<div class="row text-center-xs">

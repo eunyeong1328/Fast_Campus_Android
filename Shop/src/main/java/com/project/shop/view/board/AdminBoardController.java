@@ -1,5 +1,6 @@
 package com.project.shop.view.board;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,8 +43,7 @@ public class AdminBoardController {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
-//		게시글 count
-		int count = pagingService.getNoticeCount();
+		int count = pagingService.getNoticeCount(map);
 		map = pagingCon.getPaging(count, request, response);
 		mav.addObject("paging", map.get("paging"));
 		
@@ -54,19 +54,31 @@ public class AdminBoardController {
 	}
 	
 //	공지사항 검색 List
-	@RequestMapping(value="getSearchNoticeList.do")
+	@RequestMapping(value="getSearchNoticeList.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView getSearchNoticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
-//		게시글 count
-		int count = pagingService.getNoticeCount();
+		Enumeration enu = request.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name = (String) enu.nextElement();
+			String value = request.getParameter(name);
+			map.put(name, value);
+			if (name.equals("search_daterange")) {
+				value = value.replaceAll(" ", "");
+				String[] dateArray = value.split("-");
+				map.put("dateArray", dateArray);
+			}
+		}
+		
+		int count = pagingService.getSearchNoticeCount(map);
+
 		map = pagingCon.getPaging(count, request, response);
 		mav.addObject("paging", map.get("paging"));
 		
-		List<BoardVO> noticeList = boardService.getNoticeList(map);
+		List<BoardVO> noticeList = boardService.getSearchNoticeList(map);
 		mav.addObject("NoticeList", noticeList);
-
+		
 		return mav;
 	}
 	
@@ -125,7 +137,7 @@ public class AdminBoardController {
 		mav.addObject("member_id", memberVO.getMember_id());
 		
 //		게시글 count
-		int count = pagingService.getNoticeCount();
+		int count = pagingService.getNoticeCount(map);
 		map = pagingCon.getPaging(count, request, response);
 		mav.addObject("paging", map.get("paging"));
 		

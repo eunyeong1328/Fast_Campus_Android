@@ -1,11 +1,13 @@
 package com.project.shop.paging;
 
+import java.util.HashMap;
+
 import com.project.shop.member.MemberVO;
 
 public interface PagingService {
 	
 //	공지사항 글 개수 구하기
-	int getNoticeCount();
+	int getNoticeCount(HashMap<String, Object> map);
 	
 //	FAQ 글 개수 구하기
 	int getFAQCount();
@@ -15,5 +17,7 @@ public interface PagingService {
 	
 //	MemQ 전체 글 개수 구하기
 	int getMemQCountAll();
+
+	int getSearchNoticeCount(HashMap<String, Object> map);
 	
 }

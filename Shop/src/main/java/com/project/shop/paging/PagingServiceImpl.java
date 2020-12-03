@@ -1,5 +1,7 @@
 package com.project.shop.paging;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,8 @@ public class PagingServiceImpl implements PagingService {
 	private PagingDAO pagingDAO;
 	
 	@Override
-	public int getNoticeCount() {
-		return pagingDAO.getNoticeCount();
+	public int getNoticeCount(HashMap<String, Object> map) {
+		return pagingDAO.getNoticeCount(map);
 	}
 
 	@Override
@@ -29,6 +31,11 @@ public class PagingServiceImpl implements PagingService {
 	@Override
 	public int getMemQCountAll() {
 		return pagingDAO.getMemQCountAll();
+	}
+
+	@Override
+	public int getSearchNoticeCount(HashMap<String, Object> map) {
+		return pagingDAO.getSearchNoticeCount(map);
 	}
 
 }

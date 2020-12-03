@@ -27,32 +27,25 @@
 					 LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
 					 LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
 			  FROM (SELECT * 
-			  		FROM NOTICE
-			  		<if test="searchCondition != null">
-			  			 WHERE 
-			  			<if test="searchCondition == title">
-			  			TITLE LIKE '%#{searchKeyword}%' 
-			  			</if>
-			  			<if test="searchCondition == contents">
-			  			CONTENTS LIKE '%#{searchKeyword}%' 
-			  			</if>
-			  			<if test="dateArray != null">
-				  		AND reg_date BETWEEN TO_DATE(#{dateArray.a}, 'YY/MM/DD') 
-	                                     AND TO_DATE(#{dateArray.b}, 'YY/MM/DD')+1
-				  		</if>
-			  		</if>
-			  		<if test="searchCondition == null">
-				  		<if test="dateArray != null">
-				  		WHERE reg_date BETWEEN TO_DATE(#{dateArray.a}, 'YY/MM/DD') 
-	                                     AND TO_DATE(#{dateArray.b}, 'YY/MM/DD')+1
-				  		</if>
-			  		</if>
+			  		FROM NOTICE 
+					<where>
+						<if test="searchKeyword != ''">
+							<if test="searchCondition == 'title'">
+								AND TITLE LIKE '%' || #{searchKeyword} || '%'
+							</if>
+							<if test="searchCondition == 'contents'">
+								AND CONTENTS LIKE '%' || #{searchKeyword} || '%'
+							</if>
+						</if>
+						AND reg_date BETWEEN TO_DATE(#{dateArray[0]}, 'YY/MM/DD') 
+										 AND TO_DATE(#{dateArray[1]}, 'YY/MM/DD')+1 
+					</where>
 			  		ORDER BY NOTICE_NUM DESC 
 			  		) N 
 			  ) 
 		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
-
+	
 	<!-- FAQ -->
 	<select id="getFAQList" parameterType="hashmap" resultType="boardVO">
 		SELECT * 
@@ -218,9 +211,26 @@
 <!-- ****************************************** 게시판 글 개수 조회 ****************************************** -->
 
 	<!-- 공지사항 -->
-	<select id="getNoticeCount" resultType="int">
+	<select id="getNoticeCount" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*) 
 		FROM NOTICE
+	</select>
+	
+	<select id="getSearchNoticeCount" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) 
+		FROM NOTICE
+		<where>
+			<if test="searchKeyword != ''">
+				<if test="searchCondition == 'title'">
+					AND TITLE LIKE '%' || #{searchKeyword} || '%'
+				</if>
+				<if test="searchCondition == 'contents'">
+					AND CONTENTS LIKE '%' || #{searchKeyword} || '%'
+				</if>
+			</if>
+			AND reg_date BETWEEN TO_DATE(#{dateArray[0]}, 'YY/MM/DD')
+							 AND TO_DATE(#{dateArray[1]}, 'YY/MM/DD')+1
+		</where>
 	</select>
 	
 	<!-- FAQ -->
