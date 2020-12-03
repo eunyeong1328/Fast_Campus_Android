@@ -94,8 +94,12 @@ public class MyAccountController extends BaseController{
 			mav.setViewName("/member/loginForm");
 		} else {
 			String member_id = memberVO.getMember_id();	    	  
-			List<ProductVO> favList = myAccountService.listFavList(member_id);
+			HashMap<String, Object> favMap = myAccountService.selectFavList(member_id);			
+			List<ProductVO> favList = (List)favMap.get("favList");
+			HashMap<String, List<ProductVO>> optionMap = (HashMap)favMap.get("optionMap");
 			mav.addObject("favList", favList);    	  
+			mav.addObject("optionMap", optionMap);
+			
 		}
 		return mav;
 	}

@@ -34,12 +34,12 @@ public class MyAccountDAO {
 		sqlSession.update("mappers.myaccount.modifyAddressInfo",map);
 	}
 	
-	public List<ProductVO> listFavList(String member_id) throws Exception {      
-	      ArrayList<ProductVO> favList = (ArrayList)sqlSession.selectList("mappers.myaccount.listFavList",member_id);
+	public List<ProductVO> selectFavList(String member_id) throws Exception {      
+	      ArrayList<ProductVO> favList = (ArrayList)sqlSession.selectList("mappers.myaccount.selectFavList",member_id);
 	      return favList;
 	   }
-	public String listFavItem(HashMap ids) throws Exception{
-		String product_id = (String)sqlSession.selectOne("mappers.myaccount.listFavitem", ids);
+	public String selectFavItem(HashMap ids) throws Exception{
+		String product_id = (String)sqlSession.selectOne("mappers.myaccount.selectFavitem", ids);
 		return product_id;
 	}
 	

@@ -12,7 +12,7 @@ public interface MyAccountService{
 	public MemberVO accountSettingsInfo(String member_id) throws Exception;
 	public MemberVO modifyMemberInfo(HashMap memberMap) throws Exception;
 	public MemberVO modifyAddressInfo(HashMap map) throws Exception;
-	public List<ProductVO> listFavList(String member_id) throws Exception;
+	public HashMap<String, Object> selectFavList(String member_id) throws Exception;
 	public void deleteFav(HashMap ids) throws Exception;
 	public void addFav(HashMap ids) throws Exception;
 	public List<OrderVO> listOrderList(String member_id) throws Exception;

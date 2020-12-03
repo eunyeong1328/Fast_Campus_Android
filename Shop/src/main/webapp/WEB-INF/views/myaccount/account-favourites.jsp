@@ -108,8 +108,15 @@
 										</p>
 
 									</div>
-
+									<c:if test="${not empty optionMap.get(favList.product_id) }" >
+                              <select id="opt" class="form-control bs-select" name="option_name" title="옵션을 선택해주세요" onChange="changeOption();" required>
+                                 <c:forEach var="option" items="${optionMap.get(favList.product_id) }">
+                                    <option value="${option.option_name }">${option.option_name } [<fmt:formatNumber type="number" value="${option.option_price }"/> 원]</option>
+                                 </c:forEach>
+                              </select>
+                           </c:if>
 								</div>
+								
 
 								<div class="col-12 d-block d-sm-none mt-3">
 									<!-- mobile spacer -->
