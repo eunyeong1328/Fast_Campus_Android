@@ -34,15 +34,18 @@ function changeQuantity() {
 	    quantity  = parseInt(selectOpt.options[selectOpt.selectedIndex].text);
 }
 function add_cart(product_name,quantity,opt_name) {
-	if(!opt_name){
+	if(${not empty optionList} && !opt_name){
 		alert("옵션을 선택해주세요");
 		return;
 	}
+	
 	if(quantity==0){
 		alert("수량옵션을 선택해주세요");
 		return;
 	}
-	console.log("opt_name:"+opt_name);
+	if(!opt_name){
+		opt_name="";
+	}
 	$.ajax({
 		type : "post",
 		async : false, //false인 경우 동기식으로 처리한다.
@@ -53,7 +56,6 @@ function add_cart(product_name,quantity,opt_name) {
 			option_name:opt_name
 		},
 		success : function(data, textStatus) {
-		
 			if(data.trim()=='add_success'){
 				alert("카트에 등록되었습니다/.");
 			}else if(data.trim()=='already_existed'){
@@ -67,6 +69,7 @@ function add_cart(product_name,quantity,opt_name) {
 		complete : function(data, textStatus) {
 		}
 	}); //end ajax	
+
 }
 </script>
 

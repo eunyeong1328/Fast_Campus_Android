@@ -28,7 +28,7 @@
         	SELECT ROWNUM R_NUM, P.*
 			FROM ( 
         			SELECT ROWNUM R_NUM, level, PRODUCT_QNA_NUM, PARENT_NUM , 
-        			TITLE, CONTENTS , member_id,reg_date, PRODUCT_ID, image1, image2, image3
+        			TITLE, CONTENTS , member_id,reg_date, PRODUCT_ID, image
         			FROM PRODUCt_QNA
 			        WHERE PRODUCT_ID = #{product_id}
 			        START WITH parent_num=0

@@ -22,13 +22,22 @@ public class CartDAOImpl implements CartDAO {
 		String result = sqlSession.selectOne("mappers.cart.selectCountInCart", cartVO);
 		return Boolean.parseBoolean(result);
 	}
+	
+	@Override
+	public boolean selectCountInCarts(CartVO cartVO) throws DataAccessException {
+		String result = sqlSession.selectOne("mappers.cart.selectCountInCarts", cartVO);
+		return Boolean.parseBoolean(result);
+	}
 
 	@Override
 	public void insertProductInCart(CartVO cartVO) throws DataAccessException {
 		int cart_id=selectMaxCartId();
 		cartVO.setCart_id(cart_id);
+		if(cartVO.getMember_id()!=null) {
 		sqlSession.insert("mappers.cart.insertProductInCart", cartVO);
-		
+		}else {
+		 sqlSession.insert("mappers.cart.insertProductInCartNon", cartVO);
+		}
 	}
 	private int selectMaxCartId() throws DataAccessException{
 		int cart_id =sqlSession.selectOne("mappers.cart.selectMaxCartId");
@@ -68,5 +77,14 @@ public class CartDAOImpl implements CartDAO {
 	public void deleteAllProduct(CartVO cartVO) throws DataAccessException {
 		sqlSession.delete("mappers.cart.deleteAllProduct", cartVO);
 	}
+
+	@Override
+	public String cartChkCount(CartVO cartVO) throws DataAccessException {
+		String result = (String)sqlSession.selectOne("mappers.cart.cartChkCount", cartVO);
+		System.out.println("result::::::::::::::::::::::"+result);
+		return result;
+	}
+
+	
 	
 }

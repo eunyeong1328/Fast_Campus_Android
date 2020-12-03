@@ -15,7 +15,6 @@ public interface CartController {
 												 @RequestParam("quantity") int quantity,
 												 @RequestParam("option_name") String option_name,
 												 HttpServletRequest request, HttpServletResponse response)  throws Exception;
-
 	public @ResponseBody String plusQuantity(@RequestParam("product_name") String product_name,
 											 @RequestParam("cart_id") int cart_id,
 		                                         HttpServletRequest request, HttpServletResponse response)  throws Exception;
@@ -23,7 +22,10 @@ public interface CartController {
 											  @RequestParam("cart_id") int cart_id,
             									 HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	public @ResponseBody String removeCartProduct(@RequestParam("cart_id") int cart_id,
-										   @RequestParam("product_name") String product_name,
-												 HttpServletRequest request, HttpServletResponse response)  throws Exception;
+										          @RequestParam("product_name") String product_name,
+												  HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	public ModelAndView deleteAllProduct(HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	
+	public @ResponseBody String cartChkCount(@RequestParam("member_id") String member_id,
+			 								 HttpServletRequest request, HttpServletResponse response)  throws Exception;
 }

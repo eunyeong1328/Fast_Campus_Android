@@ -58,7 +58,7 @@ public class CartControllerImpl extends BaseController implements CartController
 															   HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO)session.getAttribute("memberInfo");
-		if(memberVO!= null && memberVO.getMember_name()!=null){
+		if(memberVO!= null && memberVO.getMember_id()!=null){
 		String member_id = memberVO.getMember_id();
 		cartVO.setMember_id(member_id);
 		cartVO.setQuantity(quantity);
@@ -67,13 +67,18 @@ public class CartControllerImpl extends BaseController implements CartController
 		}else {
 			return "logingo";
 		}
-		boolean isAreadyExisted = cartService.findCartProduct(cartVO);
+		boolean isAreadyExisted;
+		if(option_name=="") {
+		 isAreadyExisted = cartService.findCartProducts(cartVO);
+		}else {
+		 isAreadyExisted = cartService.findCartProduct(cartVO);
+		}
 		if(isAreadyExisted==true) {
 			return "already_existed";
 		}else {
 			cartService.addProductInCart(cartVO);
 			return "add_success";
-	 }
+		}
 	}
 		
 	@Override
@@ -137,6 +142,20 @@ public class CartControllerImpl extends BaseController implements CartController
 		cartService.deleteAllProduct(cartVO);
 		return mav;
 	}
+
+	@Override
+	@RequestMapping(value="/cartChkCount.do", method=RequestMethod.POST, produces="application/text; charset=utf8")
+	public String cartChkCount(@RequestParam("member_id") String member_id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		//HttpSession session = request.getSession();
+		//memberVO = (MemberVO)session.getAttribute("memberInfo");
+		cartVO.setMember_id(member_id);
+		
+		String result = (String)cartService.cartChkCount(cartVO);
+		return result;
+	}
+
 
 	
 	

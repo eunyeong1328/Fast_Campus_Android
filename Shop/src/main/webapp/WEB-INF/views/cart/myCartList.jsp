@@ -10,13 +10,17 @@
 <c:set var="total_price" value="0" />
 <c:set var="shipping" value="3500" />
 <c:set var="total_discount" value="0" />
+<%-- <jsp:include page="/WEB-INF/views/cart/cart.jsp" /> --%>
 <script type="text/javascript">
-	var sell_price;
+
+
+    var sell_price;
 	var amount;
 	var discount;
 	var total_price;
 	var total_discount;
 	var shipping = 3500;
+	var stock;
 	function add(product_name, cart_id, index) {
 		var currentIndex = parseInt(index);
 		total_price = parseInt(document.getElementById("total_price").innerText);
@@ -26,13 +30,28 @@
 			amount = parseInt(document.form.amount.value) + 1;
 			sell_price = parseInt(document.form.sell_price.value);
 			discount = parseInt(document.form.discount.value);
+			
+			var string= document.getElementsByName("stock")[currentIndex].textContent;
+			var no = string.indexOf(":");
+			var no1 = string.slice(no+1);
+			stock = no1.trim();
+			
 		} else {
 			amount = parseInt(document.form["amount"][currentIndex].value) + 1;
 			sell_price = parseInt(document.form["sell_price"][currentIndex].value);
 			discount = parseInt(document.form["discount"][currentIndex].value);
+			
+			var string= document.getElementsByName("stock")[currentIndex].textContent;
+			var no = string.indexOf(":");
+			var no1 = string.slice(no+1);
+			stock = no1.trim();
 		}
-		$
-				.ajax({
+		if(amount > stock){
+			alert("현재 재고보다 많은수량을 선택하셨습니다.");
+			return;
+		}
+	
+				$.ajax({
 					type : "post",
 					async : false,
 					url : "${contextPath}/cart/plusQuantity.do",
@@ -80,14 +99,13 @@
 		total_discount = parseInt(document.getElementById("total_discount").innerText);
 
 		if (!document.form["amount"][currentIndex]) {
-			amount = parseInt(document.form.amount.value) - 1;
+			amount = parseInt(document.form.amount.value)-1;
 			if (amount < 1) {
-				amount = 1;
+				document.form.amount.value = 1;
 				return;
 			}
 			sell_price = parseInt(document.form.sell_price.value);
 			discount = parseInt(document.form.discount.value);
-			document.form.amount.value = amount + 1;
 		} else {
 			amount = parseInt(document.form["amount"][currentIndex].value) - 1;
 			if (amount < 1) {
@@ -98,8 +116,7 @@
 			discount = parseInt(document.form["discount"][currentIndex].value);
 			document.getElementsByName("amount")[currentIndex].value = parseInt(amount);
 		}
-		$
-				.ajax({
+				$.ajax({
 					type : "post",
 					async : false,
 					url : "${contextPath}/cart/minusQuantity.do",
@@ -120,7 +137,7 @@
 									+ "<br>"
 									+ parseInt(amount * discount)
 									+ " 원";
-
+							document.form.amount.value = amount;
 							document.getElementById("total_price").innerHTML = parseInt(total_price
 									- (sell_price - discount))
 									+ " 원";
@@ -167,9 +184,7 @@
 	function refreshMemList() {
 		location.reload();
 	}
-</script>
-
-
+    </script>
 <style>
 .stm, .stm .btn {
 	overflow: hidden;
@@ -232,6 +247,13 @@
 }
 </style>
 <body>
+<c:choose>
+	  <c:when test="${isLogOn==false and empty memberInfo }">
+	  		<h1>장바구니비었음</h1>
+	  		
+	  </c:when>
+</c:choose>
+
 	<c:choose>
 		<c:when test="${ empty myCartList }">
 			<!-- CART -->
@@ -294,6 +316,12 @@
 											value="${myProductList[cnt.count-1].cart_id}" />
 										<c:set var="product_price"
 											value="${myProductList[cnt.count-1].option_price}" />
+										<c:set var="option_name"
+										 	value="${myProductList[cnt.count-1].option_name}" />
+										 	<c:if test="${empty option_name}">
+										 <c:set var="option_name"
+										 	value="${myProductList[cnt.count-1].product_name}" />	
+										 	</c:if>
 										<c:set var="product_discount"
 											value="${myProductList[cnt.count-1].discount}" />
 										<c:set var="product_image"
@@ -325,7 +353,7 @@
 														<div class="clearfix my-2 d-block">
 															<a class="fs--18 text-dark font-weight-medium"
 																href="${contextPath}/product/productDetail.do?product_id=${item.product_id}">
-																${item.option_name} </a> <span
+																${option_name} </a> <span
 																class="d-block text-muted fs--12">
 																${item.option_price} 원 </span>
 

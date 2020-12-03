@@ -2,9 +2,44 @@
     pageEncoding="UTF-8"
     isELIgnored="false"
     %>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<c:set var="cartCount" value="0"/>
+<script>
+function chk() {
+	if(confirm("로그인먼저해주세요~ \n로그인창으로 이동하시겠습니까??")){
+		location.href="${contextPath}/member/loginForm.do";
+		return true;
+	}else{
+		return false;
+	}
+}
+function cart_chk(member_id){
+	$.ajax({
+		type : "POST",
+		async : false,
+		url : "${contextPath}/cart/cartChkCount.do",
+		data : {
+			member_id:member_id
+	},
+	dataType:"text",
+	success : function(data, textStatus) {
+		alert("data" +data);
+		 cartCount = data;
+	},
+	error : function(data, textStatus) {
+		alert("에러데스:" +data);
+		},
+	complete : function(data, textStatus) {
+		}
+	}); //end ajax
+}
+</script>
 
 
 <!-- HEADER -->
@@ -245,8 +280,7 @@
               
               </c:when>
               <c:when test="${isLogOn==true and not empty memberInfo }">
-              
-
+				
               				<!-- my account -->
 							<li class="list-inline-item mx-1 dropdown">
 
@@ -299,94 +333,32 @@
 							</li>
               </c:otherwise>
               </c:choose>
-			
-
-
+            
 								<!-- cart -->
-							<li class="list-inline-item mx-1 dropdown">
-								
-								<a href="#" aria-label="My Cart" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="d-inline-block text-center text-dark">
-									<span class="badge badge-light position-absolute end-0 mt--n5">0</span>
-									<i class="fi fi-cart-1 fs--20"></i>
-									<span class="d-block font-weight-light fs--14">장바구니</span>
-								</a>
+			  <c:choose>
+			  
+			  <c:when test="${isLogOn==true and not empty memberInfo }">
+			  <script>
+				/* cart_chk("${memberInfo.member_name}"); */
+				</script>
+					   <li class="list-inline-item mx-1 dropdown d-none d-sm-block">
+				
+                        <a href="${contextPath}/cart/myCartList.do" aria-label="signup" class="d-inline-block text-center text-dark">
+                           <i class="fi fi-cart-1 fs--20">${cartCount}</i>
+                           <span class="d-block font-weight-light fs--14">장바구니</span>
+                        </a>
 
-								<!-- dropdown -->
-								<div aria-labelledby="dropdownAccount" id="dropdownAccount" class="dropdown-menu dropdown-menu-clean dropdown-menu-invert dropdown-click-ignore mt--18 w--300 p-0"> 
-									<div class="p-3">Cart Products</div> 
-
-									<!--
-									<div class="pt-5 pb-5 text-center bg-light">
-										Your cart is empty!
-									</div>
-									-->
-
-
-									<!-- item list -->
-									<div class="max-h-50vh scrollable-vertical">
-
-										<!-- item -->
-										<div class="clearfix d-block px-3 py-3 border-top">
-
-											<div class="h--50 overflow-hidden float-start mt-1"> 
-												<img width="40" src="demo.files/images/unsplash/products/thumb_330/barrett-ward-fYYUgvHYgpU-unsplash-min.jpg" alt="...">
-											</div> 
-
-											<a href="#!" class="fs--15 d-block position-relative">
-												<span class="d-block text-truncate">
-													1 &times; Product title comes here
-												</span>
-											</a>
-
-											<span class="d-block fs--12 mt-1">$196.00</span>
-										</div>
-										<!-- /item -->
-
-
-										<!-- item -->
-										<div class="clearfix d-block px-3 py-3 border-top">
-
-											<div class="h--50 overflow-hidden float-start mt-1"> 
-												<img width="40" src="demo.files/images/unsplash/products/thumb_330/hardik-sharma-CrPAvN29Nhs-unsplash-min.jpg" alt="...">
-											</div> 
-
-											<a href="#!" class="fs--15 d-block position-relative">
-												<span class="d-block text-truncate">
-													1 &times; Product title comes here
-												</span>
-											</a>
-
-											<span class="d-block fs--12 mt-1">$196.00</span>
-										</div>
-										<!-- /item -->
-
-
-									</div>
-									<!-- /item list -->
-
-
-									<!-- subtotal -->
-									<div class="fs--14 text-align-start border-top px-3 py-2">
-										Subtotal: <span class="float-end">$196.00</span>
-									</div>
-
-
-									<!-- go to cart button -->
-									<div class="clearfix border-top p-3">
-										
-										<a href="${contextPath}/cart/myCartList.do" class="btn btn-primary btn-sm btn-block">
-											<span>Go to Cart</span>
-											<i class="fi fi-arrow-end fs--12"></i>
-										</a>
-
-									</div>
-
-
-								</div>
-
-
-							</li>
-							
+                     </li>
+			  </c:when>
+				<c:otherwise>
+						<li class="list-inline-item mx-1 dropdown d-none d-sm-block">
+				<!-- onclick="chk();"  -->
+                        <a href="${contextPath}/cart/myCartList.do"  aria-label="signup" class="d-inline-block text-center text-dark">
+                           <i class="fi fi-cart-1 fs--20"></i>
+                           <span class="d-block font-weight-light fs--14">장바구니</span>
+                        </a>
+				</c:otherwise>
+				</c:choose>
 							              <!-- 고객센터 -->
 							<li class="list-inline-item mx-1 dropdown d-none d-sm-block">
 	<!--board/notice-tab.do  -->
