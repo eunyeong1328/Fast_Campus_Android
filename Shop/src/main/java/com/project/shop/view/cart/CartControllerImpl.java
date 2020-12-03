@@ -41,12 +41,20 @@ public class CartControllerImpl extends BaseController implements CartController
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("memberInfo");
+		 
+		
+		if(memberVO == null) {
+			mav.setViewName("/cart/nonMemberCart");
+			System.out.println("mav:"+mav);
+			return mav;
+		}else {
 		String member_id = memberVO.getMember_id();
 		cartVO.setMember_id(member_id);
 		Map<String,List> cartMap = cartService.myCartList(cartVO);
 		session.setAttribute("cartMap", cartMap);
 		
 		return mav;
+		}
 	}
 
 	@Override
@@ -57,6 +65,7 @@ public class CartControllerImpl extends BaseController implements CartController
 															   HttpServletRequest request, 
 															   HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
+		boolean isAreadyExisted;
 		memberVO = (MemberVO)session.getAttribute("memberInfo");
 		if(memberVO!= null && memberVO.getMember_id()!=null){
 		String member_id = memberVO.getMember_id();
@@ -65,9 +74,26 @@ public class CartControllerImpl extends BaseController implements CartController
 		cartVO.setOption_name(option_name);
 		cartVO.setProduct_name(product_name);
 		}else {
-			return "logingo";
+			String member_id = session.getId();
+			cartVO.setMember_id(member_id);
+			cartVO.setQuantity(quantity);
+			cartVO.setOption_name(option_name);
+			cartVO.setProduct_name(product_name);
+			session.setAttribute("cartVO", cartVO);
+			
+			if(option_name=="") {
+			 isAreadyExisted = cartService.findCartProducts(cartVO);
+			}else {
+			 isAreadyExisted = cartService.findCartProduct(cartVO);
+			}
+			//return "logingo";
+			if(isAreadyExisted==true) {
+				return "already_existed";
+			}else {
+				return "add_success";
+			}
 		}
-		boolean isAreadyExisted;
+		//boolean isAreadyExisted;
 		if(option_name=="") {
 		 isAreadyExisted = cartService.findCartProducts(cartVO);
 		}else {

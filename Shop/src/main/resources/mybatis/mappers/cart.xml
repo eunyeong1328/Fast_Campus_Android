@@ -23,7 +23,7 @@
 
 <resultMap id="cartResult" type="cartVO">
 	<result property="member_id" column="member_id" />
-	<result property="product_id" column="product_id" />
+	<result property="product_name" column="product_name" />
 	<result property="quantity" column="quantity" />
 	<result property="cart_id" column="cart_id" />
 </resultMap>
@@ -108,19 +108,13 @@ left outer join product_option o on x.option_name = o.option_name
 		VALUES( #{member_id}, #{quantity}, #{cart_id}, #{option_name}, #{product_name})
 	]]>
 </insert>
-<!-- 비회원일경우 카트에담기 -->
-<insert id="insertProductInCartNon" parameterType="cartVO">
-	<![CDATA[
-		INSERT INTO cart(member_id, quantity, cart_id, option_name, product_name, session_id)
-		VALUES( #{member_id}, #{quantity}, #{cart_id}, #{option_name}, #{product_name}, #{session_id})
-	]]>
-</insert>
 <!-- cart_id +1 -->
 <select id="selectMaxCartId" resultType="int">
     <![CDATA[
 		select nvl(max(cart_id), 0) + 1 from cart
    	]]>
 </select>
+<!-- 장바구니에 담긴 갯수 count -->
 <select id="cartChkCount" parameterType="cartVO" resultType="String">
 	<![CDATA[
 		select count(*) from cart 
