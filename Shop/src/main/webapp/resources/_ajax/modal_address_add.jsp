@@ -82,8 +82,7 @@
 	action="${contextPath}/myaccount/insertAddressInfo.do">
 	<div class="modal-header">
 		<h2 class="modal-title fs--18 m-0">주소</h2>
-		주소 추가
-
+		: 배송지 주소 추가
 		<button type="button" class="close pointer" data-dismiss="modal"
 			aria-label="Close">
 			<span class="fi fi-close fs--18" aria-hidden="true"></span>
@@ -200,12 +199,12 @@
 	</div>
 
 	<div class="modal-footer">
-		<button type="submit" class="btn btn-sm btn-primary" onclick="save_Changes()">
+		<button type="submit" class="btn btn-sm btn-primary" onclick="save_Add()">
 			<i class="fi fi-check"></i> 변경사항 저장
 		</button>
 		<script type="text/javascript">
-			function save_Changes() {
-				const result = confirm("변경되었습니다");
+			function save_Add() {
+				const result = confirm("추가 되었습니다.");
 			}
 		</script>
 
