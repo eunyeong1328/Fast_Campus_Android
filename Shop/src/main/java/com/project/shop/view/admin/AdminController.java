@@ -28,14 +28,6 @@ public class AdminController extends BaseController {
 	
 	@Autowired
 	private Paging p;
-	
-	@RequestMapping(value="noticeList.do")
-	public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName=(String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		System.out.println(viewName);
-		return mav;
-	}
 
 	@RequestMapping(value = "/productAdd.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView productAdd(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
@@ -77,7 +69,6 @@ public class AdminController extends BaseController {
 	public ModelAndView productUpdate(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		if(request.getParameter("product_id") == null) {
-			System.out.println("회원 정보 불러오기 실패");
 			mav.addObject("list",service.allList());
 			mav.setViewName("/admin/productList");
 			return mav;
@@ -102,7 +93,6 @@ public class AdminController extends BaseController {
 	public ModelAndView productOption(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		if(request.getParameter("product_id") == null) {
-			System.out.println("옵션 정보 불러오기 실패");
 			mav.setViewName("/admin/productList");
 			return mav;
 		}else {
@@ -134,7 +124,7 @@ public class AdminController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/checkProduct.do",method=RequestMethod.POST)
-	public ResponseEntity checkProduct(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ResponseEntity checkProduct(@RequestParam("id") String id) throws Exception{
 		  ResponseEntity resEntity = null;
 	      String result = service.checkProduct(id);
 	      resEntity =new ResponseEntity(result, HttpStatus.OK);
@@ -142,11 +132,30 @@ public class AdminController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/checkItem.do",method=RequestMethod.POST)
-	public ResponseEntity checkItem(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ResponseEntity checkItem(@RequestParam("id") String id) throws Exception{
 		  ResponseEntity resEntity = null;
 	      String result = service.checkItem(id);
 	      resEntity =new ResponseEntity(result, HttpStatus.OK);
 	      return resEntity;
+	}
+	
+	@RequestMapping(value = "/search.do",method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView search(ModelAndView mav, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		mav.setViewName((String) request.getAttribute("viewName"));
+		String search_type = request.getParameter("search_type");
+		String search_word = request.getParameter("search_word");
+		
+		if(search_type !="" && search_word !="") {
+			mav.addObject("search_type",search_type);
+			mav.addObject("search_word",search_word);
+		}
+		//페이징 처리
+		p = service.searchList(request.getParameter("cPage"),search_type,search_word);
+		mav.addObject("pvo", p);
+		//상품리스트 가져오기
+		mav.addObject("list", service.searchProduct(p.getBegin(),p.getEnd(),search_type,search_word));
+		return mav;
 	}
 	
 }

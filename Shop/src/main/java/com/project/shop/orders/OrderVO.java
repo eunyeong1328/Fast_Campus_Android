@@ -11,9 +11,10 @@ public class OrderVO {
 	 String apply_num; //카드사 승인번호
 	 String order_status; //결제상태
 	 String pg; //결제한 PG사 -html5_inicis(웹표준방식의 KG이니시스),kakaopay(카카오페이)
-	 Date paid_at; //결제승인시각
+	 long paid_at; //결제승인시각
+	 Date order_date;
 	 String member_id;
-	 String member_name;
+	 String member_name;	
 	 String email;
 	 String phone;
 	 String load_address;
@@ -52,11 +53,11 @@ public class OrderVO {
 	public void setPg(String pg) {
 		this.pg = pg;
 	}
-	public Date getPaid_at() {
+	public long getPaid_at() {
 		return paid_at;
 	}
 	public void setPaid_at(long paid_at) {
-		this.paid_at = new Date((long)paid_at*1000);
+		this.paid_at = paid_at;
 	}
 	public String getEmail() {
 		return email;
@@ -107,7 +108,12 @@ public class OrderVO {
 		this.address = address;
 	}
 	
-	
+	public Date getOrder_date() {
+		return order_date;
+	}
+	public void setOrder_date(Date order_date) {
+		this.order_date = order_date;
+	}
 	public String getDelivery_request() {
 		return delivery_request;
 	}

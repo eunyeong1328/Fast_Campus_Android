@@ -32,8 +32,14 @@
 		<result property="discount" column="discount" />
 		<result property="reg_date" column="reg_date" />
 		<result property="unit_price" column="unit_price" />
-
-
+	</resultMap>
+	
+	<resultMap id="shippingResult" type="myAccountShippingVO">
+		<result property="member_id" column="member_id" />
+		<result property="zipNo" column="zipNo" />
+		<result property="load_address" column="load_address" />
+		<result property="jibun_address" column="jibun_address" />
+		<result property="rest_address" column="rest_address" />
 	</resultMap>
 
 
@@ -46,7 +52,7 @@
 	</select>
 
 	<!-- 마이리스트 조회 -->
-	<select id="listFavList" resultMap="productResult"
+	<select id="selectFavList" resultMap="productResult"
 		parameterType="String">
 	 <![CDATA[
 			select * from product p , item i, mylist m 
@@ -56,7 +62,7 @@
     	]]>
 	</select>
 	
-		<select id="listFavitem" resultType="String"
+		<select id="selectFavitem" resultType="String"
 		parameterType="java.util.HashMap">
 	 <![CDATA[
 			select p.product_id from product p , item i, mylist m 
@@ -88,7 +94,21 @@
 		where
 		member_id=#{member_id}
 	</update>
-
+	
+	<!-- 배송지 추가  -->
+	<insert id="addAddress" parameterType="java.util.HashMap">
+		insert into shipping (member_id, zipNo, load_address, jibun_address, rest_address) 
+		values (#{member_id},#{zipNo},#{load_address},#{jibun_address},#{rest_address})
+	</insert> 
+	
+	<!--  배송지 확인 -->
+	<select id="listshippList" resultMap="shippingResult" parameterType="String">
+	 <![CDATA[
+			select * from shipping
+			where member_id=#{member_id}
+    	]]>
+	</select>
+	
 	<!-- 배송지 수정 -->
 	<update id="modifyAddressInfo" parameterType="java.util.HashMap">
 		UPDATE MEMBER
@@ -101,5 +121,11 @@
 		WHERE
 		member_id = #{member_id}
 	</update>
+	
+	
+	<!-- 회원 삭제  -->
+	<delete id= "deleteAccount" parameterType="String">
+		delete from member where member_id = #{member_id}
+	</delete>
 
 </mapper>

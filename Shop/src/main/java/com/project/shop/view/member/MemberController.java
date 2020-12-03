@@ -54,7 +54,42 @@ public class MemberController extends BaseController{
        MailDto dto = sendEmailService.createMailAndChangePassword(member_id, email);
        sendEmailService.mailSend(dto);
    }
+   
+ //이메일 인증 비밀번호
+   @RequestMapping(value = "/PwCheck.do")
+   public @ResponseBody Map<String, Boolean> PwCheck(String member_id, String password) throws Exception {
+ 		Map<String, Boolean> json = new HashMap<String, Boolean>();
+ 		boolean pwFindCheck = memberService.PwCheck(member_id, password);
+ 		System.out.println("db안에 있는 아이디를 확인하고 싶다!! " + member_id);
+ 		System.out.println("db안에 있는 비밀번호를 확인하고 싶다!! " + password);
+ 		System.out.println("이메일로 받은 비밀번호 확인");
+ 		System.out.println(pwFindCheck);
+ 		json.put("check", pwFindCheck);
+		return json;
+ 	}
+   
+   //이메일에서 인증받은 비밀번호 수정
+   @RequestMapping(value = "/modifyPassword.do", method={RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView modifyPassword(/* @RequestParam("member_id") String member_id, */
+			   HttpServletRequest request, HttpServletResponse response) throws Exception{
+	   		System.out.println("잘 실행되었습니다.");
+			ModelAndView mav = new ModelAndView();
+			String member_id = request.getParameter("member_id");
+			String password = request.getParameter("password");
+			System.out.println("아이디가 잘 넘어갔나요??  " + member_id);
+			System.out.println("패스워드가 잘 넘어갔나요?? "+ password);
 
+			HashMap<String,String> map = new HashMap<String, String>();
+			map.put("member_id",member_id);
+			map.put("password",password);
+			memberService.modifyPassword(map);
+			System.out.println("비밀번호 수정 완료!!");
+			
+			String messagePw="비밀번호 변경이 완료되었습니다."; 
+	        mav.addObject("messagePw", messagePw);
+			mav.setViewName("/member/loginForm");
+			return mav;
+   }
    
    @RequestMapping(value="/login.do" ,method = RequestMethod.POST)
    public ModelAndView login(MemberVO user ,
@@ -82,7 +117,7 @@ public class MemberController extends BaseController{
             mav.setViewName("redirect:/main/main.do");
          }            
       }else{
-         String message="아이디나  비밀번호가 틀립니다. 다시 로그인해주세요"; 
+         String message="아이디와 비밀번호가 틀립니다. 다시 로그인해주세요"; 
          mav.addObject("message", message);
          mav.setViewName("/member/loginForm");
       }

@@ -2,22 +2,13 @@ package com.project.shop.board;
 
 import java.sql.Date;
 
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BoardVO {
-
-//	파일 업로드(이미지)
-	private MultipartFile file;
+	
 	private String image;
 	
-	public MultipartFile getFile() {
-		return file;
-	}
-
-	public void setFile(MultipartFile file) {
-		this.file = file;
-	}
-
 	public String getImage() {
 		return image;
 	}
@@ -26,8 +17,22 @@ public class BoardVO {
 		this.image = image;
 	}
 
-	//	공지사항
+//	row_num
+	private int r_num;
+	private int parent_num;
+
+	public int getR_num() {
+		return r_num;
+	}
+
+	public void setR_num(int r_num) {
+		this.r_num = r_num;
+	}
+
+//	공지사항
 	private int notice_num;
+	private int next_no;
+	private int pre_no;
 	private String title;
 	private String contents;
 	private Date reg_date;
@@ -42,12 +47,11 @@ public class BoardVO {
 	private int product_qna_num;
 	private String product_id;
 	private String member_id;
-	private int parent_num;
 	private String product_name;
 
 //	1:1 문의
 	private int member_qna_num;
-	private int order_num;
+	private String order_num;
 	private String email;
 	private String phone;
 	
@@ -159,11 +163,11 @@ public class BoardVO {
 		this.member_qna_num = member_qna_num;
 	}
 
-	public int getOrder_num() {
+	public String getOrder_num() {
 		return order_num;
 	}
 
-	public void setOrder_num(int order_num) {
+	public void setOrder_num(String order_num) {
 		this.order_num = order_num;
 	}
 
@@ -189,6 +193,22 @@ public class BoardVO {
 
 	public void setQna_category_name(String qna_category_name) {
 		this.qna_category_name = qna_category_name;
+	}
+
+	public int getNext_no() {
+		return next_no;
+	}
+
+	public void setNext_no(int next_no) {
+		this.next_no = next_no;
+	}
+
+	public int getPre_no() {
+		return pre_no;
+	}
+
+	public void setPre_no(int pre_no) {
+		this.pre_no = pre_no;
 	}
 	
 }

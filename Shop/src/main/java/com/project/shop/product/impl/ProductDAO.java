@@ -31,7 +31,6 @@ public class ProductDAO {
 	}
 	//product 갯수 조회
 	public int getTotalCount(int productCategoryNum) {
-		System.out.println("ㅎㅎ");
 		int totalCount = sqlSession.selectOne("mappers.product.totalCount", productCategoryNum);
 		return totalCount;
 		
@@ -55,7 +54,9 @@ public class ProductDAO {
 	public List<ProductVO> newList() {
 		return sqlSession.selectList("mappers.product.newList");
 	}
-	
+	public List<ProductVO> discountList() {
+		return sqlSession.selectList("mappers.product.discountList");
+	}
 	public int insertProduct (ProductVO vo) {
 		sqlSession.insert("mappers.product.insertProduct",vo);
 		return sqlSession.insert("mappers.product.insertItem",vo);
@@ -100,5 +101,23 @@ public class ProductDAO {
 	}
 	public List<ProductVO> listProduct(Map map) {
 		return sqlSession.selectList("mappers.product.listProduct",map );
+	}
+	public List<ProductVO> searchProductName(Map map) {
+		return sqlSession.selectList("mappers.product.searchProductName",map );
+	}
+	public List<ProductVO> searchProductId(Map map){
+		return sqlSession.selectList("mappers.product.searchProductId",map );
+	}
+	public List<ProductVO> searchItemNum(Map map){
+		return sqlSession.selectList("mappers.product.searchItemNum",map );
+	}
+	public int getSearchCountPN(String word) {
+		return sqlSession.selectOne("mappers.product.searchCountProductName",word);
+	}
+	public int getSearchCountPI(String word) {
+		return sqlSession.selectOne("mappers.product.searchCountProductId",word);
+	}
+	public int getSearchCountIN(String word) {
+		return sqlSession.selectOne("mappers.product.searchCountItemNum",word);
 	}
 }

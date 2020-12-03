@@ -11,8 +11,8 @@ public class ProductVO {
 	private String product_id; 
 	private String product_name; 
 	private String product_detail;
-	private int sales_unit;
-	private int product_size;
+	private String sales_unit;
+	private String product_size;
 	private String packing_type;
 	private String product_image;
 	private String supplier; 
@@ -42,12 +42,25 @@ public class ProductVO {
 	private int quantity;
 	private int cart_id;
 	
+	//order
+	private String order_num;
+	
+	
 	public int getCart_id() {
 		return cart_id;
 	}
 
+	public String getOrder_num() {
+		return order_num;
+	}
+	public void setOrder_num(String order_num) {
+		this.order_num = order_num;
+	}
 
-	public ProductVO(String product_id, String product_name, String product_detail, int sales_unit, int product_size,
+
+
+
+	public ProductVO(String product_id, String product_name, String product_detail, String sales_unit, String product_size,
 			String packing_type, String product_image, String supplier, String product_detail_image,
 			int product_category_num, String product_category_name, String option_name, int option_price,
 			int option_quantity, int item_num, int price, int stock, int sales, int discount, Date reg_date,
@@ -90,7 +103,7 @@ public class ProductVO {
 	}
 
 
-	public ProductVO(String product_id, String product_name, String product_detail, int sales_unit, int product_size,
+	public ProductVO(String product_id, String product_name, String product_detail, String sales_unit, String product_size,
 			String packing_type, String product_image, String supplier, String product_detail_image,
 			int product_category_num, String product_category_name, String option_name, int option_price,
 			int option_quantity, int item_num, int price, int stock, int sales, int discount, Date reg_date,
@@ -132,7 +145,7 @@ public class ProductVO {
 	}
 
 
-	public ProductVO(String product_id, String product_name, String product_detail, int sales_unit, int product_size,
+	public ProductVO(String product_id, String product_name, String product_detail, String sales_unit, String product_size,
 			String packing_type, String product_image, String supplier, String product_detail_image,
 			int product_category_num, String product_category_name, String option_name, int option_price,
 			int option_quantity, int item_num, int price, int stock, int sales, int discount, Date reg_date,
@@ -201,19 +214,19 @@ public class ProductVO {
 		this.product_detail = product_detail;
 	}
 
-	public int getSales_unit() {
+	public String getSales_unit() {
 		return sales_unit;
 	}
 
-	public void setSales_unit(int sales_unit) {
+	public void setSales_unit(String sales_unit) {
 		this.sales_unit = sales_unit;
 	}
 
-	public int getProduct_size() {
+	public String getProduct_size() {
 		return product_size;
 	}
 
-	public void setProduct_size(int product_size) {
+	public void setProduct_size(String product_size) {
 		this.product_size = product_size;
 	}
 

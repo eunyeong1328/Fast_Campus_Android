@@ -37,12 +37,51 @@
 		<link rel="apple-touch-icon" href="${contextPath}/resources/demo.files/logo/icon_512x512.png">
 
 		<link rel="manifest" href="${contextPath}/resources/assets/images/manifest/manifest.json">
+		
 		<meta name="theme-color" content="#377dff">
 <!--font-->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
 
-</head>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<style>
+.mini{
+		width: 80px;
+		height: 80px;
+		margin-right: 60px;
+	}
+</style>
 
+	<c:if test='${not empty message }'>
+		<script>
+			alert('${message}')
+		</script>
+	</c:if>
+<script>
+function imgPop(url) {
+	var img = new Image();
+	img.src = url;
+	var img_width = img.width;
+	var win_width = img.width + 25;
+	var img_height = img.height;
+	var win_height = img.height;
+	var OpenWindow = window.open('', '_blank', 'width=' + img_width
+			+ ', height=' + img_height
+			+ ', menubars=no, scrollbars=auto');
+	OpenWindow.document
+			.write("<style>body{margin:0px;}</style><img src='"+url+"'>");
+}
+
+function categoryDelete_confirm(product_category_num) {
+	result = confirm('정말 삭제 하시겠습니까?');
+	if (result == true) {
+		location.href = "${contextPath }/adminboard/proCategoryDelete.do?product_category_num=" + product_category_num;
+	} else {
+		return false;
+	}
+}
+</script>
+</head>
 	
 	<tiles:insertAttribute name="tag" />
 
@@ -60,7 +99,7 @@
 		
 		</div>
 		
-		<script src="${contextPath}/resources/assets/js/core.min.js"></script>
+		<script src="${contextPath}/resources/assets/js/core.js"></script>
 
 		<div id="page_js_files"><!-- specific page javascript files here --></div>
 

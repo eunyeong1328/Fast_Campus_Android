@@ -2,9 +2,12 @@ package com.project.shop.member;
 
 import java.util.HashMap;
 
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.project.shop.member.impl.MemberDAO;
@@ -29,29 +32,41 @@ public class SendEmailService {
 		MailDto dto = new MailDto();
 		dto.setAddress(email);
 		dto.setTitle("[쩝쩝박사] 임시 비밀번호 안내 이메일 입니다.");
-		dto.setMessage(
-				"안녕하세요. [쩝쩝박사] 임시 비밀번호 안내 관련 이메일입니다.\n" + "아이디가 [" + member_id + "]" + "인 임시 비밀번호는 " + str + "입니다.");
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("<html><body>");
+ 		sb.append("<meta http-equiv='Content-Type' content='text/html; charset=euc-kr'>");
+ 		sb.append("<a href='https://ifh.cc/v-nQFY3g' target='_blank'><img src='https://ifh.cc/g/nQFY3g.png' border='0'></a>");
+ 		sb.append("<h3 style=\"text-align: center;\">"+""+"<h3><br>");
+ 		sb.append("</body></html>");
+ 		
+		dto.setMessage(sb +
+				"안녕하세요. [쩝쩝박사] 임시 비밀번호 안내 관련 이메일입니다.<br>" + 
+		"아이디가  " + member_id + " 인 회원님의 임시 비밀번호는 " + str + "입니다.");
+		
+
+		//DB이메일 비밀번호 수정
 		updatePassword(str, member_id);
 		return dto;
 	}
 
 	public void mailSend(MailDto mailDto) {
 		System.out.println("이메일 전송 완료!");
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setTo(mailDto.getAddress()); // 받는사람 주소
-		message.setFrom(SendEmailService.FROM_ADDRESS); // 보내는 사람 주소
-		message.setSubject(mailDto.getTitle()); // 메일제목
-		message.setText(mailDto.getMessage()); // 메일 내용
-
-		mailSender.send(message);
+		 MimeMessage message = mailSender.createMimeMessage();
+	      try {
+			MimeMessageHelper messageHelper = 
+			new MimeMessageHelper(message, true, "UTF-8");
+			//messageHelper.setCc("zzzzzz@naver.com"); //메일을 참조할 수 있는 참조자 메일 입력
+			messageHelper.setFrom(SendEmailService.FROM_ADDRESS,"쩝쩝박사"); //메일 보내는 사람의 주소 
+			messageHelper.setTo(mailDto.getAddress()); 
+			messageHelper.setSubject(mailDto.getTitle());
+			messageHelper.setText(mailDto.getMessage(),true);
+			mailSender.send(message);  
+	      }catch(Exception e){
+			e.printStackTrace();
+		  }
 	}
-
-	// 비밀번호 수정
-//	public void updatePassword(String str, String userEmail) {
-//		String pw = str;
-//		String id = memberDAO.findEmailInfo(userEmail).getMember_id();
-//		memberDAO.updateUserPassword(id, pw);
-//	}
+	
 	
 	// 비밀번호 수정
 	 public void updatePassword(String str,String id){
@@ -64,8 +79,6 @@ public class SendEmailService {
 	        System.out.println("비밀번호 가 왜 mapper에 안 들어가는 거냐고!!=====패스워드====== "+ map.get("password"));
 			System.out.println("비밀번호가 왜 mapper에  안 들어가는 거냑ㅎ!!=====아이디====== "+ map.get("member_id"));
 	        memberDAO.updateUserPassword(map);
-	        System.out.println("이제 수정 후에 값을 보여주기 <<아이디>>: " + map.get(member_id));
-	        System.out.println("이제 수정 후에 값을 보여주기 <<비밀번호>>: " + map.get(password));
 	 }
 
 	// 10자리의 랜덤난수를 생성하는 메소드

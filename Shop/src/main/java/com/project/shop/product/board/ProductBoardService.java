@@ -19,4 +19,7 @@ public interface ProductBoardService {
 	public int reviewTotalCount(String product_id) throws Exception;
 	public List<ReviewVO> getListReview(Map map) throws Exception;
 	public void addReview(Map map) throws Exception;
+	public ReviewVO getReview(int review_num) throws Exception;
+	public void editReview(Map map) throws Exception;
+	public void deleteReview(int review_num) throws Exception;
 }

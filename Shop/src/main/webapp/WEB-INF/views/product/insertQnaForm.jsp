@@ -121,7 +121,7 @@
 
 										<label
 											class="btn btn-warning cursor-pointer position-relative">
-											<!-- 
+											
 											<input	name="file" 
 													multiple="multiple"
 													type="file" 
@@ -143,8 +143,10 @@
 													data-file-btn-clear="a.js-file-btn-clear" 
 													data-file-preview-img-cover="true" 
 													data-file-preview-class="shadow-md my-2 mr-3 rounded float-start" 
-													class="custom-file-input absolute-full"/> => 이거 적용하면 파일 안받아와짐.... 왤까... 휴 ... ㅋ
- --> <input name="file" multiple="multiple" type="file"
+													class="custom-file-input absolute-full"/> 
+ 
+ 										<!--  
+ 											<input name="file" multiple="multiple" type="file"
 											data-file-ext="jpg,jpeg,png"
 											data-file-max-size-kb-per-file="3072"
 											data-file-max-size-kb-total="30720"
@@ -161,6 +163,7 @@
 											data-file-btn-clear="a.js-file-btn-clear"
 											data-file-preview-img-cover="true"
 											data-file-preview-class="shadow-md my-2 mr-3 rounded float-start" />
+										-->
 											<span class="group-icon"> <i
 												class="fi fi-arrow-upload"></i> <i
 												class="fi fi-circle-spin fi-spin"></i>
@@ -182,6 +185,7 @@
 										<div
 											class="js-file-preview-container d-inline-block position-relative clearfix hide-empty">
 											<!-- container -->
+											
 										</div>
 
 									</div>

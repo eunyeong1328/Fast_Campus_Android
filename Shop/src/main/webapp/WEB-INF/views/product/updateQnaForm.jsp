@@ -111,9 +111,32 @@
 
 										<label
 											class="btn btn-warning cursor-pointer position-relative">
-											<!-- 
 											
- --> 										<input name="file" multiple="multiple" type="file"
+											<input	name="file" 
+													multiple="multiple"
+													type="file" 
+
+													data-file-ext="jpg,jpeg,png" 
+													data-file-max-size-kb-per-file="3072" 
+													data-file-max-size-kb-total="30720" 
+													data-file-max-total-files="10" 
+
+													data-file-ext-err-msg="Allowed:" 
+													data-file-exist-err-msg="File already exists:" 
+													data-file-size-err-item-msg="File too large!" 
+													data-file-size-err-total-msg="Total allowed size exceeded!" 
+													data-file-size-err-max-msg="Maximum allowed files:" 
+													data-file-toast-position="top-center" 
+													data-file-preview-container=".js-file-preview-container" 
+													data-file-preview-img-height="100" 
+													data-file-preview-show-info="true" 
+													data-file-btn-clear="a.js-file-btn-clear" 
+													data-file-preview-img-cover="true" 
+													data-file-preview-class="shadow-md my-2 mr-3 rounded float-start" 
+													class="custom-file-input absolute-full"/> 
+ 
+ 										<!--  
+ 											<input name="file" multiple="multiple" type="file"
 											data-file-ext="jpg,jpeg,png"
 											data-file-max-size-kb-per-file="3072"
 											data-file-max-size-kb-total="30720"
@@ -130,6 +153,7 @@
 											data-file-btn-clear="a.js-file-btn-clear"
 											data-file-preview-img-cover="true"
 											data-file-preview-class="shadow-md my-2 mr-3 rounded float-start" />
+										-->
 											<span class="group-icon"> <i
 												class="fi fi-arrow-upload"></i> <i
 												class="fi fi-circle-spin fi-spin"></i>
@@ -151,6 +175,7 @@
 										<div
 											class="js-file-preview-container d-inline-block position-relative clearfix hide-empty">
 											<!-- container -->
+											
 										</div>
 
 									</div>

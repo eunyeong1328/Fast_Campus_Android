@@ -59,6 +59,21 @@
 													<th scope="row">핸드폰</th>
 													<td>${memberInfo.phone }</td>
 												</tr>
+												<tr>
+													<th scope="row">별점</th>
+													<td>
+														<div class="w--150 w-100-xs float-start float-none-xs mb-1">
+															<select class="form-control bs-select" name="rated">
+																<option value="5" data-icon="fi fi-star-full text-warning float-start">5 점</option>
+																<option value="4" data-icon="fi fi-star-full text-warning float-start">4 점</option>
+																<option value="3" data-icon="fi fi-star-full text-warning float-start">3 점</option>
+																<option value="2" data-icon="fi fi-star-full text-warning float-start">2 점</option>
+																<option value="1" data-icon="fi fi-star-full text-warning float-start">1 점</option>
+															</select>
+														</div>
+													</td>
+												</tr>
+												
 											</tbody>
 										</table>
 
@@ -171,21 +186,11 @@
 										<div
 											class="js-file-preview-container d-inline-block position-relative clearfix hide-empty">
 											<!-- container -->
-											<span data-id="0" data-file-name="bread2.jpg"
-												data-file-size="162729" id="rand_Dqr"
-												class="js-file-input-item bulkNo_gSXVA8M4 d-inline-block position-relative overflow-hidden text-center shadow-md my-2 mr-3 rounded float-start bg-cover"
-												style="width: 100px; height: 100px; background-image: url(${contextPath}/resources/images/review/bread2.jpg);">
-
-												<span
-												class="js-file-input-preview-header text-white position-absolute w-100 top-0 left-0 right-0 clearfix overlay-dark overlay-opacity-2">
-														<span class="text-truncate d-block fs--12 pl--5 pr--5">bread2.jpg</span>
-												</span> 
 											
-											</span>
 										</div>
 
 									</div>
-
+									
 								</div>
 
 							</div>

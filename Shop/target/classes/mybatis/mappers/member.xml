@@ -51,8 +51,7 @@
 								load_address,
 								jibun_address,  
 								rest_address,
- 								birthday,
- 								member_status) values(
+ 								birthday) values(
  								#{member_id},
  								 #{password}, 
  								 #{member_name},
@@ -62,8 +61,7 @@
 								#{load_address},
 								  #{jibun_address}, 
 								  #{rest_address},
-								   #{birthday},
-								   #{member_status}
+								   #{birthday}
 								   )
 								   ]]>
 		
@@ -81,11 +79,18 @@
 			where member_id = #{member_id}
 	</select>
 	
-	<!-- 패스워드 수정 -->
+	<!-- 이메일로 받은 패스워드 수정 -->
 	<update id="updateUserPassword" parameterType="java.util.HashMap">
 		update member set password = #{password}
 		where member_id = #{member_id}
 	</update>
+	
+	<!-- 비밀번호 찾기에서 패스워드 수정 -->
+	<update id="modifyPassword" parameterType="java.util.HashMap">
+		update member set password = #{password}
+		where member_id = #{member_id}
+	</update>
+	
 	
 	
 </mapper>

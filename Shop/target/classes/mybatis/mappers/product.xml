@@ -100,6 +100,10 @@
 		select * from product p , item i where p.product_id=i.product_id order by i.reg_date desc
 	</select>
 	
+	<select id="discountList" resultType="productVO">
+		select * from product p , item i where p.product_id=i.product_id order by i.discount desc
+	</select>
+	
 	<insert id="insertProduct" parameterType="productVO">
 		<![CDATA[
 			insert into product (product_id,product_name,product_detail,sales_unit,product_size,packing_type,product_image,supplier,product_category_num,product_detail_image)
@@ -215,9 +219,59 @@
         select * 
 		from (select rownum r_num,c.* 
 		from (select p.*,i.item_num,i.price,i.stock,i.sales,i.discount,i.reg_date,i.unit_price 
-			from product p , item i where p.product_id = i.product_id order by i.reg_date desc)
+			from product p , item i 
+			where p.product_id = i.product_id order by i.reg_date desc)
 		c)
-		WHERE R_NUM BETWEEN #{begin} and #{end}
+		where r_num between #{begin} and #{end}
  	</select>
+ 	
+ 	<select id="searchProductName" parameterType="java.util.HashMap" resultMap="productResult"   >
+        select * 
+		from (select rownum r_num,c.* 
+		from (select p.*,i.item_num,i.price,i.stock,i.sales,i.discount,i.reg_date,i.unit_price 
+			from product p , item i 
+			where (p.product_id = i.product_id) and (product_name like '%'||#{word}||'%') )
+		c)
+		where r_num between #{begin} and #{end}
+ 	</select>
+ 	
+ 	<select id="searchProductId" parameterType="java.util.HashMap" resultMap="productResult"   >
+        select * 
+		from (select rownum r_num,c.* 
+		from (select p.*,i.item_num,i.price,i.stock,i.sales,i.discount,i.reg_date,i.unit_price 
+			from product p , item i 
+			where (p.product_id = i.product_id) and (p.product_id like '%'||#{word}||'%') )
+		c)
+		where r_num between #{begin} and #{end}
+ 	</select>
+ 	
+ 	<select id="searchItemNum" parameterType="java.util.HashMap" resultMap="productResult"   >
+        select * 
+		from (select rownum r_num,c.* 
+		from (select p.*,i.item_num,i.price,i.stock,i.sales,i.discount,i.reg_date,i.unit_price 
+			from product p , item i 
+			where (p.product_id = i.product_id) and (item_num like '%'||#{word}||'%') )
+		c)
+		where r_num between #{begin} and #{end}
+ 	</select>
+ 	
+	<select id="searchCountProductName" parameterType="String" resultType="int">
+		select count(*)
+		from product p,item i
+		where (p.product_id = i.product_id) and (product_name like '%'||#{word}||'%')
+	</select>
+	
+	<select id="searchCountProductId" parameterType="String" resultType="int">
+		select count(*)
+		from product p,item i
+		where (p.product_id = i.product_id) and (p.product_id like '%'||#{word}||'%')
+	</select>
+	
+	<select id="searchCountItemNum" parameterType="String" resultType="int">
+		select count(*)
+		from product p,item i
+		where (p.product_id = i.product_id) and (item_num like '%'||#{word}||'%')
+	</select>
+
 	
 </mapper>

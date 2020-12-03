@@ -57,20 +57,69 @@
 		</script>
 	</c:if>
 	
+	<script type="text/javascript">
+		
+		$(document).ready(function() {
+			$("a[name='delete']").on("click", function(e) {
+				e.preventDefault();
+				fn_fileDelete($(this));
+			})
+			$("#add").on("click", function(e) {
+				e.preventDefault();
+				fn_fileAdd();
+			})
+		});
+		
+		function fn_fileDelete(obj) {
+			obj.parent().remove();
+		}
+		
+		function fn_fileAdd() {
+			var str = "<div><input name='file' type='file' multiple='multiple'><a href='#this' name='delete' class='btn'>삭제하기</a></div>";
+			$("#fileDiv").append(str);
+	
+			$("a[name='delete']").on("click", function(e) {
+				e.preventDefault();
+				fn_fileDelete($(this));
+			})
+		}
+		
+		function imgPop(url) {
+			var img = new Image();
+			img.src = url;
+			var img_width = img.width;
+			var win_width = img.width + 25;
+			var img_height = img.height;
+			var win_height = img.height;
+			var OpenWindow = window.open('', '_blank', 'width=' + img_width
+					+ ', height=' + img_height
+					+ ', menubars=no, scrollbars=auto');
+			OpenWindow.document.write("<style>body{margin:0px;}</style><img src='"+url+"'>");
+		}
+		
+		var openOrderList;
+		
+		function orderList_open(member_id) {
+			window.name = "parentForm";
+			var paramMemberId = "?member_id=" + member_id;
+			var url = "${contextPath}/board/member_order_list.do" + paramMemberId;
+			openOrderList = window.open(url, "childForm", "width=570, height=350, resizable=no, scrollbars=no");
+		}
+		
+	</script>
+
 </head>
 
 <body class="layout-admin aside-sticky header-sticky">
 
 	<div id="wrapper" class="d-flex align-items-stretch flex-column">
-		<header>
-			<tiles:insertAttribute name="header" />
-		</header>
-		<article>
-			<tiles:insertAttribute name="body" />
-		</article>
-		<footer>
-			<tiles:insertAttribute name="footer" />
-		</footer>
+
+		<tiles:insertAttribute name="header" />
+
+		<tiles:insertAttribute name="body" />
+
+		<tiles:insertAttribute name="footer" />
+
 	</div>
 	
 	<div id="onload_modal_shop" class="hide js-onload js-ajax-modal" 

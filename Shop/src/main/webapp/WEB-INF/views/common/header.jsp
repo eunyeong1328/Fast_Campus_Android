@@ -2,44 +2,9 @@
     pageEncoding="UTF-8"
     isELIgnored="false"
     %>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
-<c:set var="cartCount" value="0"/>
-<script>
-function chk() {
-	if(confirm("로그인먼저해주세요~ \n로그인창으로 이동하시겠습니까??")){
-		location.href="${contextPath}/member/loginForm.do";
-		return true;
-	}else{
-		return false;
-	}
-}
-function cart_chk(member_id){
-	$.ajax({
-		type : "POST",
-		async : false,
-		url : "${contextPath}/cart/cartChkCount.do",
-		data : {
-			member_id:member_id
-	},
-	dataType:"text",
-	success : function(data, textStatus) {
-		alert("data" +data);
-		 cartCount = data;
-	},
-	error : function(data, textStatus) {
-		alert("에러데스:" +data);
-		},
-	complete : function(data, textStatus) {
-		}
-	}); //end ajax
-}
-</script>
 
 
 <!-- HEADER -->
@@ -146,37 +111,16 @@ function cart_chk(member_id){
 							++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++
 
 						-->
-						<form 	action="search-result-2.html" 
+						<form 	action="searchResult.do" 
 								method="GET" 
-								data-autosuggest="on" 
-
-								data-mode="json" 
-								data-json-max-results='10'
-								data-json-related-title='Explore Smarty'
-								data-json-related-item-icon='fi fi-star-empty'
-								data-json-suggest-title='Suggestions for you'
-								data-json-suggest-noresult='No results for'
-								data-json-suggest-item-icon='fi fi-search'
-								data-json-suggest-min-score='5'
-								data-json-highlight-term='true'
-								data-contentType='application/json; charset=utf-8'
-								data-dataType='json'
-
-								data-container="#sow-search-container" 
-								data-input-min-length="2" 
-								data-input-delay="250" 
-								data-related-keywords="" 
-								data-related-url="${contextPath}/resources/_ajax/search_suggest_related.json" 
-								data-suggest-url="${contextPath}/resources/_ajax/search_suggest_input.json" 
-								data-related-action="related_get" 
-								data-suggest-action="suggest_get" 
+								
 								class="js-ajax-search sow-search sow-search-mobile-float d-flex-1-1-auto mx-5 m-0-xs">
 							<div class="sow-search-input w-100">
 
 								<!-- rounded: form-control-pill -->
 								<div class="input-group-over d-flex align-items-center w-100 h-100 rounded form-control-pill">
 
-									<input placeholder="오늘 뭐 먹지?" aria-label="what are you looking today?" name="s" type="text" class="form-control-sow-search form-control form-control-lg" value="" autocomplete="off">
+									<input placeholder="오늘 뭐 먹지?" aria-label="what are you looking today?" name="search_word" type="text" class="form-control-sow-search form-control form-control-lg" value="" autocomplete="off">
 
 									<span class="sow-search-buttons">
 
@@ -280,7 +224,8 @@ function cart_chk(member_id){
               
               </c:when>
               <c:when test="${isLogOn==true and not empty memberInfo }">
-				
+              
+
               				<!-- my account -->
 							<li class="list-inline-item mx-1 dropdown">
 
@@ -333,32 +278,17 @@ function cart_chk(member_id){
 							</li>
               </c:otherwise>
               </c:choose>
-            
-								<!-- cart -->
-			  <c:choose>
-			  
-			  <c:when test="${isLogOn==true and not empty memberInfo }">
-			  <script>
-				/* cart_chk("${memberInfo.member_name}"); */
-				</script>
-					   <li class="list-inline-item mx-1 dropdown d-none d-sm-block">
-				
-                        <a href="${contextPath}/cart/myCartList.do" aria-label="signup" class="d-inline-block text-center text-dark">
-                           <i class="fi fi-cart-1 fs--20">${cartCount}</i>
-                           <span class="d-block font-weight-light fs--14">장바구니</span>
-                        </a>
+			
 
-                     </li>
-			  </c:when>
-				<c:otherwise>
-						<li class="list-inline-item mx-1 dropdown d-none d-sm-block">
-				<!-- onclick="chk();"  -->
-                        <a href="${contextPath}/cart/myCartList.do"  aria-label="signup" class="d-inline-block text-center text-dark">
-                           <i class="fi fi-cart-1 fs--20"></i>
-                           <span class="d-block font-weight-light fs--14">장바구니</span>
-                        </a>
-				</c:otherwise>
-				</c:choose>
+
+											<!-- cart -->
+				<li class="list-inline-item mx-1 dropdown d-none d-sm-block"><a
+					href="${contextPath}/cart/myCartList.do" aria-label="signup"
+					class="d-inline-block text-center text-dark"> <i
+						class="fi fi-cart-1 fs--20"></i> <span
+						class="d-block font-weight-light fs--14">장바구니</span>
+				</a></li>
+							
 							              <!-- 고객센터 -->
 							<li class="list-inline-item mx-1 dropdown d-none d-sm-block">
 	<!--board/notice-tab.do  -->
@@ -528,7 +458,7 @@ function cart_chk(member_id){
 								<!-- New Product -->
 								<li class="nav-item dropdown">
 
-									<a href="#" id="mainNavPages" class="nav-link" 
+									<a href="${contextPath}/main/newProduct.do" id="mainNavPages" class="nav-link" id="mainNavPages" class="nav-link" 
 										aria-haspopup="true" 
 										aria-expanded="false">
 										신상품
@@ -540,7 +470,7 @@ function cart_chk(member_id){
 								<!-- Best Product -->
 								<li class="nav-item dropdown">
 
-									<a href="#" id="mainNavPages" class="nav-link" 
+									<a href="${contextPath}/main/bestProduct.do" id="mainNavPages" class="nav-link" id="mainNavPages" class="nav-link" 
 										aria-haspopup="true" 
 										aria-expanded="false">
 										베스트
@@ -552,7 +482,7 @@ function cart_chk(member_id){
 								<!-- Discount Product -->
 								<li class="nav-item dropdown">
 
-									<a href="#" id="mainNavPages" class="nav-link" 
+									<a href="${contextPath}/main/discountProduct.do" id="mainNavPages" class="nav-link" id="mainNavPages" class="nav-link" 
 										aria-haspopup="true" 
 										aria-expanded="false">
 										알뜰쇼핑
@@ -608,3 +538,4 @@ function cart_chk(member_id){
 				
 			</header>
 			<!-- /HEADER -->
+>>>>>>> refs/remotes/origin/mainMain
