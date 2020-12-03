@@ -281,90 +281,13 @@
 			
 
 
-								<!-- cart -->
-							<li class="list-inline-item mx-1 dropdown">
-								
-								<a href="#" aria-label="My Cart" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" class="d-inline-block text-center text-dark">
-									<span class="badge badge-light position-absolute end-0 mt--n5">0</span>
-									<i class="fi fi-cart-1 fs--20"></i>
-									<span class="d-block font-weight-light fs--14">장바구니</span>
-								</a>
-
-								<!-- dropdown -->
-								<div aria-labelledby="dropdownAccount" id="dropdownAccount" class="dropdown-menu dropdown-menu-clean dropdown-menu-invert dropdown-click-ignore mt--18 w--300 p-0"> 
-									<div class="p-3">Cart Products</div> 
-
-									<!--
-									<div class="pt-5 pb-5 text-center bg-light">
-										Your cart is empty!
-									</div>
-									-->
-
-
-									<!-- item list -->
-									<div class="max-h-50vh scrollable-vertical">
-
-										<!-- item -->
-										<div class="clearfix d-block px-3 py-3 border-top">
-
-											<div class="h--50 overflow-hidden float-start mt-1"> 
-												<img width="40" src="demo.files/images/unsplash/products/thumb_330/barrett-ward-fYYUgvHYgpU-unsplash-min.jpg" alt="...">
-											</div> 
-
-											<a href="#!" class="fs--15 d-block position-relative">
-												<span class="d-block text-truncate">
-													1 &times; Product title comes here
-												</span>
-											</a>
-
-											<span class="d-block fs--12 mt-1">$196.00</span>
-										</div>
-										<!-- /item -->
-
-
-										<!-- item -->
-										<div class="clearfix d-block px-3 py-3 border-top">
-
-											<div class="h--50 overflow-hidden float-start mt-1"> 
-												<img width="40" src="demo.files/images/unsplash/products/thumb_330/hardik-sharma-CrPAvN29Nhs-unsplash-min.jpg" alt="...">
-											</div> 
-
-											<a href="#!" class="fs--15 d-block position-relative">
-												<span class="d-block text-truncate">
-													1 &times; Product title comes here
-												</span>
-											</a>
-
-											<span class="d-block fs--12 mt-1">$196.00</span>
-										</div>
-										<!-- /item -->
-
-
-									</div>
-									<!-- /item list -->
-
-
-									<!-- subtotal -->
-									<div class="fs--14 text-align-start border-top px-3 py-2">
-										Subtotal: <span class="float-end">$196.00</span>
-									</div>
-
-
-									<!-- go to cart button -->
-									<div class="clearfix border-top p-3">
-										
-										<a href="${contextPath}/cart/myCartList.do" class="btn btn-primary btn-sm btn-block">
-											<span>Go to Cart</span>
-											<i class="fi fi-arrow-end fs--12"></i>
-										</a>
-
-									</div>
-
-
-								</div>
-
-
-							</li>
+											<!-- cart -->
+				<li class="list-inline-item mx-1 dropdown d-none d-sm-block"><a
+					href="${contextPath}/cart/myCartList.do" aria-label="signup"
+					class="d-inline-block text-center text-dark"> <i
+						class="fi fi-cart-1 fs--20"></i> <span
+						class="d-block font-weight-light fs--14">장바구니</span>
+				</a></li>
 							
 							              <!-- 고객센터 -->
 							<li class="list-inline-item mx-1 dropdown d-none d-sm-block">
