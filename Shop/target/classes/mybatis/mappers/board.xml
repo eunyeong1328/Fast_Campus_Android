@@ -5,7 +5,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.board">
-<!-- **************************************************** 전체 목록 **************************************************** -->
+<!-- **************************************************** 전체 목록, 검색 목록 **************************************************** -->
 	
 	<!-- 공지사항 -->
 	<select id="getNoticeList" parameterType="hashmap" resultType="boardVO">
@@ -15,6 +15,38 @@
 					 LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
 			  FROM (SELECT * 
 			  		FROM NOTICE 
+			  		ORDER BY NOTICE_NUM DESC 
+			  		) N 
+			  ) 
+		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
+	</select>
+	
+	<select id="getSearchNoticeList" parameterType="hashmap" resultType="boardVO">
+		SELECT * 
+		FROM (SELECT ROWNUM R_NUM, N.*, 
+					 LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
+					 LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
+			  FROM (SELECT * 
+			  		FROM NOTICE
+			  		<if test="searchCondition != null">
+			  			 WHERE 
+			  			<if test="searchCondition == title">
+			  			TITLE LIKE '%#{searchKeyword}%' 
+			  			</if>
+			  			<if test="searchCondition == contents">
+			  			CONTENTS LIKE '%#{searchKeyword}%' 
+			  			</if>
+			  			<if test="dateArray != null">
+				  		AND reg_date BETWEEN TO_DATE(#{dateArray.a}, 'YY/MM/DD') 
+	                                     AND TO_DATE(#{dateArray.b}, 'YY/MM/DD')+1
+				  		</if>
+			  		</if>
+			  		<if test="searchCondition == null">
+				  		<if test="dateArray != null">
+				  		WHERE reg_date BETWEEN TO_DATE(#{dateArray.a}, 'YY/MM/DD') 
+	                                     AND TO_DATE(#{dateArray.b}, 'YY/MM/DD')+1
+				  		</if>
+			  		</if>
 			  		ORDER BY NOTICE_NUM DESC 
 			  		) N 
 			  ) 

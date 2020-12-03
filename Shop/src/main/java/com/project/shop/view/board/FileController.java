@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -107,7 +108,7 @@ public class FileController {
 						file.createNewFile(); // 이후 파일 생성
 					}
 				}
-				mfile.transferTo(new File(savePath)); // 임시로 저장된 multipartFile을 실제 파일로 전송
+				mfile.transferTo(new File(savePath+UUID.randomUUID())); // 임시로 저장된 multipartFile을 실제 파일로 전송
 			} else {
 				System.out.println("등록할 파일이 없습니다.");
 			}

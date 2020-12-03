@@ -15,18 +15,17 @@
 					<!--
 
 						PAGE TITLE
-					-->
-					<div class="page-title bg-transparent b-0">
-
-						<h1 class="h4 mt-4 mb-0 px-3 font-weight-normal">
-							공지사항
-						</h1>
-						
+									-->
+					<div class="timeline-container">
+				
+						<h2 style="margin:10px !important;" class="h4 font-weight-normal timeline-title border-danger mb-5 pt-2 pb-2">
+							공지사항 
+							<small style="padding:3px;" class="d-block text-muted fs--15">
+								공지사항 관리 페이지입니다. </small>
+						</h2>
+				
 					</div>
-
-
-
-
+				
 					<!-- PAGE LIST -->
 					<div class="clearfix">
 					
@@ -44,41 +43,43 @@
 
 								</div>
 								
-								<div class="float-end" style="margin:13px;">
-
-									<a href="${contextPath}/adminboard/noticeInsert.do" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
-										검색
-									</a>
-
-								</div>
-								
 								<!-- 검색창 -->
-								<input autocomplete="off" type="text" name="my_daterange" class="form-control rangepicker" 
-													data-ranges="true" 
-													data-date-format="YY/MM/DD" 
-													data-quick-locale='{
-														"lang_apply"	: "적용",
-														"lang_cancel"	: "취소",
-														"lang_crange"	: "범위 선택하기",
-														"lang_months" 	: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-														"lang_weekdays" : ["일", "월", "화", "수", "목", "금", "토"],
-
-														"lang_today"	: "오늘", 
-														"lang_yday"		: "어제", 
-														"lang_7days"	: "지난 1주일", 
-														"lang_30days"	: "지난 1달", 
-														"lang_tmonth"	: "이번 달", 
-														"lang_lmonth"	: "지난 달"
-													}'
-								style="float:right;width:25%;padding:0.3rem 0.5rem;height:38px;margin:10px 0;font-size:16px;margin-left:5px;">
-
-								<input type="text" class="form-control is-valid mb-3" placeholder="검색"
-									style="float:right;width:25%;overflow:hidden;padding:0.3rem 0.5rem;height:38px;margin:10px 0 !important;font-size:16px;">
+								<form action="${contextPath}/adminboard/getSearchNoticeList.do" method="post">
+								
+									<div style="float:right;margin:13px 5px;">
+										<button type="submit" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
+											검색
+										</button>
+									</div>
 									
-								<select id="select_options2" class="form-control" style="border-color: #6dbb30;float:right;width:10%;padding:0.3rem 0.5rem;height:38px;margin:10px 0;font-size:16px;margin-right:5px;">
-									<option value="title">제목</option>
-									<option value="value">내용</option>
-								</select>
+									<input autocomplete="off" type="text" name="searchDate" class="form-control rangepicker" 
+														data-ranges="true" 
+														data-date-format="YY/MM/DD" 
+														data-quick-locale='{
+															"lang_apply"	: "적용",
+															"lang_cancel"	: "취소",
+															"lang_crange"	: "범위 선택하기",
+															"lang_months" 	: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+															"lang_weekdays" : ["일", "월", "화", "수", "목", "금", "토"],
+	
+															"lang_today"	: "오늘", 
+															"lang_yday"		: "어제", 
+															"lang_7days"	: "지난 1주일", 
+															"lang_30days"	: "지난 1달", 
+															"lang_tmonth"	: "이번 달", 
+															"lang_lmonth"	: "지난 달"
+														}'
+									style="float:right;width:25%;padding:0.3rem 0.5rem;height:38px;margin:10px 0;font-size:16px;margin-left:5px;">
+	
+									<input type="text" name="searchKeyword" class="form-control is-valid mb-3" placeholder="검색"
+										style="float:right;width:25%;overflow:hidden;padding:0.3rem 0.5rem;height:38px;margin:10px 0 !important;font-size:16px;">
+										
+									<select name="searchCondition" id="select_options2" class="form-control" style="border-color:#6dbb30;float:right;width:10%;padding:0.3rem 0.5rem;height:38px;margin:10px 0;font-size:16px;margin-right:5px;">
+										<option value="title">제목</option>
+										<option value="contents">내용</option>
+									</select>
+									
+								</form>
 								<!-- 검색창 -->
 										
 							</div>

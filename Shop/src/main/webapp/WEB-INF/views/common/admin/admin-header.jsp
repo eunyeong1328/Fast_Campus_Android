@@ -20,7 +20,7 @@
 				<!-- NAVBAR -->
 				<div class="container-fluid position-relative">
 
-					<nav class="navbar navbar-expand-lg navbar-light justify-content-lg-between justify-content-md-inherit">
+					<nav class="navbar navbar-expand-lg navbar-light justify-content-lg-between justify-content-md-inherit" style="min-height:0px;">
 
 						<div class="align-items-start">
 							

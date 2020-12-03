@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.shop.board.BoardService;
 import com.project.shop.board.BoardVO;
 import com.project.shop.member.MemberVO;
-import com.project.shop.paging.Paging;
 import com.project.shop.paging.PagingService;
 import com.project.shop.product.ProductVO;
 
@@ -27,12 +26,14 @@ public class AdminBoardController {
 
 	@Autowired
 	private BoardService boardService;
+	
 	@Autowired
 	private PagingService pagingService;
 	
 	FileController filecon = new FileController();
 	
-	Paging paging = new Paging();
+	PagingController pagingCon = new PagingController();
+	
 	HashMap<String, Object> map = new HashMap<String, Object>();
 	
 //	관리자 공지사항
@@ -40,10 +41,29 @@ public class AdminBoardController {
 	public ModelAndView getNoticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-		System.out.println("admin noticeList: " + viewName);
-		getPaging(request, response);
-		mav.addObject("paging", paging);
+		
+//		게시글 count
+		int count = pagingService.getNoticeCount();
+		map = pagingCon.getPaging(count, request, response);
+		mav.addObject("paging", map.get("paging"));
+		
+		List<BoardVO> noticeList = boardService.getNoticeList(map);
+		mav.addObject("NoticeList", noticeList);
 
+		return mav;
+	}
+	
+//	공지사항 검색 List
+	@RequestMapping(value="getSearchNoticeList.do")
+	public ModelAndView getSearchNoticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+//		게시글 count
+		int count = pagingService.getNoticeCount();
+		map = pagingCon.getPaging(count, request, response);
+		mav.addObject("paging", map.get("paging"));
+		
 		List<BoardVO> noticeList = boardService.getNoticeList(map);
 		mav.addObject("NoticeList", noticeList);
 
@@ -56,8 +76,10 @@ public class AdminBoardController {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
-		getPaging(request, response);
-		mav.addObject("paging", paging);
+//		게시글 count
+		int count = pagingService.getFAQCount();
+		map = pagingCon.getPaging(count, request, response);
+		mav.addObject("paging", map.get("paging"));
 		
 		List<BoardVO> faqList = boardService.getFAQList(map);
 		mav.addObject("FAQList", faqList);
@@ -76,8 +98,10 @@ public class AdminBoardController {
 		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
 		
 		if (isLogOn == true && memberVO.getMember_id().equals("admin")) {
-			getPaging(request, response);
-			mav.addObject("paging", paging);
+//			게시글 count
+			int count = pagingService.getMemQCountAll();
+			map = pagingCon.getPaging(count, request, response);
+			mav.addObject("paging", map.get("paging"));
 			
 			List<BoardVO> memQList = boardService.getMemQListAll(map);
 			mav.addObject("MemQList", memQList);
@@ -96,12 +120,14 @@ public class AdminBoardController {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 
-		getPaging(request, response);
-		mav.addObject("paging", paging);
-
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		mav.addObject("member_id", memberVO.getMember_id());
+		
+//		게시글 count
+		int count = pagingService.getNoticeCount();
+		map = pagingCon.getPaging(count, request, response);
+		mav.addObject("paging", map.get("paging"));
 		
 		List<BoardVO> noticeList = boardService.getNoticeList(map);
 
@@ -120,8 +146,10 @@ public class AdminBoardController {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 
-		getPaging(request, response);
-		mav.addObject("paging", paging);
+//		게시글 count
+		int count = pagingService.getFAQCount();
+		map = pagingCon.getPaging(count, request, response);
+		mav.addObject("paging", map.get("paging"));
 
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
@@ -147,8 +175,10 @@ public class AdminBoardController {
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		
 		if (memberVO != null && memberVO.getMember_id() != null) {
-			getPaging(request, response);
-			mav.addObject("paging", paging);
+//			게시글 count
+			int count = pagingService.getMemQCountAll();
+			map = pagingCon.getPaging(count, request, response);
+			mav.addObject("paging", map.get("paging"));
 			
 			List<BoardVO> memQList = boardService.getMemQListAll(map);
 			
@@ -435,50 +465,4 @@ public class AdminBoardController {
 		return mav;
 	}
 
-//	Paging
-	public void getPaging(HttpServletRequest request, HttpServletResponse response) {
-		
-		String viewName = (String) request.getAttribute("viewName");
-
-		if (viewName.equals("/adminboard/noticeList") || viewName.equals("/adminboard/notice")) {
-			paging.setTotalRecord(pagingService.getNoticeCount());
-			System.out.println("paging notice insert 후 list notice count " + paging.getTotalRecord());
-		} else if (viewName.equals("/adminboard/faqList") || viewName.equals("/adminboard/faq")) {
-			paging.setTotalRecord(pagingService.getFAQCount());
-		} else if (viewName.equals("/adminboard/memberQnaList") || viewName.equals("/adminboard/memQ")) {
-			paging.setTotalRecord(pagingService.getMemQCountAll());
-		}
-
-//		전체 게시물의 수 구하기
-		paging.setTotalPage();
-
-//		현재 페이지 구하기
-		String cPage = request.getParameter("cPage");
-		System.out.println("adsfsadf"+cPage);
-		if (cPage != null) {
-			paging.setNowPage(Integer.parseInt(cPage));
-		} else {
-			paging.setNowPage(1);
-		}
-		
-//		begin, end
-		paging.setEnd(paging.getNowPage() * paging.getNumPerPage());
-		paging.setBegin(paging.getEnd() - paging.getNumPerPage() + 1);
-
-//		블록
-		int nowPage = paging.getNowPage();
-		int currentBlock = (nowPage - 1) / paging.getPagePerBlock() + 1;
-
-		paging.setEndPage(currentBlock * paging.getPagePerBlock());
-		paging.setBeginPage(paging.getEndPage() - paging.getPagePerBlock() + 1);
-
-//		끝페이지가 전체페이지수보다 크면 끝페이지값 전체페이지수로 변경
-		if (paging.getEndPage() > paging.getTotalPage()) {
-			paging.setEndPage(paging.getTotalPage());
-		}
-		
-		map.put("paging", paging);
-		
-	}
-	
 }

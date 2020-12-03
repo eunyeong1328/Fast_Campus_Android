@@ -10,6 +10,7 @@ public interface BoardService {
 
 //	Notice List
 	List<BoardVO> getNoticeList(HashMap<String, Object> map);
+	List<BoardVO> getSerchNoticeList(HashMap<String, Object> map);
 //	FAQ List	
 	List<BoardVO> getFAQList(HashMap<String, Object> map);
 //	1:1 List (로그인회원 id로 검색)
