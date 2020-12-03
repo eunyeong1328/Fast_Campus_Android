@@ -226,7 +226,7 @@
 							<div class="bg-white shadow-md shadow-danger-lg-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
 
 								<a href="#!" class="card position-relative h-100 b-0 rounded text-decoration-none overflow-hidden bg-cover text-white overlay-dark overlay-opacity-0" 
-									style="background-image:url('${contextPath}/resources/images/gogi.JPG')">
+									style="background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('${contextPath}/resources/images/product/${bestlist[0].product_id}/${bestlist[0].product_image}');">
 									<!-- style="background-image:url('${contextPath}/resources/demo.files/images/unsplash/products/sneakers/joshua-hanson-FCcNHcylc9o-unsplash.jpg')"> -->
 
 									<div class="card-body p-4">
@@ -236,7 +236,7 @@
 											/documentation/plugins-vendor-typed.html
 										-->
 										<span class="typed text-warning h5" 
-												data-typed-string="Just Arrived|초특가|기간 한정세일"
+												data-typed-string="Just Arrived|베스트 상품|기간 한정세일"
 												data-typed-speed-forward="40" 
 												data-typed-speed-back="30" 
 												data-typed-back-delay="700" 
@@ -247,15 +247,15 @@
 
 
 										<h2 class="d-block">
-											[선물세트] 녹색한우 1+(냉동)
+											"${bestlist[0].product_name}"
 										</h2>
 
 										<hr class="border-light opacity-2">
 
 										<!-- price -->
 										<span class="h5 d-block text-danger font-weight-medium">
-											<del class="text-white">₩139,00</del> 
-											₩67,300
+											<del class="text-white">₩${bestlist[0].price}</del> 
+											₩<fmt:parseNumber value="${bestlist[0].price*((100-bestlist[0].discount)/100)}"/>
 										</span>
 
 										<!-- rating -->
@@ -320,7 +320,7 @@
 
 							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
 
-								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[0].product_id}" class="d-block text-decoration-none">
+								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[1].product_id}" class="d-block text-decoration-none">
 
 									<!-- 
 										
@@ -345,7 +345,7 @@
 
 									<!-- 3. with .bg-suprime (remove white bg and add a gray bg) -->
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[0].product_id}/${bestlist[0].product_image}" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[1].product_id}/${bestlist[1].product_image}" alt="..."> 
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -356,15 +356,15 @@
 											.text-truncate
 										-->
 										<span class="d-block fs--16 max-h-50 overflow-hidden">
-											<c:out value="${bestlist[0].product_name}" />
+											<c:out value="${bestlist[1].product_name}" />
 										</span>
 
 										<!-- price -->
 										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
 
-											<del class="text-muted"><c:out value="${bestlist[0].price}" />원</del> 
+											<del class="text-muted"><c:out value="${bestlist[1].price}" />원</del> 
 
-											<fmt:parseNumber value="${bestlist[0].price*((100-bestlist[0].discount)/100)}"/>원
+											<fmt:parseNumber value="${bestlist[1].price*((100-bestlist[1].discount)/100)}"/>원
 										</span>
 
 										<!-- rating -->
@@ -388,65 +388,6 @@
 
 							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
 
-								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[1].product_id}" class="d-block text-decoration-none">
-
-									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[1].product_id}/${bestlist[1].product_image}" alt="...">
-									</figure>
-
-									<span class="d-block text-center-xs text-gray-600 py-3">
-										
-										<!-- 
-											.max-height-50  = limited to 2 rows of text 
-											-or-
-											.text-truncate
-										-->
-										<span class="d-block fs--16 max-h-50 overflow-hidden">
-											<c:out value="${bestlist[1].product_name}" />
-										</span>
-
-										<!-- price -->
-										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
-
-											<del class="text-muted"><c:out value="${bestlist[1].price}" />원</del>  
-
-											<fmt:parseNumber value="${bestlist[1].price*((100-bestlist[1].discount)/100)}"/>원
-										</span>
-
-										<!-- rating -->
-										<span class="d-block">
-											<i class="rating-5 text-warning fs--14"></i>
-											<span class="fs--12 text-muted">(4.7)</span>
-										</span>
-
-									</span>
-
-								</a>
-
-							</div>
-
-						</div>
-						<!-- /item -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-						<!-- item -->
-						<div class="order-2 col-6 col-lg-3 mb-4 mb-2-xs">
-
-							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
-
 								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[2].product_id}" class="d-block text-decoration-none">
 
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
@@ -467,7 +408,7 @@
 										<!-- price -->
 										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
 
-											<del class="text-muted"><c:out value="${bestlist[2].price}" />원</del> 
+											<del class="text-muted"><c:out value="${bestlist[2].price}" />원</del>  
 
 											<fmt:parseNumber value="${bestlist[2].price*((100-bestlist[2].discount)/100)}"/>원
 										</span>
@@ -488,6 +429,19 @@
 						<!-- /item -->
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 						<!-- item -->
 						<div class="order-2 col-6 col-lg-3 mb-4 mb-2-xs">
 
@@ -496,7 +450,7 @@
 								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[3].product_id}" class="d-block text-decoration-none">
 
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[3].product_id}/${bestlist[3].product_image}" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[3].product_id}/${bestlist[3].product_image}" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -513,7 +467,7 @@
 										<!-- price -->
 										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
 
-											<del class="text-muted"><c:out value="${bestlist[3].price}" />원</del>  
+											<del class="text-muted"><c:out value="${bestlist[3].price}" />원</del> 
 
 											<fmt:parseNumber value="${bestlist[3].price*((100-bestlist[3].discount)/100)}"/>원
 										</span>
@@ -541,9 +495,8 @@
 
 								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[4].product_id}" class="d-block text-decoration-none">
 
-									
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[4].product_id}/${bestlist[4].product_image}" alt="...">
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[4].product_id}/${bestlist[4].product_image}" alt="..."> 
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -588,8 +541,9 @@
 
 								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[5].product_id}" class="d-block text-decoration-none">
 
+									
 									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
-										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[5].product_id}/${bestlist[5].product_image}" alt="..."> 
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[5].product_id}/${bestlist[5].product_image}" alt="...">
 									</figure>
 
 									<span class="d-block text-center-xs text-gray-600 py-3">
@@ -609,6 +563,52 @@
 											<del class="text-muted"><c:out value="${bestlist[5].price}" />원</del>  
 
 											<fmt:parseNumber value="${bestlist[5].price*((100-bestlist[5].discount)/100)}"/>원
+										</span>
+
+										<!-- rating -->
+										<span class="d-block">
+											<i class="rating-5 text-warning fs--14"></i>
+											<span class="fs--12 text-muted">(4.7)</span>
+										</span>
+
+									</span>
+
+								</a>
+
+							</div>
+
+						</div>
+						<!-- /item -->
+
+
+						<!-- item -->
+						<div class="order-2 col-6 col-lg-3 mb-4 mb-2-xs">
+
+							<div class="bg-white shadow-xs shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2 h-100">
+
+								<a href="${contextPath}/product/productDetail.do?product_id=${bestlist[6].product_id}" class="d-block text-decoration-none">
+
+									<figure class="m-0 text-center bg-light-radial rounded-top overflow-hidden">
+										<img class="img-fluid bg-suprime opacity-9" src="${contextPath}/resources/images/product/${bestlist[6].product_id}/${bestlist[6].product_image}" alt="..."> 
+									</figure>
+
+									<span class="d-block text-center-xs text-gray-600 py-3">
+										
+										<!-- 
+											.max-height-50  = limited to 2 rows of text 
+											-or-
+											.text-truncate
+										-->
+										<span class="d-block fs--16 max-h-50 overflow-hidden">
+											<c:out value="${bestlist[6].product_name}" />
+										</span>
+
+										<!-- price -->
+										<span class="d-block text-danger font-weight-medium fs--16 mt-2">
+
+											<del class="text-muted"><c:out value="${bestlist[6].price}" />원</del>  
+
+											<fmt:parseNumber value="${bestlist[6].price*((100-bestlist[6].discount)/100)}"/>원
 										</span>
 
 										<!-- rating -->
