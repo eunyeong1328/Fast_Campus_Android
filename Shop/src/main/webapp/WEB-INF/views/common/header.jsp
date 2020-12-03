@@ -458,7 +458,7 @@
 								<!-- New Product -->
 								<li class="nav-item dropdown">
 
-									<a href="#" id="mainNavPages" class="nav-link" 
+									<a href="${contextPath}/main/newProduct.do" id="mainNavPages" class="nav-link" id="mainNavPages" class="nav-link" 
 										aria-haspopup="true" 
 										aria-expanded="false">
 										신상품
@@ -470,7 +470,7 @@
 								<!-- Best Product -->
 								<li class="nav-item dropdown">
 
-									<a href="#" id="mainNavPages" class="nav-link" 
+									<a href="${contextPath}/main/bestProduct.do" id="mainNavPages" class="nav-link" id="mainNavPages" class="nav-link" 
 										aria-haspopup="true" 
 										aria-expanded="false">
 										베스트
@@ -482,7 +482,7 @@
 								<!-- Discount Product -->
 								<li class="nav-item dropdown">
 
-									<a href="#" id="mainNavPages" class="nav-link" 
+									<a href="${contextPath}/main/discountProduct.do" id="mainNavPages" class="nav-link" id="mainNavPages" class="nav-link" 
 										aria-haspopup="true" 
 										aria-expanded="false">
 										알뜰쇼핑
