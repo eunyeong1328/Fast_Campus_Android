@@ -42,7 +42,7 @@ public class SendEmailService {
  		
 		dto.setMessage(sb +
 				"안녕하세요. [쩝쩝박사] 임시 비밀번호 안내 관련 이메일입니다.<br>" + 
-		"아이디가  " + member_id + "  인 임시 비밀번호는 " + str + "입니다.");
+		"아이디가  " + member_id + " 인 회원님의 임시 비밀번호는 " + str + "입니다.");
 		
 
 		//DB이메일 비밀번호 수정

@@ -131,4 +131,15 @@
 		<put-attribute name="body" value="/WEB-INF/views/admin/board/productCategoryList.jsp" />
       </definition>
       
+      <!-- 관리자 주문목록 -->
+            <definition name="/admin/order/orders" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/orders/admin-orders.jsp" />
+      </definition>
+      
+            <definition name="/admin/order/detail" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/orders/admin-order-detail.jsp" />
+      </definition>
+      
 </tiles-definitions>

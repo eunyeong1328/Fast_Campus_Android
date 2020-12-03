@@ -27,6 +27,7 @@
   	<typeAlias type="com.project.shop.product.board.ReviewVO" alias="reviewVO"/>
     <typeAlias type="com.project.shop.cart.CartVO" alias="cartVO"/>
   	<typeAlias type="com.project.shop.orders.OrderVO" alias="orderVO"/>
+  	<typeAlias type="com.project.shop.myaccount.MyAccountShippingVO" alias ="myAccountShippingVO"/>
 
   </typeAliases>
   

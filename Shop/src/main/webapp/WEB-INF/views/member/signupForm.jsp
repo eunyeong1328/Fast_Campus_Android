@@ -153,7 +153,7 @@
 								<div class="input-group-over">
 									<div class="form-label-group mb-3">
 										<input required placeholder="Password_check" name = "Password_check"
-											id="password_check2" type="text" class="form-control" onKeyUp = "fn_compare_pwd()">
+											id="password_check2" type="password" class="form-control" onKeyUp = "fn_compare_pwd()">
 										<label for="Password_check">비밀번호 확인</label>
 										
 										<span style = "text-size:10px; color: rgba(0, 0, 255, 0.411);" id = "s_result" >동일한 비밀번호를 입력해주세요</span>

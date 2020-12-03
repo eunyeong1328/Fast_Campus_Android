@@ -1,5 +1,7 @@
 package com.project.shop.orders.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,4 +27,26 @@ public class OrderDAO {
 		sqlSession.update("mappers.order.downStock",item);
 		
 	}
+	
+	public List<OrderVO> selectAdminOrderList(HashMap orderHash) throws Exception {      
+	      ArrayList<OrderVO> orderList = (ArrayList)sqlSession.selectList("mappers.order.selectAdminOrderList",orderHash);
+	      return orderList;
+	   }
+	
+	public OrderVO selectOrderDetail(String order_num) throws Exception{
+		OrderVO orderVO = (OrderVO)sqlSession.selectOne("mappers.order.selectOrderDetail",order_num);
+		return orderVO;
+	}
+	
+	public List<ProductVO> selectOrderDetailProduct(String order_num) throws Exception{
+		List<ProductVO> productList = (List)sqlSession.selectList("mappers.order.selectOrderDetailProduct", order_num);
+		return productList;
+		
+	}
+	
+	public void changeOrderStatus(HashMap orderHash) throws Exception {
+		sqlSession.update("mappers.order.changeOrderStatus",orderHash);
+
+	}
+	
 }

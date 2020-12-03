@@ -57,7 +57,7 @@
 
 								<img class="img-fluid max-w-350" src="${contextPath}/resources/demo.files/svg/ecommerce/undraw_empty_cart_co35.svg" alt="..." style="margin-bottom:50px">
 								<br>
-								<a href="#!" class="badge badge-pill badge-purple badge-soft font-weight-normal p-2">
+								<a href="${contextPath }/main/bestProduct.do" class="badge badge-pill badge-purple badge-soft font-weight-normal p-2">
 									쇼핑하러 가기
 								</a>
 
@@ -80,7 +80,7 @@
 								<div class="col-5 col-sm-3 col-md-3 col-lg-2 text-center">
 									<a class="text-decoration-none"> <img
 										class="img-fluid bg-suprime"
-										src="${contextPath}/resources/images/item_image/${favList.product_image}"
+										src="${contextPath}/resources/images/product/${favList.product_id}/${favList.product_image}"
 										alt="...">
 									</a>
 								</div>
@@ -108,8 +108,15 @@
 										</p>
 
 									</div>
-
+									<c:if test="${not empty optionMap.get(favList.product_id) }" >
+                              <select id="opt" class="form-control bs-select" name="option_name" title="옵션을 선택해주세요" onChange="changeOption();" required>
+                                 <c:forEach var="option" items="${optionMap.get(favList.product_id) }">
+                                    <option value="${option.option_name }">${option.option_name } [<fmt:formatNumber type="number" value="${option.option_price }"/> 원]</option>
+                                 </c:forEach>
+                              </select>
+                           </c:if>
 								</div>
+								
 
 								<div class="col-12 d-block d-sm-none mt-3">
 									<!-- mobile spacer -->

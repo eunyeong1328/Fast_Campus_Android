@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.shop.common.base.BaseController;
 import com.project.shop.member.MemberVO;
 import com.project.shop.myaccount.MyAccountService;
+import com.project.shop.myaccount.MyAccountShippingVO;
+import com.project.shop.orders.OrderService;
 import com.project.shop.orders.OrderVO;
 import com.project.shop.product.ProductVO;
 
@@ -26,24 +28,11 @@ public class MyAccountController extends BaseController{
 	@Autowired
 	private MyAccountService myAccountService;
 	@Autowired
+	private OrderService orderService;
+	@Autowired
 	private MemberVO memberVO;
-
-	//계정 정보 확인
-	@RequestMapping(value ="/account-settings.do") 
-	public ModelAndView accountSettingsInfo(
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//session에서 획득한  memberInfo 정보
-		HttpSession session=request.getSession(); 
-		memberVO = (MemberVO) session.getAttribute("memberInfo");
-		String member_id = memberVO.getMember_id();
-
-		String viewName=(String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		System.out.println(member_id);
-		MemberVO memberInfo = myAccountService.accountSettingsInfo(member_id);
-		mav.addObject("memberinfo", memberInfo);
-		return mav;
-	}
+	@Autowired
+	private MyAccountShippingVO myAcccountShipping;
 
 	//계정 정보 삭제
 	@RequestMapping(value ="/deleteAccount.do") 
@@ -64,14 +53,14 @@ public class MyAccountController extends BaseController{
 
 		
 		if(!(sessionPass.equals(voPassword))){
-			String message="비밀번호를 잘못 입력하였습니다."; 
+			String message="비밀번호를 잘 못 입력하였습니다."; 
 	        mav.addObject("message", message);
 			mav.setViewName("/myaccount/account-settings");
 			return mav;
 		}else {
 			myAccountService.deleteAccount(sessionMember_id);
 			session.invalidate();
-			String message="회원이 탈퇴되었습니다."; 
+			String message="정상적으로 회원탈퇴처리가 승인되었습니다. \\n 그동안 이용해 주셔서 진심으로 감사합니다."; 
 	        mav.addObject("message", message);
 			mav.setViewName("/main/main");
 			return mav;
@@ -94,8 +83,12 @@ public class MyAccountController extends BaseController{
 			mav.setViewName("/member/loginForm");
 		} else {
 			String member_id = memberVO.getMember_id();	    	  
-			List<ProductVO> favList = myAccountService.listFavList(member_id);
+			HashMap<String, Object> favMap = myAccountService.selectFavList(member_id);			
+			List<ProductVO> favList = (List)favMap.get("favList");
+			HashMap<String, List<ProductVO>> optionMap = (HashMap)favMap.get("optionMap");
 			mav.addObject("favList", favList);    	  
+			mav.addObject("optionMap", optionMap);
+			
 		}
 		return mav;
 	}
@@ -141,10 +134,15 @@ public class MyAccountController extends BaseController{
 	}
 // 내 주문
 	@RequestMapping(value="/account-orders.do")
-	public ModelAndView listOrders( HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView selectOrders( HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav =  new ModelAndView(viewName);
+		HashMap<String, String> orderHash = new HashMap<>();
+		String period = request.getParameter("filter_order_period");
+		String status = request.getParameter("filter_order_status");
+		System.out.println("period: " + period);
+		System.out.println("status: " + status);
 
 		HttpSession session=request.getSession(); 
 		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
@@ -155,28 +153,40 @@ public class MyAccountController extends BaseController{
 			mav.setViewName("/member/loginForm");
 		} else {
 			String member_id = memberVO.getMember_id();	    	  
-			List<OrderVO> orderList = myAccountService.listOrderList(member_id);
+			orderHash.put("period",period);
+			orderHash.put("status",status);
+			orderHash.put("member_id",member_id);
+			List<OrderVO> orderList = myAccountService.selectOrderList(orderHash);
 			mav.addObject("orderList", orderList);    	  
 		}
 		return mav;
 	}
 	
 	@RequestMapping(value="/account-order-detail.do")
-	public ModelAndView listOrderDetail( @RequestParam("order_num") String order_num,
+	public ModelAndView selectOrderDetail( @RequestParam("order_num") String order_num,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav =  new ModelAndView(viewName);
 
 			
-			  Map<String, Object> orderMap =myAccountService.listOrderDetail(order_num);
+			  Map<String, Object> orderMap =myAccountService.selectOrderDetail(order_num);
 			  mav.addObject("orderMap", orderMap);
+			  
+				//변경
+				String order_status = request.getParameter("order_status");
+				System.out.println("order_status: " + order_status);
+				System.out.println("order_num: " + order_num);
+				if(order_status!=null) {
+					HashMap<String, String> statusHash = new HashMap<>();
+					statusHash.put("order_status",order_status);
+					statusHash.put("order_num",order_num);
+					orderService.changeOrderStatus(statusHash);
 
-		return mav;
+				}
+				return mav;
 	}
-
-
-
+	
 
 	//계정 수정
 	@RequestMapping(value="/modifyMemberInfo.do")
@@ -201,6 +211,54 @@ public class MyAccountController extends BaseController{
 
 
 	//새 배송지 추가
+	@RequestMapping(value="/insertAddressInfo.do")
+	public ModelAndView addShipping(@RequestParam HashMap<String, String> memberMap,
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		HttpSession session=request.getSession(); 
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");		      
+		String member_id = memberVO.getMember_id();
+		
+		String zipNo = memberMap.get("zipNo");
+		String load_address = memberMap.get("load_address");
+		String jibun_address = memberMap.get("jibun_address");
+		String rest_address = memberMap.get("rest_address");
+				
+		HashMap<String,String> map = new HashMap<String, String>();
+		map.put("member_id",member_id);
+		map.put("zipNo",zipNo);
+		map.put("load_address",load_address);
+		map.put("jibun_address",jibun_address);
+		map.put("rest_address",rest_address);
+		myAccountService.addAddress(map);
+		System.out.println("배송지 추가 완료!!");
+		
+//		List<MyAccountShippingVO> shippList = myAccountService.listshippList(member_id);
+//		System.out.println(shippList);
+//		mav.addObject("shippList",shippList);
+		mav.setViewName("redirect:/myaccount/account-settings.do");
+		return mav;
+	}
+	
+	//계정 정보 확인
+		@RequestMapping(value ="/account-settings.do") 
+		public ModelAndView accountSettingsInfo(
+				HttpServletRequest request, HttpServletResponse response) throws Exception {
+			//session에서 획득한  memberInfo 정보
+			HttpSession session=request.getSession(); 
+			memberVO = (MemberVO) session.getAttribute("memberInfo");
+			String member_id = memberVO.getMember_id();
+
+			String viewName=(String)request.getAttribute("viewName");
+			ModelAndView mav = new ModelAndView(viewName);
+			System.out.println(member_id);
+			MemberVO memberInfo = myAccountService.accountSettingsInfo(member_id);
+			mav.addObject("memberinfo", memberInfo);
+			List<MyAccountShippingVO> shippList = myAccountService.listshippList(member_id);
+			System.out.println(shippList);
+			mav.addObject("shippList",shippList);
+			return mav;
+		}
 
 	//배송지 수정
 	@RequestMapping(value="/modifyAddressInfo.do")

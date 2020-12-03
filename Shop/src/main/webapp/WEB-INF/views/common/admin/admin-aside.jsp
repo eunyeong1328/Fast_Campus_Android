@@ -113,32 +113,13 @@
 									</li>
 
 
-
-									<li class="nav-item">
-										<a class="nav-link" href="#">
-											<span class="group-icon float-end">
-												<i class="fi fi-arrow-end-slim"></i>
-												<i class="fi fi-arrow-down-slim"></i>
-											</span>
-											<i class="fi fi-layers"></i>
-											주문관리
-										</a>
-
-										<ul class="nav flex-column fs--15">
-
-											<li class="nav-item">
-												<a class="nav-link js-ajax" href="plugins-vendor-bootstrap-select.html">
-													주문내역
-												</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link js-ajax" href="plugins-vendor-flickity.html">
-													배송관리
-												</a>
-											</li>
-
-										</ul>
-									</li>
+									
+								<li class="nav-item">
+									<a class="nav-link" href="${contextPath}/admin/order/orders.do">
+										<i class="fi fi-layers"></i>
+										주문관리
+									</a>
+								</li>
 
 
 
@@ -183,23 +164,6 @@
 										<i class="fi fi-squared-minus"></i>
 										배너
 									</a>
-								</li>
-
-
-
-
-								<li class="nav-title mt-5">
-									<h6 class="fs--15 mb-1 text-white font-weight-normal">로그</h6>
-								</li>
-
-								<li class="nav-item">
-									
-									<a class="nav-link text-white" href="../layout_1/index.html">
-										<i class="nav-icon fi fi-check text-success"><!-- main icon --></i>
-										<span class="badge opacity-2 font-weight-light float-end fs--11 mt-1">layout_1</span>
-										Log
-									</a>
-
 								</li>
 
 							</ul>
