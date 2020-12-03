@@ -154,7 +154,7 @@
 										<del class="text-muted">
 											<fmt:formatNumber type="number" value="${item.price}" />
 											원
-										</del> <fmt:parseNumber value="${item.price*((100-item.discount)/100)}"/>원
+										</del> <fmt:formatNumber value="${item.price*((100-item.discount)/100)}"/>원
 								</span> <!-- rating --> <span class="d-block"> <i
 										class="rating-5 text-warning fs--14"></i> <span
 										class="fs--12 text-muted">(4.7)</span>

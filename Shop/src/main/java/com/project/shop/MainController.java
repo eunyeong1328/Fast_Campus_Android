@@ -58,5 +58,27 @@ public class MainController extends BaseController {
 		mav.addObject("list", service.searchProduct(p.getBegin(), p.getEnd(), search_word));
 		return mav;
 	}
-
+	
+	@RequestMapping(value="/main/newProduct.do")
+	public ModelAndView newProduct(ModelAndView mav,HttpServletRequest request, HttpServletResponse response) throws Exception{
+		newlist = service.newList();
+		mav.addObject("list", newlist);
+		mav.setViewName((String) request.getAttribute("viewName"));
+		return mav;
+	}
+	
+	@RequestMapping(value="/main/bestProduct.do")
+	public ModelAndView bestProduct(ModelAndView mav,HttpServletRequest request, HttpServletResponse response) throws Exception{
+		bestlist = service.bestList();
+		mav.addObject("list", bestlist);
+		mav.setViewName((String) request.getAttribute("viewName"));
+		return mav;
+	}
+	
+	@RequestMapping(value="/main/discountProduct.do")
+	public ModelAndView discountProduct(ModelAndView mav,HttpServletRequest request, HttpServletResponse response) throws Exception{
+		mav.addObject("list", service.discountList());
+		mav.setViewName((String) request.getAttribute("viewName"));
+		return mav;
+	}
 }

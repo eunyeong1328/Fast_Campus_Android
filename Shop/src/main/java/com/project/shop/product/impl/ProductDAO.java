@@ -54,7 +54,9 @@ public class ProductDAO {
 	public List<ProductVO> newList() {
 		return sqlSession.selectList("mappers.product.newList");
 	}
-	
+	public List<ProductVO> discountList() {
+		return sqlSession.selectList("mappers.product.discountList");
+	}
 	public int insertProduct (ProductVO vo) {
 		sqlSession.insert("mappers.product.insertProduct",vo);
 		return sqlSession.insert("mappers.product.insertItem",vo);
