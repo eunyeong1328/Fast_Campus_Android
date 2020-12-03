@@ -85,13 +85,13 @@ public class MyAccountServiceImpl implements MyAccountService{
 	}
 
 	@Override
-	public List<OrderVO> listOrderList(String member_id) throws Exception {
-		return myAccountDAO.listOrderList(member_id);
+	public List<OrderVO> selectOrderList(HashMap orderHash) throws Exception {
+		return myAccountDAO.selectOrderList(orderHash);
 		
 	}
 
 	@Override
-	public Map<String, Object> listOrderDetail(String order_num) throws Exception {
+	public Map<String, Object> selectOrderDetail(String order_num) throws Exception {
 		Map<String, Object> orderMap = new HashMap<String,Object>();
 		OrderVO orderDetail = myAccountDAO.selectOrderDetail(order_num);
 		List<ProductVO> productList = myAccountDAO.selectOrderDetailProduct(order_num);

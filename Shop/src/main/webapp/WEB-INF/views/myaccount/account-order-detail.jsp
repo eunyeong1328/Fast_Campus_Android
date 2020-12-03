@@ -204,7 +204,7 @@
 									<div class="col-3 col-sm-2 col-md-2 col-lg-2 text-center">
 										
 										<a class="d-block clearfix" href="${contextPath}/product/productDetail.do?product_id=${item.product_id}">
-											<img class="img-fluid" src="${contextPath}/resources/images/item_image/${item.product_image}" alt="...">
+											<img class="img-fluid" src="${contextPath}/resources/images/${item.product_id }/${item.product_image}" alt="...">
 										</a>
 
 									</div>
@@ -214,7 +214,7 @@
 										<div class="row">
 											<div class="col">
 
-												<a class="d-block clearfix" href="#!">
+												<a class="d-block clearfix" href="${contextPath}/product/productDetail.do?product_id=${item.product_id}">
 													${item.product_name }
 												</a>
 

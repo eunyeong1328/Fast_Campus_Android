@@ -80,7 +80,7 @@
 								<div class="col-5 col-sm-3 col-md-3 col-lg-2 text-center">
 									<a class="text-decoration-none"> <img
 										class="img-fluid bg-suprime"
-										src="${contextPath}/resources/images/item_image/${favList.product_image}"
+										src="${contextPath}/resources/images/product/${favList.product_id}/${favList.product_image}"
 										alt="...">
 									</a>
 								</div>

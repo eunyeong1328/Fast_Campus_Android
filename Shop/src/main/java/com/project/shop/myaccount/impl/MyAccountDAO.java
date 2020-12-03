@@ -51,8 +51,8 @@ public class MyAccountDAO {
 		sqlSession.insert("mappers.myaccount.addFavList",ids);
 	}
 	
-	public List<OrderVO> listOrderList(String member_id) throws Exception {      
-	      ArrayList<OrderVO> orderList = (ArrayList)sqlSession.selectList("mappers.order.listOrderList",member_id);
+	public List<OrderVO> selectOrderList(HashMap orderHash) throws Exception {      
+	      ArrayList<OrderVO> orderList = (ArrayList)sqlSession.selectList("mappers.order.selectOrderList",orderHash);
 	      return orderList;
 	   }
 	public OrderVO selectOrderDetail(String order_num) throws Exception{

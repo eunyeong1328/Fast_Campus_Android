@@ -44,9 +44,8 @@
 									data-style="bg-light select-form-control" title="주문 기간"
 									onchange="window.location=this.value">
 									<option value="#">전체</option>
-									<option value="?filter_order_period=1">최근 3개월 이내</option>
-									<option value="?filter_order_period=2">최근 6개월 이내</option>
-									<option value="?filter_order_period=2019">최근 1년 이내</option>
+									<option value="?filter_order_period=1">최근 일주일 이내</option>
+									<option value="?filter_order_period=2">최근 한 달 이내</option>
 								</select>
 
 								<!-- Order Status -->

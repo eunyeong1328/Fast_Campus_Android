@@ -22,6 +22,8 @@ public class OrderServiceImpl  implements OrderService {
 
 	@Override
 	public void addOrder(OrderVO orderVO, Map<String, List> cartMap) throws Exception {		
+		String order_status = orderVO.getOrder_status();
+		if(order_status.equals("paid")) orderVO.setOrder_status("결제완료");
 		//orders 테이블에 정보추가
 		orderDAO.insertNewOrder(orderVO);
 		
