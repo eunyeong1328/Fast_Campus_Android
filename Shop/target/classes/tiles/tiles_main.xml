@@ -18,6 +18,12 @@
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
 	
+	<!-- 쇼핑몰 검색 페이지 레이아웃 설정 -->
+	<definition name="/main/searchResult" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/main/searchResult.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
 </tiles-definitions>
 
 

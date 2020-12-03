@@ -9,37 +9,38 @@
   request.setCharacterEncoding("UTF-8");
 %>
 
-<!--여기서부터 시작-->
-<!-- PAGE TITLE -->
-<section class="bg-light p-0">
-	<div class="container py-5">
+			<!-- PAGE TITLE -->
+			<section class="bg-light p-0">
+				<div class="container py-5">
 
-		<h1 class="h3">${product_category_name}</h1>
+					<h1 class="h3">
+						검색 결과
+					</h1>
 
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb fs--14">
-				<li class="breadcrumb-item"><a
-					href="${contextPath}/main/main.do">Home</a></li>
-				<li class="breadcrumb-item active" aria-current="page">${product_category_name}</li>
-			</ol>
-		</nav>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb fs--14">
+							<li class="breadcrumb-item"><a href="#!">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">검색 결과</li>
+						</ol>
+					</nav>
 
-	</div>
-</section>
-<!-- /PAGE TITLE -->
-
-
-
-<section>
-	<div class="container">
-
-		<div class="row">
-
-			<!-- sidebar -->
-			<div class="order-1 col-12 col-sm-12 col-md-12 col-lg-3 mb--60">
+				</div>
+			</section>
+			<!-- /PAGE TITLE -->
 
 
-				<!-- CATEGORIES -->
+
+
+			<!-- -->
+			<section>
+				<div class="container">
+
+					<div class="row">
+
+						<div class="col-12 col-sm-12 col-md-12 col-lg-3 mb--60">
+
+
+							<!-- CATEGORIES -->
 				<nav
 					class="nav-deep nav-deep-light mb-4 border b-0-xs px-4 pb-3 p-0-md p-0-xs rounded">
 
@@ -93,60 +94,25 @@
 				</nav>
 				<!-- /CATEGORIES -->
 
-			</div>
-			<!-- /sidebar -->
+							
 
 
-
-			<!-- products -->
-			<div class="order-2 col-12 col-sm-12 col-md-12 col-lg-9">
-
-
-				<!-- additional filters -->
-				<div class="bg-light mb-5 p-3 rounded clearfix">
-
-					<div class="clearfix border-bottom pb-3 mb-3">
-
-
-						<div class="float-end fs--14 position-relative mt-1">
-							<a href="#" class="text-primary text-decoration-none"
-								data-toggle="dropdown" aria-expanded="false"> ${sortby } <i
-								class="fi fi-arrow-down-slim fs--12"></i>
-							</a>
-
-							<ul class="dropdown-menu b-0 mt-3 rounded fs--15">
-								<li class="dropdown-item active"><a
-									href="${contextPath}/product/productList.do?product_category_num=${product_category_num }&listKey=reg_date&orderKey=desc"
-									class="text-muted py-2 d-block">신상품순 </a></li>
-								<li class="dropdown-item"><a
-									href="${contextPath}/product/productList.do?product_category_num=${product_category_num }&listKey=price&orderKey=asc"
-									class="text-muted py-2 d-block">낮은가격순 </a></li>
-								<li class="dropdown-item"><a
-									href="${contextPath}/product/productList.do?product_category_num=${product_category_num }&listKey=price&orderKey=desc"
-									class="text-muted py-2 d-block">높은가격순 </a></li>
-							</ul>
 						</div>
 
-					</div>
 
-				</div>
-				<!-- /additional filters -->
+						<div class="col-12 col-sm-12 col-md-12 col-lg-9">
 
+							<h2 class="h5 mb-4 font-weight-normal">
+								총 ${pvo.totalRecord}개의<i class="font-weight-light"> 상품이 검색되었습니다.</i>
+							</h2>
 
+							<div class="row">
+								<c:forEach var="item" items="${list}">
+								<div class="col-6 col-md-4 mb-4">
 
-				<!-- product list -->
+									<div class="bg-white shadow-md shadow-3d-hover transition-all-ease-250 transition-hover-top rounded show-hover-container p-2">
 
-				<div class="row gutters-xs--xs">
-
-					<c:forEach var="item" items="${productList}">
-						<!-- item -->
-
-						<div class="col-6 col-md-4 mb-4 mb-2-xs">
-
-							<div
-								class="bg-white border rounded show-hover-container p-2 h-100">
-
-								<!-- hover buttons : top -->
+										<!-- hover buttons : top -->
 								<div
 									class="position-absolute top-0 end-0 text-align-end w--80 z-index-3 my-3 mx-4 px-2 show-hover-item">
 
@@ -154,7 +120,7 @@
 
 									<!-- add to favourite : logged in -->
 									
-									<c:choose>
+							<c:choose>
 								<c:when test="${isLogOn==true and not empty memberInfo }">
 										<a href="#"
 											class="btn-toggle btn bg-white shadow-lg btn-sm rounded-circle mb-2"
@@ -176,8 +142,7 @@
 								</div>
 								<!-- /hover buttons : top -->
 
-
-								<a
+										<a
 									href="${contextPath}/product/productDetail.do?product_id=${item.product_id}"
 									class="d-block text-decoration-none"> <!--  상품 이미지  --> <img
 									class="img-fluid"
@@ -189,24 +154,24 @@
 										<del class="text-muted">
 											<fmt:formatNumber type="number" value="${item.price}" />
 											원
-										</del> <fmt:formatNumber type="number" value="${item.sale_price}" />원
+										</del> <fmt:parseNumber value="${item.price*((100-item.discount)/100)}"/>원
 								</span> <!-- rating --> <span class="d-block"> <i
 										class="rating-5 text-warning fs--14"></i> <span
 										class="fs--12 text-muted">(4.7)</span>
 								</span>
 								</a>
 
+									</div>
+
+								</div>
+								</c:forEach>
+
+								
+
 							</div>
 
-						</div>
-					</c:forEach>
-					<!-- /item -->
 
-
-
-
-				</div>
-				<!-- pagination -->
+							<!-- pagination -->
 
 
 				<nav aria-label="pagination" class="mt-5">
@@ -220,7 +185,7 @@
 						</c:if>
 						<c:if test="${pvo.beginPage != 1}">
 							<li class="page-item"><a class="page-link"
-								href="${contextPath}/product/productList.do?product_category_num=${product_category_num }&cPage=${pvo.beginPage - 1 }">Previous</a>
+								href="${contextPath}/main/searchResult.do?search_word=${search_word}&cPage=${pvo.beginPage - 1 }">Previous</a>
 							</li>
 						</c:if>
 
@@ -235,7 +200,7 @@
 							<c:if test="${pageNo != pvo.nowPage }">
 								<li class="page-item" aria-current="page"><a
 									class="page-link"
-									href="${contextPath}/product/productList.do?product_category_num=${product_category_num}&cPage=${pageNo}">${pageNo }</a>
+									href="${contextPath}/main/searchResult.do?search_word=${search_word}&cPage=${pageNo}">${pageNo }</a>
 								</li>
 							</c:if>
 						</c:forEach>
@@ -248,18 +213,20 @@
 
 						<c:if test="${pvo.endPage < pvo.totalPage }">
 							<li class="page-item"><a class="page-link"
-								href="${contextPath}/product/productList.do?product_category_num=${product_category_num}&cPage=${pvo.endPage +1}">Next</a>
+								href="${contextPath}/main/searchResult.do?search_word=${search_word}&cPage=${pvo.endPage +1}">Next</a>
 							</li>
 						</c:if>
 					</ul>
 				</nav>
 
 				<!-- pagination -->
-			</div>
-		</div>
-	</div>
-</section>
+									
 
 
+						</div>
 
-<script src="${contextPath}/resources/assets/js/core.js"></script>
+					</div>
+
+				</div>
+			</section>
+			<!-- / -->
