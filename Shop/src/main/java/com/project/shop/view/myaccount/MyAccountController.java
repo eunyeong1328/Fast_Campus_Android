@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.shop.common.base.BaseController;
 import com.project.shop.member.MemberVO;
 import com.project.shop.myaccount.MyAccountService;
+import com.project.shop.myaccount.MyAccountShippingVO;
 import com.project.shop.orders.OrderService;
 import com.project.shop.orders.OrderVO;
 import com.project.shop.product.ProductVO;
@@ -32,26 +33,6 @@ public class MyAccountController extends BaseController{
 	private MemberVO memberVO;
 	@Autowired
 	private MyAccountShippingVO myAcccountShipping;
-
-	//계정 정보 확인
-	@RequestMapping(value ="/account-settings.do") 
-	public ModelAndView accountSettingsInfo(
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//session에서 획득한  memberInfo 정보
-		HttpSession session=request.getSession(); 
-		memberVO = (MemberVO) session.getAttribute("memberInfo");
-		String member_id = memberVO.getMember_id();
-
-		String viewName=(String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		System.out.println(member_id);
-		MemberVO memberInfo = myAccountService.accountSettingsInfo(member_id);
-		mav.addObject("memberinfo", memberInfo);
-		List<MyAccountShippingVO> shippList = myAccountService.listshippList(member_id);
-		System.out.println(shippList);
-		mav.addObject("shippList",shippList);
-		return mav;
-	}
 
 	//계정 정보 삭제
 	@RequestMapping(value ="/deleteAccount.do") 
@@ -255,9 +236,29 @@ public class MyAccountController extends BaseController{
 //		List<MyAccountShippingVO> shippList = myAccountService.listshippList(member_id);
 //		System.out.println(shippList);
 //		mav.addObject("shippList",shippList);
-		mav.setViewName("/myaccount/account-settings");
+		mav.setViewName("redirect:/myaccount/account-settings.do");
 		return mav;
 	}
+	
+	//계정 정보 확인
+		@RequestMapping(value ="/account-settings.do") 
+		public ModelAndView accountSettingsInfo(
+				HttpServletRequest request, HttpServletResponse response) throws Exception {
+			//session에서 획득한  memberInfo 정보
+			HttpSession session=request.getSession(); 
+			memberVO = (MemberVO) session.getAttribute("memberInfo");
+			String member_id = memberVO.getMember_id();
+
+			String viewName=(String)request.getAttribute("viewName");
+			ModelAndView mav = new ModelAndView(viewName);
+			System.out.println(member_id);
+			MemberVO memberInfo = myAccountService.accountSettingsInfo(member_id);
+			mav.addObject("memberinfo", memberInfo);
+			List<MyAccountShippingVO> shippList = myAccountService.listshippList(member_id);
+			System.out.println(shippList);
+			mav.addObject("shippList",shippList);
+			return mav;
+		}
 
 	//배송지 수정
 	@RequestMapping(value="/modifyAddressInfo.do")
