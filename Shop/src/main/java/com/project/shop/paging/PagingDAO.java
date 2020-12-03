@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.shop.board.BoardVO;
 import com.project.shop.member.MemberVO;
 
 @Repository
@@ -32,8 +33,16 @@ public class PagingDAO {
 		return board.selectOne("mapper.board.getMemQCountAll");
 	}
 
-	public int getSearchNoticeCount(HashMap<String, Object> map) {
-		return board.selectOne("mapper.board.getSearchNoticeCount", map);
+	public int getSearchNoticeCount(BoardVO vo) {
+		return board.selectOne("mapper.board.getSearchNoticeCount", vo);
+	}
+
+	public int getSearchFAQCount(BoardVO vo) {
+		return board.selectOne("mapper.board.getSearchFAQCount", vo);
+	}
+
+	public int getSearchMemQAllCount(BoardVO vo) {
+		return board.selectOne("mapper.board.getSearchMemQCountAll", vo);
 	}
 
 }

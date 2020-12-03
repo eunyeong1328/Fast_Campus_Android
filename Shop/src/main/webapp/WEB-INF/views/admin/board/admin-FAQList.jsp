@@ -16,15 +16,15 @@
 
 						PAGE TITLE
 					-->
-					<div class="page-title bg-transparent b-0">
-
-						<h1 class="h4 mt-4 mb-0 px-3 font-weight-normal">
-							자주하는 질문
-						</h1>
-						
+					<div class="timeline-container">
+				
+						<h2 style="margin:10px !important;" class="h4 font-weight-normal timeline-title border-danger mb-5 pt-2 pb-2">
+							자주하는 질문 
+							<small style="padding:3px;" class="d-block text-muted fs--15">
+								자주하는 질문 관리 페이지입니다. </small>
+						</h2>
+				
 					</div>
-
-
 
 
 					<!-- PAGE LIST -->
@@ -34,16 +34,36 @@
 						<div class="portlet">
 							
 							<!-- portlet : header -->
-							<div class="portlet-header border-bottom">
+							<div class="portlet-header border-bottom" style="padding:10px;">
 
-								<div class="float-end">
+								<div style="float:left;margin:13px;">
 
 									<a href="${contextPath}/adminboard/faqInsert.do" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
 										등록
 									</a>
 
 								</div>
-
+								
+								<!-- 검색창 -->
+								<form action="${contextPath}/adminboard/faqList.do" method="post">
+									
+									<div style="float:right;margin:13px 5px;">
+										<button type="submit" class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
+											검색
+										</button>
+									</div>
+									
+									<input type="text" name="searchKeyword" class="form-control is-valid mb-3" placeholder="검색"
+										style="float:right;width:25%;overflow:hidden;padding:0.3rem 0.5rem;height:38px;margin:10px 0 !important;font-size:16px;">
+										
+									<select name="searchCondition" id="select_options2" class="form-control" style="border-color:#6dbb30;float:right;width:10%;padding:0.3rem 0.5rem;height:38px;margin:10px 0;font-size:16px;margin-right:5px;">
+										<option value="qna_category_name" selected>카테고리</option>
+										<option value="title">제목</option>
+										<option value="contents">내용</option>
+									</select>
+									
+								</form>
+								<!-- 검색창 -->
 
 							</div>
 							<!-- /portlet : header -->
@@ -80,7 +100,7 @@
 
 									<div class="table-responsive">
 
-										<table class="table table-align-middle border-bottom mb-6">
+										<table class="table table-align-middle border-bottom mb-6" style="margin-bottom:10px !important;">
 
 											<thead>
 												<tr class="text-muted fs--13">
@@ -109,9 +129,9 @@
 												</tbody>
 											</c:if>
 											
+											<tbody id="item_list">
 											<c:if test="${not empty FAQList}">
 											<c:forEach var="faq" items="${FAQList}">
-											<tbody id="item_list">
 
 												<!-- item -->
 												<tr id="message_id_2" class="text-muted">
@@ -183,28 +203,9 @@
 												</tr>
 												<!-- /item -->
 
-											</tbody>
 											</c:forEach>
 											</c:if>
-
-											<tfoot>
-												<tr class="text-muted fs--13">
-													<th class="w--30 hidden-lg-down">
-														<label class="form-checkbox form-checkbox-primary float-start">
-															<input class="checkall" data-checkall-container="#item_list" type="checkbox" name="checkbox">
-															<i></i>
-														</label>
-													</th>
-													<th>번호</th>
-													<th>카테고리</th>
-													<th>
-														<span class="px-2 p-0-xs">
-															제목
-														</span>
-													</th>
-													<th class="w--60">&nbsp;</th>
-												</tr>
-											</tfoot>
+											</tbody>
 
 										</table>
 
@@ -234,18 +235,18 @@
 														data-js-form-advanced-bulk-hidden-action-value="delete" 
 														data-js-form-advanced-bulk-container-items="#item_list" 
 														data-js-form-advanced-bulk-required-selected="true" 
-														data-js-form-advanced-bulk-required-txt-error="No Items Selected!" 
+														data-js-form-advanced-bulk-required-txt-error="게시글이 선택되지 않았습니다." 
 														data-js-form-advanced-bulk-required-txt-position="top-center" 
 														data-js-form-advanced-bulk-required-custom-modal="" 
 														data-js-form-advanced-bulk-required-custom-modal-content-ajax="" 
 														data-js-form-advanced-bulk-required-modal-type="danger" 
 														data-js-form-advanced-bulk-required-modal-size="modal-md" 
-														data-js-form-advanced-bulk-required-modal-txt-title="Please Confirm" 
+														data-js-form-advanced-bulk-required-modal-txt-title="확인해주세요!" 
 														data-js-form-advanced-bulk-required-modal-txt-subtitle="Selected Items: {{no_selected}}" 
-														data-js-form-advanced-bulk-required-modal-txt-body-txt="Are you sure? Delete {{no_selected}} selected items?" 
-														data-js-form-advanced-bulk-required-modal-txt-body-info="Please note: this is a permanent action!" 
-														data-js-form-advanced-bulk-required-modal-btn-text-yes="Delete" 
-														data-js-form-advanced-bulk-required-modal-btn-text-no="Cancel" 
+														data-js-form-advanced-bulk-required-modal-txt-body-txt="{{no_selected}}개의 게시글을 선택했습니다. 정말 삭제하시겠습니까?" 
+														data-js-form-advanced-bulk-required-modal-txt-body-info="삭제하면 복구되지 않습니다." 
+														data-js-form-advanced-bulk-required-modal-btn-text-yes="삭제" 
+														data-js-form-advanced-bulk-required-modal-btn-text-no="취소" 
 														data-js-form-advanced-bulk-submit-without-confirmation="false" 
 														data-js-form-advanced-form-id="#form_id">
 														<i class="fi fi-thrash text-danger"></i>
@@ -272,7 +273,12 @@
 													</c:if>
 													<c:if test="${paging.beginPage != 1}">
 														<li class="page-item">
+															<c:if test="${vo.searchKeyword != null }">
+															<a class="page-link" href="faqList.do?cPage=${paging.endPage - 1 }&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" tabindex="-1" aria-disabled="true">Prev</a>
+															</c:if>
+															<c:if test="${vo.searchKeyword == null }">
 															<a class="page-link" href="faqList.do?cPage=${paging.endPage - 1 }" tabindex="-1" aria-disabled="true">Prev</a>
+															</c:if>
 														</li>
 													</c:if>
 													
@@ -284,7 +290,12 @@
 														</c:if>
 														<c:if test="${pageNo != paging.nowPage }">
 															<li class="page-item" aria-current="page">
-																<a class="page-link" href="faqList.do?cPage=${pageNo }">${pageNo } <span class="sr-only">(current)</span></a>
+															<c:if test="${vo.searchKeyword != null }">
+															<a class="page-link" href="faqList.do?cPage=${pageNo }&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">${pageNo } <span class="sr-only">(current)</span></a>
+															</c:if>
+															<c:if test="${vo.searchKeyword == null }">
+															<a class="page-link" href="faqList.do?cPage=${pageNo }">${pageNo } <span class="sr-only">(current)</span></a>
+															</c:if>
 															</li>
 														</c:if>
 													</c:forEach>
@@ -296,7 +307,12 @@
 													</c:if>
 													<c:if test="${paging.endPage < paging.totalPage }">
 														<li class="page-item">
+														<c:if test="${vo.searchKeyword != null }">
+															<a class="page-link" href="faqList.do?cPage=${paging.endPage + 1 }&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">Next</a>
+														</c:if>
+														<c:if test="${vo.searchKeyword == null }">
 															<a class="page-link" href="faqList.do?cPage=${paging.endPage + 1 }">Next</a>
+														</c:if>
 														</li>
 													</c:if>
 

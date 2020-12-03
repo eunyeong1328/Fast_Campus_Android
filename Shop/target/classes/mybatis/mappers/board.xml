@@ -29,16 +29,20 @@
 			  FROM (SELECT * 
 			  		FROM NOTICE 
 					<where>
-						<if test="searchKeyword != ''">
-							<if test="searchCondition == 'title'">
-								AND TITLE LIKE '%' || #{searchKeyword} || '%'
+						<if test="vo.searchKeyword != ''">
+							<if test="vo.searchCondition == 'title'">
+								AND TITLE LIKE '%' || #{vo.searchKeyword} || '%'
 							</if>
-							<if test="searchCondition == 'contents'">
-								AND CONTENTS LIKE '%' || #{searchKeyword} || '%'
+							<if test="vo.searchCondition == 'contents'">
+								AND CONTENTS LIKE '%' || #{vo.searchKeyword} || '%'
 							</if>
+						AND reg_date BETWEEN TO_DATE(#{vo.dateBegin}, 'YY/MM/DD') 
+										 AND TO_DATE(#{vo.dateEnd}, 'YY/MM/DD')+1 
 						</if>
-						AND reg_date BETWEEN TO_DATE(#{dateArray[0]}, 'YY/MM/DD') 
-										 AND TO_DATE(#{dateArray[1]}, 'YY/MM/DD')+1 
+						<if test="vo.searchKeyword == ''">
+						AND reg_date BETWEEN TO_DATE(#{vo.dateBegin}, 'YY/MM/DD') 
+										 AND TO_DATE(#{vo.dateEnd}, 'YY/MM/DD')+1 
+						</if>
 					</where>
 			  		ORDER BY NOTICE_NUM DESC 
 			  		) N 
@@ -59,6 +63,27 @@
 		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
 	
+	<select id="getSearchFAQList" parameterType="hashmap" resultType="boardVO">
+		SELECT * 
+		FROM (SELECT ROWNUM R_NUM, A.*, 
+					 LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
+					 LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
+			  FROM (SELECT F.FAQ_NUM, Q.QNA_CATEGORY_NAME, F.TITLE, F.CONTENTS  
+			  		FROM FAQ F, QNA_CATEGORY Q 
+					WHERE f.qna_category_num = q.qna_category_num
+					<if test="vo.searchCondition == 'qna_category_name'">
+						AND Q.qna_category_name LIKE '%' || #{vo.searchKeyword} || '%'
+					</if>
+					<if test="vo.searchCondition == 'title'">
+						AND TITLE LIKE '%' || #{vo.searchKeyword} || '%'
+					</if>
+					<if test="vo.searchCondition == 'contents'">
+						AND CONTENTS LIKE '%' || #{vo.searchKeyword} || '%'
+					</if>
+					ORDER BY f.faq_num DESC) A) 
+		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
+	</select>
+	
 	<!-- 1:1 문의(관리자용) 전체 -->
 	<select id="getMemQListAll" parameterType="hashmap" resultType="boardVO">
 		SELECT * 
@@ -70,6 +95,36 @@
 				order_num, member_id, email, phone, reg_date 
 				FROM MEMBER_QNA Q, QNA_CATEGORY C 
 				WHERE Q.qna_category_num = C.qna_category_num 
+         		START WITH parent_num = 0 
+      		    CONNECT BY PRIOR member_qna_num = parent_num 
+     		    ORDER SIBLINGS BY member_qna_num DESC) A)
+		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
+	</select>
+	
+	<select id="getSearchMemQListAll" parameterType="hashmap" resultType="boardVO">
+		SELECT * 
+		FROM 
+    		(SELECT ROWNUM R_NUM, A.*, LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
+            LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
+     		FROM 
+    		    (SELECT member_qna_num, parent_num, title, contents, image, qna_category_name, 
+				order_num, member_id, email, phone, reg_date 
+				FROM MEMBER_QNA Q, QNA_CATEGORY C 
+				WHERE Q.qna_category_num = C.qna_category_num 
+							<if test="vo.searchCondition == 'title'">
+								AND q.TITLE LIKE '%' || #{vo.searchKeyword} || '%'
+							</if>
+							<if test="vo.searchCondition == 'contents'">
+								AND q.CONTENTS LIKE '%' || #{vo.searchKeyword} || '%'
+							</if>
+							<if test="vo.searchCondition == 'member_id'">
+								AND q.member_id LIKE '%' || #{vo.searchKeyword} || '%'
+							</if>
+							<if test="vo.searchCondition == 'qna_category_name'">
+								AND c.qna_category_name LIKE '%' || #{vo.searchKeyword} || '%'
+							</if>
+						AND q.reg_date BETWEEN TO_DATE(#{vo.dateBegin}, 'YY/MM/DD') 
+										 AND TO_DATE(#{vo.dateEnd}, 'YY/MM/DD')+1 
          		START WITH parent_num = 0 
       		    CONNECT BY PRIOR member_qna_num = parent_num 
      		    ORDER SIBLINGS BY member_qna_num DESC) A)
@@ -211,12 +266,12 @@
 <!-- ****************************************** 게시판 글 개수 조회 ****************************************** -->
 
 	<!-- 공지사항 -->
-	<select id="getNoticeCount" parameterType="hashmap" resultType="int">
+	<select id="getNoticeCount" resultType="int">
 		SELECT COUNT(*) 
 		FROM NOTICE
 	</select>
 	
-	<select id="getSearchNoticeCount" parameterType="hashmap" resultType="int">
+	<select id="getSearchNoticeCount" parameterType="boardVO" resultType="int">
 		SELECT COUNT(*) 
 		FROM NOTICE
 		<where>
@@ -228,8 +283,8 @@
 					AND CONTENTS LIKE '%' || #{searchKeyword} || '%'
 				</if>
 			</if>
-			AND reg_date BETWEEN TO_DATE(#{dateArray[0]}, 'YY/MM/DD')
-							 AND TO_DATE(#{dateArray[1]}, 'YY/MM/DD')+1
+			AND reg_date BETWEEN TO_DATE(#{dateBegin}, 'YY/MM/DD')
+							 AND TO_DATE(#{dateEnd}, 'YY/MM/DD')+1
 		</where>
 	</select>
 	
@@ -237,6 +292,22 @@
 	<select id="getFAQCount" resultType="int">
 		SELECT COUNT(*) 
 		FROM FAQ
+	</select>
+	
+	<select id="getSearchFAQCount" parameterType="boardVO" resultType="int">
+		select count(*) from
+        (select * from faq f, qna_category q 
+        where f.qna_category_num = q.qna_category_num
+		<if test="searchCondition == 'title'">
+			AND TITLE LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="searchCondition == 'contents'">
+			AND CONTENTS LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="searchCondition == 'qna_category_name'">
+			AND qna_category_name LIKE '%' || #{searchKeyword} || '%'
+		</if>
+        )
 	</select>
 	
 	<!-- 회원 1:1 로그인회원  -->
@@ -252,6 +323,27 @@
 	<select id="getMemQCountAll" resultType="int">
 		SELECT COUNT(*)
 		FROM MEMBER_QNA
+	</select>
+	
+	<select id="getSearchMemQCountAll" parameterType="boardVO" resultType="int">
+		select count(*) from
+        (select * from member_qna q, qna_category c 
+        where q.qna_category_num = c.qna_category_num
+			<if test="searchCondition == 'title'">
+				AND q.TITLE LIKE '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'contents'">
+				AND q.CONTENTS LIKE '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'member_id'">
+				AND q.member_id LIKE '%' || #{searchKeyword} || '%'
+			</if>
+			<if test="searchCondition == 'qna_category_name'">
+				AND c.qna_category_name LIKE '%' || #{searchKeyword} || '%'
+			</if>
+			AND q.reg_date BETWEEN TO_DATE(#{dateBegin}, 'YY/MM/DD') 
+							 AND TO_DATE(#{dateEnd}, 'YY/MM/DD')+1 
+        )
 	</select>
 	
 <!-- ****************************************** delete ****************************************** -->

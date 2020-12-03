@@ -114,7 +114,15 @@ public class BoardDAO {
 	}
 	
 	public List<BoardVO> getSearchNoticeList(HashMap<String, Object> map) {
-		return board.selectList("mapper.board.getSerchNoticeList", map);
+		return board.selectList("mapper.board.getSearchNoticeList", map);
+	}
+
+	public List<BoardVO> getSearchFAQList(HashMap<String, Object> map) {
+		return board.selectList("mapper.board.getSearchFAQList", map);
+	}
+
+	public List<BoardVO> getSearchMemQAllList(HashMap<String, Object> map) {
+		return board.selectList("mapper.board.getSearchMemQListAll", map);
 	}
 	
 }

@@ -505,28 +505,16 @@
 
 									<div aria-labelledby="mainNavHome" class="dropdown-menu dropdown-menu-clean dropdown-menu-hover">
 									    <ul class="list-unstyled m-0 p-0">
-									        <li class="dropdown-item dropdown"><a href="${contextPath }/product/productList.do?product_category_num=1" class="dropdown-link" data-toggle="dropdown">육류</a>
-									            <ul class="dropdown-menu dropdown-menu-hover dropdown-menu-block-md shadow-lg b-0 m-0">
-									                <li class="dropdown-item"><a href="${contextPath }/product/productList.do?product_category_num=1" class="dropdown-link">육류 1</a></li>
-									                <li class="dropdown-item"><a href="${contextPath }/product/productList.do?product_category_num=1" class="dropdown-link">육류 2</a></li>
-									                <li class="dropdown-item"><a href="${contextPath }/product/productList.do?product_category_num=1" class="dropdown-link">육류 3</a></li>
-									            </ul>
+									        <li class="dropdown-item dropdown">
+									        	<a href="${contextPath }/product/productList.do?product_category_num=1" class="dropdown-link" data-toggle="dropdown">육류</a>
 									        </li>
-									        <li class="dropdown-item dropdown"><a href="${contextPath }/product/productList.do?product_category_num=2" class="dropdown-link" data-toggle="dropdown">채소</a>
-									            <ul class="dropdown-menu dropdown-menu-hover dropdown-menu-block-md shadow-lg b-0 m-0">
-									                 <li class="dropdown-item"><a href="${contextPath }/product/productList.do?product_category_num=2" class="dropdown-link">채소1</a></li>
-									                <li class="dropdown-item"><a href="${contextPath }/product/productList.do?product_category_num=2" class="dropdown-link">채소2</a></li>
-									                <li class="dropdown-item"><a href="${contextPath }/product/productList.do?product_category_num=2" class="dropdown-link">채소3</a></li>
-									            </ul>
+									        <li class="dropdown-item dropdown">
+									        	<a href="${contextPath }/product/productList.do?product_category_num=2" class="dropdown-link" data-toggle="dropdown">채소</a>
 									        </li>
-									        <li class="dropdown-item dropdown"><a href="${contextPath }/product/productList.do?product_category_num=3" class="dropdown-link" data-toggle="dropdown">베이커리</a>
-                            <ul class="dropdown-menu dropdown-menu-hover dropdown-menu-block-md shadow-lg b-0 m-0">
-                                 <li class="dropdown-item"><a href="${contextPath }/product/productList.do?product_category_num=3" class="dropdown-link">베이커리1</a></li>
-					             <li class="dropdown-item"><a href="${contextPath }/product/productList.do?product_category_num=3" class="dropdown-link">베이커리2</a></li>
-					             <li class="dropdown-item"><a href="${contextPath }/product/productList.do?product_category_num=3" class="dropdown-link">베이커리3</a></li>
-                            </ul>
-                        </li>
-                          </li>
+									        <li class="dropdown-item dropdown">
+									        	<a href="${contextPath }/product/productList.do?product_category_num=3" class="dropdown-link" data-toggle="dropdown">베이커리</a>
+                        					</li>
+                          				</ul>
 									</div>
 
 								</li>

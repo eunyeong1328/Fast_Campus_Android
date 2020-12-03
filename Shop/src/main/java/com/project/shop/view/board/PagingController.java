@@ -34,7 +34,10 @@ public class PagingController {
 //		begin, end
 		paging.setEnd(paging.getNowPage() * paging.getNumPerPage());
 		paging.setBegin(paging.getEnd() - paging.getNumPerPage() + 1);
-
+		
+		System.out.println("관리자검색: "+ paging.getEnd());
+		System.out.println("관리자 검색: " + paging.getBegin());
+		
 //		블록
 		int nowPage = paging.getNowPage();
 		int currentBlock = (nowPage - 1) / paging.getPagePerBlock() + 1;

@@ -39,61 +39,54 @@ public class AdminBoardController {
 	
 //	관리자 공지사항
 	@RequestMapping(value="noticeList.do")
-	public ModelAndView getNoticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView getNoticeList(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
-		int count = pagingService.getNoticeCount(map);
-		map = pagingCon.getPaging(count, request, response);
-		mav.addObject("paging", map.get("paging"));
+		int count;
+		List<BoardVO> noticeList;
 		
-		List<BoardVO> noticeList = boardService.getNoticeList(map);
-		mav.addObject("NoticeList", noticeList);
-
-		return mav;
-	}
-	
-//	공지사항 검색 List
-	@RequestMapping(value="getSearchNoticeList.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView getSearchNoticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		
-		Enumeration enu = request.getParameterNames();
-		while(enu.hasMoreElements()){
-			String name = (String) enu.nextElement();
-			String value = request.getParameter(name);
-			map.put(name, value);
-			if (name.equals("search_daterange")) {
-				value = value.replaceAll(" ", "");
-				String[] dateArray = value.split("-");
-				map.put("dateArray", dateArray);
-			}
+		if (vo.getDaterange() == null) {
+			count = pagingService.getNoticeCount(map);
+			map = pagingCon.getPaging(count, request, response);
+			noticeList = boardService.getNoticeList(map);
+		} else {
+			count = pagingService.getSearchNoticeCount(vo);
+			map = pagingCon.getPaging(count, request, response);
+			map.put("vo", vo);
+			noticeList = boardService.getSearchNoticeList(map);
 		}
 		
-		int count = pagingService.getSearchNoticeCount(map);
-
-		map = pagingCon.getPaging(count, request, response);
+		mav.addObject("vo", vo);
 		mav.addObject("paging", map.get("paging"));
-		
-		List<BoardVO> noticeList = boardService.getSearchNoticeList(map);
 		mav.addObject("NoticeList", noticeList);
-		
+
 		return mav;
 	}
 	
 //	관리자 FAQ
 	@RequestMapping(value="/faqList.do")
-	public ModelAndView getFAQList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView getFAQList(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
-//		게시글 count
-		int count = pagingService.getFAQCount();
-		map = pagingCon.getPaging(count, request, response);
-		mav.addObject("paging", map.get("paging"));
+		int count;
+		List<BoardVO> faqList;
 		
-		List<BoardVO> faqList = boardService.getFAQList(map);
+		if (vo.getSearchKeyword() == null) {
+			count = pagingService.getFAQCount();
+			map = pagingCon.getPaging(count, request, response);
+			faqList = boardService.getFAQList(map);
+		} else {
+			count = pagingService.getSearchFAQCount(vo);
+			map = pagingCon.getPaging(count, request, response);
+			map.put("vo", vo);
+			System.out.println("뭠머머머머머머머머???");
+			faqList = boardService.getSearchFAQList(map);
+		}
+		
+		mav.addObject("vo", vo);
+		mav.addObject("paging", map.get("paging"));
 		mav.addObject("FAQList", faqList);
 		
 		return mav;
@@ -101,28 +94,37 @@ public class AdminBoardController {
 	
 //	관리자 1:1 문의
 	@RequestMapping(value="/memberQnaList.do")
-	public ModelAndView memQList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView memQList(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		System.out.println("1111111");
+		int count;
+		List<BoardVO> memQList;
 		
-		HttpSession session = request.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
-		Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
-		
-		if (isLogOn == true && memberVO.getMember_id().equals("admin")) {
-//			게시글 count
-			int count = pagingService.getMemQCountAll();
+		if (vo.getDaterange() == null) {
+			System.out.println("222222222");
+			count = pagingService.getMemQCountAll();
+			System.out.println("3333333333");
 			map = pagingCon.getPaging(count, request, response);
-			mav.addObject("paging", map.get("paging"));
-			
-			List<BoardVO> memQList = boardService.getMemQListAll(map);
-			mav.addObject("MemQList", memQList);
-			mav.setViewName(viewName);
+			System.out.println("4444444");
+			memQList = boardService.getMemQListAll(map);
+			System.out.println("555555555");
 		} else {
-			String message = "관리자만 본 서비스를 이용하실 수 있습니다.";
-			mav.addObject("message", message);
-			mav.setViewName("/member/loginForm");
+			System.out.println("666666666");
+			count = pagingService.getSearchMemQAllCount(vo);
+			System.out.println("777777777");
+			map = pagingCon.getPaging(count, request, response);
+			System.out.println("8888888");
+			map.put("vo", vo);
+			System.out.println("999999999");
+			memQList = boardService.getSearchMemQAllList(map);
+			System.out.println("101010101010");
 		}
+		
+		mav.addObject("vo", vo);
+		mav.addObject("paging", map.get("paging"));
+		mav.addObject("MemQList", memQList);
+		System.out.println("121212121212121");
 		return mav;
 	}
 	
@@ -346,8 +348,7 @@ public class AdminBoardController {
 	public ModelAndView noticeDelete(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		boardService.noticeDelete(vo);
-		String cPage = request.getParameter("cPage");
-		mav.setViewName("redirect:/adminboard/noticeList.do?cPage=" + cPage);
+		mav.setViewName("redirect:/adminboard/noticeList.do");
 		return mav;
 	}
 	

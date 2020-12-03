@@ -142,4 +142,14 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.getSearchNoticeList(map);
 	}
 
+	@Override
+	public List<BoardVO> getSearchFAQList(HashMap<String, Object> map) {
+		return boardDAO.getSearchFAQList(map);
+	}
+
+	@Override
+	public List<BoardVO> getSearchMemQAllList(HashMap<String, Object> map) {
+		return boardDAO.getSearchMemQAllList(map);
+	}
+
 }
