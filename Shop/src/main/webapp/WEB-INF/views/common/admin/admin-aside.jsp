@@ -117,7 +117,7 @@
 								<li class="nav-item">
 									<a class="nav-link" href="${contextPath}/admin/order/orders.do">
 										<i class="fi fi-layers"></i>
-										회원관리
+										주문관리
 									</a>
 								</li>
 
