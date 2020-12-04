@@ -6,7 +6,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-
 <!-- 
 
 		SHIPPING ADDRESS 
@@ -14,12 +13,10 @@
 	-->
 <script
 	src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
-<!-- !!중요. - autoload=false 를 반드시 붙혀주셔야 합니다.-->
 <script>
 	//load함수를 이용하여 core스크립트의 로딩이 완료된 후, 우편번호 서비스를 실행합니다.
 	function execDaumPostcode() {
-		daum.postcode
-				.load(function() {
+		daum.postcode.load(function() {
 					new daum.Postcode(
 							{
 								oncomplete : function(data) {
@@ -197,7 +194,8 @@
 	</div>
 
 	<div class="modal-footer">
-		<button type="submit" class="btn btn-sm btn-primary" onclick="save_Changes()">
+		<button type="submit" class="btn btn-sm btn-primary"
+			onclick="save_Changes()">
 			<i class="fi fi-check"></i> 변경사항 저장
 		</button>
 		<script type="text/javascript">

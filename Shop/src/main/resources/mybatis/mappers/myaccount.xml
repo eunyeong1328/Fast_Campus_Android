@@ -33,7 +33,7 @@
 		<result property="reg_date" column="reg_date" />
 		<result property="unit_price" column="unit_price" />
 	</resultMap>
-	
+
 	<resultMap id="shippingResult" type="myAccountShippingVO">
 		<result property="member_id" column="member_id" />
 		<result property="zipNo" column="zipNo" />
@@ -61,8 +61,8 @@
 			
     	]]>
 	</select>
-	
-		<select id="selectFavitem" resultType="String"
+
+	<select id="selectFavitem" resultType="String"
 		parameterType="java.util.HashMap">
 	 <![CDATA[
 			select p.product_id from product p , item i, mylist m 
@@ -79,7 +79,8 @@
 
 	<!-- 마이리스트 추가 -->
 	<insert id="addFavList" parameterType="java.util.HashMap">
-		insert into mylist(member_id, product_id) values(#{member_id},#{product_id})
+		insert into
+		mylist(member_id, product_id) values(#{member_id},#{product_id})
 	</insert>
 
 	<!-- 회원수정 -->
@@ -95,20 +96,29 @@
 		member_id=#{member_id}
 	</update>
 	
-	<!-- 배송지 추가  -->
+	<!-- 회원 삭제 -->
+	<delete id="deleteAccount" parameterType="String">
+		delete from member
+		where member_id = #{member_id}
+	</delete>
+
+	<!-- 배송지 추가 -->
 	<insert id="addAddress" parameterType="java.util.HashMap">
-		insert into shipping (member_id, zipNo, load_address, jibun_address, rest_address) 
-		values (#{member_id},#{zipNo},#{load_address},#{jibun_address},#{rest_address})
-	</insert> 
-	
-	<!--  배송지 확인 -->
-	<select id="listshippList" resultMap="shippingResult" parameterType="String">
+		insert into shipping
+		(member_id, zipNo, load_address, jibun_address, rest_address)
+		values
+		(#{member_id},#{zipNo},#{load_address},#{jibun_address},#{rest_address})
+	</insert>
+
+	<!-- 배송지 확인 -->
+	<select id="listshippList" resultMap="shippingResult"
+		parameterType="String">
 	 <![CDATA[
 			select * from shipping
 			where member_id=#{member_id}
     	]]>
 	</select>
-	
+
 	<!-- 배송지 수정 -->
 	<update id="modifyAddressInfo" parameterType="java.util.HashMap">
 		UPDATE MEMBER
@@ -121,11 +131,14 @@
 		WHERE
 		member_id = #{member_id}
 	</update>
-	
-	
-	<!-- 회원 삭제  -->
-	<delete id= "deleteAccount" parameterType="String">
-		delete from member where member_id = #{member_id}
+
+
+	<!-- 각각 배송지 삭제 -->
+	<delete id="deleteShipping" parameterType="java.util.HashMap">
+		<![CDATA[
+		delete from shipping
+		where zipNo = #{zipNo}
+		]]>
 	</delete>
 
 </mapper>

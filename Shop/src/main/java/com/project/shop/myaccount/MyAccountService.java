@@ -19,6 +19,8 @@ public interface MyAccountService{
 	public Map<String,Object> selectOrderDetail(String order_num) throws Exception;
 	public void deleteAccount(String member_id) throws Exception;
 	public void addAddress(HashMap map) throws Exception;
-	public List<MyAccountShippingVO> listshippList(String member_id) throws Exception;;
+	public List<MyAccountShippingVO> listshippList(String member_id) throws Exception;
+//	public void deleteShipping(HashMap map) throws Exception;
+	public void deleteShipping(String zipNo) throws Exception;
 
 }
