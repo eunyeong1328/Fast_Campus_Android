@@ -271,7 +271,7 @@
 					<c:if test="${pageNo != pvo.nowPage }">
 						<li class="page-item" aria-current="page"><a
 							class="page-link"
-							href="${contextPath}/admin/productList.do?cPage=${pageNo}">${pageNo }</a>
+							href="${contextPath}/admin/member/memberList.do?cPage=${pageNo}">${pageNo }</a>
 						</li>
 					</c:if>
 				</c:forEach>
@@ -283,7 +283,7 @@
 
 				<c:if test="${pvo.endPage < pvo.totalPage }">
 					<li class="page-item"><a class="page-link"
-						href="${contextPath}/admin/productList.do?cPage=${pvo.endPage +1}">Next</a>
+						href="${contextPath}/admin/member/memberList.do?cPage=${pvo.endPage +1}">Next</a>
 					</li>
 				</c:if>
 			</ul>

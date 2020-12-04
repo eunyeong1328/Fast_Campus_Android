@@ -16,18 +16,27 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.shop.admin.member.AdminMemberService;
 import com.project.shop.common.base.BaseController;
 import com.project.shop.member.MemberVO;
+import com.project.shop.product.Paging;
+import com.project.shop.product.ProductService;
 
 @Controller("adminMemberController")
 @RequestMapping(value="/admin/member")
 public class AdminMemberController extends BaseController {
 	@Autowired
 	private AdminMemberService adminMemberService;
+	@Autowired
+	ProductService service;
+	
+	@Autowired
+	private Paging p;
 	
 	@RequestMapping(value="memberList.do")
 	public ModelAndView memberList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
+				
+		//검색 날짜
 		HashMap<String,Object> condMap=new HashMap<String,Object>();
 		Enumeration enu = request.getParameterNames();
 		while(enu.hasMoreElements()){
@@ -36,6 +45,13 @@ public class AdminMemberController extends BaseController {
 			condMap.put(name, value);
 			System.out.println(name+":"+value);
 		}
+		
+		//페이징 처리
+		p= service.pageList(request.getParameter("cPage"));
+		mav.addObject("pvo", p);
+		condMap.put("begin", p.getBegin());
+		condMap.put("end", p.getEnd());
+		
 		
 		ArrayList<MemberVO> member_list=adminMemberService.listMember(condMap);
 		mav.addObject("member_list", member_list);

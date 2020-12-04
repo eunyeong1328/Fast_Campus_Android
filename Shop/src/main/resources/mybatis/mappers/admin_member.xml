@@ -24,20 +24,19 @@
 		
 	</resultMap>	
 	
-	<!-- 회원목록 -->
+	<!-- 회원목록 -->	
 	<select id="listMember" resultMap="memberResult" parameterType="java.util.HashMap">
 	<![CDATA[
-		SELECT X.RNUM, X.*
-	FROM (
-	SELECT ROWNUM AS RNUM, A.*
+		SELECT *
+	FROM (SELECT ROWNUM AS RNUM, A.*
 	FROM(
 	    SELECT *
 	    FROM MEMBER
 	    ORDER BY MEMBER_DATE) A
-	WHERE ROWNUM <= 30 )X
-	WHERE X.RNUM >=1
+	)
+	WHERE RNUM BETWEEN #{begin} AND #{end}
 	]]>
-	</select>		
+	</select>	
 	
 	<!-- 회원검색 -->
 	<select id="searchMember" resultMap="memberResult" parameterType="java.util.HashMap">
