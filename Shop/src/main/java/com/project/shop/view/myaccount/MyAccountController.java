@@ -49,7 +49,7 @@ public class MyAccountController extends BaseController {
 		System.out.println("세션 아이디" + sessionMember_id);
 		System.out.println("세션 비번" + sessionPass);
 		System.out.println("내가 입력한 비번" + voPassword);
-
+		
 		if (!(sessionPass.equals(voPassword))) {
 			String message = "비밀번호를 잘 못 입력하였습니다.";
 			mav.addObject("message", message);
