@@ -67,6 +67,7 @@ public class BoardController {
 
 		int count;
 		List<BoardVO> faqList;
+		map.put("vo", vo);
 		
 		if (vo.getSearchKeyword() == null) {
 			count = pagingService.getFAQCount();
@@ -75,7 +76,6 @@ public class BoardController {
 		} else {
 			count = pagingService.getSearchFAQCount(vo);
 			map = pagingCon.getPaging(count, request, response);
-			map.put("vo", vo);
 			faqList = boardService.getSearchFAQList(map);
 		}
 		
@@ -97,6 +97,7 @@ public class BoardController {
 		
 		int count;
 		List<BoardVO> memQList;
+		map.put("vo", vo);
 		
 		if (memberVO != null && memberVO.getMember_id() != null) {
 			map.put("member_id", memberVO.getMember_id());
@@ -106,8 +107,6 @@ public class BoardController {
 				map = pagingCon.getPaging(count, request, response);
 				memQList = boardService.getMemQList(map);
 			} else {
-				System.out.println("???????????");
-				map.put("vo", vo);
 				count = pagingService.getSearchMemQCount(map);
 				map = pagingCon.getPaging(count, request, response);
 				memQList = boardService.getSearchMemQList(map);
@@ -192,7 +191,9 @@ public class BoardController {
 	public ModelAndView getNotice(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-
+		
+		boardService.noticeViewUpdate(vo.getNotice_num());
+		
 		int count;
 		List<BoardVO> noticeList;
 		BoardVO notice;

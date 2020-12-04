@@ -280,10 +280,10 @@
 													<c:if test="${paging.beginPage != 1}">
 														<li class="page-item">
 															<c:if test="${vo.searchKeyword != null }">
-															<a class="page-link" href="faqList.do?cPage=${paging.endPage - 1 }&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" tabindex="-1" aria-disabled="true">Prev</a>
+															<a class="page-link" href="faqList.do?cPage=${paging.beginPage - 1 }&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" tabindex="-1" aria-disabled="true">Prev</a>
 															</c:if>
 															<c:if test="${vo.searchKeyword == null }">
-															<a class="page-link" href="faqList.do?cPage=${paging.endPage - 1 }" tabindex="-1" aria-disabled="true">Prev</a>
+															<a class="page-link" href="faqList.do?cPage=${paging.beginPage - 1 }" tabindex="-1" aria-disabled="true">Prev</a>
 															</c:if>
 														</li>
 													</c:if>

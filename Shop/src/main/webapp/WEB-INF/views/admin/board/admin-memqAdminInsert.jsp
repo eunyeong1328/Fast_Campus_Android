@@ -26,7 +26,7 @@
 		<input type="hidden" name="email" value="${memberInfo.email }">
 		<input type="hidden" name="phone" value="${memberInfo.phone }">
 		<input type="hidden" name="member_qna_num" value="${memQ.member_qna_num }">
-		<input type="hidden" name="cPage" value="${paging.nowPage}">
+		<input type="hidden" name="cPage" value="${cPage}">
 		<input type="hidden" name="action" value="memqAdminAdd">
 		
 		<!--

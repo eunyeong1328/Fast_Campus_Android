@@ -44,6 +44,7 @@ public class AdminBoardController {
 
 		int count;
 		List<BoardVO> noticeList;
+		map.put("vo", vo);
 
 		if (vo.getDaterange() == null) {
 			count = pagingService.getNoticeCount();
@@ -52,7 +53,6 @@ public class AdminBoardController {
 		} else {
 			count = pagingService.getSearchNoticeCount(vo);
 			map = pagingCon.getPaging(count, request, response);
-			map.put("vo", vo);
 			noticeList = boardService.getSearchNoticeList(map);
 		}
 
@@ -72,6 +72,7 @@ public class AdminBoardController {
 
 		int count;
 		List<BoardVO> faqList;
+		map.put("vo", vo);
 
 		if (vo.getSearchKeyword() == null) {
 			count = pagingService.getFAQCount();
@@ -80,7 +81,6 @@ public class AdminBoardController {
 		} else {
 			count = pagingService.getSearchFAQCount(vo);
 			map = pagingCon.getPaging(count, request, response);
-			map.put("vo", vo);
 			faqList = boardService.getSearchFAQList(map);
 		}
 
@@ -100,6 +100,7 @@ public class AdminBoardController {
 
 		int count;
 		List<BoardVO> memQList;
+		map.put("vo", vo);
 
 		if (vo.getDaterange() == null) {
 			count = pagingService.getMemQCountAll();
@@ -108,7 +109,6 @@ public class AdminBoardController {
 		} else {
 			count = pagingService.getSearchMemQAllCount(vo);
 			map = pagingCon.getPaging(count, request, response);
-			map.put("vo", vo);
 			memQList = boardService.getSearchMemQAllList(map);
 		}
 
@@ -202,9 +202,13 @@ public class AdminBoardController {
 	public ModelAndView FAQInsert(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-
-		boardService.faqInsert(vo);
-		mav.setViewName("redirect:/adminboard/faqList.do");
+		
+		String action = request.getParameter("action");
+		
+		if (action != null && action.equals("faqAdd")) {
+			boardService.faqInsert(vo);
+			mav.setViewName("redirect:/adminboard/faqList.do");
+		}
 	
 		return mav;
 	}
@@ -307,6 +311,9 @@ public class AdminBoardController {
 
 		BoardVO memQ = boardService.getMemQ(vo);
 		mav.addObject("memQ", memQ);
+		
+		String cPage = request.getParameter("cPage");
+		mav.addObject("cPage", cPage);
 
 		return mav;
 	}
@@ -328,9 +335,11 @@ public class AdminBoardController {
 	public ModelAndView memQAdminUpdateView(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		String cPage = request.getParameter("cPage");
 
 		BoardVO memQ = boardService.getMemQ(vo);
 		mav.addObject("memQ", memQ);
+		mav.addObject("cPage", cPage);
 		return mav;
 	}
 
@@ -342,7 +351,9 @@ public class AdminBoardController {
 
 		map = filecon.fileUpload(multipartRequest, response);
 		boardService.memqAdminUpdate(map);
-		mav.setViewName("redirect:/adminboard/memQ.do?member_qna_num=" + member_qna_num + "&cPage=" + multipartRequest.getParameter("cPage"));
+		mav.setViewName("redirect:/adminboard/memQ.do?member_qna_num=" + member_qna_num 
+												+ "&cPage=" + multipartRequest.getParameter("cPage")
+												+ "&member_id=" + multipartRequest.getParameter("member_id"));
 
 		return mav;
 	}

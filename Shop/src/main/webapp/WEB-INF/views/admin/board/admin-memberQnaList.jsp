@@ -209,11 +209,11 @@
 									</c:if>
 									<c:if test="${paging.beginPage != 1}">
 										<li class="page-item">
-										<c:if test="${vo.daterange != null }">
-											<a class="page-link" href="memberQnaList.do?cPage=${paging.endPage - 1 }&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" tabindex="-1" aria-disabled="true">Prev</a>
-										</c:if> 
 										<c:if test="${vo.daterange == null }">
-											<a class="page-link" href="memberQnaList.do?cPage=${paging.endPage - 1 }" tabindex="-1" aria-disabled="true">Prev</a>
+											<a class="page-link" href="memberQnaList.do?cPage=${paging.beginPage - 1 }" tabindex="-1" aria-disabled="true">Prev</a>
+										</c:if> 
+										<c:if test="${vo.daterange != null }">
+											<a class="page-link" href="memberQnaList.do?cPage=${paging.beginPage - 1 }&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" tabindex="-1" aria-disabled="true">Prev</a>
 										</c:if>
 										</li>
 									</c:if>
@@ -227,11 +227,11 @@
 										</c:if>
 										<c:if test="${pageNo != paging.nowPage }">
 											<li class="page-item" aria-current="page">
-											<c:if test="${vo.daterange != null }">
-												<a class="page-link" href="memberQnaList.do?cPage=${pageNo }&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" tabindex="-1" aria-disabled="true">Prev</a>
-											</c:if> 
 											<c:if test="${vo.daterange == null }">
 												<a class="page-link" href="memberQnaList.do?cPage=${pageNo }">${pageNo } <span class="sr-only">(current)</span></a>
+											</c:if> 
+											<c:if test="${vo.daterange != null }">
+												<a class="page-link" href="memberQnaList.do?cPage=${pageNo }&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" tabindex="-1" aria-disabled="true">${pageNo }</a>
 											</c:if>
 											</li>
 										</c:if>

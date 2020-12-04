@@ -202,7 +202,7 @@
 	
 	<!-- 1:1 문의 선택한 글 불러오기 -->
 	<select id="getMemQ" parameterType="boardVO" resultType="boardVO">
-		SELECT q.member_qna_num, q.title, q.contents, q.image, q.qna_category_num, c.qna_category_name, 
+		SELECT q.parent_num, q.member_qna_num, q.title, q.contents, q.image, q.qna_category_num, c.qna_category_name, 
 			q.order_num, q.member_id, q.email, q.phone, q.reg_date 
 		FROM MEMBER_QNA Q, QNA_CATEGORY C 
 		WHERE Q.qna_category_num = C.qna_category_num 
@@ -291,7 +291,7 @@
 		UPDATE member_qna 
 		SET TITLE = #{title}, 
 		CONTENTS = #{contents}, 
-		IMAGE = #{image}, 
+		IMAGE = #{image}  
 		WHERE member_qna_num = #{member_qna_num}
 	</update>
 
@@ -355,20 +355,20 @@
 		select count(*) from
         (select * from member_qna q, qna_category c 
         where q.qna_category_num = c.qna_category_num
-		<if test="searchCondition == 'title'">
-			AND q.TITLE LIKE '%' || #{searchKeyword} || '%'
+		<if test="vo.searchCondition == 'title'">
+			AND q.TITLE LIKE '%' || #{vo.searchKeyword} || '%'
 		</if>
-		<if test="searchCondition == 'contents'">
-			AND q.CONTENTS LIKE '%' || #{searchKeyword} || '%'
+		<if test="vo.searchCondition == 'contents'">
+			AND q.CONTENTS LIKE '%' || #{vo.searchKeyword} || '%'
 		</if>
-		<if test="searchCondition == 'member_id'">
-			AND q.member_id LIKE '%' || #{searchKeyword} || '%'
+		<if test="vo.searchCondition == 'member_id'">
+			AND q.member_id LIKE '%' || #{vo.searchKeyword} || '%'
 		</if>
-		<if test="searchCondition == 'qna_category_name'">
-			AND c.qna_category_name LIKE '%' || #{searchKeyword} || '%'
+		<if test="vo.searchCondition == 'qna_category_name'">
+			AND c.qna_category_name LIKE '%' || #{vo.searchKeyword} || '%'
 		</if>
-		AND q.reg_date BETWEEN TO_DATE(#{dateBegin}, 'YY/MM/DD') 
-						 AND TO_DATE(#{dateEnd}, 'YY/MM/DD')+1 
+		AND q.reg_date BETWEEN TO_DATE(#{vo.dateBegin}, 'YY/MM/DD') 
+						 AND TO_DATE(#{vo.dateEnd}, 'YY/MM/DD')+1 
         AND Q.member_id = #{member_id} OR Q.member_id = 'admin' 
 		AND Q.parent_num IN (SELECT member_qna_num from member_qna where member_id = #{member_id})
    		START WITH parent_num = 0 

@@ -22,7 +22,7 @@
 
 	<form novalidate class="bs-validate" method="post" action="${contextPath }/adminboard/faqInsert.do"
 		enctype="multipart/form-data">
-
+		<input type="hidden" name="action" value="faqAdd">
 		<section>
 
 			<div class="row gutters-sm">
