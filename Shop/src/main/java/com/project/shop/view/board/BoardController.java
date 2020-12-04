@@ -156,17 +156,17 @@ public class BoardController {
 	@RequestMapping(value = "/memQ-update.do")
 	public ModelAndView memQUpdateView(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView(viewName);
 
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		String cPage = request.getParameter("cPage");
+		System.out.println("asdfasdf111111111"+cPage);
 
 		vo.setMember_id(memberVO.getMember_id());
 		BoardVO memQ = boardService.getMemQ(vo);
 		mav.addObject("memQ", memQ);
 		mav.addObject("cPage", cPage);
-		mav.setViewName(viewName);
 		
 		return mav;
 	}
@@ -176,10 +176,12 @@ public class BoardController {
 	public ModelAndView memQUpdate(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String cPage = multipartRequest.getParameter("cPage");
+		System.out.println("asdfasdf222222222"+cPage);
 		String member_qna_num = multipartRequest.getParameter("member_qna_num");
-
+		System.out.println("asdfasdf222222222"+member_qna_num);
 		map = filecon.fileUpload(multipartRequest, response);
 		boardService.memQUpdate(map);
+		System.out.println("asdfasdf222222222"+member_qna_num);
 		mav.setViewName("redirect:memQ.do?member_qna_num=" + member_qna_num + "&cPage=" + cPage);
 
 		return mav;
@@ -194,6 +196,7 @@ public class BoardController {
 		int count;
 		List<BoardVO> noticeList;
 		BoardVO notice;
+		map.put("vo", vo);
 		
 		if (vo.getDaterange() == null) {
 			count = pagingService.getNoticeCount();
@@ -202,7 +205,6 @@ public class BoardController {
 		} else {
 			count = pagingService.getSearchNoticeCount(vo);
 			map = pagingCon.getPaging(count, request, response);
-			map.put("vo", vo);
 			noticeList = boardService.getSearchNoticeList(map);
 		}
 		
@@ -227,6 +229,7 @@ public class BoardController {
 		int count;
 		List<BoardVO> faqList;
 		BoardVO faq;
+		map.put("vo", vo);
 		
 		if (vo.getSearchKeyword() == null) {
 			count = pagingService.getFAQCount();
@@ -235,7 +238,6 @@ public class BoardController {
 		} else {
 			count = pagingService.getSearchFAQCount(vo);
 			map = pagingCon.getPaging(count, request, response);
-			map.put("vo", vo);
 			faqList = boardService.getSearchFAQList(map);
 		}
 		
@@ -243,7 +245,7 @@ public class BoardController {
 		mav.addObject("paging", map.get("paging"));
 		
 		for (BoardVO faqVO : faqList) {
-			if (faqVO.getFaq_num() == vo.getFaq_num() || faqVO.getR_num() == vo.getFaq_num()) {
+			if (faqVO.getFaq_num() == vo.getFaq_num() || faqVO.getR_num() == vo.getR_num()) {
 				faq = faqVO;
 				mav.addObject("faq", faq);
 			}
@@ -254,7 +256,8 @@ public class BoardController {
 
 	@RequestMapping("/memQ.do")
 	public ModelAndView getMemQ(BoardVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
 
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");

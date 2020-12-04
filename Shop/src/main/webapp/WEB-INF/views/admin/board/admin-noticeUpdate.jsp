@@ -24,6 +24,7 @@
 		enctype="multipart/form-data">
 		<input type="hidden" name="notice_num" value="${notice.notice_num }">
 		<input type="hidden" name="cPage" value="${paging.nowPage}">
+		<input type="hidden" name="action" value="noticeUpdating">
 
 		<!--
 							

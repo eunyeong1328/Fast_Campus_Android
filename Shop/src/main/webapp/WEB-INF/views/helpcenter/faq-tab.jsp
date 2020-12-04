@@ -65,16 +65,14 @@
 									<td>${faq.r_num}</td>
 									<td>${faq.qna_category_name}</td>
 									
-									<c:if test="${vo.searchKeyword == null }">
-										<td>
+									<td>
+										<c:if test="${vo.searchKeyword == null }">
 											<a href="faq.do?faq_num=${faq.faq_num}&cPage=${paging.nowPage}">${faq.title}</a>
-										</td>
-									</c:if>
-									<c:if test="${vo.searchKeyword != null }">
-										<td>
-											<a href="faq.do?faq_num=${faq.faq_num}&cPage=${paging.nowPage}">${faq.title}</a>
-										</td>
-									</c:if>
+										</c:if>
+										<c:if test="${vo.searchKeyword != null }">
+											<a href="faq.do?faq_num=${faq.faq_num}&cPage=${paging.nowPage}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">${faq.title}</a>
+										</c:if>
+									</td>
 									
 								</tr>
 							</tbody>

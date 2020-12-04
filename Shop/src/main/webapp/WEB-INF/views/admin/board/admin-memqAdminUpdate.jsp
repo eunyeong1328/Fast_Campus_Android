@@ -24,6 +24,7 @@
 		enctype="multipart/form-data">
 		<input type="hidden" name="member_qna_num" value="${memQ.member_qna_num }">
 		<input type="hidden" name="cPage" value="${paging.nowPage}">
+		<input type="hidden" name="action" value="memqAdminUpdating">
 
 		<!--
 							

@@ -5,7 +5,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <%
-  request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
+
+	String pOrderNum = request.getParameter("pOrderNum");
+	if (pOrderNum == null) {
+		pOrderNum = "주문 번호를 선택해주세요.";
+	}
 %>
 
 <div class="d-flex flex-fill container">
@@ -47,21 +52,27 @@
 								<input type="hidden" name="member_id" value="${memQ.member_id }">
 								<input type="hidden" name="member_qna_num" value="${memQ.member_qna_num}"> 
 								<input type="hidden" name="cPage" value="${cPage }">
+								<input type="hidden" name="action" value="memqUpdate">
+								
 								<div class="memq-title">
 									<p>제목</p>
 									<div class="category-select">
 										<select name="qna_category_num">
 											<option value="${memQ.qna_category_num }" selected>${memQ.qna_category_name }</option>
-											<option value="1">배송</option>
-											<option value="2">반품</option>
-											<option value="3">상품</option>
+											<option value="1">배송지연/불만</option>
+											<option value="2">반품문의</option>
+											<option value="4">환불문의</option>
+											<option value="5">주문결제문의</option>
+											<option value="6">회원정보문의</option>
+											<option value="7">교환문의</option>
+											<option value="8">기타문의</option>
 										</select> <input type="text" name="title" value="${memQ.title }">
 									</div>
 								</div>
 								<div class="memq-order-num">
 									<p>주문번호</p>
-									<input type="number" name="order_num" value="${memQ.order_num}">
-									<input type="button" value="주문조회">
+									<input type="text" name="order_num" value="<%=pOrderNum %>" id="pOrderNum" readonly>
+									<input type="button" value="주문조회" onclick="orderList_open('${memberInfo.member_id }')">
 								</div>
 								<div class="memq-email">
 									<p>이메일</p>

@@ -22,6 +22,7 @@
 
 	<form novalidate class="bs-validate" method="post" action="${contextPath }/adminboard/noticeAdd.do"
 		enctype="multipart/form-data">
+		<input type="hidden" name="action" value="noticeAdd">
 
 		<section>
 
