@@ -81,4 +81,21 @@ public class MyAccountDAO {
 		ArrayList<MyAccountShippingVO> listshippList = (ArrayList)sqlSession.selectList("mappers.myaccount.listshippList",member_id);
 	    return listshippList;
 	}
+	
+//	public void deleteShipping(HashMap map) throws Exception{
+//		System.out.println("==============  $$$$ 이건 DAO $$$$  =====================");
+//		System.out.println("여기 까지 삭제가 잘 되어 지나요??");
+//		System.out.println("listshippList 아이디 확인:          " + map.get("member_id"));
+//		System.out.println("myAccountService 우편번호:          " + map.get("zipNo"));
+//		System.out.println("Account 삭제할 도로명주소:           " + map.get("load_address"));
+//		System.out.println("Account 삭제할 지번 주소:          " + map.get("jibun_address"));
+//		System.out.println("Account 삭제할 나머지 주소:          " + map.get("rest_address"));
+//		sqlSession.delete("mappers.myaccount.deleteShipping", map);
+//	}
+	
+	public void deleteShipping(String zipNo) throws Exception{
+		System.out.println("==============  $$$$ 이건 DAO $$$$  =====================");
+		System.out.println("여기 삭제할 나머지 주소:          " + zipNo);
+		sqlSession.delete("mappers.myaccount.deleteShipping", zipNo);
+	}
 }

@@ -31,8 +31,8 @@
 						<div class="clearfix d-flex justify-content-between">
 
 							<!-- Logo : height: 60px max -->
-							<a class="w-100 align-self-center navbar-brand p-3" href="${contextPath}/main/main.do">
-								<img src="${contextPath}/resources/assets/images/logo/logo_light.svg" width="110" height="60" alt="...">
+							<a class="w-100 align-self-center navbar-brand p-3" href="${contextPath}/main/main.do" >
+								<img src="${contextPath}/resources/images/logo-admin3.svg" width="260" height="111" style="display: block; box-sizing: border-box; margin-left: 20px" alt="..." >
 							</a>
 
 						</div>

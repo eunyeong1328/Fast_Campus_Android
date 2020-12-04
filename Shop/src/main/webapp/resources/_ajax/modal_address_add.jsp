@@ -14,12 +14,10 @@
 	-->
 <script
 	src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
-<!-- !!중요. - autoload=false 를 반드시 붙혀주셔야 합니다.-->
 <script>
 	//load함수를 이용하여 core스크립트의 로딩이 완료된 후, 우편번호 서비스를 실행합니다.
 	function execDaumPostcode() {
-		daum.postcode
-				.load(function() {
+		daum.postcode.load(function() {
 					new daum.Postcode(
 							{
 								oncomplete : function(data) {
@@ -81,8 +79,8 @@
 <form novalidate class="bs-validate" method="post"
 	action="${contextPath}/myaccount/insertAddressInfo.do">
 	<div class="modal-header">
-		<h2 class="modal-title fs--18 m-0">주소</h2>
-		: 배송지 주소 추가
+		<h2 class="modal-title fs--18 m-0">새 배송지 추가</h2>
+		
 		<button type="button" class="close pointer" data-dismiss="modal"
 			aria-label="Close">
 			<span class="fi fi-close fs--18" aria-hidden="true"></span>
