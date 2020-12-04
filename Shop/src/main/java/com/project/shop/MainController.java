@@ -1,6 +1,8 @@
 package com.project.shop;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,9 +12,12 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.shop.common.base.BaseController;
+import com.project.shop.member.MailDto;
+import com.project.shop.member.SendEmailService;
 import com.project.shop.product.Paging;
 import com.project.shop.product.ProductService;
 import com.project.shop.product.ProductVO;
@@ -26,6 +31,9 @@ public class MainController extends BaseController {
 	@Autowired
 	ProductService service;
 	List<ProductVO> bestlist, newlist;
+	
+	@Autowired
+	private SendEmailService sendEmailService;
 
 	@Autowired
 	private Paging p;
@@ -81,4 +89,12 @@ public class MainController extends BaseController {
 		mav.setViewName((String) request.getAttribute("viewName"));
 		return mav;
 	}
+	
+	//이메일과 아이디(id)의 일치여부를 check하는 컨트롤러
+	 @RequestMapping(value = "/main/sendEmail.do")
+	   public @ResponseBody void sendEmail(String email){
+		 	System.out.println("이메일 확인"+email);
+	       MailDto dto = sendEmailService.sendEmailAdvertise(email);
+	       sendEmailService.mailSend(dto);
+	   }
 }

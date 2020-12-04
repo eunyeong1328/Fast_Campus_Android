@@ -23,7 +23,7 @@
 
 <resultMap id="cartResult" type="cartVO">
 	<result property="member_id" column="member_id" />
-	<result property="product_id" column="product_id" />
+	<result property="product_name" column="product_name" />
 	<result property="quantity" column="quantity" />
 	<result property="cart_id" column="cart_id" />
 </resultMap>
@@ -72,27 +72,32 @@
 </update>
 <!--내카트에 담긴 제품정보  -->		
 <select id="selectProductList" resultMap="productResult" parameterType="java.util.Map">
-select x.*, o.option_name, o.option_price
-from  product_option o,	(select p.*, i.price, i.discount, i.stock, c.cart_id, c.quantity, c.option_name
+							
+select x.*, nvl(o.option_price, price) as option_price
+from (select p.*, i.price, i.discount, i.stock, c.cart_id, c.quantity, c.option_name
 		from product p, item i, cart c 
 		where c.member_id = ANY
-		<foreach item="item" collection="list" open="(" separator="," close=")">
-		#{item.member_id}
-		</foreach>
+							<foreach item="item" collection="list" open="(" separator="," close=")">
+							#{item.member_id}
+							</foreach>
 		and p.product_name = c.product_name
-		and p.product_id = i.product_id
-		and c.option_name in
-		<foreach item="item" collection="list" open="(" separator="," close=")">
-	#{item.option_name}	
-</foreach> ) x
-where o.option_name= x.option_name
-
+		and p.product_id = i.product_id) x
+left outer join product_option o on x.option_name = o.option_name						
+								
 </select>
 <!-- 카트에 같은제품이있는지 체크 -->
 <select id="selectCountInCart" resultType="String" parameterType="cartVO">
    <![CDATA[
 		    select decode(count(*), 0, 'false', 'true') from cart
 			where option_name=#{option_name}
+			  and member_id=#{member_id} 
+    	]]>
+</select>
+<!-- 옵션이 없을경우 카트에 같은제품이있는지 체크 -->
+<select id="selectCountInCarts" resultType="String" parameterType="cartVO">
+   <![CDATA[
+		    select decode(count(*), 0, 'false', 'true') from cart
+			where product_name=#{product_name}
 			  and member_id=#{member_id} 
     	]]>
 </select>
@@ -109,6 +114,12 @@ where o.option_name= x.option_name
 		select nvl(max(cart_id), 0) + 1 from cart
    	]]>
 </select>
-
+<!-- 장바구니에 담긴 갯수 count -->
+<select id="cartChkCount" parameterType="cartVO" resultType="String">
+	<![CDATA[
+		select count(*) from cart
+		where member_id = #{member_id}
+	]]>
+</select>
 </mapper>
 

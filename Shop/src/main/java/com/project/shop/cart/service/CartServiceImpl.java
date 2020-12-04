@@ -19,17 +19,22 @@ public class CartServiceImpl implements CartService {
 	
 	@Autowired
 	private CartDAO cartDAO;
-
+	
+	@Override
+	public boolean findCartProducts(CartVO cartVO) throws Exception {
+		return cartDAO.selectCountInCarts(cartVO);
+	}
+	
 	@Override
 	public boolean findCartProduct(CartVO cartVO) throws Exception {
 		return cartDAO.selectCountInCart(cartVO);
 	}
-
+	
 	@Override
 	public void addProductInCart(CartVO cartVO) throws Exception {
 		cartDAO.insertProductInCart(cartVO);
 	}
-
+	
 	@Override
 	public Map<String, List> myCartList(CartVO cartVO) throws Exception {
 		Map<String,List> cartMap = new HashMap<String,List>();
@@ -43,7 +48,6 @@ public class CartServiceImpl implements CartService {
 		cartMap.put("myProductList", myProductList);
 		return cartMap;
 	}
-
 	@Override
 	public void plusQuantity(CartVO cartVO) throws Exception {
 		cartDAO.plusQuantity(cartVO);
@@ -63,4 +67,11 @@ public class CartServiceImpl implements CartService {
 	public void deleteAllProduct(CartVO cartVO) throws Exception {
 		cartDAO.deleteAllProduct(cartVO);
 	}
+
+	@Override
+	public String cartChkCount(CartVO cartVO) throws Exception {
+		return cartDAO.cartChkCount(cartVO);
+	}
+
+
 }
