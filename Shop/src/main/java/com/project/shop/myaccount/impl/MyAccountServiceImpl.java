@@ -113,9 +113,24 @@ public class MyAccountServiceImpl implements MyAccountService{
 	
 	@Override
 	public List<MyAccountShippingVO> listshippList(String member_id) throws Exception {
-		System.out.println("===================================");
-		System.out.println("listshippList 아이디 확인" + member_id );
 		return myAccountDAO.listshippList(member_id);
 	}
 
+//	@Override
+//	public void deleteShipping(HashMap map) throws Exception {
+//		System.out.println("===========   이건  MyAccountImpl 주소 잘 넘어오는지 확인 !!========================");
+//		System.out.println("listshippList 아이디 확인" + map.get("member_id"));
+//		System.out.println("myAccountService 우편번호" + map.get("zipNo"));
+//		System.out.println("Account 삭제할 도로명주소 " + map.get("load_address"));
+//		System.out.println("Account 삭제할 지번 주소" + map.get("jibun_address"));
+//		System.out.println("Account 삭제할 나머지 주소" + map.get("rest_address"));
+//		myAccountDAO.deleteShipping(map);
+//		
+//	}
+
+	@Override
+	public void deleteShipping(String zipNo) throws Exception {
+		myAccountDAO.deleteShipping(zipNo);
+		
+	}
 }
