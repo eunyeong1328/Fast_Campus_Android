@@ -654,11 +654,11 @@
 
                   <div class="col-10 mx-auto col-lg-4 py-4">
 
-                     <form novalidate method="post" action="#subscribe_url" class="bs-validate py-3 mt-1 input-group-over input-group-pill"> 
+                     <form id="form" novalidate class="bs-validate py-3 mt-1 input-group-over input-group-pill"> 
                            
-                        <input required class="form-control form-control-lg font-weight-light text-center-md text-center-xs" name="subscriber_email" type="email" value="" placeholder="email address..." aria-label="email address...">
+                        <input required class="form-control form-control-lg font-weight-light text-center-md text-center-xs" id="email" name="email" type="email" value="" placeholder="email address..." aria-label="email address...">
 
-                        <button aria-label="subscribe" type="submit" class="btn bg-transparent shadow-none"> 
+                        <button aria-label="subscribe" type="submit" class="btn bg-transparent shadow-none" onclick="sendEmail()"> 
                            <i class="fi fi-send fs--18"></i> 
                         </button>
 
@@ -1051,5 +1051,29 @@
 
 	</div>
 
+<script>
+	$("#form").click(function(e){
+		console.log('form close');
+		$(this).find('form')[0].reset()
+	});
+	
+	function sendEmail(){
+		var email = $("#email").val();
+
+		$.ajax({
+			type:"POST",
+			url: "${contextPath}/main/sendEmail.do",
+			async : false,
+			data: {
+				"email":email
+			},
+			success:function(){
+				$('#form').find('#email').val('');
+				location.href="${contextPath}/main/main.do";
+				alert("전송 성공");
+			}
+		})
+	}
+</script>
 
                      

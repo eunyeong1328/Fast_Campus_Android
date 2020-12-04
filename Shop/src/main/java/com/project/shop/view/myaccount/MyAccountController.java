@@ -38,7 +38,7 @@ public class MyAccountController extends BaseController{
 	@RequestMapping(value ="/deleteAccount.do") 
 	public ModelAndView deleteAccount(
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//session에서 획득한  memberInfo 정보
+		//session�뿉�꽌 �쉷�뱷�븳  memberInfo �젙蹂�
 		ModelAndView mav = new ModelAndView();
 		
 		HttpSession session=request.getSession(); 
@@ -47,27 +47,27 @@ public class MyAccountController extends BaseController{
 		String sessionPass = memberVO.getPassword();
 		String voPassword = request.getParameter("current_password");
 		
-		System.out.println("세션 아이디" + sessionMember_id);
-		System.out.println("세션 비번" + sessionPass);
-		System.out.println("내가 입력한 비번" + voPassword);
+		System.out.println("�꽭�뀡 �븘�씠�뵒" + sessionMember_id);
+		System.out.println("�꽭�뀡 鍮꾨쾲" + sessionPass);
+		System.out.println("�궡媛� �엯�젰�븳 鍮꾨쾲" + voPassword);
 
 		
 		if(!(sessionPass.equals(voPassword))){
-			String message="비밀번호를 잘 못 입력하였습니다."; 
+			String message="鍮꾨�踰덊샇瑜� �옒 紐� �엯�젰�븯���뒿�땲�떎."; 
 	        mav.addObject("message", message);
 			mav.setViewName("/myaccount/account-settings");
 			return mav;
 		}else {
 			myAccountService.deleteAccount(sessionMember_id);
 			session.invalidate();
-			String message="정상적으로 회원탈퇴처리가 승인되었습니다. \\n 그동안 이용해 주셔서 진심으로 감사합니다."; 
+			String message="�젙�긽�쟻�쑝濡� �쉶�썝�깉�눜泥섎━媛� �듅�씤�릺�뿀�뒿�땲�떎. \\n 洹몃룞�븞 �씠�슜�빐 二쇱뀛�꽌 吏꾩떖�쑝濡� 媛먯궗�빀�땲�떎."; 
 	        mav.addObject("message", message);
 			mav.setViewName("/main/main");
 			return mav;
 		}
 	}
 
-//찜 리스트
+//李� 由ъ뒪�듃
 	@RequestMapping(value="/account-favourites.do")
 	public ModelAndView accountFavourites( HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -79,7 +79,7 @@ public class MyAccountController extends BaseController{
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 
 		if(isLogOn == null || isLogOn == false || memberVO ==null) {
-			mav.addObject("message", "세션이 만료되었습니다. 다시 로그인해주세요");
+			mav.addObject("message", "�꽭�뀡�씠 留뚮즺�릺�뿀�뒿�땲�떎. �떎�떆 濡쒓렇�씤�빐二쇱꽭�슂");
 			mav.setViewName("/member/loginForm");
 		} else {
 			String member_id = memberVO.getMember_id();	    	  
@@ -104,7 +104,7 @@ public class MyAccountController extends BaseController{
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 
 		if(isLogOn == null || isLogOn == false || memberVO ==null) {
-			mav.addObject("message", "세션이 만료되었습니다. 다시 로그인해주세요");
+			mav.addObject("message", "�꽭�뀡�씠 留뚮즺�릺�뿀�뒿�땲�떎. �떎�떆 濡쒓렇�씤�빐二쇱꽭�슂");
 			mav.setViewName("/member/loginForm");
 		} else {
 			String member_id = memberVO.getMember_id();
@@ -132,7 +132,7 @@ public class MyAccountController extends BaseController{
 		myAccountService.addFav(ids);		    	  
 
 	}
-// 내 주문
+// �궡 二쇰Ц
 	@RequestMapping(value="/account-orders.do")
 	public ModelAndView selectOrders( HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -149,7 +149,7 @@ public class MyAccountController extends BaseController{
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 
 		if(isLogOn == null || isLogOn == false || memberVO ==null) {
-			mav.addObject("message", "세션이 만료되었습니다. 다시 로그인해주세요");
+			mav.addObject("message", "�꽭�뀡�씠 留뚮즺�릺�뿀�뒿�땲�떎. �떎�떆 濡쒓렇�씤�빐二쇱꽭�슂");
 			mav.setViewName("/member/loginForm");
 		} else {
 			String member_id = memberVO.getMember_id();	    	  
@@ -173,7 +173,7 @@ public class MyAccountController extends BaseController{
 			  Map<String, Object> orderMap =myAccountService.selectOrderDetail(order_num);
 			  mav.addObject("orderMap", orderMap);
 			  
-				//변경
+				//蹂�寃�
 				String order_status = request.getParameter("order_status");
 				System.out.println("order_status: " + order_status);
 				System.out.println("order_num: " + order_num);
@@ -188,7 +188,7 @@ public class MyAccountController extends BaseController{
 	}
 	
 
-	//계정 수정
+	//怨꾩젙 �닔�젙
 	@RequestMapping(value="/modifyMemberInfo.do")
 	public ModelAndView modifyMemberInfo(
 			@RequestParam HashMap<String, String> memberMap,
@@ -198,19 +198,19 @@ public class MyAccountController extends BaseController{
 		memberVO=(MemberVO)session.getAttribute("memberInfo");
 
 		memberVO = (MemberVO)myAccountService.modifyMemberInfo(memberMap);
-		System.out.println("수정 처리 완료!!");
+		System.out.println("�닔�젙 泥섎━ �셿猷�!!");
 
-		//수정된 회원 정보를 다시 세션에 저장한다.
+		//�닔�젙�맂 �쉶�썝 �젙蹂대�� �떎�떆 �꽭�뀡�뿉 ���옣�븳�떎.
 		session.removeAttribute("memberInfo");
 		session.setAttribute("memberInfo", memberVO);
-		//		System.out.println("후 요청 : " + memberVO);
+		//		System.out.println("�썑 �슂泥� : " + memberVO);
 
 		mav.setViewName("redirect:/myaccount/account-settings.do");
 		return mav;
 	}
 
 
-	//새 배송지 추가
+	//�깉 諛곗넚吏� 異붽�
 	@RequestMapping(value="/insertAddressInfo.do")
 	public ModelAndView addShipping(@RequestParam HashMap<String, String> memberMap,
 			HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -231,7 +231,7 @@ public class MyAccountController extends BaseController{
 		map.put("jibun_address",jibun_address);
 		map.put("rest_address",rest_address);
 		myAccountService.addAddress(map);
-		System.out.println("배송지 추가 완료!!");
+		System.out.println("諛곗넚吏� 異붽� �셿猷�!!");
 		
 //		List<MyAccountShippingVO> shippList = myAccountService.listshippList(member_id);
 //		System.out.println(shippList);
@@ -260,7 +260,7 @@ public class MyAccountController extends BaseController{
 			return mav;
 		}
 
-	//배송지 수정
+	//諛곗넚吏� �닔�젙
 	@RequestMapping(value="/modifyAddressInfo.do")
 	public ModelAndView modifyMemberAddressInfo(
 			@RequestParam HashMap<String, String> memberMap,
@@ -274,8 +274,8 @@ public class MyAccountController extends BaseController{
 		String jibun_address = memberMap.get("jibun_address");
 		String rest_address = memberMap.get("rest_address");
 
-		System.out.println("아이디: " + member_id + " 우편번호  :" + zipNo + 
-				" 도로명 주소 : " + load_address + " 지번 주소: "+ jibun_address + " 나머지 주소 : "+rest_address);
+		System.out.println("�븘�씠�뵒: " + member_id + " �슦�렪踰덊샇  :" + zipNo + 
+				" �룄濡쒕챸 二쇱냼 : " + load_address + " 吏�踰� 二쇱냼: "+ jibun_address + " �굹癒몄� 二쇱냼 : "+rest_address);
 
 		HashMap<String,String> map = new HashMap<String, String>();
 		map.put("zipNo",zipNo);
@@ -285,18 +285,18 @@ public class MyAccountController extends BaseController{
 		map.put("member_id",member_id);
 
 		memberVO = (MemberVO)myAccountService.modifyAddressInfo(map);
-		System.out.println("수정 처리 완료!!");
+		System.out.println("�닔�젙 泥섎━ �셿猷�!!");
 
-		//수정된 회원 정보를 다시 세션에 저장한다.
+		//�닔�젙�맂 �쉶�썝 �젙蹂대�� �떎�떆 �꽭�뀡�뿉 ���옣�븳�떎.
 		session.removeAttribute("member_Info");
 		session.setAttribute("member_Info", memberVO);
-		System.out.println("후 요청 : " + memberVO);
+		System.out.println("�썑 �슂泥� : " + memberVO);
 
-		String message="변경되었습니다."; 
+		String message="蹂�寃쎈릺�뿀�뒿�땲�떎."; 
 		mav.addObject("message", message);
 		mav.setViewName("redirect:/myaccount/account-settings.do");
 		return mav;
 	}
 
-	//새 배송지 삭제
+	//�깉 諛곗넚吏� �궘�젣
 }

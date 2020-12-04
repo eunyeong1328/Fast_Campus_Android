@@ -95,6 +95,24 @@ public class SendEmailService {
 		}
 		return str;
 	}
-
-
+	
+	public MailDto sendEmailAdvertise(String email) {
+		MailDto dto = new MailDto();
+		dto.setAddress(email);
+		dto.setTitle("[쩝쩝박사] 할인 정보 안내 이메일 입니다.");
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("<html><body>");
+ 		sb.append("<meta http-equiv='Content-Type' content='text/html; charset=euc-kr'>");
+ 		sb.append("<a href='https://ifh.cc/v-nQFY3g' target='_blank'><img src='https://ifh.cc/g/nQFY3g.png' border='0'></a>");
+ 		sb.append("<h3 style=\"text-align: center;\">"+""+"<h3><br>");
+ 		sb.append("</body></html>");
+ 		
+		dto.setMessage(sb +
+				"안녕하세요. [쩝쩝박사] 할인 정보 안내 관련 이메일입니다.<br>" + 
+		 "감사합니다.");
+		
+		return dto;
+	}
+	
 }
