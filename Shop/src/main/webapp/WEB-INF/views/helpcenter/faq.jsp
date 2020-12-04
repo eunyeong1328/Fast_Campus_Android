@@ -47,11 +47,20 @@
 						<!-- 이전글이 있음, pre_no != 0 -->
 						<c:if test="${faq.pre_no != 0 }">
 							<c:if test="${faq.r_num > paging.begin }">
-								<a href="faq.do?r_num=${faq.pre_no}&cPage=${paging.nowPage}">이전글</a>
+								<c:if test="${vo.searchKeyword == null }">
+									<a href="faq.do?r_num=${faq.pre_no}&cPage=${paging.nowPage}">이전글</a>
+								</c:if>
+								<c:if test="${vo.searchKeyword != null }">
+									<a href="faq.do?r_num=${faq.pre_no}&cPage=${paging.nowPage}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">이전글</a>
+								</c:if>
 							</c:if>
 							<c:if test="${faq.r_num == paging.begin }">
-								<a
-									href="faq.do?r_num=${faq.pre_no}&cPage=${paging.nowPage - 1}">이전글</a>
+								<c:if test="${vo.searchKeyword == null }">
+									<a href="faq.do?r_num=${faq.pre_no}&cPage=${paging.nowPage - 1}">이전글</a>
+								</c:if>
+								<c:if test="${vo.searchKeyword != null }">
+									<a href="faq.do?r_num=${faq.pre_no}&cPage=${paging.nowPage - 1}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">이전글</a>
+								</c:if>
 							</c:if>
 						</c:if>
 
@@ -62,15 +71,30 @@
 						<!-- 다음글이 있음, next_no != 0 -->
 						<c:if test="${faq.next_no != 0 }">
 							<c:if test="${faq.r_num < paging.end }">
-								<a href="faq.do?r_num=${faq.next_no}&cPage=${paging.nowPage}">다음글</a>
+								<c:if test="${vo.searchKeyword == null }">
+									<a href="faq.do?r_num=${faq.next_no}&cPage=${paging.nowPage}">다음글</a>
+								</c:if>
+								<c:if test="${vo.searchKeyword != null }">
+									<a href="faq.do?r_num=${faq.next_no}&cPage=${paging.nowPage}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">다음글</a>
+								</c:if>
 							</c:if>
 							<c:if test="${faq.r_num == paging.end }">
-								<a
-									href="faq.do?r_num=${faq.next_no}&cPage=${paging.nowPage + 1}">다음글</a>
+								<c:if test="${vo.searchKeyword == null }">
+									<a href="faq.do?r_num=${faq.next_no}&cPage=${paging.nowPage + 1}">다음글</a>
+								</c:if>
+								<c:if test="${vo.searchKeyword != null }">
+									<a href="faq.do?r_num=${faq.next_no}&cPage=${paging.nowPage + 1}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">다음글</a>
+								</c:if>
 							</c:if>
 						</c:if>
 
-						<a href="faq-tab.do?cPage=${paging.nowPage }" class="list">목록</a>
+						<c:if test="${vo.searchKeyword == null }">
+							<a href="faq-tab.do?cPage=${paging.nowPage }" class="list">목록</a>
+						</c:if>
+						<c:if test="${vo.searchKeyword != null }">
+							<a href="faq-tab.do?cPage=${paging.nowPage }&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" class="list">목록</a>
+						</c:if>
+						
 					</div>
 				</div>
 			</div>

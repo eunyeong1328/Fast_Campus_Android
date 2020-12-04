@@ -22,8 +22,8 @@
 
 	<form novalidate class="bs-validate" method="post" action="${contextPath }/adminboard/memqAdminUpdating.do"
 		enctype="multipart/form-data">
-		<input type="hidden" name="action" value="memqAdminUpdating">
 		<input type="hidden" name="member_qna_num" value="${memQ.member_qna_num }">
+		<input type="hidden" name="cPage" value="${paging.nowPage}">
 
 		<!--
 							

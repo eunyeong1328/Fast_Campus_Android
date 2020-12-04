@@ -22,13 +22,7 @@
 
 	<form novalidate class="bs-validate" method="post" action="${contextPath }/adminboard/noticeAdd.do"
 		enctype="multipart/form-data">
-		<input type="hidden" name="action" value="noticeAdd">
 
-		<!--
-							
-							PRODUCT DETAIL
-
-						-->
 		<section>
 
 			<div class="row gutters-sm">

@@ -107,7 +107,6 @@
 									<th><span class="px-2 p-0-xs"> 제목 </span></th>
 									<th>작성자</th>
 									<th>작성날짜</th>
-									<th class="w--60">&nbsp;</th>
 								</tr>
 							</thead>
 
@@ -133,65 +132,38 @@
 											</label></td>
 											<td>${memQ.r_num}</td>
 											<td>${memQ.qna_category_name }</td>
-											<td><c:if test="${memQ.parent_num == 0 }">
-													<a
-														href="${contextPath}/adminboard/memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}"
-														class="font-weight-medium text-muted mx-2 m-0-xs">
-														${memQ.title} </a>
-												</c:if> <c:if test="${memQ.parent_num != 0 }">
-													<a
-														href="${contextPath}/adminboard/memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}"
-														class="font-weight-medium text-muted mx-2 m-0-xs"> <span
-														class="badge badge-soft badge-pill badge-purple">RE</span>
+											
+											<td>
+											<c:if test="${vo.daterange == null }">
+												<c:if test="${memQ.parent_num == 0 }">
+													<a href="${contextPath}/adminboard/memQ.do?member_qna_num=${memQ.member_qna_num}&member_id=${memQ.member_id }&cPage=${paging.nowPage}" class="font-weight-medium text-muted mx-2 m-0-xs">
+														${memQ.title} 
+													</a>
+												</c:if> 
+												<c:if test="${memQ.parent_num != 0 }">
+													<a href="${contextPath}/adminboard/memQ.do?member_qna_num=${memQ.member_qna_num}&member_id=${memQ.member_id }&cPage=${paging.nowPage}" class="font-weight-medium text-muted mx-2 m-0-xs"> 
+													<span class="badge badge-soft badge-pill badge-purple">RE</span>
 														${memQ.title }
 													</a>
-												</c:if> <!-- MOBILE ONLY -->
-												<div class="fs--13 d-block d-xl-none">
-													<span class="d-block text-muted">Visits: 0</span> <span
-														class="badge badge-success font-weight-medium fs--12">Active</span>
-													<span class="badge badge-danger font-weight-medium fs--12">Inactive</span>
-												</div> <!-- /MOBILE ONLY --></td>
+												</c:if> 
+											</c:if>
+											<c:if test="${vo.daterange != null }">
+												<c:if test="${memQ.parent_num == 0 }">
+													<a href="${contextPath}/adminboard/memQ.do?member_qna_num=${memQ.member_qna_num}&member_id=${memQ.member_id }&cPage=${paging.nowPage}&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" class="font-weight-medium text-muted mx-2 m-0-xs">
+														${memQ.title} 
+													</a>
+												</c:if> 
+												<c:if test="${memQ.parent_num != 0 }">
+													<a href="${contextPath}/adminboard/memQ.do?member_qna_num=${memQ.member_qna_num}&member_id=${memQ.member_id }&cPage=${paging.nowPage}&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" class="font-weight-medium text-muted mx-2 m-0-xs"> 
+													<span class="badge badge-soft badge-pill badge-purple">RE</span>
+														${memQ.title }
+													</a>
+												</c:if> 
+											</c:if>
+											</td>
+											
 											<td>${memQ.member_id }</td>
 											<td>${memQ.reg_date }</td>
-
-											<td class="text-align-end">
-
-												<div class="dropdown">
-
-													<a href="#" class="btn btn-sm btn-light rounded-circle"
-														data-toggle="dropdown" aria-expanded="false"
-														aria-haspopup="true"> <span class="group-icon">
-															<i class="fi fi-dots-vertical-full"></i> <i
-															class="fi fi-close"></i>
-													</span>
-													</a>
-
-
-													<div
-														class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-220">
-
-														<a href="#!"
-															class="dropdown-item text-truncate js-ajax-confirm"
-															data-href="page-list.html"
-															data-ajax-confirm-body="Delete this page?"
-															data-ajax-confirm-mode="ajax"
-															data-ajax-confirm-method="GET"
-															data-ajax-confirm-btn-yes-class="btn-sm btn-danger"
-															data-ajax-confirm-btn-yes-text="Delete"
-															data-ajax-confirm-btn-yes-icon="fi fi-check"
-															data-ajax-confirm-btn-no-class="btn-sm btn-light"
-															data-ajax-confirm-btn-no-text="Cancel"
-															data-ajax-confirm-btn-no-icon="fi fi-close"
-															data-ajax-confirm-success-target="#message_id_2"
-															data-ajax-confirm-success-target-action="remove"> <i
-															class="fi fi-thrash text-danger"></i> Delete
-														</a>
-
-													</div>
-
-												</div>
-
-											</td>
 
 										</tr>
 										<!-- /item -->
@@ -212,10 +184,9 @@
 									<th><span class="px-2 p-0-xs"> 제목 </span></th>
 									<th>작성자</th>
 									<th>작성날짜</th>
-									<th class="w--60">&nbsp;</th>
 								</tr>
 							</tfoot>
-
+							
 						</table>
 
 					</div>
@@ -224,52 +195,6 @@
 
 					<!-- options and pagination -->
 					<div class="row text-center-xs">
-
-						<div class="hidden-lg-down col-12 col-xl-6">
-
-							<!-- SELECTED ITEMS -->
-							<div class="dropup">
-
-								<a href="#" class="btn btn-sm btn-pill btn-light"
-									data-toggle="dropdown" aria-expanded="false"
-									aria-haspopup="true"> <span class="group-icon"> <i
-										class="fi fi-dots-vertical-full"></i> <i class="fi fi-close"></i>
-								</span> <span>Selected Items</span>
-								</a>
-
-								<div
-									class="dropdown-menu dropdown-menu-clean dropdown-click-ignore max-w-250">
-
-									<a href="#!"
-										class="dropdown-item text-truncate js-form-advanced-bulk"
-										data-js-form-advanced-bulk-hidden-action-id="#action"
-										data-js-form-advanced-bulk-hidden-action-value="delete"
-										data-js-form-advanced-bulk-container-items="#item_list"
-										data-js-form-advanced-bulk-required-selected="true"
-										data-js-form-advanced-bulk-required-txt-error="게시글이 선택되지 않았습니다."
-										data-js-form-advanced-bulk-required-txt-position="top-center"
-										data-js-form-advanced-bulk-required-custom-modal=""
-										data-js-form-advanced-bulk-required-custom-modal-content-ajax=""
-										data-js-form-advanced-bulk-required-modal-type="danger"
-										data-js-form-advanced-bulk-required-modal-size="modal-md"
-										data-js-form-advanced-bulk-required-modal-txt-title="확인해주세요!"
-										data-js-form-advanced-bulk-required-modal-txt-subtitle="Selected Items: {{no_selected}}"
-										data-js-form-advanced-bulk-required-modal-txt-body-txt="{{no_selected}}개의 게시글을 선택했습니다. 정말 삭제하시겠습니까?"
-										data-js-form-advanced-bulk-required-modal-txt-body-info="삭제하면 복구되지 않습니다."
-										data-js-form-advanced-bulk-required-modal-btn-text-yes="삭제"
-										data-js-form-advanced-bulk-required-modal-btn-text-no="취소"
-										data-js-form-advanced-bulk-submit-without-confirmation="false"
-										data-js-form-advanced-form-id="#form_id"> <i
-										class="fi fi-thrash text-danger"></i> Delete
-									</a>
-
-								</div>
-
-							</div>
-							<!-- /SELECTED ITEMS -->
-
-						</div>
-
 
 						<div class="col-12 col-xl-6">
 

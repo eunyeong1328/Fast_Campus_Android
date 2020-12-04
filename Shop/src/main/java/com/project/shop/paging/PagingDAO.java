@@ -16,8 +16,8 @@ public class PagingDAO {
 	private SqlSessionTemplate board;
 	
 //	공지사항 전체 건수 조회
-	public int getNoticeCount(HashMap<String, Object> map) {
-		return board.selectOne("mapper.board.getNoticeCount", map);
+	public int getNoticeCount() {
+		return board.selectOne("mapper.board.getNoticeCount");
 	}
 	
 //	FAQ 전체 건수 조회
@@ -43,6 +43,10 @@ public class PagingDAO {
 
 	public int getSearchMemQAllCount(BoardVO vo) {
 		return board.selectOne("mapper.board.getSearchMemQCountAll", vo);
+	}
+
+	public int getSearchMemQCount(HashMap<String, Object> map) {
+		return board.selectOne("mapper.board.getSearchMemQCount", map);
 	}
 
 }

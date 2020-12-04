@@ -46,12 +46,22 @@
 
 					</div>
 					
-					<button type="button" class="btn btn-secondary btn-soft-static mb-1" 
-						onclick="location.href='${contextPath }/adminboard/faqList.do?cPage=${paging.nowPage}'">
-						목록
-					</button>
+					<c:if test="${vo.searchKeyword == null }">
+						<button type="button" class="btn btn-secondary btn-soft-static mb-1" 
+							onclick="location.href='${contextPath }/adminboard/faqList.do?cPage=${paging.nowPage}'">
+							목록
+						</button>
+					</c:if>
+					
+					<c:if test="${vo.searchKeyword != null }">
+						<button type="button" class="btn btn-secondary btn-soft-static mb-1" 
+							onclick="location.href='${contextPath }/adminboard/faqList.do?cPage=${paging.nowPage}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}'">
+							목록
+						</button>
+					</c:if>
+					
 					<button type="button" class="btn btn-primary btn-soft-static mb-1"
-						onclick="location.href='${contextPath }/adminboard/faqUpdate.do?faq_num=${faq.faq_num}'">
+						onclick="location.href='${contextPath }/adminboard/faqUpdate.do?faq_num=${faq.faq_num}&cPage=${paging.nowPage}'">
 						수정
 					</button>
 					<button type="button" class="btn btn-danger btn-soft-static mb-1"

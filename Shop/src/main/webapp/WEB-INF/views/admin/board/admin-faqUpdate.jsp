@@ -20,10 +20,10 @@
 
 	</div>
 
-	<form novalidate class="bs-validate" method="post" action="${contextPath }/adminboard/faqUpdate.do"
+	<form novalidate class="bs-validate" method="post" action="${contextPath }/adminboard/faqUpdating.do"
 		enctype="multipart/form-data">
-		<input type="hidden" name="action" value="faqUpdate">
 		<input type="hidden" name="faq_num" value="${faq.faq_num }">
+		<input type="hidden" name="cPage" value="${paging.nowPage}">
 
 		<!--
 							
@@ -91,69 +91,6 @@
 												["help", ["help"]]
 											]'>${faq.contents }</textarea>
 					<small class="text-gray-400">* shift + enter = new line</small>
-
-				</div>
-
-
-				<div class="col-12 col-lg-12 col-xl-4 mb-5">
-
-					<!--
-										PRODUCT IMAGES
-									-->
-					<div class="clearfix bg-light p-2 mb-2 rounded">
-
-						<label class="btn btn-warning cursor-pointer position-relative">
-
-							<input name="file" multiple="multiple" type="file"
-							data-file-ext="jpg,jpeg,png"
-							data-file-max-size-kb-per-file="3072"
-							data-file-max-size-kb-total="30720"
-							data-file-max-total-files="10" data-file-ext-err-msg="Allowed:"
-							data-file-exist-err-msg="File already exists:"
-							data-file-size-err-item-msg="File too large!"
-							data-file-size-err-total-msg="Total allowed size exceeded!"
-							data-file-size-err-max-msg="Maximum allowed files:"
-							data-file-toast-position="top-center"
-							data-file-preview-container=".js-file-preview-container"
-							data-file-preview-img-height="100"
-							data-file-preview-show-info="true"
-							data-file-btn-clear="a.js-file-btn-clear"
-							data-file-preview-img-cover="true"
-							data-file-preview-class="shadow-md my-2 mr-3 rounded float-start"
-							class="custom-file-input absolute-full"> 
-							<span class="group-icon"> 
-								<i class="fi fi-arrow-upload"></i> 
-								<i class="fi fi-circle-spin fi-spin"></i>
-							</span> 
-							<span>Upload Images</span>
-
-						</label>
-
-						<!-- remove button -->
-						<a href="#" title="Clear Files" data-toggle="tooltip"
-							class="js-file-btn-clear hide btn btn-secondary mb-2"> <i
-							class="fi fi-close m-0"></i>
-						</a>
-
-						<!-- info -->
-						<small class="d-block text-muted"> Upload up to 10 product
-							images (jpg, jpeg, png). </small>
-
-						<!--
-												
-											Container : files are pushed here!
-											.hide-empty = container hidden if empty
-
-										-->
-						<div
-							class="js-file-preview-container d-inline-block position-relative clearfix hide-empty">
-							<!-- container -->
-						</div>
-
-					</div>
-
-
-
 
 				</div>
 

@@ -75,28 +75,7 @@
 
 								<form novalidate class="bs-validate" id="form_id" method="post" action="#!">
 
-
-									<!-- 
-
-										IMPORTANT
-										The "action" hidden input is updated by javascript according to button params/action:
-											data-js-form-advanced-hidden-action-id="#action"
-											data-js-form-advanced-hidden-action-value="delete"
-
-										In your backend, should process data like this (PHP example):
-
-											if($_POST['action'] === 'delete') {
-
-												foreach($_POST['item_id'] as $item_id) {
-													// ... delete $item_id from database
-												}
-
-											}
-
-									-->
 									<input type="hidden" id="action" name="action" value=""><!-- value populated by js -->
-
-
 
 									<div class="table-responsive">
 
@@ -145,10 +124,18 @@
 													<td>${faq.r_num}</td>
 													<td>${faq.qna_category_name }</td>
 													<td>
-
-														<a href="${contextPath}/adminboard/faq.do?faq_num=${faq.faq_num}&cPage=${paging.nowPage}" class="font-weight-medium text-muted mx-2 m-0-xs">
-															${faq.title}
-														</a>
+													
+														<c:if test="${vo.searchKeyword == null }">
+															<a href="${contextPath}/adminboard/faq.do?faq_num=${faq.faq_num}&cPage=${paging.nowPage}" class="font-weight-medium text-muted mx-2 m-0-xs">
+																${faq.title}
+															</a>
+														</c:if>
+														
+														<c:if test="${vo.searchKeyword != null }">
+															<a href="${contextPath}/adminboard/faq.do?faq_num=${faq.faq_num}&cPage=${paging.nowPage}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" class="font-weight-medium text-muted mx-2 m-0-xs">
+																${faq.title}
+															</a>
+														</c:if>
 
 														<!-- MOBILE ONLY -->
 														<div class="fs--13 d-block d-xl-none">
@@ -206,6 +193,25 @@
 											</c:forEach>
 											</c:if>
 											</tbody>
+											
+											<tfoot>
+												<tr class="text-muted fs--13">
+													<th class="w--30 hidden-lg-down">
+														<label class="form-checkbox form-checkbox-primary float-start">
+															<input class="checkall" data-checkall-container="#item_list" type="checkbox" name="checkbox">
+															<i></i>
+														</label>
+													</th>
+													<th>번호</th>
+													<th>카테고리</th>
+													<th>
+														<span class="px-2 p-0-xs">
+															제목
+														</span>
+													</th>
+													<th class="w--60">&nbsp;</th>
+												</tr>
+											</tfoot>
 
 										</table>
 

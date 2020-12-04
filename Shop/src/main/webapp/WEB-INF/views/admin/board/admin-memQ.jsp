@@ -67,22 +67,35 @@
 
 					</div>
 					
+					
 					<c:if test="${memQ.parent_num == 0 }">
 						<button type="button" class="btn btn-primary btn-soft-static mb-1"
-							onclick="location.href='${contextPath}/adminboard/memqAdminInsert.do?cPage=${paging.nowPage}&member_qna_num=${memQ.member_qna_num }&member_id=${memQ.member_id }'">
+							onclick="location.href='${contextPath}/adminboard/memqAdminInsert.do?cPage=${paging.nowPage}&member_qna_num=${memQ.member_qna_num }&member_id=${memQ.member_id }&cPage=${paging.nowPage}'">
 							답변하기
 						</button>
 					</c:if>
-					<button type="button" class="btn btn-secondary btn-soft-static mb-1" 
-						onclick="location.href='${contextPath }/adminboard/memberQnaList.do?cPage=${paging.nowPage}'">
-						목록
-					</button>
+					
+					<c:if test="${vo.daterange == null }">
+						<button type="button" class="btn btn-secondary btn-soft-static mb-1" 
+							onclick="location.href='${contextPath }/adminboard/memberQnaList.do?cPage=${paging.nowPage}'">
+							목록
+						</button>
+					</c:if>
+					
+					<c:if test="${vo.daterange != null }">
+						<button type="button" class="btn btn-secondary btn-soft-static mb-1" 
+							onclick="location.href='${contextPath }/adminboard/memberQnaList.do?cPage=${paging.nowPage}&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}'">
+							목록
+						</button>
+					</c:if>
+					
 					<c:if test="${memQ.parent_num != 0 }">
 						<button type="button" class="btn btn-primary btn-soft-static mb-1"
-							onclick="location.href='${contextPath}/adminboard/memqAdminUpdate.do?member_qna_num=${memQ.member_qna_num}&member_id=${memQ.member_id }'">
+							onclick="location.href='${contextPath}/adminboard/memqAdminUpdate.do?member_qna_num=${memQ.member_qna_num}&member_id=${memQ.member_id }&cPage=${paging.nowPage}'">
 							수정
 						</button>
 					</c:if>
+					
 					<button type="button" class="btn btn-danger btn-soft-static mb-1"
 						onclick="location.href='${contextPath }/adminboard/memqDelete.do?member_qna_num=${memQ.member_qna_num}&cPage=${paging.nowPage}'">
 						삭제

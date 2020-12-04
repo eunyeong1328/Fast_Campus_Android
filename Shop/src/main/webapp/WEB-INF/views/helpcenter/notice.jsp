@@ -60,10 +60,20 @@
 						<!-- 이전글이 있음, pre_no != 0 -->
 						<c:if test="${notice.pre_no != 0 }">
 							<c:if test="${notice.r_num > paging.begin }">
-								<a href="notice.do?r_num=${notice.pre_no}&cPage=${paging.nowPage}">이전글</a>
+								<c:if test="${vo.daterange == null }">
+									<a href="notice.do?r_num=${notice.pre_no}&cPage=${paging.nowPage}">이전글</a>
+								</c:if>
+								<c:if test="${vo.daterange != null }">
+									<a href="notice.do?r_num=${notice.pre_no}&cPage=${paging.nowPage}&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">이전글</a>
+								</c:if>
 							</c:if>
 							<c:if test="${notice.r_num == paging.begin }">
-								<a href="notice.do?r_num=${notice.pre_no}&cPage=${paging.nowPage - 1}">이전글</a>
+								<c:if test="${vo.daterange == null }">
+									<a href="notice.do?r_num=${notice.pre_no}&cPage=${paging.nowPage - 1}">이전글</a>
+								</c:if>
+								<c:if test="${vo.daterange != null }">
+									<a href="notice.do?r_num=${notice.pre_no}&cPage=${paging.nowPage - 1}&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">이전글</a>
+								</c:if>
 							</c:if>
 						</c:if>
 						
@@ -74,14 +84,30 @@
 						<!-- 다음글이 있음, next_no != 0 -->
 						<c:if test="${notice.next_no != 0 }">
 							<c:if test="${notice.r_num < paging.end }">
-								<a href="notice.do?r_num=${notice.next_no}&cPage=${paging.nowPage}">다음글</a>
+								<c:if test="${vo.daterange == null }">
+									<a href="notice.do?r_num=${notice.next_no}&cPage=${paging.nowPage}">다음글</a>
+								</c:if>
+								<c:if test="${vo.daterange != null }">
+									<a href="notice.do?r_num=${notice.next_no}&cPage=${paging.nowPage}&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">다음글</a>
+								</c:if>
 							</c:if>
 							<c:if test="${notice.r_num == paging.end }">
-								<a href="notice.do?r_num=${notice.next_no}&cPage=${paging.nowPage + 1}">다음글</a>
+								<c:if test="${vo.daterange == null }">
+									<a href="notice.do?r_num=${notice.next_no}&cPage=${paging.nowPage + 1}">다음글</a>
+								</c:if>
+								<c:if test="${vo.daterange != null }">
+									<a href="notice.do?r_num=${notice.next_no}&cPage=${paging.nowPage + 1}&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">다음글</a>
+								</c:if>
 							</c:if>
 						</c:if>
-
-						<a href="notice-tab.do?cPage=${paging.nowPage }" class="list">목록</a>
+						
+						<c:if test="${vo.daterange == null }">
+							<a href="notice-tab.do?cPage=${paging.nowPage }" class="list">목록</a>
+						</c:if>
+						<c:if test="${vo.daterange != null }">
+							<a href="notice-tab.do?cPage=${paging.nowPage }&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" class="list">목록</a>
+						</c:if>
+						
 					</div>
 				</div>
 			</div>

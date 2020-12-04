@@ -15,8 +15,8 @@ public class PagingServiceImpl implements PagingService {
 	private PagingDAO pagingDAO;
 	
 	@Override
-	public int getNoticeCount(HashMap<String, Object> map) {
-		return pagingDAO.getNoticeCount(map);
+	public int getNoticeCount() {
+		return pagingDAO.getNoticeCount();
 	}
 
 	@Override
@@ -47,6 +47,11 @@ public class PagingServiceImpl implements PagingService {
 	@Override
 	public int getSearchMemQAllCount(BoardVO vo) {
 		return pagingDAO.getSearchMemQAllCount(vo);
+	}
+
+	@Override
+	public int getSearchMemQCount(HashMap<String, Object> map) {
+		return pagingDAO.getSearchMemQCount(map);
 	}
 
 }

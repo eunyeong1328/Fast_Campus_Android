@@ -22,12 +22,12 @@
 
 	<form novalidate class="bs-validate" method="post" action="${contextPath }/adminboard/memqAdminAdd.do"
 		enctype="multipart/form-data">
-		<input type="hidden" name="action" value="memqAdminAdd">
 		<input type="hidden" name="member_id" value="${memberInfo.member_id }">
 		<input type="hidden" name="email" value="${memberInfo.email }">
 		<input type="hidden" name="phone" value="${memberInfo.phone }">
 		<input type="hidden" name="member_qna_num" value="${memQ.member_qna_num }">
-
+		<input type="hidden" name="cPage" value="${paging.nowPage}">
+		
 		<!--
 							
 							PRODUCT DETAIL

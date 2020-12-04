@@ -124,5 +124,9 @@ public class BoardDAO {
 	public List<BoardVO> getSearchMemQAllList(HashMap<String, Object> map) {
 		return board.selectList("mapper.board.getSearchMemQListAll", map);
 	}
+
+	public List<BoardVO> getSearchMemQList(HashMap<String, Object> map) {
+		return board.selectList("mapper.board.getSearchMemQList", map);
+	}
 	
 }

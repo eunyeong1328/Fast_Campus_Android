@@ -60,19 +60,38 @@
 								<tr>
 									<td>${memQ.r_num}</td>
 									<td>${memQ.qna_category_name}</td>
-									<c:if test="${memQ.parent_num == 0 }">
-										<td class="joy-title-text-left">
-											<a href="memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}">${memQ.title }</a>
-										</td>
+									
+									<c:if test="${vo.daterange == null }">
+										<c:if test="${memQ.parent_num == 0 }">
+											<td class="joy-title-text-left">
+												<a href="memQ.do?member_qna_num=${memQ.member_qna_num}&cPage=${paging.nowPage}">${memQ.title }</a>
+											</td>
+										</c:if>
+										<c:if test="${memQ.parent_num != 0 }">
+											<td class="joy-title-text-left">
+												<a href="memQ.do?member_qna_num=${memQ.member_qna_num}&cPage=${paging.nowPage}">
+													<span class="badge badge-soft badge-pill badge-purple">RE</span>
+													${memQ.title }
+												</a>
+											</td>
+										</c:if>
 									</c:if>
-									<c:if test="${memQ.parent_num != 0 }">
-										<td class="joy-title-text-left">
-											<a href="memQ.do?r_num=${memQ.r_num}&cPage=${paging.nowPage}">
-												<span class="badge badge-soft badge-pill badge-purple">RE</span>
-												${memQ.title }
-											</a>
-										</td>
+									<c:if test="${vo.daterange != null }">
+										<c:if test="${memQ.parent_num == 0 }">
+											<td class="joy-title-text-left">
+												<a href="memQ.do?member_qna_num=${memQ.member_qna_num}&cPage=${paging.nowPage}&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">${memQ.title }</a>
+											</td>
+										</c:if>
+										<c:if test="${memQ.parent_num != 0 }">
+											<td class="joy-title-text-left">
+												<a href="memQ.do?member_qna_num=${memQ.member_qna_num}&cPage=${paging.nowPage}&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">
+													<span class="badge badge-soft badge-pill badge-purple">RE</span>
+													${memQ.title }
+												</a>
+											</td>
+										</c:if>
 									</c:if>
+									
 									<td>${memQ.member_id}</td>
 									<td>${memQ.reg_date}</td>
 								</tr>
@@ -80,13 +99,63 @@
 						</c:forEach>
 					</c:if>
 				</table>
+				
+				<!-- 검색창 -->
+					<form action="${contextPath}/board/memberQ-tab.do" method="post" style="margin:5px;">
+	
+						<div style="float:right; margin: 13px 5px;">
+							<button type="submit"
+								class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
+								검색</button>
+						</div>
+	
+						<input autocomplete="off" type="text" name="daterange"
+							class="form-control rangepicker" data-ranges="true"
+							data-date-format="YY/MM/DD"
+							data-quick-locale='{
+																"lang_apply"	: "적용",
+																"lang_cancel"	: "취소",
+																"lang_crange"	: "범위 선택하기",
+																"lang_months" 	: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+																"lang_weekdays" : ["일", "월", "화", "수", "목", "금", "토"],
+		
+																"lang_today"	: "오늘", 
+																"lang_yday"		: "어제", 
+																"lang_7days"	: "지난 1주일", 
+																"lang_30days"	: "지난 1달", 
+																"lang_tmonth"	: "이번 달", 
+																"lang_lmonth"	: "지난 달"
+															}'
+							style="border-color: #600080; float:right; width:17%; padding: 0.3rem 0.5rem; height: 38px; margin: 10px 0px;font-size: 16px; ">
+	
+						<input type="text" name="searchKeyword"
+							class="form-control is-valid mb-3" placeholder="검색"
+							style="border-color: #600080; float:right; width:15%; overflow: hidden; padding: 0.3rem 0.5rem; height: 38px; margin: 10px 5px !important; font-size: 16px;">
+	
+						<select name="searchCondition" id="select_options2"
+							class="form-control"
+							style="border-color: #600080; float:right; width: 10%; padding: 0.3rem 0.5rem; height: 38px; margin: 10px 0px; font-size: 16px; ">
+							<option value="qna_category_name" selected>카테고리</option>
+							<option value="title">제목</option>
+							<option value="contents">내용</option>
+							<option value="member_id">아이디</option>
+						</select>
+						
+					</form>
+					<!-- 검색창 -->
 
 				<ul class="joy-paging">
 					<c:if test="${paging.beginPage == 1}">
 						<li><p class="disabled">Prev</p></li>
 					</c:if>
 					<c:if test="${paging.beginPage != 1}">
-						<li><a href="memberQ-tab.do?cPage=${paging.beginPage - 1 }">Prev</a>
+						<li>
+							<c:if test="${vo.daterange == null }">
+								<a href="memberQ-tab.do?cPage=${paging.beginPage - 1 }">Prev</a>
+							</c:if>
+							<c:if test="${vo.daterange != null }">
+								<a href="memberQ-tab.do?cPage=${paging.beginPage - 1 }&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">Prev</a>
+							</c:if>
 						</li>
 					</c:if>
 
@@ -96,7 +165,14 @@
 							<li class="active">${pageNo }</li>
 						</c:if>
 						<c:if test="${pageNo != paging.nowPage }">
-							<li><a href="memberQ-tab.do?cPage=${pageNo }">${pageNo }</a></li>
+							<li>
+								<c:if test="${vo.daterange == null }">
+								<a href="memberQ-tab.do?cPage=${pageNo }">${pageNo }</a>
+								</c:if>
+								<c:if test="${vo.daterange != null }">
+								<a href="memberQ-tab.do?cPage=${pageNo }&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">${pageNo }</a>
+								</c:if>
+							</li>
 						</c:if>
 					</c:forEach>
 
@@ -104,7 +180,14 @@
 						<li><p class="disabled">Next</p></li>
 					</c:if>
 					<c:if test="${paging.endPage < paging.totalPage }">
-						<li><a href="memberQ-tab.do?cPage=${paging.endPage + 1 }">Next</a></li>
+						<li>
+							<c:if test="${vo.daterange == null }">
+								<a href="memberQ-tab.do?cPage=${paging.endPage + 1 }">Next</a>
+							</c:if>
+							<c:if test="${vo.daterange != null }">
+								<a href="memberQ-tab.do?cPage=${paging.endPage + 1 }&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">Next</a>
+							</c:if>
+						</li>
 					</c:if>
 
 				</ul>

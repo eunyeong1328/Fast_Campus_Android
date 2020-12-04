@@ -66,7 +66,12 @@
 								<tr>
 									<td>${notice.r_num}</td>
 									<td>
-										<a href="notice.do?r_num=${notice.r_num}&cPage=${paging.nowPage}&notice_num=${notice.notice_num}">${notice.title}</a>
+										<c:if test="${vo.daterange == null }">
+										<a href="notice.do?notice_num=${notice.notice_num}&cPage=${paging.nowPage}">${notice.title}</a>
+										</c:if>
+										<c:if test="${vo.daterange != null }">
+										<a href="notice.do?notice_num=${notice.notice_num}&cPage=${paging.nowPage}&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">${notice.title}</a>
+										</c:if>
 									</td>
 									<td>쩝쩝박사</td>
 									<td>${notice.reg_date}</td>
@@ -78,6 +83,51 @@
 					
 				</table>
 
+			</div>
+			<!-- /portlet : header -->
+
+					<!-- 검색창 -->
+					<form action="${contextPath}/board/notice-tab.do" method="post" style="margin:5px;">
+	
+						<div style="float:right; margin: 13px 5px;">
+							<button type="submit"
+								class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
+								검색</button>
+						</div>
+	
+						<input autocomplete="off" type="text" name="daterange"
+							class="form-control rangepicker" data-ranges="true"
+							data-date-format="YY/MM/DD"
+							data-quick-locale='{
+																"lang_apply"	: "적용",
+																"lang_cancel"	: "취소",
+																"lang_crange"	: "범위 선택하기",
+																"lang_months" 	: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+																"lang_weekdays" : ["일", "월", "화", "수", "목", "금", "토"],
+		
+																"lang_today"	: "오늘", 
+																"lang_yday"		: "어제", 
+																"lang_7days"	: "지난 1주일", 
+																"lang_30days"	: "지난 1달", 
+																"lang_tmonth"	: "이번 달", 
+																"lang_lmonth"	: "지난 달"
+															}'
+							style="border-color: #600080; float:right; width:17%; padding: 0.3rem 0.5rem; height: 38px; margin: 10px 0px;font-size: 16px; ">
+	
+						<input type="text" name="searchKeyword"
+							class="form-control is-valid mb-3" placeholder="검색"
+							style="border-color: #600080; float:right; width:15%; overflow: hidden; padding: 0.3rem 0.5rem; height: 38px; margin: 10px 5px !important; font-size: 16px;">
+	
+						<select name="searchCondition" id="select_options2"
+							class="form-control"
+							style="border-color: #600080; float:right; width: 8%; padding: 0.3rem 0.5rem; height: 38px; margin: 10px 0px; font-size: 16px; ">
+							<option value="title" selected>제목</option>
+							<option value="contents">내용</option>
+						</select>
+						
+					</form>
+					<!-- 검색창 -->
+				
 				<!-- paging -->
 				<ul class="joy-paging">
 				
@@ -89,7 +139,12 @@
 					
 					<c:if test="${paging.beginPage != 1}">
 						<li>
-							<a href="notice-tab.do?cPage=${paging.beginPage - 1 }">Prev</a>
+							<c:if test="${vo.daterange == null }">
+								<a href="notice-tab.do?cPage=${paging.beginPage - 1 }">Prev</a>
+							</c:if>
+							<c:if test="${vo.daterange != null }">
+								<a href="notice-tab.do?cPage=${paging.beginPage - 1 }&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">Prev</a>
+							</c:if>
 						</li>
 					</c:if>
 					
@@ -99,7 +154,12 @@
 						</c:if>
 						<c:if test="${pageNo != paging.nowPage }">
 							<li>
-								<a href="notice-tab.do?cPage=${pageNo }">${pageNo }</a>
+								<c:if test="${vo.daterange == null }">
+									<a href="notice-tab.do?cPage=${pageNo }">${pageNo }</a>
+								</c:if>
+								<c:if test="${vo.daterange != null }">
+									<a href="notice-tab.do?cPage=${pageNo }&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">${pageNo }</a>
+								</c:if>
 							</li>
 						</c:if>
 					</c:forEach>
@@ -110,7 +170,12 @@
 					</c:if>
 					<c:if test="${paging.endPage < paging.totalPage }">
 						<li>
-							<a href="notice-tab.do?cPage=${paging.endPage + 1 }">Next</a>
+							<c:if test="${vo.daterange == null }">
+								<a href="notice-tab.do?cPage=${paging.endPage + 1 }">Next</a>
+							</c:if>
+							<c:if test="${vo.daterange != null }">
+								<a href="notice-tab.do?cPage=${paging.endPage + 1 }&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">Next</a>
+							</c:if>
 						</li>
 					</c:if>
 				</ul>

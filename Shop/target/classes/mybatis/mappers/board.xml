@@ -150,6 +150,38 @@
      		    ORDER SIBLINGS BY member_qna_num DESC) A)
 		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
 	</select>
+	
+	<select id="getSearchMemQList" parameterType="hashmap" resultType="boardVO">
+		SELECT * 
+		FROM 
+    		(SELECT ROWNUM R_NUM, A.*, LEAD(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS NEXT_NO, 
+            LAG(ROWNUM, 1) OVER (ORDER BY ROWNUM) AS PRE_NO 
+     		FROM 
+    		    (SELECT member_qna_num, parent_num, title, contents, image, qna_category_name, 
+				order_num, member_id, email, phone, reg_date 
+				FROM MEMBER_QNA Q, QNA_CATEGORY C 
+				WHERE Q.qna_category_num = C.qna_category_num 
+					<if test="vo.searchCondition == 'title'">
+						AND q.TITLE LIKE '%' || #{vo.searchKeyword} || '%'
+					</if>
+					<if test="vo.searchCondition == 'contents'">
+						AND q.CONTENTS LIKE '%' || #{vo.searchKeyword} || '%'
+					</if>
+					<if test="vo.searchCondition == 'member_id'">
+						AND q.member_id LIKE '%' || #{vo.searchKeyword} || '%'
+					</if>
+					<if test="vo.searchCondition == 'qna_category_name'">
+						AND c.qna_category_name LIKE '%' || #{vo.searchKeyword} || '%'
+					</if>
+					AND q.reg_date BETWEEN TO_DATE(#{vo.dateBegin}, 'YY/MM/DD') 
+										 AND TO_DATE(#{vo.dateEnd}, 'YY/MM/DD')+1 
+				AND Q.member_id = #{member_id} OR Q.member_id = 'admin' 
+				AND Q.parent_num IN (SELECT member_qna_num from member_qna where member_id = #{member_id})
+         		START WITH parent_num = 0 
+      		    CONNECT BY PRIOR member_qna_num = parent_num 
+     		    ORDER SIBLINGS BY member_qna_num DESC) A)
+		WHERE R_NUM BETWEEN #{paging.begin} AND #{paging.end}
+	</select>
 
 <!-- ****************************************** 선택한 글 상세 보기 ****************************************** -->
 
@@ -317,6 +349,29 @@
 		WHERE MEMBER_ID = #{member_id}
 		OR MEMBER_ID = 'admin'
 		AND PARENT_NUM IN (SELECT member_qna_num from member_qna where member_id = #{member_id})
+	</select>
+	
+	<select id="getSearchMemQCount" parameterType="hashmap" resultType="int">
+		select count(*) from
+		(select * from member_qna q, qna_category c 
+        where q.qna_category_num = c.qna_category_num
+			<if test="vo.searchCondition == 'title'">
+				AND q.TITLE LIKE '%' || #{vo.searchKeyword} || '%'
+			</if>
+			<if test="vo.searchCondition == 'contents'">
+				AND q.CONTENTS LIKE '%' || #{vo.searchKeyword} || '%'
+			</if>
+			<if test="vo.searchCondition == 'member_id'">
+				AND q.member_id LIKE '%' || #{vo.searchKeyword} || '%'
+			</if>
+			<if test="vo.searchCondition == 'qna_category_name'">
+				AND c.qna_category_name LIKE '%' || #{vo.searchKeyword} || '%'
+			</if>
+			AND q.reg_date BETWEEN TO_DATE(#{dateBegin}, 'YY/MM/DD') 
+							 AND TO_DATE(#{dateEnd}, 'YY/MM/DD')+1 
+        and MEMBER_ID = #{member_id} OR MEMBER_ID = 'admin'
+		AND PARENT_NUM IN (SELECT member_qna_num from member_qna where member_id = #{member_id})
+        )
 	</select>
 	
 	<!-- 회원 1:1 문의 전체 -->

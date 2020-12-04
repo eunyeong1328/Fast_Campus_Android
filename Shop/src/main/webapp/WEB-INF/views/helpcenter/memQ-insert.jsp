@@ -49,8 +49,7 @@
 						<div id="memq-insert">
 
 							<form action="memqAdd.do" method="post" enctype="multipart/form-data">
-								<input type="hidden" name="action" value="memqAdd"> <input
-									type="hidden" name="member_id" value="${memberInfo.member_id }">
+								<input type="hidden" name="member_id" value="${memberInfo.member_id }">
 								<div class="memq-title">
 									<p>제목</p>
 									<div class="category-select">

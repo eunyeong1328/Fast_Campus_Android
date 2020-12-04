@@ -16,6 +16,7 @@ public class BoardVO {
 	
 	public String getDateBegin() {
 		return dateBegin;
+		
 	}
 
 	public void setDateBegin(String dateBegin) {

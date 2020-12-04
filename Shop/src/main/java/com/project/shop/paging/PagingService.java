@@ -8,7 +8,7 @@ import com.project.shop.member.MemberVO;
 public interface PagingService {
 
 //	공지사항 글 개수 구하기
-	int getNoticeCount(HashMap<String, Object> map);
+	int getNoticeCount();
 
 //	FAQ 글 개수 구하기
 	int getFAQCount();
@@ -24,5 +24,7 @@ public interface PagingService {
 	int getSearchFAQCount(BoardVO vo);
 
 	int getSearchMemQAllCount(BoardVO vo);
+
+	int getSearchMemQCount(HashMap<String, Object> map);
 
 }

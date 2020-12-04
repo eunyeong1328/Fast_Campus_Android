@@ -128,22 +128,35 @@
 										<!-- item -->
 										<tr id="message_id_2" class="text-muted">
 
-											<td class="hidden-lg-down"><label
-												class="form-checkbox form-checkbox-secondary float-start">
-													<input type="checkbox" name="item_id[]"
-													value="${notice.notice_num}"> <i></i>
-											</label></td>
+											<td class="hidden-lg-down">
+												<label class="form-checkbox form-checkbox-secondary float-start">
+													<input type="checkbox" name="item_id[]" value="${notice.notice_num}"> <i></i>
+												</label>
+											</td>
+											
 											<td>${notice.r_num}</td>
-											<td><a
-												href="${contextPath}/adminboard/notice.do?notice_num=${notice.notice_num}&cPage=${paging.nowPage}"
-												class="font-weight-medium text-muted mx-2 m-0-xs">
-													${notice.title} </a> <!-- MOBILE ONLY -->
+											
+											<td>
+												
+												<c:if test="${vo.daterange == null }">
+													<a href="${contextPath}/adminboard/notice.do?notice_num=${notice.notice_num}&cPage=${paging.nowPage}" class="font-weight-medium text-muted mx-2 m-0-xs">
+														${notice.title} 
+													</a> 
+												</c:if>
+												<c:if test="${vo.daterange != null }">
+													<a href="${contextPath}/adminboard/notice.do?notice_num=${notice.notice_num}&cPage=${paging.nowPage}&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" class="font-weight-medium text-muted mx-2 m-0-xs">
+														${notice.title} 
+													</a> 
+												</c:if>
+												
+												<!-- MOBILE ONLY -->
 												<div class="fs--13 d-block d-xl-none">
 													<span class="d-block text-muted">Visits:
-														${notice.notice_num}</span> <span
-														class="badge badge-success font-weight-medium fs--12">Active</span>
-													<!-- 															<span class="badge badge-danger font-weight-medium fs--12">Inactive</span> -->
-												</div> <!-- /MOBILE ONLY --></td>
+														${notice.views}</span> 
+												</div> 
+												<!-- /MOBILE ONLY -->
+												
+											</td>
 
 											<td class="hidden-lg-down">${notice.views}</td>
 
@@ -195,6 +208,21 @@
 									</c:forEach>
 								</c:if>
 							</tbody>
+							
+							<tfoot>
+								<tr class="text-muted fs--13">
+									<th class="w--30 hidden-lg-down"><label
+										class="form-checkbox form-checkbox-primary float-start">
+											<input class="checkall" data-checkall-container="#item_list"
+											type="checkbox" name="checkbox"> <i></i>
+									</label></th>
+									<th>번호</th>
+									<th><span class="px-2 p-0-xs"> 제목 </span></th>
+									<th class="w--200 hidden-lg-down">조회수</th>
+									<th>작성날짜</th>
+									<th class="w--60">&nbsp;</th>
+								</tr>
+							</tfoot>
 
 						</table>
 
@@ -263,10 +291,10 @@
 									<c:if test="${paging.beginPage != 1}">
 										<li class="page-item">
 										<c:if test="${vo.daterange != null }">
-											<a class="page-link" href="noticeList.do?cPage=${paging.endPage - 1 }&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" tabindex="-1" aria-disabled="true">Prev</a>
+											<a class="page-link" href="noticeList.do?cPage=${paging.beginPage - 1 }&daterange=${vo.daterange}&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}" tabindex="-1" aria-disabled="true">Prev</a>
 										</c:if> 
 										<c:if test="${vo.daterange == null }">
-											<a class="page-link" href="noticeList.do?cPage=${paging.endPage - 1 }" tabindex="-1" aria-disabled="true">Prev</a>
+											<a class="page-link" href="noticeList.do?cPage=${paging.beginPage - 1 }" tabindex="-1" aria-disabled="true">Prev</a>
 										</c:if>
 										</li>
 									</c:if>

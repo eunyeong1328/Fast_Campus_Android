@@ -64,15 +64,48 @@
 								<tr>
 									<td>${faq.r_num}</td>
 									<td>${faq.qna_category_name}</td>
-									<td>
-										<a href="faq.do?r_num=${faq.r_num}&cPage=${paging.nowPage}">${faq.title}</a>
-									</td>
+									
+									<c:if test="${vo.searchKeyword == null }">
+										<td>
+											<a href="faq.do?faq_num=${faq.faq_num}&cPage=${paging.nowPage}">${faq.title}</a>
+										</td>
+									</c:if>
+									<c:if test="${vo.searchKeyword != null }">
+										<td>
+											<a href="faq.do?faq_num=${faq.faq_num}&cPage=${paging.nowPage}">${faq.title}</a>
+										</td>
+									</c:if>
+									
 								</tr>
 							</tbody>
 						</c:forEach>
 					</c:if>
 
 				</table>
+				
+				<!-- 검색창 -->
+					<form action="${contextPath}/board/faq-tab.do" method="post" style="margin:5px;">
+	
+						<div style="float:right; margin: 13px 5px;">
+							<button type="submit"
+								class="js-ajax btn btn-sm btn-primary btn-pill px-2 py-1 fs--15">
+								검색</button>
+						</div>
+	
+						<input type="text" name="searchKeyword"
+							class="form-control is-valid mb-3" placeholder="검색"
+							style="border-color: #600080; float:right; width:17%; overflow: hidden; padding: 0.3rem 0.5rem; height: 38px; margin: 10px 5px !important; font-size: 16px;">
+	
+						<select name="searchCondition" id="select_options2"
+							class="form-control"
+							style="border-color: #600080; float:right; width: 10%; padding: 0.3rem 0.5rem; height: 38px; margin: 10px 0px; font-size: 16px; ">
+								<option value="qna_category_name" selected>카테고리</option>
+								<option value="title">제목</option>
+								<option value="contents">내용</option>
+						</select>
+						
+					</form>
+					<!-- 검색창 -->
 
 				<ul class="joy-paging">
 					<c:if test="${paging.beginPage == 1}">
@@ -82,7 +115,12 @@
 					</c:if>
 					<c:if test="${paging.beginPage != 1}">
 						<li>
-							<a href="faq-tab.do?cPage=${paging.beginPage - 1 }">Prev</a>
+							<c:if test="${vo.searchKeyword == null }">
+								<a href="faq-tab.do?cPage=${paging.beginPage - 1 }">Prev</a>
+							</c:if>
+							<c:if test="${vo.searchKeyword != null }">
+								<a href="faq-tab.do?cPage=${paging.beginPage - 1 }&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">Prev</a>
+							</c:if>
 						</li>
 					</c:if>
 					<c:forEach var="pageNo" begin="${paging.beginPage }" end="${paging.endPage }">
@@ -91,7 +129,12 @@
 						</c:if>
 						<c:if test="${pageNo != paging.nowPage }">
 							<li>
-								<a href="faq-tab.do?cPage=${pageNo }">${pageNo }</a>
+								<c:if test="${vo.searchKeyword == null }">
+									<a href="faq-tab.do?cPage=${pageNo }">${pageNo }</a>
+								</c:if>
+								<c:if test="${vo.searchKeyword != null }">
+									<a href="faq-tab.do?cPage=${pageNo }&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">${pageNo }</a>
+								</c:if>
 							</li>
 						</c:if>
 					</c:forEach>
@@ -100,7 +143,12 @@
 					</c:if>
 					<c:if test="${paging.endPage < paging.totalPage }">
 						<li>
-							<a href="faq-tab.do?cPage=${paging.endPage + 1 }">Next</a>
+							<c:if test="${vo.searchKeyword == null }">
+								<a href="faq-tab.do?cPage=${paging.endPage + 1 }">Next</a>
+							</c:if>
+							<c:if test="${vo.searchKeyword != null }">
+								<a href="faq-tab.do?cPage=${paging.endPage + 1 }&searchKeyword=${vo.searchKeyword}&searchCondition=${vo.searchCondition}">Next</a>
+							</c:if>
 						</li>
 					</c:if>
 				</ul>

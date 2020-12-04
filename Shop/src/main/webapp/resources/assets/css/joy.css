@@ -54,6 +54,7 @@ html body:not(.aside-compact).layout-admin #footer {padding-left: 0;}
 .joy-table thead tr {border-bottom:1px solid #600080;}
 .joy-table thead th {padding:20px 0; text-align:center; font-size:14px; font-weight:normal;}
 .joy-table tbody tr {border-bottom:1px solid #eee; cursor: pointer;}
+.joy-table tbody:last-child {border-bottom:1px solid #600080;}
 .joy-table tbody td {padding:20px 0; text-align:center; font-size:14px;}
 
 .joy-table .joy-title-text-left {
@@ -77,6 +78,7 @@ html body:not(.aside-compact).layout-admin #footer {padding-left: 0;}
     margin: -2px;
     box-sizing: border-box;
     vertical-align: middle;
+    float: left;
 }
 
 .joy-paging li:first-child {

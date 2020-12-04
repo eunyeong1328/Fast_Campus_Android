@@ -64,5 +64,6 @@ public interface BoardService {
 	void categoryDelete(int product_category_num);
 	List<BoardVO> getSearchFAQList(HashMap<String, Object> map);
 	List<BoardVO> getSearchMemQAllList(HashMap<String, Object> map);
+	List<BoardVO> getSearchMemQList(HashMap<String, Object> map);
 	
 }
