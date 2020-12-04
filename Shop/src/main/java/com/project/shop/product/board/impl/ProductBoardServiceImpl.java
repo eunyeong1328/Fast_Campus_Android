@@ -37,8 +37,8 @@ public class ProductBoardServiceImpl implements ProductBoardService{
 		return productQna;
 	} 
 	@Override
-	public Paging pagingInfo(String product_id, String cPage, int totalCount) throws Exception {
-	
+	public Paging pagingInfo(String poduct_id, String cPage) throws Exception {
+		int totalCount = qnaTotalCount(poduct_id);
 		// 1. 전체 게시물의 수를 구하기
 		p.setTotalRecord(totalCount); 
 		p.setTotalPage(); // 전체 페이지 갯수 구하기

@@ -51,7 +51,12 @@
 								load_address,
 								jibun_address,  
 								rest_address,
- 								birthday) values(
+ 								birthday
+ 								]]>
+ 			<if test="member_status == '구글'">
+ 			,member_status
+ 			</if>
+ 								) values(
  								#{member_id},
  								 #{password}, 
  								 #{member_name},
@@ -62,8 +67,11 @@
 								  #{jibun_address}, 
 								  #{rest_address},
 								   #{birthday}
+			 <if test="member_status == '구글'">
+ 			,#{member_status}
+ 			</if>
 								   )
-								   ]]>
+								   
 		
 	</insert>
 	

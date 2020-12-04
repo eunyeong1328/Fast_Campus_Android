@@ -148,7 +148,7 @@
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link js-ajax" href="">
+									<a class="nav-link js-ajax" href="${contextPath}/admin/productQnaList.do">
 										<i class="fi fi-box"></i>
 										상품 문의
 									</a>

@@ -30,12 +30,11 @@
         			SELECT ROWNUM R_NUM, level, Q.*
         			FROM PRODUCt_QNA Q
 		]]>
-			        <where>
-			        	<if test="product_id !=null">
-			        		 PRODUCT_ID = #{product_id}
-			        	</if>
-			        </where>
-			       
+			       <where>
+			       	<if test="product_id != null">
+			       		PRODUCT_ID = #{product_id}
+			       	</if>
+			       </where>
 			        START WITH parent_num=0
 			        CONNECT BY PRIOR product_qna_num = parent_num
 			        ORDER SIBLINGS BY product_qna_num DESC
@@ -47,7 +46,12 @@
 	<select id="totalCount" parameterType="String" resultType="int">
 		SELECT COUNT(*)
 		FROM product_qna
-		WHERE product_id = #{product_id}	
+		<where>
+			<if test="product_id != null">
+				product_id = #{product_id}	
+			</if>
+		</where>
+	
 	</select>
 	
 	<select id="selectQnaNo" resultType="int">
