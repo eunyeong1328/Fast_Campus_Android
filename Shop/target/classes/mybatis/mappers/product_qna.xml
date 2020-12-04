@@ -25,18 +25,23 @@
 	<!-- 아진 -->
 	<select id="selectProductQna" parameterType="java.util.HashMap" resultMap="product_qnaResult"   >
         <![CDATA[
-        	SELECT ROWNUM R_NUM, P.*
+        	SELECT  P.*
 			FROM ( 
-        			SELECT ROWNUM R_NUM, level, PRODUCT_QNA_NUM, PARENT_NUM , 
-        			TITLE, CONTENTS , member_id,reg_date, PRODUCT_ID, image
-        			FROM PRODUCt_QNA
-			        WHERE PRODUCT_ID = #{product_id}
+        			SELECT ROWNUM R_NUM, level, Q.*
+        			FROM PRODUCt_QNA Q
+		]]>
+			        <where>
+			        	<if test="product_id !=null">
+			        		 PRODUCT_ID = #{product_id}
+			        	</if>
+			        </where>
+			       
 			        START WITH parent_num=0
 			        CONNECT BY PRIOR product_qna_num = parent_num
 			        ORDER SIBLINGS BY product_qna_num DESC
 			    ) P
 			WHERE R_NUM BETWEEN #{begin} and #{end}
-	  	]]>
+	  	
 	</select>
 	
 	<select id="totalCount" parameterType="String" resultType="int">
