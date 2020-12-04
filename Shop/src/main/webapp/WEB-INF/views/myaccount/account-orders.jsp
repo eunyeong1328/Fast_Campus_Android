@@ -26,7 +26,7 @@
 			<!-- /PAGE TITLE -->
 			
 			<c:choose>
-				<c:when test="${empty favList }">
+				<c:when test="${empty orderList }">
 				
 					<div class="container" style="margin-top: 50px">
 
