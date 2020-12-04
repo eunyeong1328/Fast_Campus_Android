@@ -47,6 +47,7 @@ public class ProductController extends BaseController{
 									@RequestParam(value="orderKey", defaultValue="desc") String orderKey,
 									@RequestParam Map<String, String> info,
 									HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("컨트롤러");
 		//뷰정보
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);

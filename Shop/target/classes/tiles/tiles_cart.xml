@@ -27,6 +27,9 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/cart/myCartList.jsp" />
 	</definition>
-	
+	<definition name="/cart/nonMemberCart" extends="baseLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/views/cart/nonMemberCart.jsp" />
+	</definition>
 </tiles-definitions>
 	

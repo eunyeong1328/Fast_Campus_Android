@@ -429,13 +429,19 @@
 									<div aria-labelledby="mainNavHome" class="dropdown-menu dropdown-menu-clean dropdown-menu-hover">
 									    <ul class="list-unstyled m-0 p-0">
 									        <li class="dropdown-item dropdown">
-									        	<a href="${contextPath }/product/productList.do?product_category_num=1" class="dropdown-link" data-toggle="dropdown">육류</a>
+									        	<a href="${contextPath }/product/productList.do?product_category_num=1">육류</a>
 									        </li>
 									        <li class="dropdown-item dropdown">
-									        	<a href="${contextPath }/product/productList.do?product_category_num=2" class="dropdown-link" data-toggle="dropdown">채소</a>
+									        	<a href="${contextPath }/product/productList.do?product_category_num=2">채소</a>
 									        </li>
 									        <li class="dropdown-item dropdown">
-									        	<a href="${contextPath }/product/productList.do?product_category_num=3" class="dropdown-link" data-toggle="dropdown">베이커리</a>
+									        	<a href="${contextPath }/product/productList.do?product_category_num=3">베이커리</a>
+                        					</li>
+                        					 <li class="dropdown-item dropdown">
+									        	<a href="${contextPath }/product/productList.do?product_category_num=4">과일</a>
+                        					</li>
+                        					 <li class="dropdown-item dropdown">
+									        	<a href="${contextPath }/product/productList.do?product_category_num=5">음료</a>
                         					</li>
                           				</ul>
 									</div>

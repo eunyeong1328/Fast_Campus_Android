@@ -280,7 +280,7 @@ public class MyAccountController extends BaseController {
 		// 수정된 회원 정보를 다시 세션에 저장한다.
 		session.removeAttribute("member_Info");
 		session.setAttribute("member_Info", memberVO);
-		System.out.println("후 요청 : " + memberVO);
+		System.out.println("�썑 �슂泥� : " + memberVO);
 
 		String message = "변경되었습니다.";
 		mav.addObject("message", message);
