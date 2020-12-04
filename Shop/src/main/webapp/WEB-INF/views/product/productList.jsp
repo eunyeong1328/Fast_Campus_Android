@@ -68,25 +68,18 @@
 								class="px-2 d-inline-block"> 베이커리 </span>
 						</a></li>
 
-						<li class="nav-item"><a class="nav-link px-0" href="#!">
+						<li class="nav-item"><a class="nav-link px-0"
+							href="${contextPath}/product/productList.do?product_category_num=4">
 								<i class="fi fi-arrow-end m-0 fs--12"></i> <span
-								class="px-2 d-inline-block"> 추가예정1 </span>
+								class="px-2 d-inline-block"> 과일 </span>
 						</a></li>
-
-						<li class="nav-item"><a class="nav-link px-0" href="#"> <span
-								class="group-icon"> <i class="fi fi-arrow-end"></i> <i
-									class="fi fi-arrow-down"></i>
-							</span> <span class="px-2 d-inline-block"> 추가예정2 </span>
-						</a>
-
-							<ul class="nav flex-column px-3">
-								<li class="nav-item"><a class="nav-link" href="#">
-										Option 1 </a></li>
-								<li class="nav-item"><a class="nav-link" href="#">
-										Option 2 </a></li>
-								<li class="nav-item"><a class="nav-link" href="#">
-										Option 3 </a></li>
-							</ul></li>
+						
+						<li class="nav-item"><a class="nav-link px-0"
+							href="${contextPath}/product/productList.do?product_category_num=5">
+								<i class="fi fi-arrow-end m-0 fs--12"></i> <span
+								class="px-2 d-inline-block"> 음료 </span>
+						</a></li>
+						
 
 					</ul>
 
