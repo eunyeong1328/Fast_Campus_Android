@@ -117,7 +117,7 @@ left outer join product_option o on x.option_name = o.option_name
 <!-- 장바구니에 담긴 갯수 count -->
 <select id="cartChkCount" parameterType="cartVO" resultType="String">
 	<![CDATA[
-		select count(*) from cart 
+		select count(*) from cart
 		where member_id = #{member_id}
 	]]>
 </select>

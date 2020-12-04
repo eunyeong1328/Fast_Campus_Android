@@ -81,7 +81,6 @@ public class CartDAOImpl implements CartDAO {
 	@Override
 	public String cartChkCount(CartVO cartVO) throws DataAccessException {
 		String result = (String)sqlSession.selectOne("mappers.cart.cartChkCount", cartVO);
-		System.out.println("result::::::::::::::::::::::"+result);
 		return result;
 	}
 

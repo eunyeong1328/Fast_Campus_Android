@@ -5,7 +5,29 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}" />
-
+<script>
+function cart_chk(member_id){
+	$.ajax({
+		type : "POST",
+		async : false,
+		url : "${contextPath}/cart/cartChkCount.do",
+		data : {
+			member_id:member_id
+	},
+	dataType:"text",
+	success : function(data, textStatus) {
+		//alert("data" +data);
+		console.log(data);
+		 document.getElementById("cartCount").innerText= data;
+	},
+	error : function(data, textStatus) {
+		alert("에러데스:" +data);
+		},
+	complete : function(data, textStatus) {
+		}
+	}); //end ajax
+}
+</script>
 
 <!-- HEADER -->
 			<header id="header" class="shadow-xs">
@@ -279,15 +301,35 @@
               </c:otherwise>
               </c:choose>
 			
+            
+								<!-- cart -->
+			  <c:choose>
+			  
+			  <c:when test="${isLogOn==true and not empty memberInfo }">
+			 
+					   <li class="list-inline-item mx-1 dropdown d-none d-sm-block">
+					
+                        <a href="${contextPath}/cart/myCartList.do" aria-label="signup" class="d-inline-block text-center text-dark">
+                           <i class="fi fi-cart-1 fs--20" id="cartCount">0</i>
+                           <span class="d-block font-weight-light fs--14" >장바구니</span>
+                        </a>
+                     </li>
+                      	<script>
+						cart_chk("${memberInfo.member_id}");
+						</script>
+			 
+			  </c:when>
+				<c:otherwise>
+						<li class="list-inline-item mx-1 dropdown d-none d-sm-block">
+                        <a href="${contextPath}/cart/myCartList.do"  aria-label="signup" class="d-inline-block text-center text-dark">
+                           <i class="fi fi-cart-1 fs--20"></i>
+                           <span class="d-block font-weight-light fs--14">장바구니</span>
+                        </a>
+				</c:otherwise>
+				
+				</c:choose>
 
 
-											<!-- cart -->
-				<li class="list-inline-item mx-1 dropdown d-none d-sm-block"><a
-					href="${contextPath}/cart/myCartList.do" aria-label="signup"
-					class="d-inline-block text-center text-dark"> <i
-						class="fi fi-cart-1 fs--20"></i> <span
-						class="d-block font-weight-light fs--14">장바구니</span>
-				</a></li>
 							
 							              <!-- 고객센터 -->
 							<li class="list-inline-item mx-1 dropdown d-none d-sm-block">
@@ -538,4 +580,4 @@
 				
 			</header>
 			<!-- /HEADER -->
->>>>>>> refs/remotes/origin/mainMain
+

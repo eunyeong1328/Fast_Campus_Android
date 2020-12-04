@@ -13,7 +13,6 @@
 <%-- <jsp:include page="/WEB-INF/views/cart/cart.jsp" /> --%>
 <script type="text/javascript">
 
-
     var sell_price;
 	var amount;
 	var discount;
