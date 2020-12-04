@@ -98,4 +98,10 @@ public class MyAccountDAO {
 		System.out.println("여기 삭제할 나머지 주소:          " + zipNo);
 		sqlSession.delete("mappers.myaccount.deleteShipping", zipNo);
 	}
+	
+	public void defaultShippingPoint(String member_id) throws Exception{
+		System.out.println("==============  $$$$ 이건 DAO $$$$  =====================");
+		System.out.println("여기 삭제할 나머지 주소: 여기까지 아이디가 넘어오나요??    "+member_id);
+		sqlSession.update("mappers.myaccount.defaultShippingPoint", member_id);
+	}
 }

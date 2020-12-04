@@ -280,7 +280,6 @@ public class MyAccountController extends BaseController {
 		// 수정된 회원 정보를 다시 세션에 저장한다.
 		session.removeAttribute("member_Info");
 		session.setAttribute("member_Info", memberVO);
-		System.out.println("�썑 �슂泥� : " + memberVO);
 
 		String message = "변경되었습니다.";
 		mav.addObject("message", message);
@@ -307,39 +306,30 @@ public class MyAccountController extends BaseController {
 	}
 	
 	//기본 배송지 선택
-
-	// 배송지 삭제
-//	@RequestMapping(value = "/deleteShipping.do")
-//	public ModelAndView deleteShipping(@RequestParam HashMap<String, String> memberMap, HttpServletRequest request,
-//			HttpServletResponse response) throws Exception {
-//		// session에서 획득한 memberInfo 정보
-//		ModelAndView mav = new ModelAndView();
-//
-//		HttpSession session = request.getSession();
-//		memberVO = (MemberVO) session.getAttribute("memberInfo");
-//		String member_id = memberVO.getMember_id();
-//		System.out.println("세션 아이디" + member_id);
-//		String zipNo = memberMap.get("zipNo");
-//		String load_address = memberMap.get("load_address");
-//		String jibun_address = memberMap.get("jibun_address");
-//		String rest_address = memberMap.get("rest_address");
-//
-//		System.out.println("삭제할 아이디: " + member_id + " 우편번호  :" + zipNo + " 도로명 주소 : " + load_address + " 지번 주소: "
-//				+ jibun_address + " 나머지 주소 : " + rest_address);
-//
-//		HashMap<String, String> map = new HashMap<String, String>();
-//		map.put("zipNo", zipNo);
-//		map.put("load_address", load_address);
-//		map.put("jibun_address", jibun_address);
-//		map.put("rest_address", rest_address);
-//		map.put("member_id", member_id);
-//
-//		myAccountService.deleteShipping(map);
-//		List<MyAccountShippingVO> shippList = myAccountService.listshippList(member_id);
-//		System.out.println(shippList);
-//		mav.addObject("shippList", shippList);
-//		mav.setViewName("redirect:/myaccount/account-settings.do");
-//		return mav;
-//	}
+	@RequestMapping(value = "/defaultShippingPoint.do")
+	public ModelAndView defaultShippingPoint(@RequestParam HashMap<String, String> memberMap, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		System.out.println("여기까지 기본 배송지 선택시 오나요??");
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		memberVO = (MemberVO) session.getAttribute("memberInfo");
+		String member_id = memberVO.getMember_id();
+		System.out.println("세션 아이디" + member_id);
+		myAccountService.defaultShippingPoint(member_id);
+		System.out.println("값이 잘 넘어왔나요??");
+		
+		String viewName = (String) request.getAttribute("viewName");
+		System.out.println(member_id);
+		
+		MemberVO memberInfo = myAccountService.accountSettingsInfo(member_id);
+		mav.addObject("memberinfo", memberInfo);
+		List<MyAccountShippingVO> shippList = myAccountService.listshippList(member_id);
+		System.out.println(shippList);
+		mav.addObject("shippList", shippList);
+		String shipMessage = "기본 배송지로 변경 되었습니다.";
+		mav.addObject("shipMessage", shipMessage);
+		mav.setViewName("/myaccount/account-settings");
+		return mav;
+	}
 
 }

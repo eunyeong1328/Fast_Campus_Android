@@ -22,5 +22,6 @@ public interface MyAccountService{
 	public List<MyAccountShippingVO> listshippList(String member_id) throws Exception;
 //	public void deleteShipping(HashMap map) throws Exception;
 	public void deleteShipping(String zipNo) throws Exception;
+	public void defaultShippingPoint(String member_id) throws Exception;
 
 }

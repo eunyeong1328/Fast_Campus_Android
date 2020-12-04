@@ -133,4 +133,10 @@ public class MyAccountServiceImpl implements MyAccountService{
 		myAccountDAO.deleteShipping(zipNo);
 		
 	}
+
+	@Override
+	public void defaultShippingPoint(String member_id) throws Exception {
+		myAccountDAO.defaultShippingPoint(member_id);
+		
+	}
 }

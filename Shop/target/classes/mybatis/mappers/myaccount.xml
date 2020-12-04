@@ -140,5 +140,18 @@
 		where zipNo = #{zipNo}
 		]]>
 	</delete>
+	
+	
+	<!-- 기본 배송지 수정  -->
+	<update id = "defaultShippingPoint" parameterType="String">
+		merge into member m
+		using shipping s
+		on ( m.member_id =  #{member_id} and m.member_id = s.member_id)
+		    when matched then
+		        update set m.zipno = s.zipno,
+		                m.load_address = s.load_address,
+		                m.jibun_address = s.jibun_address,
+		                m.rest_address = s.rest_address
+	</update>
 
 </mapper>
