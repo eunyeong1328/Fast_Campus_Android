@@ -39,8 +39,6 @@ public class ProductController extends BaseController{
 	@Autowired
 	private ProductBoardService productBoardService;
 	
-	@Autowired
-	private Paging p;
 	
 	@RequestMapping(value="/productList.do")
 	public ModelAndView productList(@RequestParam(value="listKey", defaultValue="reg_date") String listKey,
@@ -73,8 +71,8 @@ public class ProductController extends BaseController{
 		if(cPage == null) {
 			cPage="1";
 		}
-		p = productService.pagingInfo(product_category_num, cPage);
-		mav.addObject("pvo", p);
+		Paging productP = productService.pagingInfo(product_category_num, cPage);
+		mav.addObject("pvo", productP);
 		
 		
 		//상품리스트 가져오기
@@ -82,8 +80,8 @@ public class ProductController extends BaseController{
 		map.put("product_category_num", product_category_num );
 		map.put("listKey", listKey);
 		map.put("orderKey", orderKey);
-		map.put("begin", p.getBegin());
-		map.put("end", p.getEnd());
+		map.put("begin", productP.getBegin());
+		map.put("end", productP.getEnd());
 		
 		List<ProductVO> productList = productService.listProduct(product_category_num, map);
 		mav.addObject("productList", productList);
@@ -113,16 +111,16 @@ public class ProductController extends BaseController{
 		if(cPage == null) {
 			cPage="1";
 		}
-		int totalCount = productBoardService.qnaTotalCount(product_id);
-		p = productBoardService.pagingInfo(product_id, cPage, totalCount );
-		mav.addObject("pvo", p);
+		
+		Paging qnaP = productBoardService.pagingInfo(product_id, cPage );
+		mav.addObject("pvo", qnaP);
 		
 		
 		//Q&A 글 가져오기
 		Map map = new HashMap();
 		map.put("product_id", product_id);
-		map.put("begin", p.getBegin());
-		map.put("end", p.getEnd());
+		map.put("begin", qnaP.getBegin());
+		map.put("end", qnaP.getEnd());
 		List<ProductBoardQnaVO> productBoardQnaList = productBoardService.getListQna(map);
 		mav.addObject("qnaList", productBoardQnaList);
 		
@@ -147,15 +145,15 @@ public class ProductController extends BaseController{
 		if(nPage == null) {
 			nPage="1";
 		}
-		totalCount = productBoardService.reviewTotalCount(product_id);
-		p = productBoardService.pagingInfo(product_id, nPage, totalCount);
-		mav.addObject("rePvo", p);
+		
+		Paging reviewP = productBoardService.pagingInfo(product_id, nPage);
+		mav.addObject("rePvo", reviewP);
 		
 		//REVIEW 글 가져오기
 		map = new HashMap();
 		map.put("product_id", product_id);
-		map.put("begin", p.getBegin());
-		map.put("end", p.getEnd());
+		map.put("begin", reviewP.getBegin());
+		map.put("end", reviewP.getEnd());
 		
 		List<ReviewVO> reviewList = productBoardService.getListReview(map);
 		mav.addObject("reviewList", reviewList);

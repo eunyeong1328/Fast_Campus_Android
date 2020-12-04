@@ -32,10 +32,11 @@
 
 			<!-- portlet : header -->
 			<div class="portlet-header border-bottom">
-
+				<!--
 				<form name="search" method="post" class="float-end row">
-
+				-->
 					<!-- 날짜로 검색 -->
+				<!--  	
 					<div class="float-end col-6 col-lg-5">
 
 						<input autocomplete="off" type="text" name="search_daterange"
@@ -51,9 +52,11 @@
 
 
 					</div>
+				-->
 					<!-- 날짜로 검색 끝 -->
 
 					<!-- 옵션으로 검색 -->
+				<!--  
 					<div class="row gutters-xs col-6">
 
 						<div class="col-4 col-lg-4">
@@ -81,12 +84,13 @@
 						</div>
 
 					</div>
+				-->	
 					<!-- 옵션으로 검색 끝 -->
 
 
-
+			<!--  
 				</form>
-
+			-->
 
 			</div>
 			<!-- /portlet : header -->
@@ -139,7 +143,7 @@
 												<td width="40%">
 													<a href="${contextPath }/admin/productQnaForm.do?product_qna_num=${item.product_qna_num}">
 														<c:if test="${item.parent_num != 0 }">
-															<span style="display: inline-block; width: 4%;"
+															<span style="display: inline-block; width: 8%;"
 																class="badge badge-soft badge-pill badge-indigo">RE</span>
 														</c:if>
 														${item.title } 
@@ -178,8 +182,7 @@
 						</c:if>
 
 						<%-- 페이지 표시(시작페이지~끝페이지) --%>
-						<c:forEach var="pageNo" begin="${pvo.beginPage }"
-							end="${pvo.endPage }">
+						<c:forEach var="pageNo" begin="${pvo.beginPage }" end="${pvo.endPage }">
 							<c:if test="${pageNo == pvo.nowPage }">
 								<li class="page-item active"><a class="page-link" href="#">${pageNo }
 										<span class="sr-only"></span>

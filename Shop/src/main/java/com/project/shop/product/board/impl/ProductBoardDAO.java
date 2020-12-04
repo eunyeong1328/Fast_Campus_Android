@@ -16,7 +16,9 @@ public class ProductBoardDAO {
 	private SqlSessionTemplate sqlSession;
 	//================================ Q&A 게시판 ==================================
 	public int selectTotalCountProductQna(String product_id) {
+		
 		int totalCount = sqlSession.selectOne("mappers.product_qna.totalCount", product_id);
+		System.out.println("DAO 총 QNA 수 : "+totalCount);
 		return totalCount;
 	}
 	public List<ProductBoardQnaVO> selectProductQnaList(Map map){
@@ -27,7 +29,7 @@ public class ProductBoardDAO {
 	
 	public void insertBoardQna(Map map) {
 		int boardQnaNo = selectQnaNo()+1;
-		System.out.println("borardQnaNo: " + boardQnaNo);
+		
 		map.put("product_qna_num", boardQnaNo);
 		sqlSession.insert("mappers.product_qna.insertBoardQna", map);
 	}

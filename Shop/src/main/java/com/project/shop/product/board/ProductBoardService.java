@@ -9,7 +9,7 @@ public interface ProductBoardService {
 	//아진 - Q&A
 	public int qnaTotalCount(String product_id) throws Exception;
 	public List<ProductBoardQnaVO> getListQna(Map map) throws Exception;
-	public Paging pagingInfo(String product_id, String cPage, int totalCount) throws Exception;
+	public Paging pagingInfo(String product_id, String cPage) throws Exception;
 	public ProductBoardQnaVO getProductQna(int product_qna_num) throws Exception;
 	public void addBoardQna(Map map) throws Exception;
 	public void editBoaardQna(Map map) throws Exception;

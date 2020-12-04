@@ -142,4 +142,24 @@
 		<put-attribute name="body" value="/WEB-INF/views/admin/orders/admin-order-detail.jsp" />
       </definition>
       
+      <!-- 아진, 관리자 상품문의 -->
+      <definition name="/admin/productQnaList" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/productQnaList.jsp" />
+      </definition>
+      
+      <definition name="/admin/productQnaForm" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/productQnaForm.jsp" />
+      </definition>
+      
+      <definition name="/admin/productQnaReForm" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/productQnaReForm.jsp" />
+      </definition>
+      
+      <definition name="/admin/productQnaReUpdateForm" extends="adminLayout">
+		<put-attribute name="tag" value="/WEB-INF/views/common/admin/tag/admin-boardTag.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/board/productQnaReUpdateForm.jsp" />
+      </definition>
 </tiles-definitions>
