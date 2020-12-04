@@ -1,37 +1,22 @@
 package com.project.shop.view.board;
 
 import java.util.HashMap;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import com.project.shop.member.MemberVO;
 import com.project.shop.paging.Paging;
-import com.project.shop.paging.PagingService;
 
 public class PagingController {
-	
-	@Autowired
-	private PagingService pagingService;
 	
 	Paging paging = new Paging();
 	HashMap<String, Object> map = new HashMap<String, Object>();
 	
-//	Paging @@@@@@ 편하게 보려고 복사본임 지울거임 @@@@@@@@@@@
-	public HashMap<String, Object> getPaging(HttpServletRequest request, HttpServletResponse response) {
-		String viewName = (String) request.getAttribute("viewName");
-
-		HttpSession session = request.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
-
-		if (viewName.equals("/board/notice-tab") || viewName.equals("/board/notice")) {
-			paging.setTotalRecord(pagingService.getNoticeCount());
-		} else if (viewName.equals("/board/faq-tab") || viewName.equals("/board/faq")) {
-			paging.setTotalRecord(pagingService.getFAQCount());
-		} else if (viewName.equals("/board/memberQ-tab") || viewName.equals("/board/memberQ")) {
-			paging.setTotalRecord(pagingService.getMemQCount(memberVO));
+//	Paging
+	public HashMap<String, Object> getPaging(int count, HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("까꿍");
+		System.out.println(count);
+		
+		if (count != 0) {
+			paging.setTotalRecord(count);
 		}
 
 //		전체 게시물의 수 구하기
@@ -39,6 +24,7 @@ public class PagingController {
 
 //		현재 페이지 구하기
 		String cPage = request.getParameter("cPage");
+		System.out.println("adsfsadf"+cPage);
 		if (cPage != null) {
 			paging.setNowPage(Integer.parseInt(cPage));
 		} else {
@@ -48,7 +34,10 @@ public class PagingController {
 //		begin, end
 		paging.setEnd(paging.getNowPage() * paging.getNumPerPage());
 		paging.setBegin(paging.getEnd() - paging.getNumPerPage() + 1);
-
+		
+		System.out.println("관리자검색: "+ paging.getEnd());
+		System.out.println("관리자 검색: " + paging.getBegin());
+		
 //		블록
 		int nowPage = paging.getNowPage();
 		int currentBlock = (nowPage - 1) / paging.getPagePerBlock() + 1;
@@ -64,6 +53,5 @@ public class PagingController {
 		map.put("paging", paging);
 		
 		return map;
-		
 	}
 }

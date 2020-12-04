@@ -10,6 +10,7 @@ public interface BoardService {
 
 //	Notice List
 	List<BoardVO> getNoticeList(HashMap<String, Object> map);
+	List<BoardVO> getSearchNoticeList(HashMap<String, Object> map);
 //	FAQ List	
 	List<BoardVO> getFAQList(HashMap<String, Object> map);
 //	1:1 List (로그인회원 id로 검색)
@@ -61,4 +62,7 @@ public interface BoardService {
 	void categoryInsert(String product_category_name);
 	void categoryUpdate(ProductVO productVO);
 	void categoryDelete(int product_category_num);
+	List<BoardVO> getSearchFAQList(HashMap<String, Object> map);
+	List<BoardVO> getSearchMemQAllList(HashMap<String, Object> map);
+	
 }

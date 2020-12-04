@@ -137,4 +137,19 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.categoryDelete(product_category_num);
 	}
 
+	@Override
+	public List<BoardVO> getSearchNoticeList(HashMap<String, Object> map) {
+		return boardDAO.getSearchNoticeList(map);
+	}
+
+	@Override
+	public List<BoardVO> getSearchFAQList(HashMap<String, Object> map) {
+		return boardDAO.getSearchFAQList(map);
+	}
+
+	@Override
+	public List<BoardVO> getSearchMemQAllList(HashMap<String, Object> map) {
+		return boardDAO.getSearchMemQAllList(map);
+	}
+
 }

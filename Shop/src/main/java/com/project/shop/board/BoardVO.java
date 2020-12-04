@@ -7,6 +7,80 @@ import org.springframework.stereotype.Component;
 @Component
 public class BoardVO {
 	
+	private String[] dateArray;
+	private String daterange;
+	private String dateBegin;
+	private String dateEnd;
+	private String searchCondition;
+	private String searchKeyword;
+	
+	public String getDateBegin() {
+		return dateBegin;
+	}
+
+	public void setDateBegin(String dateBegin) {
+		this.dateBegin = dateBegin;
+	}
+
+	public String getDateEnd() {
+		return dateEnd;
+	}
+
+	public void setDateEnd(String dateEnd) {
+		this.dateEnd = dateEnd;
+	}
+	
+	public String[] getDateArray() {
+		return dateArray;
+	}
+
+	public void setDateArray(String[] dateArray) {
+		this.dateArray = dateArray;
+		setDateBegin(dateArray[0]);
+		System.out.println(dateBegin);
+		setDateEnd(dateArray[1]);
+		System.out.println(dateEnd);
+	}
+
+	public String getDaterange() {
+		return daterange;
+	}
+
+	public void setDaterange(String daterange) {
+		this.daterange = daterange.replaceAll(" ", "");
+		dateArray = daterange.split("-");
+		setDateArray(dateArray);
+	}
+
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+		System.out.println(searchCondition);
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+		System.out.println(searchKeyword);
+	}
+
+	@Override
+	public String toString() {
+		return "BoardVO [image=" + image + ", r_num=" + r_num + ", parent_num=" + parent_num + ", notice_num="
+				+ notice_num + ", next_no=" + next_no + ", pre_no=" + pre_no + ", title=" + title + ", contents="
+				+ contents + ", reg_date=" + reg_date + ", views=" + views + ", faq_num=" + faq_num
+				+ ", qna_category_num=" + qna_category_num + ", qna_category_name=" + qna_category_name
+				+ ", product_qna_num=" + product_qna_num + ", product_id=" + product_id + ", member_id=" + member_id
+				+ ", product_name=" + product_name + ", member_qna_num=" + member_qna_num + ", order_num=" + order_num
+				+ ", email=" + email + ", phone=" + phone + "]";
+	}
+
 	private String image;
 	
 	public String getImage() {

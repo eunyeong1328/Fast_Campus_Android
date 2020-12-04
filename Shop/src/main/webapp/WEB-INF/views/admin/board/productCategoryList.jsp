@@ -26,7 +26,7 @@
 			<div class="portlet" style="overflow: hidden; display: block;">
 
 				<div class="portlet-body"
-					style="display: inline-block; width: 20%; float: left;">
+					style="display: inline-block; width: 25%; float: left;">
 
 					<div class="portlet-header border-bottom">
 						<span>
@@ -66,7 +66,7 @@
 
 				</div>
 
-				<div class="portlet-body" style="display: inline-block; width: 20%; float: left;">
+				<div class="portlet-body" style="display: inline-block; width: 25%; float: left;">
 					<div class="portlet-header border-bottom">
 						<span>
 							<i class="fi fi-star-empty fs--25 text-warning"></i>
@@ -83,7 +83,7 @@
 				</div>
 
 				<div class="portlet-body"
-					style="display: inline-block; width: 20%; float: left;">
+					style="display: inline-block; width: 25%; float: left;">
 					<div class="portlet-header border-bottom">
 						<span> <i class="fi fi-star-empty fs--25 text-warning"></i>
 							카테고리 수정
@@ -106,7 +106,7 @@
 					</form>
 				</div>
 
-				<div class="portlet-body" style="display: inline-block; width: 20%; float: left;">
+				<div class="portlet-body" style="display: inline-block; width: 25%; float: left;">
 					<div class="portlet-header border-bottom">
 						<span>
 							<i class="fi fi-star-empty fs--25 text-warning"></i>

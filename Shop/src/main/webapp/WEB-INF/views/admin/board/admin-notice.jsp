@@ -59,7 +59,7 @@
 					</div>
 					
 					<button type="button" class="btn btn-secondary btn-soft-static mb-1" 
-						onclick="location.href='${contextPath }/adminboard/noticeList.do?&cPage=${paging.nowPage}'">
+						onclick="location.href='${contextPath }/adminboard/noticeList.do?cPage=${paging.nowPage}'">
 						목록
 					</button>
 					<button type="button" class="btn btn-primary btn-soft-static mb-1"
