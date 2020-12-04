@@ -5,10 +5,59 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath }"  />
+
+
 <%
   request.setCharacterEncoding("UTF-8");
 %>
+<script type="text/javascript">
+var opt_name;
+var optionMap = 
 
+function changeOption() {
+	var selectOpt = document.getElementById("opt");
+	var tmp = selectOpt.options[selectOpt.selectedIndex].text;
+	var tmp1 = tmp.lastIndexOf("원");
+	var num = tmp.indexOf("[");
+	var str = tmp.substring(0,num);
+	opt_name = str.trim();
+}
+
+function add_cart(product_name,opt_name) {
+	if(${not empty optionMap.get(fproduct_id)} && !opt_name){
+		alert("옵션을 선택해주세요");
+		return;
+	}
+	
+	if(!opt_name){
+		opt_name="";
+	}
+	$.ajax({
+		type : "post",
+		async : false, //false인 경우 동기식으로 처리한다.
+		url : "${contextPath}/cart/addProductInCart.do",
+		data : {
+			product_name:product_name,
+			quantity:1,
+			option_name:opt_name
+		},
+		success : function(data, textStatus) {
+			if(data.trim()=='add_success'){
+				alert("카트에 등록되었습니다.");
+			}else if(data.trim()=='already_existed'){
+				alert("이미 카트에 등록된 상품입니다.");	
+			}else if(data.trim()=='logingo'){
+				alert("로그인을 먼저 해주세요.");
+			}
+		},
+		error : function(data, textStatus) {
+		},
+		complete : function(data, textStatus) {
+		}
+	}); //end ajax	
+
+}
+</script>
 
 			<!-- PAGE TITLE -->
 			<section class="bg-light p-0">
@@ -108,13 +157,18 @@
 										</p>
 
 									</div>
-									<c:if test="${not empty optionMap.get(favList.product_id) }" >
+									
+									<c:set var="fproduct_id"  value="${favList.product_id }"  />
+									
+									<c:if test="${not empty optionMap.get(fproduct_id) }" >
                               <select id="opt" class="form-control bs-select" name="option_name" title="옵션을 선택해주세요" onChange="changeOption();" required>
-                                 <c:forEach var="option" items="${optionMap.get(favList.product_id) }">
+                                 <c:forEach var="option" items="${optionMap.get(fproduct_id) }">
                                     <option value="${option.option_name }">${option.option_name } [<fmt:formatNumber type="number" value="${option.option_price }"/> 원]</option>
                                  </c:forEach>
                               </select>
-                           </c:if>
+                           </c:if>                        
+                           
+                           
 								</div>
 								
 
@@ -127,7 +181,8 @@
 									class="col-12 col-sm-4 col-md-4 col-lg-4 text-align-end text-align-center-xs b-0">
 
 									<button type="submit"
-										class="btn btn-sm btn-primary fs--14 w-100-xs d-block-xs">
+										class="btn btn-sm btn-primary fs--14 w-100-xs d-block-xs"
+										onclick="javascript:add_cart('${favList.product_name}',opt_name)"> 
 										장바구니에 추가</button>
 
 									<div class="clearfix mt-2">
