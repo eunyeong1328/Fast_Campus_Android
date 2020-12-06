@@ -5,14 +5,26 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-<body>
+<c:if test='${not empty message }'>
+	<script>
+		alert('${message}');
+	</script>
+</c:if>
 
+<c:if test='${not empty shipMessage }'>
+	<script>
+		alert('${shipMessage}');
+	</script>
+</c:if>
+<body>
 	<div id="wrapper">
 
 		<!-- PAGE TITLE -->
@@ -41,7 +53,7 @@
 			<div class="container">
 
 				<div class="row">
-				<jsp:include page="/WEB-INF/views/myaccount/account-navi.jsp" />
+					<jsp:include page="/WEB-INF/views/myaccount/account-navi.jsp" />
 
 					<div class="col-12 col-sm-12 col-md-12 col-lg-9">
 
@@ -67,7 +79,7 @@
 							<!-- ACCOUNT TAB -->
 							<div id="tab_account" class="tab-pane active">
 
-								<form method="post"
+								<form method="post" id="account"
 									action="${contextPath}/myaccount/modifyMemberInfo.do"
 									novalidate class="bs-validate" enctype="multipart/form-data">
 
@@ -105,8 +117,7 @@
 														style="background-image: url('${contextPath}/resources/images/grade_image/grade1.PNG')"
 														>
 													</span>
-												</span>  --%>
-													<!-- 
+												</span>  --%> <!-- 
 															upload field (등급 나타내는 곳)
 														--> <!-- 사진 삽입 --> <!-- <input name="account_avatar"
 													type="file" data-file-ext="jpg, png"
@@ -172,8 +183,7 @@
 														<div class="form-label-group mb-6">
 															<input required placeholder="email" id="email"
 																name="email" type="text" class="form-control"
-																value="${memberinfo.email}"> <label
-																for="email">이메일</label>
+																value="${memberinfo.email}"> <label for="email">이메일</label>
 														</div>
 
 														<div id="email_edit_info"
@@ -190,8 +200,8 @@
 														<div class="form-label-group mb-3">
 															<input required placeholder="phone" id="phone"
 																name="phone" type="text" class="form-control"
-																value="${memberinfo.phone}"> <label
-																for="phone">휴대폰 번호</label>
+																value="${memberinfo.phone}"> <label for="phone">휴대폰
+																번호</label>
 														</div>
 
 													</div>
@@ -263,8 +273,9 @@
 													<div class="input-group-over">
 														<div class="form-label-group mb-3">
 															<input placeholder="New Password" id="password"
-																name="password" type="password" class="form-control" value="${memberinfo.password}">
-															<label for="password">새 비밀번호</label>
+																name="password" type="password" class="form-control"
+																value="${memberinfo.password}"> <label
+																for="password">새 비밀번호</label>
 														</div>
 
 														<!-- `SOW : Form Advanced` plugin used -->
@@ -285,94 +296,17 @@
 									</div>
 									<!-- /PASSWORD -->
 
-
-
-									<!-- DELETE ACCOUNT -->
-									<div class="clearfix mt--60">
-
-										<div class="text-align-end">
-											<a href="#account_deactivate_confirm"
-												class="text-gray-500 text-decoration-none font-light collapsed"
-												data-toggle="collapse" aria-expanded="false"
-												onclick="jQuery('#user_password_current, #user_password_new').val('');">
-												<span class="group-icon fs--13"> <i
-													class="fi fi-arrow-down"></i> <i class="fi fi-close"></i>
-											</span> <span class="pl-2 pr-2"> 계정 삭제 </span>
-											</a>
-										</div>
-
-
-										<div id="account_deactivate_confirm" class="collapse" style="">
-
-											<div class="alert b-0 bg-danger-soft mt-3 mb-5 p-4 clearfix">
-
-												<p>
-													참고 : 삭제 된 계정은 복원 할 수 없습니다! 귀하의 계정은 시스템에서 영구적으로 삭제됩니다. <br>
-													이것이 당신이 원하는 것인지 확인하십시오.
-												</p>
-
-												<p class="m-0 fs--13">보안상의 이유로 귀하의 계정은 30 일 이내에 비활성화되고
-													영구적으로 삭제됩니다. 계정에 다시 로그인하면 삭제 진행이 취소됩니다.</p>
-
-												<i
-													class="arrow arrow-lg arrow-bottom arrow-center border-danger-soft"></i>
-											</div>
-
-											<div class="row mb--60">
-
-												<div class="col-12 offset-lg-2 col-lg-7">
-
-													<div class="input-group-over">
-														<div class="form-label-group mb-1">
-															<input placeholder="Current Password"
-																id="account_del_current_password"
-																name="account_current_password" type="password"
-																class="form-control" value="${memberinfo.password }">
-															<label for="account_del_current_password">현재 비밀번호</label>
-														</div>
-
-														<!-- `SOW : Form Advanced` plugin used -->
-														<a href="#" class="btn fs--12 btn-password-type-toggle"
-															data-target="#account_del_current_password"> <span
-															class="group-icon"> <i class="fi fi-eye m-0"></i>
-																<i class="fi fi-close m-0"></i>
-														</span>
-														</a>
-													</div>
-
-													<div class="mt--7 fs--13 text-muted mb--30">보안상의 이유로
-														현재 비밀번호가 필요합니다.</div>
-
-
-													<div class="form-label-group mb-1">
-														<textarea rows="5" placeholder="Feedback"
-															id="account_deactivate_feedback"
-															name="account_deactivate_feedback" class="form-control"></textarea>
-														<label for="account_deactivate_feedback">Feedback</label>
-													</div>
-
-												</div>
-
-											</div>
-
-										</div>
-
-									</div>
-									<!-- /DELETE ACCOUNT -->
-
-
-
 									<div class="border-top pt-4 mt-1">
 
-										<button type="submit" class="btn btn-purple fs--20"  onclick = "saveChanges()">
-											<i class="fi fi-check "></i>
-											변경사항 저장
+										<button type="submit" class="btn btn-purple fs--20"
+											onclick="saveChanges()">
+											<i class="fi fi-check "></i> 변경사항 저장
 										</button>
 									</div>
-									
-									<script >
+
+									<script>
 										function saveChanges() {
-											const result = confirm("변경되었습니다");  
+											const result = confirm("변경되었습니다");
 											/* swal("변경되었습니다","계정 수정 성공", "success");  
 											swal({
 												title: "변경되었습니다!",
@@ -384,25 +318,25 @@
 									</script>
 								</form>
 								<!-- form 태그 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-							</div>
 
+							</div>
 
 							<!-- ADDRESSES TAB ++++++++++++++++++++++++++++++++++배송 주소(주소탭)+++++++++++++++++++++++++++++-->
 							<div id="tab_address" class="tab-pane border bt-0 p-4 shadow-xs">
 
-								<%-- <h3 class="h5 clearfix mb-3 mt-3">
+								<h3 class="h5 clearfix mb-3 mt-3">
 
 									<a href="#"
-										data-href="${contextPath}/resources/_ajax/modal_address.jsp" 
-											data-ajax-modal-size="modal-md"
-											data-ajax-modal-centered="false"
-											data-ajax-modal-backdrop="static"
-											class="js-ajax-modal float-end btn btn-sm btn-primary fs--14 mb-0">
+										data-href="${contextPath}/resources/_ajax/modal_address_add.jsp"
+										data-ajax-modal-size="modal-md"
+										data-ajax-modal-centered="false"
+										data-ajax-modal-backdrop="static"
+										class="js-ajax-modal float-end btn btn-sm btn-primary fs--14 mb-0">
 										새 배송지 추가 </a> <span class="float-start mt-2"> <span
 										class="text-primary">배송</span> 주소
 									</span>
 
-								</h3> --%>
+								</h3>
 
 
 
@@ -426,24 +360,22 @@
 											</p>
 
 
-											<p class="mb-0 mt-2 text-success">
-												<i class="fi fi-check"></i> &nbsp; 기본 배송지
+											<p class="mb-0 mt-2 text-success" style = "text-align: center; font:bold 30px;">
+												<!-- <i class="fi fi-check"> --></i> &nbsp; 기본 배송지
 											</p>
 
 										</div>
-										
+
 										<div class="col-4 col-sm-3 col-md-3 col-lg-2">
-										
-											<a href="#"
-												name = "member_id" id = "member_id" value= "${memberinfo.member_id}"
+
+											<a href="#" name="member_id" id="member_id"
+												value="${memberinfo.member_id}"
 												data-href="${contextPath}/resources/_ajax/modal_address.jsp"
 												data-ajax-modal-size="modal-md"
 												data-ajax-modal-centered="false"
 												data-ajax-modal-backdrop="static"
-												class="js-ajax-modal float-end btn btn-sm btn-block btn-light fs--14 mb-0"
-												>
-												수정 </a>
-												<!-- <a href="#" data-href="#?action=delete&amp;item_id=1"
+												class="js-ajax-modal float-end btn btn-sm btn-block btn-light fs--14 mb-0">
+												수정 </a><!--  <a href="#" data-href="#?action=delete&amp;item_id=1"
 												data-ajax-confirm-mode="regular"
 												data-ajax-confirm-size="modal-md"
 												data-ajax-confirm-centered="false"
@@ -466,75 +398,87 @@
 
 
 								<!-- address -->
-								<%-- <div class="d-block shadow-xs rounded p-4 mb-2">
-									<div class="row">
+								<c:forEach var="shippList" items="${shippList}">
 
-										<div class="col">
+									<div class="d-block shadow-xs rounded p-4 mb-2">
+										<div class="row">
 
-											<p class="mb-0">
-												<b>John Doe</b>
-											</p>
-											<p class="mb-0">Road 741, No.44</p>
-											<p class="mb-0">New York / United States</p>
-											<p class="mb-0">My Company</p>
-											<p class="mb-0">+01-785-388-9450</p>
+											<div class="col">
 
-											<p class="mb-0 mt-3">
-												<a href="#!" class="btn btn-sm btn-light active"> <i
-													class="fi fi-check"></i> 기본 배송지로 저장
-												</a>
-											</p>
+												<p class="mb-0" id = "zipNo" name = "zipNo">
+													<b>우편번호 :</b> &nbsp;&nbsp; <b>${shippList.zipNo}</b>
+												</p>
+												<p class="mb-0"  id = "load_address" name = "load_address" >
+													<b>도로명 주소 :</b> &nbsp;&nbsp; <b>${shippList.load_address}</b>
+												</p>
+												<p class="mb-0"  id = "jibun_address" name = "jibun_address">
+													<b>지번 주소 :</b> &nbsp;&nbsp; <b>${shippList.jibun_address}</b>
+												</p>
+												<p class="mb-0"  id = "rest_address" name = "rest_address" >
+													<b>나머지 주소 :</b> &nbsp;&nbsp; <b>${shippList.rest_address}</b>
+												</p>
+												
+												<p class="mb-0 mt-3">
+													<a href="${contextPath}/myaccount/defaultShippingPoint.do" class="btn btn-sm btn-light active">
+														<i class="fi fi-check"></i> 
+														기본 배송지
+													</a>
+												</p>
+												
 
-										</div>
+											</div>
 
-										<div class="col-4 col-sm-3 col-md-3 col-lg-2">
+											
 
-											<a href="#"
-												data-href="${contextPath}/resources/_ajax/modal_address.jsp"
-												data-ajax-modal-size="modal-md"
-												data-ajax-modal-centered="false"
-												data-ajax-modal-backdrop="static"
-												class="js-ajax-modal float-end btn btn-sm btn-block btn-light fs--14 mb-0">
-												수정 </a>  <a href="#" data-href="#?action=delete&amp;item_id=1"
-												data-ajax-confirm-mode="regular"
-												data-ajax-confirm-size="modal-md"
-												data-ajax-confirm-centered="false"
-												data-ajax-confirm-title="Please Confirm"
-												data-ajax-confirm-body="Are you sure? Remove from favourites?"
-												data-ajax-confirm-btn-yes-class="btn-sm btn-danger"
-												data-ajax-confirm-btn-yes-text="Yes, Remove"
-												data-ajax-confirm-btn-yes-icon="fi fi-check"
-												data-ajax-confirm-btn-no-class="btn-sm btn-light"
-												data-ajax-confirm-btn-no-text="Cancel"
-												data-ajax-confirm-btn-no-icon="fi fi-close"
-												data-ajax-confirm-callback-function=""
-												class="js-ajax-confirm float-end btn btn-sm btn-block btn-light fs--14 mb-0 mt-2">
-												삭제 </a>
+											<div class="col-4 col-sm-3 col-md-3 col-lg-2">
 
+												<a href="#"
+													data-href="${contextPath}/resources/_ajax/modal_address_add.jsp"
+													data-ajax-modal-size="modal-md"
+													data-ajax-modal-centered="false"
+													data-ajax-modal-backdrop="static"
+													class="js-ajax-modal float-end btn btn-sm btn-block btn-light fs--14 mb-0">
+													수정 </a>
+													 <a href="${contextPath}/myaccount/deleteShipping.do?zipNo=${shippList.zipNo}"
+													data-ajax-confirm-mode="regular"
+													data-ajax-confirm-size="modal-md"
+													data-ajax-confirm-centered="false"
+													data-ajax-confirm-title="확인해주세요"
+													data-ajax-confirm-body="확실합니까? 배송지에서 제거하시겠습니까??"
+													data-ajax-confirm-btn-yes-class="btn-sm btn-danger"
+													data-ajax-confirm-btn-yes-text="제거"
+													data-ajax-confirm-btn-yes-icon="fi fi-check"
+													data-ajax-confirm-btn-no-class="btn-sm btn-light"
+													data-ajax-confirm-btn-no-text="취소"
+													data-ajax-confirm-btn-no-icon="fi fi-close"
+													data-ajax-confirm-callback-function=""
+													class="js-ajax-confirm float-end btn btn-sm btn-block btn-light fs--14 mb-0 mt-2"
+													>
+													삭제 </a>
+													
+											</div>
 										</div>
 									</div>
-								</div> --%>
+								</c:forEach>
 								<!-- /address -->
 
-
-
-
-
-
-
 							</div>
-
 						</div>
-
 					</div>
-
 				</div>
 
+
+				<!-- 계정 삭제 -->
+				<jsp:include page="account-delete.jsp" flush="true">
+					<jsp:param value="account-delete" name="account-delete" />
+				</jsp:include>
 			</div>
 		</section>
 		<!-- / -->
 
-		<!-- INFO BOX -->
+
+
+		<!-- INFO BOX(밑) -->
 		<section class="bg-light py-0">
 			<div class="container py-3">
 

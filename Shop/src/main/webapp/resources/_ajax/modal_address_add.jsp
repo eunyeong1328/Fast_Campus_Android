@@ -198,11 +198,11 @@
 
 	<div class="modal-footer">
 		<button type="submit" class="btn btn-sm btn-primary" onclick="save_Add()">
-			<i class="fi fi-check"></i> 변경사항 저장
+			<i class="fi fi-check"></i> 추가
 		</button>
 		<script type="text/javascript">
 			function save_Add() {
-				const result = confirm("추가 되었습니다.");
+				const result = confirm("새 배송지가 추가 되었습니다.");
 			}
 		</script>
 
