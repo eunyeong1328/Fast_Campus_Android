@@ -338,7 +338,7 @@
 											<div class="col-4 col-sm-4 col-md-2 col-lg-2 text-center">
 
 												<img class="img-fluid max-h-80"
-													src="${contextPath}/resources/images/item_image/${product_image}"
+													src="${contextPath}/resources/images/product/${item.product_id }/${product_image}"
 													alt="...">
 
 											</div>
