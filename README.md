@@ -84,7 +84,7 @@
 
 관리자 : 관리자 페이지를 구성하여 상품 및 회원 관리, 고객센터 운영 등의 쇼핑몰 시스템을 전반적으로 관리할 수 있다.
 
-https://user-images.githubusercontent.com/66169832/102633558-eef58d80-4193-11eb-8a97-e0948b9d4963.mp4
+<video src="https://user-images.githubusercontent.com/66169832/102633558-eef58d80-4193-11eb-8a97-e0948b9d4963.mp4"></video>
 
 1. Insert
    * 상품 관리의 상품입력에서 상품을 추가하는 기능
