@@ -1,5 +1,9 @@
 식품 전용 온라인 쇼핑몰
 ============================
+
+
+[![쩝쩝박사](http://img.youtube.com/vi/EVkqiXxS2N8/0.jpg)](https://youtu.be/EVkqiXxS2N8?t=0s) 
+
 ### 프로젝트 계획 이유
  언택트(Untact) 시대로 불필요한 외부접촉을 피하고 안전하게 식품을 받아볼 수 있는 서비스 구현하고자 식품 전용 온라인 쇼핑몰을 제작하였다.
  
@@ -80,7 +84,7 @@
     
 ### [ 관리자 기능 ]
 ---
-<iframe width="640" height="360" src="https://youtu.be/Ou2Y9I2oz40" frameborder="0" gesture="media" allowfullscreen=""></iframe>
+
 관리자 : 관리자 페이지를 구성하여 상품 및 회원 관리, 고객센터 운영 등의 쇼핑몰 시스템을 전반적으로 관리할 수 있다.
 
 1. Insert
