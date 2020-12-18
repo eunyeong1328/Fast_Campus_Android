@@ -3,6 +3,7 @@
 
 
 [![쩝쩝박사](http://img.youtube.com/vi/EVkqiXxS2N8/0.jpg)](https://youtu.be/EVkqiXxS2N8?t=0s) 
+
 (위의 그림을 클릭 시 프로젝트가 구현되는 영상의 유튜브 링크로 이동합니다)
 
 ### 프로젝트 계획 이유
