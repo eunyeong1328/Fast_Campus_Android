@@ -12,6 +12,9 @@
  
 ### [ 상품 기능 ]
 ---
+
+<video src="https://user-images.githubusercontent.com/66169832/102767116-73c5ee80-43c2-11eb-83b3-6ee137c3c408.mp4" width='600' controls></video>
+
 상품 : 상품을 담고 주문할 수 있고 상품문의 및 상품 후기 작성 할 수 있다.
 
 1. Insert
@@ -46,6 +49,10 @@
     
 ### [ 계정 기능 ]
 ---
+
+<video src="https://user-images.githubusercontent.com/66169832/102763478-0e233380-43bd-11eb-8399-9c415500f6f0.mp4" width='600' controls></video>
+
+
 계정 : 계정 정보 관리, 주문 관리, 찜 리스트 등의 기능을 이용할 수 있도록 구현한다.
 
 1. Insert
@@ -84,7 +91,7 @@
 
 관리자 : 관리자 페이지를 구성하여 상품 및 회원 관리, 고객센터 운영 등의 쇼핑몰 시스템을 전반적으로 관리할 수 있다.
 
-<video src="https://user-images.githubusercontent.com/66169832/102633558-eef58d80-4193-11eb-8a97-e0948b9d4963.mp4" width='400' controls></video>
+<video src="https://user-images.githubusercontent.com/66169832/102633558-eef58d80-4193-11eb-8a97-e0948b9d4963.mp4" width='600' controls></video>
 
 1. Insert
    * 상품 관리의 상품입력에서 상품을 추가하는 기능
