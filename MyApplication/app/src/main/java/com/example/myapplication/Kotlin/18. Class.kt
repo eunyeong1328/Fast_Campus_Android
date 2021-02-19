@@ -1,7 +1,6 @@
 package com.example.myapplication.Kotlin
 
 //18. Class
-
 // OOP(Object Oriented Programing 객체지향 프로그래밍:코드 작성)
 // 객체란 뭘까?
 // - 이름이 있는 모든 것
@@ -26,6 +25,7 @@ fun main(array: Array<String>){
 
     val superCar : SuperCar = SuperCar("good engine", "big","white")
     //우리가 만든 클래스(설명서)는 자료형이 된다.
+    //클래스를 사용하려면 constructor
    val bigCar1 : Car = Car("v8 engine","big")
     var number : Int = 10
     var number1 = 20
