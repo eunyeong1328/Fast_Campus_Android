@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--부모의 정가운데-->
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:background="#A80808" />
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#FF5722"
+        android:layout_alignParentBottom="true"
+        />
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#2BA808"
+        android:layout_alignParentRight="true"
+        />
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#A80808"
+        android:layout_alignParentLeft="true"
+        />
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#00BCD4"
+        android:layout_alignParentEnd="true"
+        />
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        android:background="#FFEB3B"
+        />
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:background="#FFEB3B"
+        />
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:background="#FFEB3B"
+        />
+
+</RelativeLayout>
